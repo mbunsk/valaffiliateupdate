@@ -1,0 +1,136 @@
+Replit Prompt for New ValidatorAI Site
+We’re rebuilding ValidatorAI.com with a clear, modern flow.
+
+Please mock up a new homepage and minimal subpages based on the following goals and structure.
+
+🎯 Goal
+Build a clear and clean site that:
+
+Guides users through validating their idea
+
+Helps them turn it into a real landing page
+
+Invites them to submit their new project to be featured in our 200,000-reader newsletter
+
+🧱 Page Layout – Homepage
+Header (Sticky)
+Logo on left
+
+Navigation:
+
+“Validate Your Idea”
+
+“Get a Landing Page”
+
+“Submit to Newsletter”
+
+“About” (optional)
+
+Hero Section
+Headline:
+“Validate Your Startup Idea in Seconds”
+
+Subheadline:
+Get instant AI feedback, next steps, and launch support — and if it’s good, we’ll share it with 200,000+ startup readers.
+
+CTA Button:
+“Start Validating” → scrolls to idea input section
+
+Step 1: Idea Validation (Interactive Box)
+A large input box where users can paste their startup idea and get an AI response.
+
+Label:
+“Describe your idea in a sentence or two”
+
+Below the box:
+“We’ll analyze your idea and give you instant feedback, market fit tips, and next steps to help you move forward.”
+
+[ Run Validation ] button → results appear below (or on separate results page)
+
+Step 2: Make it Real (Choose a Site Builder)
+Headline:
+“Bring Your Idea to Life”
+
+Subheadline:
+Pick one of our favorite site builders to create your landing page fast — no coding required.
+
+Layout:
+
+3 Columns with builder logos and brief blurbs:
+
+Replit
+
+Fastest no-code builder with backend support.
+
+[Button] Start with Replit
+
+Lovable
+
+Visual, drag-and-drop editor. Easy and sleek.
+
+[Button] Start with Lovable
+
+Typedream (or another)
+
+Notion-style UI, perfect for fast pages.
+
+[Button] Start with Typedream
+
+Above all three, display a big text area:
+"Paste this prompt into any of the builders to create your site"
+
+Provide a sample prompt (e.g. “Create a site for a wellness app that uses AI to personalize fitness and nutrition recommendations...”)
+
+Step 3: Submit Your Landing Page
+Headline:
+“Want to Be Featured in Our Newsletter?”
+
+Subheadline:
+We showcase the best early startup ideas and projects to our audience of 200,000+ founders, investors, and builders.
+
+Simple form:
+
+Name
+
+Email
+
+Project name
+
+Project summary
+
+Paste your site URL
+
+Platform used (dropdown)
+
+Optional screenshot upload
+
+[ Submit for Consideration ]
+
+Note below the form:
+“We personally select projects based on usefulness, clarity, and potential. If chosen, your idea will be seen by thousands.”
+
+Testimonials (Optional)
+Just a few 1-liners from people who launched via ValidatorAI.
+
+Footer
+About
+
+Terms
+
+Contact
+
+Social links
+
+⚙️ Technical Notes
+Should work well on mobile
+
+Use clean sans-serif fonts (Inter, Work Sans, etc.)
+
+Light theme
+
+Keep design minimal, modern, professional
+
+Code in HTML + CSS + JS or your preferred stack
+
+You can mock functionality; the main goal is layout and flow
+
