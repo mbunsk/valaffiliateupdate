@@ -247,30 +247,7 @@ export default function NewsletterForm() {
                   )}
                 />
 
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">📸 Screenshot (Optional)</label>
-                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-white/20 border-dashed rounded-xl hover:border-primary transition-colors bg-white/5">
-                    <div className="space-y-1 text-center">
-                      <Upload className="mx-auto h-12 w-12 text-white/60" />
-                      <div className="flex text-sm text-white/80">
-                        <label className="relative cursor-pointer bg-primary/20 rounded-md font-medium text-white hover:text-primary hover:bg-primary/30 px-3 py-1 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary">
-                          <span>Upload a screenshot</span>
-                          <input
-                            type="file"
-                            className="sr-only"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                          />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
-                      </div>
-                      <p className="text-xs text-white/50">PNG, JPG, GIF up to 10MB</p>
-                      {selectedFile && (
-                        <p className="text-sm text-green-300 font-medium">{selectedFile.name}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+
 
                 <div className="flex justify-center">
                   <Button
