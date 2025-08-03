@@ -253,9 +253,50 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                       </div>
                       <h4 className="text-xl font-bold gradient-text">3. Customer Targeting & Messaging</h4>
                     </div>
-                    <p className="text-foreground/80 leading-relaxed">
-                      {feedback.customerTargeting}
-                    </p>
+                    <div className="text-foreground/80 leading-relaxed">
+                      {typeof feedback.customerTargeting === 'string' ? (
+                        <p>{feedback.customerTargeting}</p>
+                      ) : (
+                        <div className="space-y-4">
+                          {feedback.customerTargeting.subreddits && (
+                            <div>
+                              <p className="font-semibold mb-2">📱 Reddit Communities:</p>
+                              <div className="space-y-2">
+                                {feedback.customerTargeting.subreddits.map((subreddit: string, index: number) => (
+                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
+                                    <p className="text-sm">{subreddit}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {feedback.customerTargeting.onlineCommunities && (
+                            <div>
+                              <p className="font-semibold mb-2">🌐 Online Communities:</p>
+                              <div className="space-y-2">
+                                {feedback.customerTargeting.onlineCommunities.map((community: string, index: number) => (
+                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
+                                    <p className="text-sm">{community}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {feedback.customerTargeting.inPersonLocations && (
+                            <div>
+                              <p className="font-semibold mb-2">📍 In-Person Locations:</p>
+                              <div className="space-y-2">
+                                {feedback.customerTargeting.inPersonLocations.map((location: string, index: number) => (
+                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
+                                    <p className="text-sm">{location}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
 

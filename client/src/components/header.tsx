@@ -61,14 +61,20 @@ export default function Header() {
                 </div>
                 <div className="flex items-center space-x-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3 w-3 ${
-                        i < 4 ? 'text-yellow-400 fill-current' : 
-                        i === 4 ? 'text-yellow-400 fill-current opacity-50' : 
-                        'text-gray-300 dark:text-gray-600'
-                      }`}
-                    />
+                    <div key={i} className="relative h-3 w-3">
+                      {i < 4 ? (
+                        <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                      ) : i === 4 ? (
+                        <>
+                          <Star className="h-3 w-3 text-gray-300 dark:text-gray-600" />
+                          <div className="absolute inset-0 overflow-hidden" style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}>
+                            <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                          </div>
+                        </>
+                      ) : (
+                        <Star className="h-3 w-3 text-gray-300 dark:text-gray-600" />
+                      )}
+                    </div>
                   ))}
                 </div>
                 <span className="text-sm font-bold text-gray-900 dark:text-gray-100">4.85</span>
