@@ -10,7 +10,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Upload, Loader2, HelpCircle } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Upload, Loader2, HelpCircle, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -212,7 +213,21 @@ export default function NewsletterForm() {
                   name="siteUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white font-semibold">🌐 Landing Page URL (or the preview URL your site builder offers)</FormLabel>
+                      <div className="flex items-center gap-2">
+                        <FormLabel className="text-white font-semibold">🌐 Landing Page URL (or the preview URL your site builder offers)</FormLabel>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Info className="w-4 h-4 text-white/60 hover:text-white/80 cursor-help" />
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-xs">
+                              <p className="text-sm">
+                                At Base44, Lovable and Bubble, they give you the ability to PUBLISH your site for free and you can retrieve a preview URL there, so you can show off your new creation.
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
                       <FormControl>
                         <Input 
                           placeholder="https://your-mockup-page.com" 

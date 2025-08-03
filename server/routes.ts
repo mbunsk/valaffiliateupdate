@@ -92,8 +92,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Generate refined landing page prompt using AI
   app.post("/api/generate-prompt", async (req, res) => {
+    const { idea, targetCustomer, problemSolved } = req.body;
+    
     try {
-      const { idea, targetCustomer, problemSolved } = req.body;
       
       // Use AI to refine and rewrite the idea in better language
       const response = await openai.chat.completions.create({
