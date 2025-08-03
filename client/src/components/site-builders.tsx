@@ -144,7 +144,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             {/* Instructions to use builders */}
             <div className="text-center mt-6 p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
               <p className="text-foreground/80 text-lg">
-                👇 <span className="font-semibold">Paste your prompt with the site builders below</span> to see what your idea looks like live!
+                <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with the site builders below</span> to see what your idea looks like live!
               </p>
             </div>
           </CardContent>
