@@ -21,11 +21,19 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
           {/* Fullerton Quote and User Stats */}
-          <div className="mb-8 space-y-3">
-            <div className="flex justify-center items-center space-x-6">
-              <blockquote className="text-lg font-medium text-white">
-                "This is the future!"
-              </blockquote>
+          <div className="mb-8 space-y-6">
+            <div className="flex justify-center items-center space-x-12">
+              {/* Quote Section */}
+              <div className="text-center">
+                <blockquote className="text-lg font-medium text-white mb-2">
+                  "This is the future!"
+                </blockquote>
+                <cite className="text-sm text-white/70">
+                  - Cal State Fullerton Entrepreneurship Center
+                </cite>
+              </div>
+              
+              {/* User Stats Section */}
               <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-1">
                   {[...Array(4)].map((_, i) => (
@@ -41,9 +49,6 @@ export default function Hero() {
                 <span className="text-sm text-white/80">entrepreneurs validated</span>
               </div>
             </div>
-            <cite className="text-sm text-white/70 block text-center">
-              - Cal State Fullerton Entrepreneurship Center
-            </cite>
           </div>
           
           <div className="inline-block mb-6">
