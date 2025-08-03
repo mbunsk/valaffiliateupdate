@@ -35,15 +35,27 @@ export default function Hero() {
               
               {/* User Stats Section */}
               <div className="flex items-center space-x-2">
-                <div className="flex items-center space-x-1">
-                  {[...Array(4)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    >
-                      U
-                    </div>
-                  ))}
+                <div className="flex items-center -space-x-1">
+                  <img 
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiNGRkE1MDAiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    alt="User"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                  />
+                  <img 
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiM4QjVDRjYiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    alt="User"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                  />
+                  <img 
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiNFRjQ0NDQiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    alt="User"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                  />
+                  <img 
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiMxMEI5ODEiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    alt="User"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                  />
                 </div>
                 <span className="text-lg font-bold text-white">278,355</span>
                 <span className="text-sm text-white/80">entrepreneurs validated</span>

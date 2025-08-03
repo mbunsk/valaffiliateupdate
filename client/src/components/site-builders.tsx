@@ -72,7 +72,7 @@ export default function SiteBuilders() {
             🎨 Build Your Landing Page
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Mock Up Your Idea! 🚀
+            Mock Up Your Idea! <span style={{fontFamily: 'Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols'}}>🚀</span>
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
             Create a free landing page to show partners, customers, and friends what you're exploring!
