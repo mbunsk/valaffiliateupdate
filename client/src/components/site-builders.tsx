@@ -161,7 +161,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
 
             {/* Quick Win Benefits */}
             <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-xl p-6 mt-6 border border-green-500/20">
-              <h4 className="text-lg font-bold text-green-600 mb-3 flex items-center gap-2">
+              <h4 className="text-lg font-bold text-green-600 mb-3 flex items-center justify-center gap-2">
                 ⚡ Why Mockup Your Idea Now for Free?
               </h4>
               <div className="grid md:grid-cols-3 gap-4 text-sm">
