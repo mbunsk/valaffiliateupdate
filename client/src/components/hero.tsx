@@ -20,10 +20,29 @@ export default function Hero() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
-          {/* Fullerton Quote and User Stats */}
+          {/* Hero Top Section with Val and Stats */}
           <div className="mb-8 space-y-6">
-            <div className="flex justify-center items-center space-x-12">
-              {/* Quote Section */}
+            <div className="flex justify-center items-center space-x-16">
+              {/* Val's Quote Section */}
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
+                  <img 
+                    src="/attached_assets/AIValFull_1754243498167.jpg" 
+                    alt="Val - Your AI Mentor" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="text-left">
+                  <blockquote className="text-lg font-medium text-white mb-1">
+                    "Every great idea deserves thoughtful exploration!"
+                  </blockquote>
+                  <cite className="text-sm text-white/70">
+                    - Val, your AI startup mentor
+                  </cite>
+                </div>
+              </div>
+              
+              {/* Testimonial Section */}
               <div className="text-center">
                 <blockquote className="text-lg font-medium text-white mb-2">
                   "This is the future!"
