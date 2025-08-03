@@ -32,10 +32,10 @@ export default function SiteBuilders() {
   const builders = [
     {
       name: "Base44",
-      description: "⭐ RECOMMENDED: Free builder with powerful features — no credit card needed!",
+      description: "Free builder with powerful features — no credit card needed!",
       url: "https://base44.com",
-      color: "bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600",
-      iconBg: "bg-gradient-to-r from-orange-100 to-red-100",
+      color: "bg-orange-600 hover:bg-orange-700",
+      iconBg: "bg-orange-100",
       iconColor: "text-orange-600",
       recommended: true,
     },
@@ -115,7 +115,7 @@ export default function SiteBuilders() {
         {/* Site Builders */}
         <div className="grid md:grid-cols-3 gap-8">
           {builders.map((builder, index) => (
-            <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-orange-400 bg-gradient-to-br from-orange-50/80 to-red-50/80 hover:border-orange-500' : 'border-primary/20 hover:border-primary/40 bg-card/80'} backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float ${builder.recommended ? 'ring-2 ring-orange-200' : ''}`} style={{animationDelay: `${index * 0.2}s`}}>
+            <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-orange-400 hover:border-orange-500 ring-2 ring-orange-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float`} style={{animationDelay: `${index * 0.2}s`}}>
               <CardContent className="p-8 text-center">
                 <div className={`w-20 h-20 ${builder.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg`} style={{animationDelay: `${index * 0.3}s`}}>
                   <div className={`w-10 h-10 ${builder.iconColor}`}>
@@ -140,10 +140,7 @@ export default function SiteBuilders() {
                     )}
                   </div>
                 </div>
-                <h3 className="text-2xl font-black text-foreground mb-3">
-                  {builder.name}
-                  {builder.recommended && <span className="ml-2 text-lg">⭐</span>}
-                </h3>
+                <h3 className="text-2xl font-black text-foreground mb-3">{builder.name}</h3>
                 <p className="text-foreground/70 mb-6 text-lg">{builder.description}</p>
                 <Button asChild className={`w-full ${builder.color} transition-all duration-300 transform hover:scale-105 rounded-2xl py-6 text-lg font-bold shadow-lg hover:shadow-xl`}>
                   <a href={builder.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
