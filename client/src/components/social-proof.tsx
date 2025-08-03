@@ -17,14 +17,19 @@ export function SocialProof() {
 
           {/* Product Hunt Badge & Rating */}
           <div className="flex flex-col items-center space-y-4">
-            <div className="flex items-center space-x-3 bg-white dark:bg-gray-800 rounded-lg px-4 py-3 shadow-sm">
+            <a 
+              href="https://www.producthunt.com/products/validator-ai?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-validator-ai&launch=validator-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-3 bg-white dark:bg-gray-800 rounded-lg px-4 py-3 shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
               <div className="bg-orange-500 text-white px-2 py-1 rounded text-xs font-bold">
                 PH
               </div>
               <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 Featured on Product Hunt
               </span>
-            </div>
+            </a>
             
             <div className="flex items-center space-x-2">
               <div className="flex items-center">

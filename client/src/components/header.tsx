@@ -31,7 +31,12 @@ export default function Header() {
           <nav className="hidden md:block">
             <div className="ml-10 flex items-center space-x-6">
               {/* Product Hunt Rating */}
-              <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-lg px-3 py-1 shadow-sm">
+              <a 
+                href="https://www.producthunt.com/products/validator-ai?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-validator-ai&launch=validator-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-lg px-3 py-1 shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
                 <div className="bg-orange-500 text-white px-1 py-0.5 rounded text-xs font-bold">
                   PH
                 </div>
@@ -46,7 +51,7 @@ export default function Header() {
                   ))}
                 </div>
                 <span className="text-sm font-bold text-gray-900 dark:text-gray-100">4.85</span>
-              </div>
+              </a>
               <button 
                 onClick={() => scrollToSection('validate')}
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
