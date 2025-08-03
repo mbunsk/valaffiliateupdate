@@ -7,7 +7,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createSubmission(submission: InsertSubmission): Promise<Submission>;
   getAllSubmissions(): Promise<Submission[]>;
-  createValidation(validation: InsertValidation): Promise<Validation>;
+  createValidation(validation: InsertValidation, feedback: string): Promise<Validation>;
   getValidationsByIdea(idea: string): Promise<Validation[]>;
 }
 
@@ -55,12 +55,8 @@ export class MemStorage implements IStorage {
     return Array.from(this.submissions.values());
   }
 
-  async createValidation(insertValidation: InsertValidation): Promise<Validation> {
+  async createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation> {
     const id = randomUUID();
-    
-    // Generate AI-like feedback based on the idea
-    const feedback = this.generateValidationFeedback(insertValidation.idea);
-    
     const validation: Validation = {
       ...insertValidation,
       id,

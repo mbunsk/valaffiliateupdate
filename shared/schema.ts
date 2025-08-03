@@ -24,6 +24,8 @@ export const submissions = pgTable("submissions", {
 export const validations = pgTable("validations", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   idea: text("idea").notNull(),
+  targetCustomer: text("target_customer").notNull(),
+  problemSolved: text("problem_solved").notNull(),
   feedback: text("feedback").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });

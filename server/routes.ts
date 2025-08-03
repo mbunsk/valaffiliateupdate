@@ -26,8 +26,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Validate startup idea
   app.post("/api/validate", async (req, res) => {
     try {
-      const { idea } = insertValidationSchema.parse(req.body);
-      const validation = await storage.createValidation({ idea });
+      const { idea, targetCustomer, problemSolved } = insertValidationSchema.parse(req.body);
+      
+      // Generate mock AI feedback (in production, this would call actual AI service)
+      const mockFeedback = JSON.stringify({
+        ideaFit: "Your idea directly aligns with the problem you've identified and shows strong potential.",
+        competitors: ["Competitor A: Basic solution", "Competitor B: Premium offering", "Competitor C: Budget option"],
+        uniqueOpportunity: "Consider combining the best aspects with modern tech integration.",
+        customerInsights: `Your target customers (${targetCustomer}) are well-defined. Look for them in online communities and forums.`,
+        readinessScore: 75,
+        nextSteps: ["Conduct customer interviews", "Define unique value proposition", "Create prototype"]
+      });
+      
+      const validation = await storage.createValidation({ 
+        idea, 
+        targetCustomer, 
+        problemSolved
+      }, mockFeedback);
       res.json(validation);
     } catch (error) {
       if (error instanceof z.ZodError) {

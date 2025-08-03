@@ -2,25 +2,46 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const testimonials = [
   {
-    name: "Jessica Martinez",
-    title: "Idea Explorer",
-    initials: "JM",
+    name: "Travis",
+    title: "Professor in California",
+    initials: "TR",
     color: "from-blue-400 to-blue-600",
-    quote: "ValidatorAI helped me explore my mental health app concept. The AI feedback was insightful, and getting featured in their newsletter brought me amazing feedback from the community!"
+    quote: "Over our 15-minute conversation, Val asked the right questions to help me structure a clear starting point for the startup I discussed."
   },
   {
-    name: "Robert Chen",
-    title: "Creative Thinker",
-    initials: "RC",
-    color: "from-green-400 to-green-600",
-    quote: "The exploration process helped me refine my delivery concept. Now I have a clear vision and a beautiful landing page to share with friends."
-  },
-  {
-    name: "Sarah Parker",
-    title: "Concept Creator",
-    initials: "SP",
+    name: "Jessica",
+    title: "USA",
+    initials: "JE",
     color: "from-purple-400 to-purple-600",
-    quote: "From idea to mockup in just hours! The site builder recommendations were perfect, and the newsletter feature connected me with other explorers."
+    quote: "Val has been really great so far! It feels light years better than anything I've used before. This is hands down the most confident that I've felt about any of them."
+  },
+  {
+    name: "Eric",
+    title: "College Student, USA",
+    initials: "ER",
+    color: "from-green-400 to-green-600",
+    quote: "This service makes it really easy for a person like myself that has no experience in the business sector. It is actually making me think about pursuing this small idea."
+  },
+  {
+    name: "Jen",
+    title: "USA",
+    initials: "JN",
+    color: "from-pink-400 to-pink-600",
+    quote: "I did an accelerator previously which fell short because they molded my idea into a major opportunity. Val is helping me move forward the correct way."
+  },
+  {
+    name: "David Fox",
+    title: "Zapt",
+    initials: "DF",
+    color: "from-orange-400 to-orange-600",
+    quote: "Putting Zapt through Validator AI gave us actionable advice and excellent insights which significantly helped us move forward. The AI mentor underscored several vital considerations."
+  },
+  {
+    name: "Andrew Bouras",
+    title: "Varos Technologies",
+    initials: "AB",
+    color: "from-cyan-400 to-cyan-600",
+    quote: "We have received accurate feedback every step of the way. The AI hit on all important aspects of our business that we are addressing."
   }
 ];
 
@@ -39,7 +60,7 @@ export default function Testimonials() {
           <p className="text-xl text-foreground/70">Real people who brought their wild ideas to life through exploration 🚀</p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <Card key={testimonial.name} className="shadow-2xl border-2 border-primary/20 hover:border-primary/40 bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float" style={{animationDelay: `${index * 0.3}s`}}>
               <CardContent className="p-8">
