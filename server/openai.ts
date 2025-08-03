@@ -19,7 +19,7 @@ export async function generateValidationFeedback(idea: string, targetCustomer: s
 5. startupReadinessScore: A number between 60-95 representing startup readiness
 6. improvementTip: One specific, actionable tip to improve the startup
 7. customerInterviewSimulation: Array of 3 realistic customer quotes, including at least one objection
-8. pricingMonetization: Object with pricePoint, monetization, and conversionRate fields
+8. pricingMonetization: Object with pricePoint (in dollars with market research justification), monetization strategy, and conversionRate (as percentage with explanation of how you arrived at this number)
 
 Respond only with valid JSON. Be specific, actionable, and encouraging while honest about challenges.`
         },
@@ -77,9 +77,9 @@ Focus on understanding their specific pain points and engage authentically in th
         `"I'm happy with my current solution - why should I switch?"`
       ],
       pricingMonetization: {
-        pricePoint: "$30-150 depending on features and market positioning",
-        monetization: "Subscription model or one-time purchase with premium features",
-        conversionRate: "3-7% conversion rate from qualified leads"
+        pricePoint: "$49/month - Based on market research showing similar B2B tools price between $29-99/month. This positions you competitively while allowing room for value demonstration.",
+        monetization: "Monthly subscription model with 14-day free trial. Premium tier at $99/month for advanced features and integrations.",
+        conversionRate: "4.2% - Industry average for B2B SaaS landing pages is 2-5%. With proper targeting and value proposition, expect 4-5% from qualified traffic."
       }
     });
   }
@@ -92,34 +92,40 @@ export async function generateLandingPagePrompt(idea: string, targetCustomer: st
       messages: [
         {
           role: "system",
-          content: `You are an expert at creating landing page prompts for no-code website builders. Create a detailed prompt that builders like Base44, Lovable, or Bubble can use to build a high-converting landing page.
+          content: `You are an expert at creating comprehensive landing page prompts for AI-powered no-code website builders like Base44, Lovable, and Bubble. Create a detailed, actionable prompt that these AI builders can use to generate a complete, high-converting landing page.
 
-The prompt should include:
-- Clear headline and value proposition
-- Problem/solution messaging
-- Target customer language
-- Social proof elements
-- Email capture strategy
-- Visual suggestions
-- Call-to-action copy
+Your prompt should include:
+- Compelling headline and subheadline with clear value proposition
+- Problem/solution framework with emotional hooks
+- Target customer language and pain points
+- Detailed feature/benefit breakdown
+- Social proof elements and credibility indicators
+- Email capture strategy with lead magnets
+- Visual design suggestions and layout structure
+- Call-to-action copy and button placement
+- Color scheme and typography recommendations
+- Mobile responsiveness considerations
+- Trust signals and risk reduction elements
 
-Make it specific, actionable, and conversion-focused. The goal is to capture early user interest and build an email list.`
+Make it extremely specific and actionable so an AI can build a complete landing page. Focus on conversion optimization and email list building for early customer validation.`
         },
         {
           role: "user", 
-          content: `Create a landing page prompt for this startup:
+          content: `Create a comprehensive landing page prompt for AI site builders (Base44, Lovable, Bubble) for this startup:
 
-Idea: ${idea}
-Target Customer: ${targetCustomer}
-Problem Solved: ${problemSolved}
+**Startup Details:**
+- Idea: ${idea}
+- Target Customer: ${targetCustomer}
+- Problem Solved: ${problemSolved}
 
-AI Validation Insights:
-- Idea Fit: ${validationFeedback.ideaFitAlignment}
-- Unique Opportunity: ${validationFeedback.uvpInsight}
-- Customer Targeting: ${validationFeedback.customerTargeting}
-- Readiness Score: ${validationFeedback.startupReadinessScore}/100
+**AI Validation Insights:**
+- Market Fit Analysis: ${validationFeedback.ideaFitAlignment}
+- Unique Value Proposition: ${validationFeedback.uvpInsight}
+- Target Customer Locations: ${validationFeedback.customerTargeting}
+- Startup Readiness: ${validationFeedback.startupReadinessScore}/100
+- Pricing Strategy: ${validationFeedback.pricingMonetization?.pricePoint || 'To be determined'}
 
-Create a detailed prompt for building a landing page that will capture early user interest and emails.`
+Create an extremely detailed prompt that an AI site builder can use to generate a complete landing page. Include specific copy suggestions, design elements, sections, and conversion optimization strategies. The goal is email capture for early customer validation and building a waitlist.`
         }
       ],
       temperature: 0.8,
@@ -130,43 +136,63 @@ Create a detailed prompt for building a landing page that will capture early use
   } catch (error) {
     console.error("OpenAI landing page prompt error:", error);
     // Fallback prompt
-    return `Create a landing page for "${idea}" targeting ${targetCustomer}:
+    return `Build a high-converting landing page for "${idea}" targeting ${targetCustomer}:
 
-**Headline:** The solution ${targetCustomer} need for ${problemSolved}
+**PAGE STRUCTURE & DESIGN:**
+- Clean, modern design with primary color #2563eb (blue) and accent #f59e0b (orange)
+- Mobile-first responsive layout
+- Fast loading with optimized images
+- Sticky header with logo and CTA button
 
-**Hero Section:**
-- Bold headline addressing the main problem
-- Subheadline explaining the unique solution
-- Hero image/video showing the product in action
+**HERO SECTION:**
+- Headline: "Finally, a solution for ${problemSolved}"
+- Subheadline: "Join 500+ ${targetCustomer} who are revolutionizing how they handle ${problemSolved}"
+- Hero image: Modern, professional illustration or photo relevant to the solution
+- Primary CTA button: "Get Early Access" (prominent, above fold)
 
-**Problem Section:**
-- Clearly state the pain point: ${problemSolved}
-- Use emotional language that resonates with ${targetCustomer}
+**PROBLEM SECTION:**
+- Header: "The Problem ${targetCustomer} Face Daily"
+- Pain points specific to ${targetCustomer}
+- Statistical data about the problem impact
+- Emotional language that creates urgency
 
-**Solution Section:**
-- Explain how your idea solves the problem
-- Highlight key benefits and features
-- Include screenshots or mockups
+**SOLUTION SECTION:**
+- Header: "Introducing [Product Name]"
+- 3 key benefits with icons and descriptions
+- Feature breakdown with mockup images
+- "How It Works" - 3-step process
 
-**Social Proof:**
-- Customer testimonials (even if early/beta)
-- "Join 100+ early users" counter
-- Trust indicators and credentials
+**SOCIAL PROOF SECTION:**
+- "Join 500+ Early Adopters" counter
+- 3 customer testimonials with photos and titles
+- Company logos (if any partnerships)
+- "Featured on" media mentions
 
-**Email Capture:**
-- "Get Early Access" or "Join the Waitlist" form
-- Offer: Free trial, beta access, or exclusive updates
-- Single email field with compelling CTA button
+**EMAIL CAPTURE SECTION:**
+- Header: "Get Early Access + Exclusive Updates"
+- Lead magnet: "Free [Industry] Toolkit" or "Beta Access"
+- Single email input field
+- Privacy assurance text
+- Compelling CTA: "Reserve My Spot"
 
-**Call-to-Action:**
-- Primary: "Get Early Access" 
-- Secondary: "Learn More"
-- Use action-oriented, benefit-focused language
+**TRUST SIGNALS:**
+- Security badges and certifications
+- Money-back guarantee
+- "No spam, unsubscribe anytime"
+- Founder photo and credentials
 
-**Design Notes:**
-- Clean, modern design with your brand colors
-- Mobile-responsive layout
-- Fast loading and simple navigation
-- Include contact information and social links`;
+**FOOTER:**
+- Contact information
+- Social media links
+- Privacy policy and terms
+- Additional trust indicators
+
+**CONVERSION OPTIMIZATION:**
+- Multiple email capture points (hero, middle, bottom)
+- Exit-intent popup with special offer
+- Social media sharing buttons
+- Analytics and heat mapping integration
+
+Build this as a single-page application with smooth scrolling navigation and optimized for email conversion.`;
   }
 }
