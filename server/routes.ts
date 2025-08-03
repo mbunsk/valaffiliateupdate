@@ -86,12 +86,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Generate refined landing page prompt
+  // Generate refined landing page prompt using AI
   app.post("/api/generate-prompt", async (req, res) => {
     try {
       const { idea, targetCustomer, problemSolved } = req.body;
       
-      // Generate a simple, refined prompt using the correct format
+      // Use AI to refine and rewrite the idea in better language
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+        messages: [
+          {
+            role: "system",
+            content: "You are a professional copywriter who helps entrepreneurs create clear, compelling descriptions of their startup ideas. Rewrite startup concepts in professional, clear language that would work well for landing page prompts. Make the language more polished and marketable while keeping the core concept intact."
+          },
+          {
+            role: "user", 
+            content: `Please rewrite this startup idea in clear, professional language:
+
+Original idea: ${idea}
+Target customer: ${targetCustomer}  
+Problem it solves: ${problemSolved}
+
+Rewrite each part to be more clear and marketable. Return ONLY a JSON object with these exact keys:
+{
+  "refinedIdea": "the polished version of the idea",
+  "refinedCustomer": "the refined target customer description", 
+  "refinedProblem": "the refined problem description"
+}`
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.3,
+        max_tokens: 500
+      });
+
+      const refined = JSON.parse(response.choices[0].message.content);
+      
+      const prompt = `Create a landing page for "${refined.refinedIdea}" which helps ${refined.refinedCustomer} ${refined.refinedProblem}. The target customer is ${refined.refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      
+      res.json({ prompt });
+    } catch (error) {
+      console.error("Error generating prompt:", error);
+      // Fallback to simple refinement if AI fails
       const refinedIdea = `${idea.charAt(0).toUpperCase()}${idea.slice(1).toLowerCase()}`;
       const refinedCustomer = targetCustomer.toLowerCase();
       const refinedProblem = problemSolved.toLowerCase();
@@ -99,9 +135,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const prompt = `Create a landing page for "${refinedIdea}" which helps ${refinedCustomer} ${refinedProblem}. The target customer is ${refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
       
       res.json({ prompt });
-    } catch (error) {
-      console.error("Error generating prompt:", error);
-      res.status(500).json({ message: "Failed to generate prompt" });
     }
   });
 

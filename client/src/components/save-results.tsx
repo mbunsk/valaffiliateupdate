@@ -21,22 +21,42 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
   const generatePDF = async () => {
     setGenerating(true);
     try {
-      // Create a clean text version of the feedback - more thorough cleaning
+      // Create a clean text version of the feedback - thorough HTML cleaning
       let cleanFeedback = validationData.feedback
+        // Remove code blocks and markdown artifacts first
+        .replace(/```html/gi, '')
+        .replace(/```/g, '')
+        .replace(/`/g, '')
+        // Replace HTML elements with proper spacing
         .replace(/<div[^>]*>/gi, '\n\n')
         .replace(/<\/div>/gi, '')
         .replace(/<h3[^>]*>/gi, '\n\n')
         .replace(/<\/h3>/gi, ': ')
+        .replace(/<h4[^>]*>/gi, '\n\n')
+        .replace(/<\/h4>/gi, ': ')
         .replace(/<p[^>]*>/gi, '\n')
         .replace(/<\/p>/gi, '')
+        .replace(/<ul[^>]*>/gi, '\n')
+        .replace(/<\/ul>/gi, '')
+        .replace(/<li[^>]*>/gi, '\n• ')
+        .replace(/<\/li>/gi, '')
+        .replace(/<strong[^>]*>/gi, '')
+        .replace(/<\/strong>/gi, '')
+        .replace(/<em[^>]*>/gi, '')
+        .replace(/<\/em>/gi, '')
+        // Remove any remaining HTML tags
         .replace(/<[^>]*>/g, '')
+        // Clean HTML entities
         .replace(/&nbsp;/g, ' ')
         .replace(/&amp;/g, '&')
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>')
         .replace(/&quot;/g, '"')
         .replace(/&#39;/g, "'")
+        .replace(/&hellip;/g, '...')
+        // Clean up excessive whitespace
         .replace(/\n{3,}/g, '\n\n')
+        .replace(/\s{2,}/g, ' ')
         .trim();
       
       // Create PDF

@@ -105,6 +105,11 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 <p>Define 5 key metrics to track progress: early validation signals, user engagement indicators, and business health measurements.</p>
 </div>
 
+<div class="validation-section">
+<h3>One Suggestion to Make This Idea More Marketable</h3>
+<p>Provide one specific, actionable suggestion that would make this startup idea more appealing to customers and easier to market. Focus on positioning, messaging, features, or market approach that would increase conversion rates and customer interest.</p>
+</div>
+
 Be encouraging but realistic. Focus on actionable insights without any styling instructions.`
         },
         {
