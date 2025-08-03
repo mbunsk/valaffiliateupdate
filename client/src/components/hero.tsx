@@ -59,7 +59,7 @@ export default function Hero() {
               Explore Your Ideas
             </span>
             <br />
-            <span className="text-foreground animate-wiggle inline-block">With AI Feedback! <span className="animate-rocket-launch inline-block">🚀</span></span>
+            <span className="text-foreground">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
             Get instant AI feedback, mock up a landing page, and share your exploration with{" "}
