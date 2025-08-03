@@ -31,10 +31,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Validate startup idea
   app.post("/api/validate", async (req, res) => {
     try {
-      const { idea, targetCustomer, problemSolved, whatDoYouNeed = "" } = insertValidationSchema.parse(req.body);
+      const { idea, targetCustomer, problemSolved } = insertValidationSchema.parse(req.body);
       
       // Generate AI feedback using OpenAI
-      const aiFeedback = await generateValidationFeedback(idea, targetCustomer, problemSolved, whatDoYouNeed);
+      const aiFeedback = await generateValidationFeedback(idea, targetCustomer, problemSolved);
       
       if (!aiFeedback) {
         throw new Error("Failed to generate feedback");
@@ -43,8 +43,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validation = await storage.createValidation({ 
         idea, 
         targetCustomer, 
-        problemSolved,
-        whatDoYouNeed
+        problemSolved
       }, aiFeedback);
       res.json(validation);
     } catch (error) {
@@ -67,6 +66,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         projectSummary: req.body.projectSummary,
         siteUrl: req.body.siteUrl,
         platform: req.body.platform,
+        whatDoYouNeed: req.body.whatDoYouNeed,
         screenshotPath: req.file?.path || null,
       };
 

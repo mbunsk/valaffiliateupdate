@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Loader2, Lightbulb, Target, Users, Zap, HelpCircle } from "lucide-react";
+import { CheckCircle, Loader2, Lightbulb, Target, Users, Zap } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SaveResults from "@/components/save-results";
@@ -15,7 +15,6 @@ interface ValidationResponse {
   idea: string;
   targetCustomer: string;
   problemSolved: string;
-  whatDoYouNeed: string;
   feedback: string;
   createdAt: string;
 }
@@ -25,7 +24,6 @@ interface IdeaValidationProps {
     idea: string;
     targetCustomer: string;
     problemSolved: string;
-    whatDoYouNeed: string;
     feedback: string;
   }) => void;
 }
@@ -34,12 +32,11 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
   const [idea, setIdea] = useState("");
   const [targetCustomer, setTargetCustomer] = useState("");
   const [problemSolved, setProblemSolved] = useState("");
-  const [whatDoYouNeed, setWhatDoYouNeed] = useState("");
   const [validationResult, setValidationResult] = useState<ValidationResponse | null>(null);
   const { toast } = useToast();
 
   const validateMutation = useMutation({
-    mutationFn: async (data: { idea: string; targetCustomer: string; problemSolved: string; whatDoYouNeed: string }) => {
+    mutationFn: async (data: { idea: string; targetCustomer: string; problemSolved: string }) => {
       const response = await apiRequest("POST", "/api/validate", data);
       return response.json() as Promise<ValidationResponse>;
     },
@@ -52,7 +49,6 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
           idea: data.idea,
           targetCustomer: data.targetCustomer,
           problemSolved: data.problemSolved,
-          whatDoYouNeed: data.whatDoYouNeed,
           feedback: data.feedback
         });
       }
@@ -74,15 +70,15 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
   });
 
   const handleValidation = () => {
-    if (!idea.trim() || !targetCustomer.trim() || !problemSolved.trim() || !whatDoYouNeed.trim()) {
+    if (!idea.trim() || !targetCustomer.trim() || !problemSolved.trim()) {
       toast({
         title: "Missing Information",
-        description: "Please fill in all four fields!",
+        description: "Please fill in all three fields!",
         variant: "destructive",
       });
       return;
     }
-    validateMutation.mutate({ idea, targetCustomer, problemSolved, whatDoYouNeed });
+    validateMutation.mutate({ idea, targetCustomer, problemSolved });
   };
 
   const parseFeedback = (feedbackHtml: string) => {
@@ -129,7 +125,7 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
             <div className="text-center mb-8">
               <span className="text-3xl">💭</span>
               <p className="text-lg font-semibold text-foreground mt-2">
-                Tell us about your idea in 4 quick steps
+                Tell us about your idea in 3 quick steps
               </p>
               <p className="text-sm text-foreground/60">
                 Just the basics - we'll do the deep thinking for you! 🎨
@@ -174,19 +170,6 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                   onChange={(e) => setProblemSolved(e.target.value)}
                   className="text-base border-2 border-secondary/30 focus:border-secondary rounded-xl bg-input text-foreground placeholder:text-muted-foreground"
                   placeholder="e.g., Limited space for sneaker storage and display..."
-                />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <HelpCircle className="w-5 h-5 text-purple-500" />
-                  <label className="text-sm font-semibold text-foreground">What do you need?</label>
-                </div>
-                <Input
-                  value={whatDoYouNeed}
-                  onChange={(e) => setWhatDoYouNeed(e.target.value)}
-                  className="text-base border-2 border-purple-500/30 focus:border-purple-500 rounded-xl bg-input text-foreground placeholder:text-muted-foreground"
-                  placeholder="e.g., I need a technical founder, help with traction, advice..."
                 />
               </div>
             </div>

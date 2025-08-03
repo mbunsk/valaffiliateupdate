@@ -10,7 +10,6 @@ interface SaveResultsProps {
     idea: string;
     targetCustomer: string;
     problemSolved: string;
-    whatDoYouNeed: string;
     feedback: string;
   };
 }
@@ -52,7 +51,6 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         { title: "IDEA", content: validationData.idea },
         { title: "TARGET CUSTOMER", content: validationData.targetCustomer },
         { title: "PROBLEM SOLVED", content: validationData.problemSolved },
-        { title: "WHAT YOU NEED", content: validationData.whatDoYouNeed },
         { title: "VAL'S ANALYSIS", content: cleanFeedback }
       ];
 

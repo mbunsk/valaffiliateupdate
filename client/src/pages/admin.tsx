@@ -246,6 +246,13 @@ function AdminDashboard() {
                             </p>
                           </div>
 
+                          <div>
+                            <h4 className="font-semibold mb-2">What They Need:</h4>
+                            <p className="text-sm font-medium text-primary bg-primary/10 p-2 rounded">
+                              {submission.whatDoYouNeed || 'Not specified'}
+                            </p>
+                          </div>
+
                           {submission.screenshotPath && (
                             <div>
                               <h4 className="font-semibold mb-2">Screenshot:</h4>

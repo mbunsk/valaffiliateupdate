@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Upload, Loader2 } from "lucide-react";
+import { Upload, Loader2, HelpCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -20,6 +20,7 @@ const formSchema = z.object({
   projectSummary: z.string().min(10, "Project summary must be at least 10 characters"),
   siteUrl: z.string().url("Invalid URL"),
   platform: z.string().min(1, "Please select a platform"),
+  whatDoYouNeed: z.string().min(1, "Please tell us what you need"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -37,6 +38,7 @@ export default function NewsletterForm() {
       projectSummary: "",
       siteUrl: "",
       platform: "",
+      whatDoYouNeed: "",
     },
   });
 
@@ -242,6 +244,27 @@ export default function NewsletterForm() {
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
+                      <FormMessage className="text-red-300" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="whatDoYouNeed"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white font-semibold flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4" />
+                        What do you need?
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="e.g., I need a technical founder, help with traction, advice..." 
+                          {...field} 
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
+                        />
+                      </FormControl>
                       <FormMessage className="text-red-300" />
                     </FormItem>
                   )}

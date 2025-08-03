@@ -17,6 +17,7 @@ export const submissions = pgTable("submissions", {
   projectSummary: text("project_summary").notNull(),
   siteUrl: text("site_url").notNull(),
   platform: text("platform").notNull(),
+  whatDoYouNeed: text("what_do_you_need").notNull().default(""),
   screenshotPath: text("screenshot_path"),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -26,7 +27,6 @@ export const validations = pgTable("validations", {
   idea: text("idea").notNull(),
   targetCustomer: text("target_customer").notNull(),
   problemSolved: text("problem_solved").notNull(),
-  whatDoYouNeed: text("what_do_you_need").notNull().default(""),
   feedback: text("feedback").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });

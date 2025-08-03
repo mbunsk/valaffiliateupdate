@@ -3,7 +3,7 @@ import OpenAI from "openai";
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateValidationFeedback(idea: string, targetCustomer: string, problemSolved: string, whatDoYouNeed: string) {
+export async function generateValidationFeedback(idea: string, targetCustomer: string, problemSolved: string) {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -112,9 +112,8 @@ Be encouraging but realistic. Focus on actionable insights without any styling i
           content: `Startup Idea: ${idea}
 Target Customer: ${targetCustomer}
 Problem Solved: ${problemSolved}
-What They Need: ${whatDoYouNeed}
 
-Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified. Consider what they specifically need (${whatDoYouNeed}) in your recommendations and next steps.`
+Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified.`
         }
       ],
       temperature: 0.7,
