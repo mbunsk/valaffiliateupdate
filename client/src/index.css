@@ -162,20 +162,25 @@
     }
   }
 
-  .neon-border-glow {
-    animation: neon-border-spin 4s linear infinite, neon-pulse 2s ease-in-out infinite;
-    background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
-    padding: 2px;
+  /* Highlight border effect */
+  @keyframes border-glow {
+    0%, 100% { 
+      box-shadow: 0 0 10px hsla(280, 100%, 70%, 0.3),
+                  0 0 20px hsla(280, 100%, 70%, 0.2),
+                  inset 0 0 10px hsla(280, 100%, 70%, 0.1);
+      border-color: hsla(195, 80%, 45%, 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 20px hsla(280, 100%, 70%, 0.6),
+                  0 0 40px hsla(280, 100%, 70%, 0.4),
+                  inset 0 0 20px hsla(280, 100%, 70%, 0.2);
+      border-color: hsla(195, 80%, 45%, 0.8);
+    }
   }
-  
-  .neon-border-glow::before {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: inherit;
-    border-radius: inherit;
-    filter: blur(4px);
-    opacity: 0.6;
+
+  .highlight-border {
+    animation: border-glow 3s ease-in-out infinite;
+    transition: all 0.3s ease;
   }
 
   .gradient-text {

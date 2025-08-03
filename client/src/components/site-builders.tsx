@@ -133,7 +133,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             
 
             
-            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
+            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/30 highlight-border">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
                 <Button
