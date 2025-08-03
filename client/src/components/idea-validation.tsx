@@ -184,10 +184,14 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
               return (
                 <div id="validation-response" className="mt-8 space-y-6 animate-in slide-in-from-bottom-4 duration-600">
                   <div className="text-center mb-8">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-gentle">
-                      <CheckCircle className="w-10 h-10 text-white" />
+                    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-4 border-green-500 shadow-lg animate-bounce-gentle">
+                      <img 
+                        src="/attached_assets/AIValFull_1754243498167.jpg" 
+                        alt="Val - Your AI Mentor" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <h3 className="text-3xl font-black gradient-text mb-2">Val's Analysis is Ready! 🎉</h3>
+                    <h3 className="text-3xl font-black gradient-text mb-2">Val's Analysis is Ready! <span className="text-3xl">🎉</span></h3>
                     <p className="text-lg text-foreground/70">Your warm, thoughtful startup mentor has insights for you</p>
                   </div>
 

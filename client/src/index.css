@@ -250,3 +250,38 @@
     display: inline-block;
   }
 }
+
+
+/* Customer conversation styling */
+.customer-conversations {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.customer-conversation {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.customer-conversation h4 {
+  color: hsl(var(--primary));
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.customer-conversation p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.customer-conversation strong {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}

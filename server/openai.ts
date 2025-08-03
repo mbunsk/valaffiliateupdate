@@ -32,7 +32,13 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 
 <div class="validation-section">
 <h3>Find Your Customers</h3>
-<p>Suggest where to find target customers online and provide a clear message that would resonate with them.</p>
+<p>Provide at least 3 specific places to find early customers with detailed examples:</p>
+<ul>
+<li><strong>Reddit Communities:</strong> List specific subreddits (e.g., r/entrepreneurship, r/startups) relevant to this idea</li>
+<li><strong>Online Groups:</strong> Identify Facebook groups, Discord servers, or LinkedIn communities where target customers spend time</li>
+<li><strong>Forums & Websites:</strong> Name specific industry forums, blogs, or websites where these customers are active</li>
+</ul>
+<p>Include realistic acquisition strategies and potential partnerships for each location.</p>
 </div>
 
 <div class="validation-section">
@@ -46,12 +52,38 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 
 <div class="validation-section">
 <h3>Customer Reality Simulation</h3>
-<p>Simulate how 2-3 potential customers might respond to this idea, including realistic objections and interest levels.</p>
+<div class="customer-conversations">
+<div class="customer-conversation">
+<h4>Customer #1: [Profile]</h4>
+<p><strong>Initial Response:</strong> "[Their first reaction]"</p>
+<p><strong>Follow-up Questions:</strong> "[Their concerns/questions]"</p>
+<p><strong>Objections:</strong> "[Specific hesitations]"</p>
+<p><strong>Interest Level:</strong> [High/Medium/Low with reasoning]</p>
+</div>
+<div class="customer-conversation">
+<h4>Customer #2: [Profile]</h4>
+<p><strong>Initial Response:</strong> "[Their first reaction]"</p>
+<p><strong>Follow-up Questions:</strong> "[Their concerns/questions]"</p>
+<p><strong>Objections:</strong> "[Specific hesitations]"</p>
+<p><strong>Interest Level:</strong> [High/Medium/Low with reasoning]</p>
+</div>
+<div class="customer-conversation">
+<h4>Customer #3: [Profile]</h4>
+<p><strong>Initial Response:</strong> "[Their first reaction]"</p>
+<p><strong>Follow-up Questions:</strong> "[Their concerns/questions]"</p>
+<p><strong>Objections:</strong> "[Specific hesitations]"</p>
+<p><strong>Interest Level:</strong> [High/Medium/Low with reasoning]</p>
+</div>
+</div>
 </div>
 
 <div class="validation-section">
-<h3>Revenue Potential</h3>
-<p>Based on market research, estimate realistic revenue scenarios: conservative first-year projections, pricing strategy recommendations, and key revenue milestones to track.</p>
+<h3>Revenue Potential & Business Model</h3>
+<p><strong>Market Analysis:</strong> Research the total addressable market size, competitor pricing, and market trends for this industry.</p>
+<p><strong>Business Model Options:</strong> Analyze 2-3 potential business models (subscription, one-time purchase, freemium, marketplace, etc.) and recommend the best fit.</p>
+<p><strong>Pricing Strategy:</strong> Suggest specific pricing tiers with reasoning based on value delivered and market research.</p>
+<p><strong>Revenue Projections:</strong> Provide conservative, realistic, and optimistic first-year revenue scenarios with assumptions.</p>
+<p><strong>Key Milestones:</strong> Define specific revenue and customer acquisition milestones to track progress.</p>
 </div>
 
 <div class="validation-section">
@@ -73,10 +105,7 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 <p>Define 5 key metrics to track progress: early validation signals, user engagement indicators, and business health measurements.</p>
 </div>
 
-<div class="prompt-section">
-<h3>Polished Landing Page Prompt</h3>
-<p>Create a clean, professional landing page prompt by fixing any spelling/grammar in their original idea and presenting it as: "Create a landing page for [Polished Idea Name] - [clean description of what it does], which helps [specific target customer] solve [specific problem] by [clear solution approach]. Include a hero section, key features, testimonials section, and email signup form. Use [appropriate design style] with [suggested color scheme]. Perfect for validating demand and collecting interested prospects."</p>
-</div>
+
 
 Be encouraging but realistic. Focus on actionable insights without any styling instructions.`
         },
