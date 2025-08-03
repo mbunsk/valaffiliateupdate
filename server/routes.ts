@@ -30,12 +30,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Generate mock AI feedback (in production, this would call actual AI service)
       const mockFeedback = JSON.stringify({
-        ideaFit: "Your idea directly aligns with the problem you've identified and shows strong potential.",
-        competitors: ["Competitor A: Basic solution", "Competitor B: Premium offering", "Competitor C: Budget option"],
-        uniqueOpportunity: "Consider combining the best aspects with modern tech integration.",
-        customerInsights: `Your target customers (${targetCustomer}) are well-defined. Look for them in online communities and forums.`,
-        readinessScore: 75,
-        nextSteps: ["Conduct customer interviews", "Define unique value proposition", "Create prototype"]
+        ideaFitAlignment: `Your idea of ${idea} directly aligns with the problem you've identified for ${targetCustomer}. The solution addresses the core issue of ${problemSolved}, showing strong market potential.`,
+        competitorSnapshot: [
+          "**Competitor A** – Offers basic solutions focused on core functionality and affordability.", 
+          "**Competitor B** – Provides premium offerings emphasizing quality and advanced features.",
+          "**Competitor C** – Known for innovative approaches with unique technology integration."
+        ],
+        uvpInsight: "To stand out, consider combining functionality with modern technology integration and superior user experience that existing solutions lack.",
+        customerTargeting: `${targetCustomer} are a strong target market. You can find these customers in specialized online communities, industry forums, social media groups, and relevant networking events. Focus on understanding their specific pain points and preferences.`,
+        startupReadinessScore: Math.floor(Math.random() * 30) + 60, // 60-90 range
+        improvementTip: "Conduct targeted interviews with your ideal customers to validate assumptions and refine your solution based on real user feedback.",
+        customerInterviewSimulation: [
+          `Customer A: "I really need a solution that addresses ${problemSolved} in a more efficient way."`,
+          `Customer B: "Current options don't quite meet my needs - there's definitely room for improvement."`,
+          `Customer C (objection): "I'm used to existing solutions; not sure if I want to switch to something new."`
+        ],
+        pricingMonetization: {
+          pricePoint: "$50–$200 depending on features and market positioning",
+          monetization: "Direct sales, subscription model, or freemium with premium features",
+          conversionRate: "2–5% from qualified leads with proper validation"
+        }
       });
       
       const validation = await storage.createValidation({ 

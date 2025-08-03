@@ -65,11 +65,18 @@ export default function IdeaValidation() {
       return JSON.parse(feedbackJson);
     } catch {
       return {
-        marketFit: "Analysis completed successfully.",
-        strengths: "Your idea shows potential for development.",
-        nextSteps: ["Continue research", "Build an MVP", "Test with users"],
-        concerns: "Consider market competition and user acquisition.",
-        tip: "Focus on your unique value proposition."
+        ideaFitAlignment: "Analysis completed successfully.",
+        competitorSnapshot: ["Competitor A: Basic solution", "Competitor B: Premium offering", "Competitor C: Budget option"],
+        uvpInsight: "Consider focusing on your unique value proposition.",
+        customerTargeting: "Your target customers are well-defined for this market.",
+        startupReadinessScore: 75,
+        improvementTip: "Focus on customer validation and market research.",
+        customerInterviewSimulation: ["Customer A: Interested in solution", "Customer B: Has concerns about pricing", "Customer C: Wants more features"],
+        pricingMonetization: {
+          pricePoint: "$50–$200 depending on features",
+          monetization: "Direct sales or subscription model",
+          conversionRate: "2–5% from qualified leads"
+        }
       };
     }
   };
@@ -187,7 +194,7 @@ export default function IdeaValidation() {
                       <h4 className="text-xl font-bold gradient-text">1. Idea Fit & Alignment</h4>
                     </div>
                     <p className="text-foreground/80 leading-relaxed">
-                      Your idea directly aligns with the problem you've identified. The solution shows promise for addressing real customer pain points, though defining the specific scope and unique approach will strengthen your positioning in the market.
+                      {feedback.ideaFitAlignment}
                     </p>
                   </CardContent>
                 </Card>
@@ -201,23 +208,16 @@ export default function IdeaValidation() {
                       </div>
                       <h4 className="text-xl font-bold gradient-text">2. Competitor Snapshot + UVP Insight</h4>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-4 mb-4">
-                      <div className="p-3 bg-card/40 rounded-lg border border-accent/20">
-                        <p className="font-semibold text-sm">Competitor A</p>
-                        <p className="text-xs text-foreground/70">Basic solution focusing on core functionality</p>
-                      </div>
-                      <div className="p-3 bg-card/40 rounded-lg border border-accent/20">
-                        <p className="font-semibold text-sm">Competitor B</p>
-                        <p className="text-xs text-foreground/70">Premium offering with advanced features</p>
-                      </div>
-                      <div className="p-3 bg-card/40 rounded-lg border border-accent/20">
-                        <p className="font-semibold text-sm">Competitor C</p>
-                        <p className="text-xs text-foreground/70">Budget option with limited capabilities</p>
-                      </div>
+                    <div className="space-y-3 mb-4">
+                      {feedback.competitorSnapshot.map((competitor: string, index: number) => (
+                        <div key={index} className="p-3 bg-card/40 rounded-lg border border-accent/20">
+                          <p className="text-sm text-foreground/80">{competitor}</p>
+                        </div>
+                      ))}
                     </div>
                     <div className="p-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg">
                       <p className="font-semibold text-foreground mb-2">💡 Your Unique Opportunity:</p>
-                      <p className="text-foreground/80 text-sm">Consider combining the best aspects with modern tech integration to create a standout solution in this market.</p>
+                      <p className="text-foreground/80 text-sm">{feedback.uvpInsight}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -231,13 +231,9 @@ export default function IdeaValidation() {
                       </div>
                       <h4 className="text-xl font-bold gradient-text">3. Customer Targeting & Messaging</h4>
                     </div>
-                    <p className="text-foreground/80 leading-relaxed mb-4">
-                      Your target customers are well-defined, but consider segmenting further for more focused messaging. Look for these customers in online communities, forums, and social platforms where they actively discuss their interests.
+                    <p className="text-foreground/80 leading-relaxed">
+                      {feedback.customerTargeting}
                     </p>
-                    <div className="p-4 bg-card/40 rounded-lg border border-secondary/20">
-                      <p className="font-semibold text-foreground mb-2">🎯 Suggested Messaging:</p>
-                      <p className="text-foreground/80 italic">"The smart solution for [target customer] who want [key benefit] without [main pain point]"</p>
-                    </div>
                   </CardContent>
                 </Card>
 
@@ -252,13 +248,70 @@ export default function IdeaValidation() {
                         <h4 className="text-xl font-bold gradient-text">4. Startup Readiness Score</h4>
                       </div>
                       <div className="text-right">
-                        <div className="text-3xl font-black text-primary">75</div>
+                        <div className="text-3xl font-black text-primary">{feedback.startupReadinessScore}</div>
                         <div className="text-sm text-foreground/60">out of 100</div>
                       </div>
                     </div>
-                    <p className="text-foreground/80">
-                      Strong foundation with clear problem-solution fit. Focus on customer validation and unique positioning to reach the next level.
+                  </CardContent>
+                </Card>
+
+                {/* Improvement Tip */}
+                <Card className="shadow-xl border-2 border-green-500/30 bg-gradient-to-br from-green-500/5 to-green-500/10">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center mr-3">
+                        <span className="text-xl">💡</span>
+                      </div>
+                      <h4 className="text-xl font-bold gradient-text">5. 1 Tip to Improve Your Startup</h4>
+                    </div>
+                    <p className="text-foreground/80 leading-relaxed">
+                      {feedback.improvementTip}
                     </p>
+                  </CardContent>
+                </Card>
+
+                {/* Customer Interview Simulation */}
+                <Card className="shadow-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-blue-500/10">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-3">
+                        <span className="text-xl">📈</span>
+                      </div>
+                      <h4 className="text-xl font-bold gradient-text">6. Customer Interview Simulation</h4>
+                    </div>
+                    <div className="space-y-3">
+                      {feedback.customerInterviewSimulation.map((interview: string, index: number) => (
+                        <div key={index} className="p-3 bg-card/40 rounded-lg border border-blue-500/20">
+                          <p className="text-sm text-foreground/80 italic">"{interview}"</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Pricing & Monetization */}
+                <Card className="shadow-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-purple-500/10">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                        <span className="text-xl">💰</span>
+                      </div>
+                      <h4 className="text-xl font-bold gradient-text">7. Pricing & Monetization</h4>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
+                        <p className="font-semibold text-sm mb-1">Price Point</p>
+                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.pricePoint}</p>
+                      </div>
+                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
+                        <p className="font-semibold text-sm mb-1">Monetization</p>
+                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.monetization}</p>
+                      </div>
+                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
+                        <p className="font-semibold text-sm mb-1">Conversion Rate</p>
+                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.conversionRate}</p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
 
