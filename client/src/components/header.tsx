@@ -64,7 +64,9 @@ export default function Header() {
                     <Star
                       key={i}
                       className={`h-3 w-3 ${
-                        i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300 dark:text-gray-600'
+                        i < 4 ? 'text-yellow-400 fill-current' : 
+                        i === 4 ? 'text-yellow-400 fill-current opacity-50' : 
+                        'text-gray-300 dark:text-gray-600'
                       }`}
                     />
                   ))}
