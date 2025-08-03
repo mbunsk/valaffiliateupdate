@@ -68,7 +68,7 @@ export default function Footer() {
               🎯 Ready to turn your wild idea into reality?
             </p>
             <p className="text-white/60 text-sm">
-              © 2024 ValidatorAI. Made with ❤️ for dreamers and builders everywhere.
+              © 2025 ValidatorAI. Made with ❤️ for dreamers and builders everywhere.
             </p>
           </div>
         </div>
