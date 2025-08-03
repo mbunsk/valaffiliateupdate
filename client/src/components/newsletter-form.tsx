@@ -125,7 +125,7 @@ export default function NewsletterForm() {
                 <span className="text-3xl">💡</span>
               </div>
               <h3 className="text-2xl font-bold text-white mb-2">Share Your Amazing Idea!</h3>
-              <p className="text-white/80 text-lg">Fill out this fun form to get valuable feedback from our community</p>
+              <p className="text-white/80 text-lg">Fill out this form to get valuable feedback from our community</p>
             </div>
             
             <Form {...form}>
