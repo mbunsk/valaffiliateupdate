@@ -4,10 +4,13 @@ import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByGoogleId(googleId: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(insertUser: InsertUser): Promise<User>;
-  createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation>;
-  createSubmission(insertSubmission: InsertSubmission): Promise<Submission>;
+  createValidation(insertValidation: InsertValidation, feedback: string, userId?: string): Promise<Validation>;
+  getUserValidations(userId: string): Promise<Validation[]>;
+  createSubmission(insertSubmission: InsertSubmission, userId?: string): Promise<Submission>;
+  getUserSubmissions(userId: string): Promise<Submission[]>;
   getAllSubmissions(): Promise<Submission[]>;
   createAdminSession(insertSession: InsertAdminSession): Promise<AdminSession>;
   getAdminSession(id: string): Promise<AdminSession | undefined>;
@@ -20,8 +23,13 @@ export class DatabaseStorage implements IStorage {
     return user || undefined;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
+  async getUserByGoogleId(googleId: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.googleId, googleId));
+    return user || undefined;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
     return user || undefined;
   }
 
@@ -33,20 +41,28 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation> {
+  async createValidation(insertValidation: InsertValidation, feedback: string, userId?: string): Promise<Validation> {
     const [validation] = await db
       .insert(validations)
-      .values({ ...insertValidation, feedback })
+      .values({ ...insertValidation, feedback, userId })
       .returning();
     return validation;
   }
 
-  async createSubmission(insertSubmission: InsertSubmission): Promise<Submission> {
+  async getUserValidations(userId: string): Promise<Validation[]> {
+    return await db.select().from(validations).where(eq(validations.userId, userId)).orderBy(desc(validations.createdAt));
+  }
+
+  async createSubmission(insertSubmission: InsertSubmission, userId?: string): Promise<Submission> {
     const [submission] = await db
       .insert(submissions)
-      .values(insertSubmission)
+      .values({ ...insertSubmission, userId })
       .returning();
     return submission;
+  }
+
+  async getUserSubmissions(userId: string): Promise<Submission[]> {
+    return await db.select().from(submissions).where(eq(submissions.userId, userId)).orderBy(desc(submissions.createdAt));
   }
 
   async getAllSubmissions(): Promise<Submission[]> {

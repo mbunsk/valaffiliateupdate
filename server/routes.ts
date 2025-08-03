@@ -7,7 +7,13 @@ import { storage } from "./storage";
 import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
 import { z } from "zod";
 import { generateValidationFeedback, generateLandingPagePrompt } from "./openai";
+import { requireAuth, optionalAuth, AuthenticatedRequest } from "./auth";
 import OpenAI from "openai";
+
+// Validate that OpenAI API key is present
+if (!process.env.OPENAI_API_KEY) {
+  throw new Error("OPENAI_API_KEY environment variable is required");
+}
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -32,8 +38,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve attached assets statically
   app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets')));
 
-  // Validate startup idea
-  app.post("/api/validate", async (req, res) => {
+  // Validate startup idea (optional auth to track user data)
+  app.post("/api/validate", optionalAuth, async (req: AuthenticatedRequest, res) => {
     try {
       const { idea, targetCustomer, problemSolved } = insertValidationSchema.parse(req.body);
       
@@ -48,8 +54,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         idea, 
         targetCustomer, 
         problemSolved
-      }, aiFeedback);
-      res.json(validation);
+      }, aiFeedback, req.user?.id);
+
+      // Return structured response for frontend
+      res.json({
+        id: validation.id,
+        idea,
+        targetCustomer,
+        problemSolved,
+        feedback: aiFeedback
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ message: "Invalid input", errors: error.errors });
@@ -60,8 +74,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Submit project for newsletter consideration
-  app.post("/api/submit", upload.single('screenshot'), async (req, res) => {
+  // Submit project for newsletter consideration (optional auth)
+  app.post("/api/submit", upload.single('screenshot'), optionalAuth, async (req: AuthenticatedRequest, res) => {
     try {
       const submissionData = {
         name: req.body.name,
@@ -75,7 +89,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       };
 
       const validatedData = insertSubmissionSchema.parse(submissionData);
-      const submission = await storage.createSubmission(validatedData);
+      const submission = await storage.createSubmission(validatedData, req.user?.id);
       
       res.json({ 
         message: "Thank you for your submission! We'll review your project and get back to you within 48 hours.",
@@ -90,7 +104,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Generate refined landing page prompt using AI
+  // Generate refined landing page prompt using AI (no auth required for public use)
   app.post("/api/generate-prompt", async (req, res) => {
     const { idea, targetCustomer, problemSolved } = req.body;
     

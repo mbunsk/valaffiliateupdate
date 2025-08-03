@@ -5,12 +5,16 @@ import { z } from "zod";
 
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  googleId: text("google_id").unique(),
+  email: text("email").notNull().unique(),
+  name: text("name").notNull(),
+  avatar: text("avatar"),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const submissions = pgTable("submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id),
   name: text("name").notNull(),
   email: text("email").notNull(),
   projectName: text("project_name").notNull(),
@@ -24,6 +28,7 @@ export const submissions = pgTable("submissions", {
 
 export const validations = pgTable("validations", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id),
   idea: text("idea").notNull(),
   targetCustomer: text("target_customer").notNull(),
   problemSolved: text("problem_solved").notNull(),
@@ -37,9 +42,9 @@ export const adminSessions = pgTable("admin_sessions", {
   expiresAt: timestamp("expires_at").notNull(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+export const insertUserSchema = createInsertSchema(users).omit({
+  id: true,
+  createdAt: true,
 });
 
 export const insertSubmissionSchema = createInsertSchema(submissions).omit({

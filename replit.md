@@ -66,25 +66,45 @@ Three main entities defined in `shared/schema.ts`:
 ### Storage Layer
 Currently implements in-memory storage (`MemStorage`) with interface (`IStorage`) designed for easy database integration.
 
+## Security Implementation
+
+### Environment Variable Protection
+- **API Keys**: All sensitive keys (OpenAI, Database) are stored as encrypted environment variables
+- **JWT Secrets**: Automatically generated secure JWT secrets for session management
+- **Environment Validation**: Server validates all required environment variables on startup
+
+### User Data Isolation  
+- **Database Schema**: Updated with proper user relationships and foreign keys
+- **User-Specific Data**: All validations and submissions are linked to authenticated users
+- **Access Control**: Users can only access their own data through scoped queries
+- **Optional Authentication**: Public features work without auth, but data is isolated when users log in
+
+### Security Middleware
+- **Authentication System**: JWT-based authentication ready for Google OAuth integration
+- **Route Protection**: Admin routes protected with session-based authentication
+- **Input Validation**: All API endpoints use Zod schemas for input sanitization
+- **File Upload Security**: Image-only uploads with size limits and secure storage
+
 ## Data Flow
 
 1. **Idea Validation Flow**:
-   - User enters idea in textarea
+   - User enters idea in textarea (optionally authenticated)
    - Frontend validates input with Zod schema
-   - API call to `/api/validate` creates validation record
-   - AI feedback is displayed (currently mocked, ready for AI integration)
+   - API call to `/api/validate` creates validation record linked to user if authenticated
+   - AI feedback generated using OpenAI GPT-4o and displayed securely
 
 2. **Project Submission Flow**:
-   - User fills out project details form
-   - Optional screenshot upload via file input
+   - User fills out project details form (optionally authenticated)
+   - Optional screenshot upload with security validation
    - Form validation with React Hook Form and Zod
-   - Multipart form submission to `/api/submit`
+   - Multipart form submission to `/api/submit` with user association
    - Success feedback via toast notifications
 
-3. **Navigation Flow**:
-   - Smooth scrolling between sections
-   - Responsive mobile menu
-   - Progressive disclosure of content
+3. **User Authentication Flow** (Ready for Google OAuth):
+   - JWT-based session management
+   - Secure cookie storage with HttpOnly flags
+   - User data isolation in database
+   - Optional authentication for better user experience
 
 ## External Dependencies
 

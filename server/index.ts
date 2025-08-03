@@ -1,7 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
+import { validateEnvironment } from "./env-validation";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+
+// Validate environment security before starting
+validateEnvironment();
 
 const app = express();
 app.use(express.json());
