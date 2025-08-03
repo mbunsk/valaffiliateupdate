@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Loader2, Lightbulb, Target, Users, Zap } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import SaveResults from "@/components/save-results";
 
 interface ValidationResponse {
   id: string;
@@ -198,6 +199,10 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                     />
                   </div>
 
+                  {/* Save Results Component */}
+                  <div className="mt-6">
+                    <SaveResults validationData={validationResult} />
+                  </div>
 
                 </div>
               );

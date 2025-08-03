@@ -49,6 +49,30 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 <p>Simulate how 2-3 potential customers might respond to this idea, including realistic objections and interest levels.</p>
 </div>
 
+<div class="validation-section">
+<h3>Revenue Potential</h3>
+<p>Based on market research, estimate realistic revenue scenarios: conservative first-year projections, pricing strategy recommendations, and key revenue milestones to track.</p>
+</div>
+
+<div class="validation-section">
+<h3>Launch Timeline</h3>
+<ul>
+<li>Week 1-2: Specific validation activities and customer interviews</li>
+<li>Week 3-4: MVP development approach and key features to build first</li>
+<li>Month 2-3: Launch strategy and initial customer acquisition plan</li>
+</ul>
+</div>
+
+<div class="validation-section">
+<h3>Risk Assessment</h3>
+<p>Identify the 3 biggest risks that could derail this idea and provide specific mitigation strategies for each.</p>
+</div>
+
+<div class="validation-section">
+<h3>Success Metrics</h3>
+<p>Define 5 key metrics to track progress: early validation signals, user engagement indicators, and business health measurements.</p>
+</div>
+
 <div class="prompt-section">
 <h3>Polished Landing Page Prompt</h3>
 <p>Create a clean, professional landing page prompt by fixing any spelling/grammar in their original idea and presenting it as: "Create a landing page for [Polished Idea Name] - [clean description of what it does], which helps [specific target customer] solve [specific problem] by [clear solution approach]. Include a hero section, key features, testimonials section, and email signup form. Use [appropriate design style] with [suggested color scheme]. Perfect for validating demand and collecting interested prospects."</p>

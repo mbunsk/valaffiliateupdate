@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Copy, Check, ExternalLink } from "lucide-react";
+import { Copy, Check, ExternalLink, Timer, Users, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import ProgressTracker from "@/components/progress-tracker";
+import BuilderComparison from "@/components/builder-comparison";
 import base44Logo from "@assets/base44png_1754234608565.png";
 import bubbleLogo from "@assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png";
 import lovableLogo from "@assets/lovable-icon-bg-light_1754234608566.png";
@@ -114,6 +116,12 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           </p>
         </div>
 
+        {/* Progress Tracker */}
+        <ProgressTracker currentStep={validationData ? 2 : 1} />
+
+        {/* Builder Comparison */}
+        <BuilderComparison />
+
         {/* Prompt Generator */}
         <Card className="mb-12 shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
           <CardContent className="p-8">
@@ -156,6 +164,27 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
               <p className="text-foreground/80 text-lg">
                 <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with the site builders below</span> to see what your idea looks like live!
               </p>
+            </div>
+
+            {/* Quick Win Benefits */}
+            <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-xl p-6 mt-6 border border-green-500/20">
+              <h4 className="text-lg font-bold text-green-600 mb-3 flex items-center gap-2">
+                ⚡ Why Build a Mockup Now?
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="flex items-start gap-2">
+                  <span className="text-green-500">✓</span>
+                  <span>Share with friends, partners & potential customers in minutes</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-blue-500">✓</span>
+                  <span>Test your message before investing time & money</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-purple-500">✓</span>
+                  <span>Collect emails from interested people immediately</span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
