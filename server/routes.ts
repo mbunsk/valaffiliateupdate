@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import express from "express";
 import multer from "multer";
 import path from "path";
 import { storage } from "./storage";
@@ -24,6 +25,9 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve attached assets statically
+  app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets')));
+
   // Validate startup idea
   app.post("/api/validate", async (req, res) => {
     try {
