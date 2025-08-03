@@ -61,7 +61,7 @@ Most scores will fall in the 65-85 range. Only those with a very clear understan
 
 <strong>Want to keep exploring?</strong>
 Copy and paste this prompt into <a target="_blank" href="https://validatorai.com/click/?a=bubble"><strong>Bubble</strong></a> to instantly create a landing page.
-["I am building [your startup idea], which helps [target audience] solve [problem] by [unique solution]. My goal is to [get pre-orders, collect emails, schedule demos, validate demand, etc.]. Please create a landing page that clearly communicates this, includes a strong call-to-action, and allows users to sign up or express interest."]
+Create a customized landing page prompt that includes the user's specific idea: "${idea}", target customer: "${targetCustomer}", and problem: "${problemSolved}". Format it as: "I am building [their specific idea], which helps [their specific target customer] solve [their specific problem] by [unique solution based on your UVP analysis]. My goal is to validate demand and collect emails from interested prospects. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest."
 
 <h2>6. Simulation</h2>
 <strong>Customer Interview Simulation.</strong>
@@ -97,7 +97,7 @@ Respond only with clean HTML using the exact structure above. Be specific, actio
 Target Customer: ${targetCustomer}
 Problem Solved: ${problemSolved}
 
-Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified.`
+Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified. Make sure to customize the landing page prompt section with the specific idea, target customer, and problem provided above.`
         }
       ],
       temperature: 0.7,
