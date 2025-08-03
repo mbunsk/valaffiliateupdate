@@ -102,7 +102,7 @@ export default function About() {
                   <Button 
                     variant="outline" 
                     className="flex items-center space-x-2 hover:bg-primary/10"
-                    onClick={() => window.open('https://linkedin.com', '_blank')}
+                    onClick={() => window.open('https://www.linkedin.com/in/aronmeystedt/', '_blank')}
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>Connect on LinkedIn</span>
