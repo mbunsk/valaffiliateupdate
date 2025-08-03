@@ -191,14 +191,12 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                   </div>
 
                   {/* AI Analysis Content */}
-                  <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-                    <CardContent className="p-8">
-                      <div 
-                        className="ai-feedback-content"
-                        dangerouslySetInnerHTML={{ __html: feedbackHtml }}
-                      />
-                    </CardContent>
-                  </Card>
+                  <div className="space-y-6">
+                    <div 
+                      className="ai-feedback-content"
+                      dangerouslySetInnerHTML={{ __html: feedbackHtml }}
+                    />
+                  </div>
 
                   {/* Next Steps CTA */}
                   <Card className="shadow-xl border-2 border-gradient-to-r from-primary to-accent bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10">

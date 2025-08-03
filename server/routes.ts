@@ -81,24 +81,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Generate landing page prompt
-  app.post("/api/generate-prompt", async (req, res) => {
-    try {
-      const { idea, targetCustomer, problemSolved, feedback } = req.body;
-      
-      if (!idea || !targetCustomer || !problemSolved || !feedback) {
-        return res.status(400).json({ message: "Missing required fields" });
-      }
 
-      const parsedFeedback = typeof feedback === 'string' ? JSON.parse(feedback) : feedback;
-      const landingPagePrompt = await generateLandingPagePrompt(idea, targetCustomer, problemSolved, parsedFeedback);
-      
-      res.json({ prompt: landingPagePrompt });
-    } catch (error) {
-      console.error("Landing page prompt generation error:", error);
-      res.status(500).json({ message: "Failed to generate landing page prompt" });
-    }
-  });
 
   // Get all submissions (for admin purposes)
   app.get("/api/submissions", async (req, res) => {
