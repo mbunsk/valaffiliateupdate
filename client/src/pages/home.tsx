@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
+import MeetVal from "@/components/meet-val";
 import IdeaValidation from "@/components/idea-validation";
 import SiteBuilders from "@/components/site-builders";
 import NewsletterForm from "@/components/newsletter-form";
@@ -19,6 +20,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <MeetVal />
       <IdeaValidation onValidationComplete={setValidationData} />
       <SiteBuilders validationData={validationData} />
       <NewsletterForm />
