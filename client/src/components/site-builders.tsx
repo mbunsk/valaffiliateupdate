@@ -182,7 +182,13 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           {builders.map((builder, index) => (
             <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-orange-400 hover:border-orange-500 ring-2 ring-orange-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float`} style={{animationDelay: `${index * 0.2}s`}}>
               <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg" style={{animationDelay: `${index * 0.3}s`}}>
+                <a 
+                  href={builder.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                  style={{animationDelay: `${index * 0.3}s`}}
+                >
                   <img 
                     src={
                       builder.name === "Base44" ? base44Logo :
@@ -193,7 +199,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
                     alt={`${builder.name} logo`}
                     className="w-12 h-12 object-contain"
                   />
-                </div>
+                </a>
                 <h3 className="text-2xl font-black text-foreground mb-3">{builder.name}</h3>
                 <p className="text-foreground/70 mb-6 text-lg">{builder.description}</p>
                 <Button asChild className={`w-full ${builder.color} transition-all duration-300 transform hover:scale-105 rounded-2xl py-6 text-lg font-bold shadow-lg hover:shadow-xl`}>
