@@ -6,7 +6,7 @@ const testimonials = [
     title: "Professor in California",
     initials: "TR",
     color: "from-blue-400 to-blue-600",
-    quote: "Over our 15-minute conversation, Val asked the right questions to help me structure a clear starting point for the startup I discussed."
+    quote: "Val asked the right questions to help me structure a clear starting point for the startup I discussed."
   },
   {
     name: "Jessica",
