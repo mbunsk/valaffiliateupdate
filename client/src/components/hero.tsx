@@ -21,27 +21,29 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
           {/* Fullerton Quote and User Stats */}
-          <div className="mb-8 space-y-4">
-            <blockquote className="text-lg font-medium text-gray-700 dark:text-gray-300">
-              "This is the future!"
-            </blockquote>
-            <cite className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="mb-8 space-y-3">
+            <div className="flex justify-center items-center space-x-6">
+              <blockquote className="text-lg font-medium text-white">
+                "This is the future!"
+              </blockquote>
+              <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                    >
+                      U
+                    </div>
+                  ))}
+                </div>
+                <span className="text-lg font-bold text-white">278,355</span>
+                <span className="text-sm text-white/80">entrepreneurs validated</span>
+              </div>
+            </div>
+            <cite className="text-sm text-white/70 block text-center">
               - Cal State Fullerton Entrepreneurship Center
             </cite>
-            <div className="flex justify-center items-center space-x-2 mt-4">
-              <div className="flex items-center space-x-1">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                  >
-                    U
-                  </div>
-                ))}
-              </div>
-              <span className="text-lg font-bold text-gray-900 dark:text-gray-100">278,355</span>
-              <span className="text-sm text-gray-600 dark:text-gray-400">entrepreneurs validated</span>
-            </div>
           </div>
           
           <div className="inline-block mb-6">

@@ -65,12 +65,12 @@ export default function Header() {
               >
                 ⭐ Get Featured
               </button>
-              <button 
-                onClick={() => scrollToSection('about')}
+              <a 
+                href="/about"
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
                 💡 About
-              </button>
+              </a>
             </div>
           </nav>
           
@@ -108,12 +108,12 @@ export default function Header() {
             >
               Submit to Newsletter
             </button>
-            <button 
-              onClick={() => scrollToSection('about')}
+            <a 
+              href="/about"
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
             >
               About
-            </button>
+            </a>
           </div>
         </div>
       )}

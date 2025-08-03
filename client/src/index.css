@@ -128,7 +128,8 @@
   }
 
   .animate-rocket-launch {
-    animation: rocketLaunch 2s ease-in-out;
+    animation: rocketLaunch 2s ease-in-out forwards;
+    animation-delay: 0.5s;
   }
 
   .gradient-text {
