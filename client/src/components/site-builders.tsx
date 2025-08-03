@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Copy, Check, ExternalLink, Timer, Users, Zap } from "lucide-react";
+import { Copy, Check, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import ProgressTracker from "@/components/progress-tracker";
-import BuilderComparison from "@/components/builder-comparison";
+
 import base44Logo from "@assets/base44png_1754234608565.png";
 import bubbleLogo from "@assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png";
 import lovableLogo from "@assets/lovable-icon-bg-light_1754234608566.png";
@@ -115,12 +114,6 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             <span className="text-primary font-semibold">Perfect for sharing your concept and getting feedback! ✨</span>
           </p>
         </div>
-
-        {/* Progress Tracker */}
-        <ProgressTracker currentStep={validationData ? 2 : 1} />
-
-        {/* Builder Comparison */}
-        <BuilderComparison />
 
         {/* Prompt Generator */}
         <Card className="mb-12 shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
