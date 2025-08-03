@@ -166,52 +166,71 @@
     50% { background-position: 100% 50%; }
   }
 
-  /* AI Feedback Content Styling - Fun & Engaging */
-  .ai-feedback-content h2 {
-    @apply text-2xl font-black mb-6 mt-8 p-6 rounded-2xl shadow-xl border-2 relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(var(--primary)/10%), hsl(var(--accent)/10%));
-    border-color: hsl(var(--primary)/30%);
-    color: hsl(var(--primary));
+  /* Beautiful AI Feedback styling */
+  .ai-feedback-content {
+    @apply text-foreground leading-relaxed space-y-6;
   }
   
-  .ai-feedback-content h2:first-child {
-    @apply mt-0;
+  .ai-feedback-content .validation-section {
+    @apply p-6 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8), hsl(var(--card) / 0.6));
+    border-color: hsl(var(--primary) / 0.1);
   }
   
-  .ai-feedback-content h2::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r opacity-5;
-    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)));
+  .ai-feedback-content .validation-section h3 {
+    @apply text-xl font-black text-primary mb-4 flex items-center gap-2;
   }
   
-  .ai-feedback-content p {
-    @apply text-foreground opacity-80 leading-relaxed mb-4 text-lg;
+  .ai-feedback-content .validation-section h3::before {
+    content: "✨";
+    @apply text-accent;
   }
   
-  .ai-feedback-content strong {
-    @apply font-bold text-primary px-2 py-1 rounded-lg;
-    background-color: hsl(var(--primary) / 0.1);
+  .ai-feedback-content .validation-section p {
+    @apply leading-relaxed text-base;
+    color: hsl(var(--foreground) / 0.9);
   }
   
-  .ai-feedback-content .score {
-    @apply text-4xl font-black text-primary px-4 py-2 rounded-xl inline-block;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.2));
+  .ai-feedback-content .validation-section ul {
+    @apply space-y-2 mt-3;
   }
   
-  .ai-feedback-content a {
-    @apply text-primary hover:text-accent transition-colors underline font-bold px-2 py-1 rounded-lg;
-    background-color: hsl(var(--primary) / 0.1);
+  .ai-feedback-content .validation-section li {
+    @apply leading-relaxed flex items-start gap-2;
+    color: hsl(var(--foreground) / 0.9);
   }
   
-  .ai-feedback-content a:hover {
-    background-color: hsl(var(--accent) / 0.1);
+  .ai-feedback-content .validation-section li::before {
+    content: "→";
+    @apply text-accent font-bold;
   }
   
-  /* Fun card-like sections for feedback */
-  .ai-feedback-content > p:not(:first-of-type) {
-    @apply p-6 rounded-xl border shadow-lg;
-    background-color: hsl(var(--card) / 0.6);
-    border-color: hsl(var(--primary) / 0.2);
+  .ai-feedback-content .score-display {
+    @apply text-5xl font-black text-center my-4 px-6 py-3 rounded-2xl inline-block;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.8));
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .ai-feedback-content .prompt-section {
+    @apply p-6 rounded-2xl border-2 shadow-lg;
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.2));
+    border-color: hsl(var(--accent) / 0.3);
+  }
+  
+  .ai-feedback-content .prompt-section h3 {
+    @apply text-xl font-black text-accent mb-4 flex items-center gap-2;
+  }
+  
+  .ai-feedback-content .prompt-section h3::before {
+    content: "🚀";
+  }
+  
+  .ai-feedback-content .prompt-section p {
+    @apply leading-relaxed text-base font-mono p-4 rounded-lg border;
+    color: hsl(var(--foreground) / 0.9);
+    background-color: hsl(var(--card) / 0.5);
+    border-color: hsl(var(--accent) / 0.2);
   }
 
   /* Pulsing pointer animation */

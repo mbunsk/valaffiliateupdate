@@ -29,7 +29,17 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
   const getCustomPrompt = () => {
     if (!validationData) return samplePrompt;
     
-    return `I am building ${validationData.idea}, which helps ${validationData.targetCustomer} solve ${validationData.problemSolved} by [describe your unique solution approach based on your UVP insights]. My goal is to validate demand and collect emails from interested ${validationData.targetCustomer}. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest. Focus on the problem of ${validationData.problemSolved} and how this solution specifically helps ${validationData.targetCustomer}.`;
+    // Try to extract the polished prompt from the AI feedback
+    const feedbackHtml = validationData.feedback;
+    const promptMatch = feedbackHtml.match(/<div class="prompt-section">[\s\S]*?<p>(.*?)<\/p>/);
+    
+    if (promptMatch && promptMatch[1]) {
+      // Remove any remaining HTML tags from the extracted prompt
+      return promptMatch[1].replace(/<[^>]*>/g, '').trim();
+    }
+    
+    // Fallback to basic template if extraction fails
+    return `Create a landing page for "${validationData.idea}" - a solution that helps ${validationData.targetCustomer} solve ${validationData.problemSolved}. Include a hero section, key features, testimonials section, and email signup form. Perfect for validating demand and collecting interested prospects.`;
   };
 
   const copyPrompt = async () => {
