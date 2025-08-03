@@ -93,6 +93,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin authentication route
+  app.post("/api/admin/login", async (req, res) => {
+    try {
+      const { password } = req.body;
+      
+      if (password !== "1221") {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
+      // Create session that expires in 24 hours
+      const expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 24);
+      
+      const session = await storage.createAdminSession({ expiresAt });
+      
+      // Set secure cookie
+      res.cookie('admin_session', session.id, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        sameSite: 'strict'
+      });
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Admin login error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Admin middleware to verify session
+  const requireAdmin = async (req: any, res: any, next: any) => {
+    try {
+      const sessionId = req.cookies?.admin_session;
+      
+      if (!sessionId) {
+        return res.status(401).json({ message: "No session" });
+      }
+
+      const session = await storage.getAdminSession(sessionId);
+      
+      if (!session || session.expiresAt < new Date()) {
+        return res.status(401).json({ message: "Session expired" });
+      }
+
+      next();
+    } catch (error) {
+      console.error("Admin auth error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  // Get all submissions (admin only)
+  app.get("/api/admin/submissions", requireAdmin, async (req, res) => {
+    try {
+      const submissions = await storage.getAllSubmissions();
+      res.json(submissions);
+    } catch (error) {
+      console.error("Get submissions error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Admin logout
+  app.post("/api/admin/logout", async (req, res) => {
+    res.clearCookie('admin_session');
+    res.json({ success: true });
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

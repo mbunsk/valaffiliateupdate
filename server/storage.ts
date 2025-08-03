@@ -1,95 +1,75 @@
-import { type User, type InsertUser, type Submission, type InsertSubmission, type Validation, type InsertValidation } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { users, validations, submissions, adminSessions, type User, type InsertUser, type Validation, type InsertValidation, type Submission, type InsertSubmission, type AdminSession, type InsertAdminSession } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  createSubmission(submission: InsertSubmission): Promise<Submission>;
+  createUser(insertUser: InsertUser): Promise<User>;
+  createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation>;
+  createSubmission(insertSubmission: InsertSubmission): Promise<Submission>;
   getAllSubmissions(): Promise<Submission[]>;
-  createValidation(validation: InsertValidation, feedback: string): Promise<Validation>;
-  getValidationsByIdea(idea: string): Promise<Validation[]>;
+  createAdminSession(insertSession: InsertAdminSession): Promise<AdminSession>;
+  getAdminSession(id: string): Promise<AdminSession | undefined>;
+  deleteExpiredAdminSessions(): Promise<void>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private submissions: Map<string, Submission>;
-  private validations: Map<string, Validation>;
-
-  constructor() {
-    this.users = new Map();
-    this.submissions = new Map();
-    this.validations = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
+  async createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation> {
+    const [validation] = await db
+      .insert(validations)
+      .values({ ...insertValidation, feedback })
+      .returning();
+    return validation;
+  }
+
   async createSubmission(insertSubmission: InsertSubmission): Promise<Submission> {
-    const id = randomUUID();
-    const submission: Submission = {
-      ...insertSubmission,
-      id,
-      createdAt: new Date(),
-      screenshotPath: insertSubmission.screenshotPath || null,
-    };
-    this.submissions.set(id, submission);
+    const [submission] = await db
+      .insert(submissions)
+      .values(insertSubmission)
+      .returning();
     return submission;
   }
 
   async getAllSubmissions(): Promise<Submission[]> {
-    return Array.from(this.submissions.values());
+    return await db.select().from(submissions).orderBy(desc(submissions.createdAt));
   }
 
-  async createValidation(insertValidation: InsertValidation, feedback: string): Promise<Validation> {
-    const id = randomUUID();
-    const validation: Validation = {
-      ...insertValidation,
-      id,
-      feedback,
-      createdAt: new Date(),
-    };
-    this.validations.set(id, validation);
-    return validation;
+  async createAdminSession(insertSession: InsertAdminSession): Promise<AdminSession> {
+    const [session] = await db
+      .insert(adminSessions)
+      .values(insertSession)
+      .returning();
+    return session;
   }
 
-  async getValidationsByIdea(idea: string): Promise<Validation[]> {
-    return Array.from(this.validations.values()).filter(
-      (validation) => validation.idea.toLowerCase().includes(idea.toLowerCase())
-    );
+  async getAdminSession(id: string): Promise<AdminSession | undefined> {
+    const [session] = await db.select().from(adminSessions).where(eq(adminSessions.id, id));
+    return session || undefined;
   }
 
-  private generateValidationFeedback(idea: string): string {
-    // Simple feedback generation based on keywords
-    const feedback = {
-      marketFit: "The market shows strong potential with growing demand in this sector.",
-      strengths: "Clear value proposition, addresses real user pain points, scalable concept.",
-      nextSteps: [
-        "Research existing competitors and identify differentiation opportunities",
-        "Create a minimal viable product (MVP) focusing on core features",
-        "Test with 10-20 potential users for initial feedback",
-        "Develop a go-to-market strategy for your target audience"
-      ],
-      concerns: "Consider user acquisition costs, competition level, and technical complexity.",
-      tip: "Start with a specific niche to validate your concept before expanding to broader markets."
-    };
-
-    return JSON.stringify(feedback);
+  async deleteExpiredAdminSessions(): Promise<void> {
+    const now = new Date();
+    await db.delete(adminSessions).where(eq(adminSessions.expiresAt, now));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
