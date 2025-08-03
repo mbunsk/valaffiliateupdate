@@ -80,25 +80,9 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
     validateMutation.mutate({ idea, targetCustomer, problemSolved });
   };
 
-  const parseFeedback = (feedbackJson: string) => {
-    try {
-      return JSON.parse(feedbackJson);
-    } catch {
-      return {
-        ideaFitAlignment: "Analysis completed successfully.",
-        competitorSnapshot: ["Competitor A: Basic solution", "Competitor B: Premium offering", "Competitor C: Budget option"],
-        uvpInsight: "Consider focusing on your unique value proposition.",
-        customerTargeting: "Your target customers are well-defined for this market.",
-        startupReadinessScore: 75,
-        improvementTip: "Focus on customer validation and market research.",
-        customerInterviewSimulation: ["Customer A: Interested in solution", "Customer B: Has concerns about pricing", "Customer C: Wants more features"],
-        pricingMonetization: {
-          pricePoint: "$50–$200 depending on features",
-          monetization: "Direct sales or subscription model",
-          conversionRate: "2–5% from qualified leads"
-        }
-      };
-    }
+  const parseFeedback = (feedbackHtml: string) => {
+    // The new AI response comes as HTML, so we'll return it as-is for direct rendering
+    return feedbackHtml;
   };
 
   return (
@@ -195,215 +179,53 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
             </div>
 
             {validationResult && (() => {
-              const feedback = parseFeedback(validationResult.feedback);
+              const feedbackHtml = parseFeedback(validationResult.feedback);
               return (
                 <div id="validation-response" className="mt-8 space-y-6 animate-in slide-in-from-bottom-4 duration-600">
                   <div className="text-center mb-8">
                     <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-gentle">
                       <CheckCircle className="w-10 h-10 text-white" />
                     </div>
-                    <h3 className="text-3xl font-black gradient-text mb-2">Your AI Analysis is Ready! 🎉</h3>
-                    <p className="text-lg text-foreground/70">Deep insights to help you explore your idea further</p>
+                    <h3 className="text-3xl font-black gradient-text mb-2">Val's Analysis is Ready! 🎉</h3>
+                    <p className="text-lg text-foreground/70">Your warm, thoughtful startup mentor has insights for you</p>
                   </div>
 
-                  {/* Idea Fit & Alignment */}
+                  {/* AI Analysis Content */}
                   <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-                    <CardContent className="p-6">
-                      <div className="flex items-center mb-4">
-                        <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-xl">🔍</span>
-                        </div>
-                        <h4 className="text-xl font-bold gradient-text">1. Idea Fit & Alignment</h4>
-                      </div>
-                      <p className="text-foreground/80 leading-relaxed">
-                        {feedback.ideaFitAlignment}
-                      </p>
+                    <CardContent className="p-8">
+                      <div 
+                        className="ai-feedback-content"
+                        dangerouslySetInnerHTML={{ __html: feedbackHtml }}
+                      />
                     </CardContent>
                   </Card>
 
-                {/* Competitor Analysis */}
-                <Card className="shadow-xl border-2 border-accent/30 bg-gradient-to-br from-accent/5 to-accent/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">📊</span>
+                  {/* Next Steps CTA */}
+                  <Card className="shadow-xl border-2 border-gradient-to-r from-primary to-accent bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10">
+                    <CardContent className="p-6 text-center">
+                      <div className="mb-4">
+                        <span className="text-4xl">🚀</span>
                       </div>
-                      <h4 className="text-xl font-bold gradient-text">2. Competitor Snapshot + UVP Insight</h4>
-                    </div>
-                    <div className="space-y-3 mb-4">
-                      {feedback.competitorSnapshot.map((competitor: string, index: number) => (
-                        <div key={index} className="p-3 bg-card/40 rounded-lg border border-accent/20">
-                          <p className="text-sm text-foreground/80">{competitor}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="p-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg">
-                      <p className="font-semibold text-foreground mb-2">💡 Your Unique Opportunity:</p>
-                      <p className="text-foreground/80 text-sm">{feedback.uvpInsight}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Customer Targeting */}
-                <Card className="shadow-xl border-2 border-secondary/30 bg-gradient-to-br from-secondary/5 to-secondary/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">🧠</span>
-                      </div>
-                      <h4 className="text-xl font-bold gradient-text">3. Customer Targeting & Messaging</h4>
-                    </div>
-                    <div className="text-foreground/80 leading-relaxed">
-                      {typeof feedback.customerTargeting === 'string' ? (
-                        <p>{feedback.customerTargeting}</p>
-                      ) : (
-                        <div className="space-y-4">
-                          {feedback.customerTargeting.subreddits && (
-                            <div>
-                              <p className="font-semibold mb-2">📱 Reddit Communities:</p>
-                              <div className="space-y-2">
-                                {feedback.customerTargeting.subreddits.map((subreddit: string, index: number) => (
-                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
-                                    <p className="text-sm">{subreddit}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {feedback.customerTargeting.onlineCommunities && (
-                            <div>
-                              <p className="font-semibold mb-2">🌐 Online Communities:</p>
-                              <div className="space-y-2">
-                                {feedback.customerTargeting.onlineCommunities.map((community: string, index: number) => (
-                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
-                                    <p className="text-sm">{community}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {feedback.customerTargeting.inPersonLocations && (
-                            <div>
-                              <p className="font-semibold mb-2">📍 In-Person Locations:</p>
-                              <div className="space-y-2">
-                                {feedback.customerTargeting.inPersonLocations.map((location: string, index: number) => (
-                                  <div key={index} className="p-2 bg-card/40 rounded-lg border border-secondary/20">
-                                    <p className="text-sm">{location}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Readiness Score */}
-                <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-purple-500/5 to-pink-500/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-xl">📈</span>
-                        </div>
-                        <h4 className="text-xl font-bold gradient-text">4. Startup Readiness Score</h4>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-3xl font-black text-primary">{feedback.startupReadinessScore}</div>
-                        <div className="text-sm text-foreground/60">out of 100</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Improvement Tip */}
-                <Card className="shadow-xl border-2 border-green-500/30 bg-gradient-to-br from-green-500/5 to-green-500/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">💡</span>
-                      </div>
-                      <h4 className="text-xl font-bold gradient-text">5. 1 Tip to Improve Your Startup</h4>
-                    </div>
-                    <p className="text-foreground/80 leading-relaxed">
-                      {feedback.improvementTip}
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Customer Interview Simulation */}
-                <Card className="shadow-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-blue-500/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">📈</span>
-                      </div>
-                      <h4 className="text-xl font-bold gradient-text">6. Customer Interview Simulation</h4>
-                    </div>
-                    <div className="space-y-3">
-                      {feedback.customerInterviewSimulation.map((interview: string, index: number) => (
-                        <div key={index} className="p-3 bg-card/40 rounded-lg border border-blue-500/20">
-                          <p className="text-sm text-foreground/80 italic">"{interview}"</p>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Pricing & Monetization */}
-                <Card className="shadow-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-purple-500/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">💰</span>
-                      </div>
-                      <h4 className="text-xl font-bold gradient-text">7. Pricing & Monetization</h4>
-                    </div>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
-                        <p className="font-semibold text-sm mb-1">Price Point</p>
-                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.pricePoint}</p>
-                      </div>
-                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
-                        <p className="font-semibold text-sm mb-1">Monetization</p>
-                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.monetization}</p>
-                      </div>
-                      <div className="p-3 bg-card/40 rounded-lg border border-purple-500/20">
-                        <p className="font-semibold text-sm mb-1">Conversion Rate</p>
-                        <p className="text-xs text-foreground/70">{feedback.pricingMonetization.conversionRate}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Next Steps CTA */}
-                <Card className="shadow-xl border-2 border-gradient-to-r from-primary to-accent bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10">
-                  <CardContent className="p-6 text-center">
-                    <div className="mb-4">
-                      <span className="text-4xl">🚀</span>
-                    </div>
-                    <h4 className="text-2xl font-bold gradient-text mb-3">Ready to Mock It Up?</h4>
-                    <p className="text-foreground/70 mb-6">
-                      Now that you have AI insights, create a landing page mockup to share your idea with friends, potential customers, and partners!
-                    </p>
-                    <Button 
-                      onClick={() => {
-                        const element = document.getElementById('build');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
-                      size="lg"
-                      className="px-8 py-3 text-lg font-bold rounded-2xl shadow-xl bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-105"
-                    >
-                      <Zap className="mr-2 w-5 h-5" />
-                      Mock Up For Free
-                      <span className="ml-2">✨</span>
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <h4 className="text-2xl font-bold gradient-text mb-3">Ready to Mock It Up?</h4>
+                      <p className="text-foreground/70 mb-6">
+                        Now that you have Val's insights, create a landing page mockup to share your idea with friends, potential customers, and partners!
+                      </p>
+                      <Button 
+                        onClick={() => {
+                          const element = document.getElementById('build');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        size="lg"
+                        className="px-8 py-3 text-lg font-bold rounded-2xl shadow-xl bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-105"
+                      >
+                        <Zap className="mr-2 w-5 h-5" />
+                        Mock Up For Free
+                        <span className="ml-2">✨</span>
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </div>
               );
             })()}

@@ -165,4 +165,29 @@
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
   }
+
+  /* AI Feedback Content Styling */
+  .ai-feedback-content h2 {
+    @apply text-xl font-bold text-primary mb-4 mt-6;
+  }
+  
+  .ai-feedback-content h2:first-child {
+    @apply mt-0;
+  }
+  
+  .ai-feedback-content p {
+    @apply text-foreground opacity-80 leading-relaxed mb-4;
+  }
+  
+  .ai-feedback-content strong {
+    @apply font-bold text-primary;
+  }
+  
+  .ai-feedback-content .score {
+    @apply text-2xl font-black text-primary;
+  }
+  
+  .ai-feedback-content a {
+    @apply text-primary hover:text-accent transition-colors underline;
+  }
 }
