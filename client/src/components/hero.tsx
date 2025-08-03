@@ -109,7 +109,7 @@ export default function Hero() {
             className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
           >
             <span className="mr-3">🎮</span>
-            Let's Explore Ideas!
+            Lets Validate Your Idea Now!
             <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
           </Button>
           
