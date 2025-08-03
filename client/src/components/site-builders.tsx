@@ -15,6 +15,7 @@ interface SiteBuildersProps {
     idea: string;
     targetCustomer: string;
     problemSolved: string;
+    whatDoYouNeed: string;
     feedback: string;
   };
 }

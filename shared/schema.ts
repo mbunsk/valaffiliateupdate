@@ -26,6 +26,7 @@ export const validations = pgTable("validations", {
   idea: text("idea").notNull(),
   targetCustomer: text("target_customer").notNull(),
   problemSolved: text("problem_solved").notNull(),
+  whatDoYouNeed: text("what_do_you_need").notNull().default(""),
   feedback: text("feedback").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
