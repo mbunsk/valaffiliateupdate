@@ -2,14 +2,27 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, CheckCircle, Star } from "lucide-react";
 import validatorIcon from "@assets/Validator AI Icon_1754233923589.png";
+import { useLocation } from "wouter";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const goToHome = () => {
+    if (location === '/') {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to home page
+      setLocation('/');
     }
     setIsMobileMenuOpen(false);
   };
@@ -20,14 +33,17 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <div className="flex items-center space-x-3">
+              <button 
+                onClick={goToHome}
+                className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
+              >
                 <img 
                   src={validatorIcon} 
                   alt="ValidatorAI Logo" 
                   className="w-12 h-12"
                 />
                 <span className="text-2xl font-black text-white">ValidatorAI</span>
-              </div>
+              </button>
             </div>
           </div>
           
