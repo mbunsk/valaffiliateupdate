@@ -15,7 +15,7 @@ export async function generateValidationFeedback(idea: string, targetCustomer: s
 1. ideaFitAlignment: A detailed analysis of how well the idea fits the problem and target market
 2. competitorSnapshot: An array of 3 competitor descriptions in format "**Name** – Description"
 3. uvpInsight: A specific unique value proposition insight or recommendation
-4. customerTargeting: Detailed advice on finding and reaching the target customers
+4. customerTargeting: Detailed advice with specific Reddit groups (include 3-5 relevant subreddits by name), online communities, and in-person locations where they can find their target customers. Be very specific with actual community names.
 5. startupReadinessScore: A number between 60-95 representing startup readiness
 6. improvementTip: One specific, actionable tip to improve the startup
 7. customerInterviewSimulation: Array of 3 realistic customer quotes, including at least one objection
@@ -49,7 +49,26 @@ Please analyze this startup idea and provide comprehensive validation feedback.`
         "**Adjacent Competitor C** – Similar target market, different focus"
       ],
       uvpInsight: "Focus on what makes your solution uniquely valuable compared to existing alternatives.",
-      customerTargeting: `${targetCustomer} can be found in relevant online communities, industry forums, and social platforms. Focus on understanding their specific pain points.`,
+      customerTargeting: `${targetCustomer} can be found in these specific places:
+
+**Reddit Communities:**
+- r/entrepreneur (general startup discussions)
+- r/smallbusiness (business owners and operators)
+- Industry-specific subreddits related to your target market
+
+**Online Communities:**
+- LinkedIn groups for your industry
+- Facebook groups and pages
+- Discord servers focused on your niche
+- Industry-specific forums and websites
+
+**In-Person Locations:**
+- Local networking events and meetups
+- Industry conferences and trade shows
+- Coworking spaces and business centers
+- Professional association meetings
+
+Focus on understanding their specific pain points and engage authentically in these communities.`,
       startupReadinessScore: 72,
       improvementTip: "Conduct customer interviews to validate assumptions and refine your solution based on real feedback.",
       customerInterviewSimulation: [
