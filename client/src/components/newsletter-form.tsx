@@ -107,7 +107,7 @@ export default function NewsletterForm() {
             💬 Get Feedback!
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Share Your Exploration! <span style={{fontFamily: 'Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols'}}>🌟</span>
+            Share Your Exploration! <span className="emoji">🌟</span>
           </h2>
           <p className="text-xl text-foreground/70 mb-4">
             Submit your project and get feedback and traction from our amazing community of{" "}

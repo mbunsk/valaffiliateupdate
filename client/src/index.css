@@ -145,6 +145,20 @@
   .emoji {
     font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', sans-serif;
     font-variant-emoji: emoji;
+    font-feature-settings: "liga" off;
+  }
+
+  /* Force emoji display in all text elements */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+  }
+
+  /* Specific emoji styling for better rendering */
+  .gradient-text span {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
   }
 
   @keyframes gradientShift {

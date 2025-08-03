@@ -90,7 +90,7 @@ export default function IdeaValidation() {
             🎯 Idea Validation Lab
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            What's Your Wild Idea? <span className="text-5xl" style={{fontFamily: 'Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols'}}>🤔</span>
+            What's Your Wild Idea? <span className="text-5xl emoji">🤔</span>
           </h2>
           <p className="text-xl text-foreground/70 leading-relaxed">
             Share any idea and our AI will give you thoughtful feedback, insights, and suggestions to explore it further!
