@@ -5,6 +5,7 @@ import path from "path";
 import { storage } from "./storage";
 import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
 import { z } from "zod";
+import { generateValidationFeedback, generateLandingPagePrompt } from "./openai";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -28,40 +29,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { idea, targetCustomer, problemSolved } = insertValidationSchema.parse(req.body);
       
-      // Generate mock AI feedback (in production, this would call actual AI service)
-      const mockFeedback = JSON.stringify({
-        ideaFitAlignment: `Your idea of ${idea} directly aligns with the problem you've identified for ${targetCustomer}. The solution addresses the core issue of ${problemSolved}, showing strong market potential.`,
-        competitorSnapshot: [
-          "**Competitor A** – Offers basic solutions focused on core functionality and affordability.", 
-          "**Competitor B** – Provides premium offerings emphasizing quality and advanced features.",
-          "**Competitor C** – Known for innovative approaches with unique technology integration."
-        ],
-        uvpInsight: "To stand out, consider combining functionality with modern technology integration and superior user experience that existing solutions lack.",
-        customerTargeting: `${targetCustomer} are a strong target market. You can find these customers in specialized online communities, industry forums, social media groups, and relevant networking events. Focus on understanding their specific pain points and preferences.`,
-        startupReadinessScore: Math.floor(Math.random() * 30) + 60, // 60-90 range
-        improvementTip: "Conduct targeted interviews with your ideal customers to validate assumptions and refine your solution based on real user feedback.",
-        customerInterviewSimulation: [
-          `Customer A: "I really need a solution that addresses ${problemSolved} in a more efficient way."`,
-          `Customer B: "Current options don't quite meet my needs - there's definitely room for improvement."`,
-          `Customer C (objection): "I'm used to existing solutions; not sure if I want to switch to something new."`
-        ],
-        pricingMonetization: {
-          pricePoint: "$50–$200 depending on features and market positioning",
-          monetization: "Direct sales, subscription model, or freemium with premium features",
-          conversionRate: "2–5% from qualified leads with proper validation"
-        }
-      });
+      // Generate AI feedback using OpenAI
+      const aiFeedback = await generateValidationFeedback(idea, targetCustomer, problemSolved);
+      
+      if (!aiFeedback) {
+        throw new Error("Failed to generate feedback");
+      }
       
       const validation = await storage.createValidation({ 
         idea, 
         targetCustomer, 
         problemSolved
-      }, mockFeedback);
+      }, aiFeedback);
       res.json(validation);
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ message: "Invalid input", errors: error.errors });
       } else {
+        console.error("Validation error:", error);
         res.status(500).json({ message: "Internal server error" });
       }
     }
@@ -93,6 +78,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ message: "Internal server error" });
       }
+    }
+  });
+
+  // Generate landing page prompt
+  app.post("/api/generate-prompt", async (req, res) => {
+    try {
+      const { idea, targetCustomer, problemSolved, feedback } = req.body;
+      
+      if (!idea || !targetCustomer || !problemSolved || !feedback) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      const parsedFeedback = typeof feedback === 'string' ? JSON.parse(feedback) : feedback;
+      const landingPagePrompt = await generateLandingPagePrompt(idea, targetCustomer, problemSolved, parsedFeedback);
+      
+      res.json({ prompt: landingPagePrompt });
+    } catch (error) {
+      console.error("Landing page prompt generation error:", error);
+      res.status(500).json({ message: "Failed to generate landing page prompt" });
     }
   });
 

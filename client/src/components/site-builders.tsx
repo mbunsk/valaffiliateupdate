@@ -4,16 +4,59 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Copy, Check, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
-export default function SiteBuilders() {
+interface SiteBuildersProps {
+  validationData?: {
+    idea: string;
+    targetCustomer: string;
+    problemSolved: string;
+    feedback: string;
+  };
+}
+
+export default function SiteBuilders({ validationData }: SiteBuildersProps) {
   const [copied, setCopied] = useState(false);
+  const [generatingPrompt, setGeneratingPrompt] = useState(false);
+  const [currentPrompt, setCurrentPrompt] = useState("");
   const { toast } = useToast();
 
   const samplePrompt = `Create a landing page mockup for "FitAI" - an app concept that uses AI to create personalized workout plans. Include a hero section highlighting the AI personalization, features section showing workout customization, testimonials section, and a signup form to collect interest. Use a clean, fitness-focused design with blue and green accent colors. Perfect for showing the concept to potential partners, friends, or collaborators who might be interested in the idea.`;
 
-  const copyPrompt = async () => {
+  const generateCustomPrompt = async () => {
+    if (!validationData) return;
+    
+    setGeneratingPrompt(true);
     try {
-      await navigator.clipboard.writeText(samplePrompt);
+      const response = await apiRequest("POST", "/api/generate-prompt", {
+        idea: validationData.idea,
+        targetCustomer: validationData.targetCustomer,
+        problemSolved: validationData.problemSolved,
+        feedback: validationData.feedback
+      });
+      
+      const data = await response.json();
+      setCurrentPrompt(data.prompt);
+      
+      toast({
+        title: "Prompt Generated!",
+        description: "Your custom landing page prompt is ready",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate custom prompt",
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingPrompt(false);
+    }
+  };
+
+  const copyPrompt = async () => {
+    const promptToCopy = currentPrompt || samplePrompt;
+    try {
+      await navigator.clipboard.writeText(promptToCopy);
       setCopied(true);
       toast({
         title: "Copied!",
@@ -87,9 +130,28 @@ export default function SiteBuilders() {
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <span className="text-3xl animate-wiggle">📝</span>
-              <h3 className="text-2xl font-black gradient-text mt-2">Free Landing Page Prompt!</h3>
-              <p className="text-foreground/70 mt-2">Copy this and create your mockup in minutes — completely free!</p>
+              <h3 className="text-2xl font-black gradient-text mt-2">
+                {validationData ? "Your Custom Landing Page Prompt!" : "Free Landing Page Prompt!"}
+              </h3>
+              <p className="text-foreground/70 mt-2">
+                {validationData 
+                  ? "AI-generated prompt based on your idea and validation feedback" 
+                  : "Copy this and create your mockup in minutes — completely free!"
+                }
+              </p>
             </div>
+            
+            {validationData && !currentPrompt && (
+              <div className="text-center mb-6">
+                <Button
+                  onClick={generateCustomPrompt}
+                  disabled={generatingPrompt}
+                  className="px-6 py-3 text-lg font-bold rounded-2xl shadow-xl bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary transition-all duration-300"
+                >
+                  {generatingPrompt ? "Generating..." : "🤖 Generate My Custom Prompt"}
+                </Button>
+              </div>
+            )}
             
             <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
               <div className="flex items-center justify-between mb-4">
@@ -106,7 +168,7 @@ export default function SiteBuilders() {
               </div>
               
               <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
-                {samplePrompt}
+                {currentPrompt || samplePrompt}
               </div>
             </div>
           </CardContent>

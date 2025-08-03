@@ -18,7 +18,16 @@ interface ValidationResponse {
   createdAt: string;
 }
 
-export default function IdeaValidation() {
+interface IdeaValidationProps {
+  onValidationComplete?: (data: {
+    idea: string;
+    targetCustomer: string;
+    problemSolved: string;
+    feedback: string;
+  }) => void;
+}
+
+export default function IdeaValidation({ onValidationComplete }: IdeaValidationProps) {
   const [idea, setIdea] = useState("");
   const [targetCustomer, setTargetCustomer] = useState("");
   const [problemSolved, setProblemSolved] = useState("");
@@ -32,6 +41,17 @@ export default function IdeaValidation() {
     },
     onSuccess: (data) => {
       setValidationResult(data);
+      
+      // Pass validation data to parent component
+      if (onValidationComplete) {
+        onValidationComplete({
+          idea: data.idea,
+          targetCustomer: data.targetCustomer,
+          problemSolved: data.problemSolved,
+          feedback: data.feedback
+        });
+      }
+      
       setTimeout(() => {
         const element = document.getElementById('validation-response');
         if (element) {
