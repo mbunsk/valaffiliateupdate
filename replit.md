@@ -36,6 +36,13 @@ The application follows a modern full-stack architecture with clear separation b
 
 ## Key Components
 
+### SEO Optimization
+- **Primary Target**: Idea validation, validate startup ideas, startup idea validator terms
+- **Title**: "ValidatorAI - Free AI-Powered Startup Idea Validation Tool"
+- **Meta Description**: Focus on instant AI feedback, free tools, and 200,000+ entrepreneur community
+- **Keywords**: Comprehensive coverage of idea validation, startup validation, and entrepreneurship terms
+- **Social Sharing**: Open Graph and Twitter Card implementation for better social media presence
+
 ### Database Schema
 Three main entities defined in `shared/schema.ts`:
 - **Users**: Basic user authentication (id, username, password)
