@@ -86,7 +86,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-
+  // Generate refined landing page prompt
+  app.post("/api/generate-prompt", async (req, res) => {
+    try {
+      const { idea, targetCustomer, problemSolved } = req.body;
+      
+      // Generate a simple, refined prompt using the correct format
+      const refinedIdea = `${idea.charAt(0).toUpperCase()}${idea.slice(1).toLowerCase()}`;
+      const refinedCustomer = targetCustomer.toLowerCase();
+      const refinedProblem = problemSolved.toLowerCase();
+      
+      const prompt = `Create a landing page for "${refinedIdea}" which helps ${refinedCustomer} ${refinedProblem}. The target customer is ${refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      
+      res.json({ prompt });
+    } catch (error) {
+      console.error("Error generating prompt:", error);
+      res.status(500).json({ message: "Failed to generate prompt" });
+    }
+  });
 
   // Get all submissions (for admin purposes)
   app.get("/api/submissions", async (req, res) => {

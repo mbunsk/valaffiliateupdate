@@ -27,20 +27,36 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
 
   const samplePrompt = `Create a landing page mockup for "FitAI" - an app concept that uses AI to create personalized workout plans. Include a hero section highlighting the AI personalization, features section showing workout customization, testimonials section, and a signup form to collect interest. Use a clean, fitness-focused design with blue and green accent colors. Perfect for showing the concept to potential partners, friends, or collaborators who might be interested in the idea.`;
 
-  const getCustomPrompt = () => {
+  const generateRefinedPrompt = async () => {
     if (!validationData) return samplePrompt;
     
-    // Try to extract the polished prompt from the AI feedback
-    const feedbackHtml = validationData.feedback;
-    const promptMatch = feedbackHtml.match(/<div class="prompt-section">[\s\S]*?<p>(.*?)<\/p>/);
-    
-    if (promptMatch && promptMatch[1]) {
-      // Remove any remaining HTML tags from the extracted prompt
-      return promptMatch[1].replace(/<[^>]*>/g, '').trim();
+    setGeneratingPrompt(true);
+    try {
+      const response = await apiRequest("POST", "/api/generate-prompt", {
+        idea: validationData.idea,
+        targetCustomer: validationData.targetCustomer,
+        problemSolved: validationData.problemSolved
+      });
+      
+      const data = await response.json();
+      setCurrentPrompt(data.prompt);
+      return data.prompt;
+    } catch (error) {
+      // Fallback to improved template if API fails
+      const fallbackPrompt = `Create a landing page for "${validationData.idea.toLowerCase()}" which helps ${validationData.targetCustomer.toLowerCase()} solve ${validationData.problemSolved.toLowerCase()}. The target customer is ${validationData.targetCustomer.toLowerCase()}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      setCurrentPrompt(fallbackPrompt);
+      return fallbackPrompt;
+    } finally {
+      setGeneratingPrompt(false);
     }
+  };
+
+  const getCustomPrompt = () => {
+    if (!validationData) return samplePrompt;
+    if (currentPrompt) return currentPrompt;
     
-    // Fallback to basic template if extraction fails
-    return `Create a landing page for "${validationData.idea}" - a solution that helps ${validationData.targetCustomer} solve ${validationData.problemSolved}. Include a hero section, key features, testimonials section, and email signup form. Perfect for validating demand and collecting interested prospects.`;
+    // Default improved template
+    return `Create a landing page for "${validationData.idea.toLowerCase()}" which helps ${validationData.targetCustomer.toLowerCase()} solve ${validationData.problemSolved.toLowerCase()}. The target customer is ${validationData.targetCustomer.toLowerCase()}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
   };
 
   const copyPrompt = async () => {
@@ -133,21 +149,41 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             
 
             
-            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/30 highlight-border">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-4 sm:p-6 border-2 border-accent/30 highlight-border">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
                 <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
                 <Button
-                  onClick={copyPrompt}
+                  onClick={async () => {
+                    if (validationData && !currentPrompt) {
+                      await generateRefinedPrompt();
+                    }
+                    copyPrompt();
+                  }}
                   variant="outline"
-                  className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+                  className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   size="sm"
+                  disabled={generatingPrompt}
                 >
-                  {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-                  {copied ? "🎉 Copied!" : "📋 Copy Prompt"}
+                  {generatingPrompt ? (
+                    <div className="flex items-center">
+                      <div className="animate-spin w-4 h-4 mr-2 border-2 border-primary border-t-transparent rounded-full" />
+                      Generating...
+                    </div>
+                  ) : copied ? (
+                    <>
+                      <Check className="w-4 h-4 mr-2" />
+                      🎉 Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 mr-2" />
+                      📋 Copy Prompt
+                    </>
+                  )}
                 </Button>
               </div>
               
-              <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
+              <div className="bg-card/90 p-4 sm:p-6 rounded-xl border-2 border-primary/20 font-mono text-xs sm:text-sm text-foreground shadow-inner backdrop-blur-sm max-h-64 overflow-y-auto">
                 {validationData ? getCustomPrompt() : samplePrompt}
               </div>
             </div>

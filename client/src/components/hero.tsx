@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="text-center">
           {/* Hero Top Section with Val and Stats */}
           <div className="mb-8 space-y-6">
-            <div className="flex justify-center items-center space-x-16">
+            <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8 xl:space-x-16">
               {/* Val's Quote Section */}
               <div className="flex items-center space-x-4 relative">
                 <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
