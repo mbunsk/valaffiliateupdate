@@ -47,15 +47,6 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-                
-                <div className="text-left">
-                  <blockquote className="text-lg font-medium text-white mb-1">
-                    "Every great idea deserves thoughtful exploration!"
-                  </blockquote>
-                  <cite className="text-sm text-white/70">
-                    - Val, your AI startup mentor
-                  </cite>
-                </div>
               </div>
               
               {/* Testimonial Section */}
