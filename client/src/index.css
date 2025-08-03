@@ -132,6 +132,41 @@
     animation-delay: 0.5s;
   }
 
+  /* Neon border animation */
+  @keyframes neon-border-spin {
+    0% { 
+      background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    }
+    25% { 
+      background: conic-gradient(from 90deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    }
+    50% { 
+      background: conic-gradient(from 180deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    }
+    75% { 
+      background: conic-gradient(from 270deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    }
+    100% { 
+      background: conic-gradient(from 360deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    }
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% { 
+      opacity: 0.7;
+      filter: blur(1px);
+    }
+    50% { 
+      opacity: 1;
+      filter: blur(2px);
+    }
+  }
+
+  .neon-border-glow {
+    animation: neon-border-spin 4s linear infinite, neon-pulse 2s ease-in-out infinite;
+    background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+  }
+
   .gradient-text {
     background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%), hsl(60, 100%, 70%));
     background-size: 200% 200%;
