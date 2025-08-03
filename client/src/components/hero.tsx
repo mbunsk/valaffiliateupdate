@@ -25,7 +25,7 @@ export default function Hero() {
             <div className="flex justify-center items-center space-x-16">
               {/* Val's Quote Section */}
               <div className="flex items-center space-x-4 relative">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
+                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
                   <img 
                     src="/attached_assets/AIValFull_1754243498167.jpg" 
                     alt="Val - Your AI Mentor" 
