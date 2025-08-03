@@ -26,38 +26,14 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
 
   const samplePrompt = `Create a landing page mockup for "FitAI" - an app concept that uses AI to create personalized workout plans. Include a hero section highlighting the AI personalization, features section showing workout customization, testimonials section, and a signup form to collect interest. Use a clean, fitness-focused design with blue and green accent colors. Perfect for showing the concept to potential partners, friends, or collaborators who might be interested in the idea.`;
 
-  const generateCustomPrompt = async () => {
-    if (!validationData) return;
+  const getCustomPrompt = () => {
+    if (!validationData) return samplePrompt;
     
-    setGeneratingPrompt(true);
-    try {
-      const response = await apiRequest("POST", "/api/generate-prompt", {
-        idea: validationData.idea,
-        targetCustomer: validationData.targetCustomer,
-        problemSolved: validationData.problemSolved,
-        feedback: validationData.feedback
-      });
-      
-      const data = await response.json();
-      setCurrentPrompt(data.prompt);
-      
-      toast({
-        title: "Prompt Generated!",
-        description: "Your custom landing page prompt is ready",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to generate custom prompt",
-        variant: "destructive",
-      });
-    } finally {
-      setGeneratingPrompt(false);
-    }
+    return `I am building ${validationData.idea}, which helps ${validationData.targetCustomer} solve ${validationData.problemSolved} by [describe your unique solution approach based on your UVP insights]. My goal is to validate demand and collect emails from interested ${validationData.targetCustomer}. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest. Focus on the problem of ${validationData.problemSolved} and how this solution specifically helps ${validationData.targetCustomer}.`;
   };
 
   const copyPrompt = async () => {
-    const promptToCopy = currentPrompt || samplePrompt;
+    const promptToCopy = validationData ? getCustomPrompt() : samplePrompt;
     try {
       await navigator.clipboard.writeText(promptToCopy);
       setCopied(true);
@@ -144,17 +120,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
               </p>
             </div>
             
-            {validationData && !currentPrompt && (
-              <div className="text-center mb-6">
-                <Button
-                  onClick={generateCustomPrompt}
-                  disabled={generatingPrompt}
-                  className="px-6 py-3 text-lg font-bold rounded-2xl shadow-xl bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary transition-all duration-300"
-                >
-                  {generatingPrompt ? "Generating..." : "🤖 Generate My Custom Prompt"}
-                </Button>
-              </div>
-            )}
+
             
             <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
               <div className="flex items-center justify-between mb-4">
@@ -171,7 +137,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
               </div>
               
               <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
-                {currentPrompt || samplePrompt}
+                {validationData ? getCustomPrompt() : samplePrompt}
               </div>
             </div>
           </CardContent>
