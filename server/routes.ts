@@ -7,6 +7,10 @@ import { storage } from "./storage";
 import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
 import { z } from "zod";
 import { generateValidationFeedback, generateLandingPagePrompt } from "./openai";
+import OpenAI from "openai";
+
+// the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Configure multer for file uploads
 const upload = multer({
@@ -120,7 +124,12 @@ Rewrite each part to be more clear and marketable. Return ONLY a JSON object wit
         max_tokens: 500
       });
 
-      const refined = JSON.parse(response.choices[0].message.content);
+      const content = response.choices[0].message.content;
+      if (!content) {
+        throw new Error("No content received from AI");
+      }
+      
+      const refined = JSON.parse(content);
       
       const prompt = `Create a landing page for "${refined.refinedIdea}" which helps ${refined.refinedCustomer} ${refined.refinedProblem}. The target customer is ${refined.refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
       
@@ -132,9 +141,9 @@ Rewrite each part to be more clear and marketable. Return ONLY a JSON object wit
       const refinedCustomer = targetCustomer.toLowerCase();
       const refinedProblem = problemSolved.toLowerCase();
       
-      const prompt = `Create a landing page for "${refinedIdea}" which helps ${refinedCustomer} ${refinedProblem}. The target customer is ${refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      const fallbackPrompt = `Create a landing page for "${refinedIdea}" which helps ${refinedCustomer} ${refinedProblem}. The target customer is ${refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
       
-      res.json({ prompt });
+      res.json({ prompt: fallbackPrompt });
     }
   });
 

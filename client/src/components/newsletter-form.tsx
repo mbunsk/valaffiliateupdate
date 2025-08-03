@@ -212,7 +212,7 @@ export default function NewsletterForm() {
                   name="siteUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white font-semibold">🌐 Landing Page URL</FormLabel>
+                      <FormLabel className="text-white font-semibold">🌐 Landing Page URL (or the preview URL your site builder offers)</FormLabel>
                       <FormControl>
                         <Input 
                           placeholder="https://your-mockup-page.com" 
