@@ -97,10 +97,8 @@ export default function Hero() {
               <div className="text-sm text-foreground/60">to mock up</div>
             </div>
             <div className="text-center">
-              <div className="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl px-4 py-2 shadow-lg border border-white/20">
-                <div className="text-lg font-bold text-white">200K</div>
-                <div className="text-xs text-white/80">people (if you want)</div>
-              </div>
+              <div className="text-2xl font-bold text-secondary">1 min</div>
+              <div className="text-sm text-foreground/60">for feedback</div>
             </div>
           </div>
         </div>
