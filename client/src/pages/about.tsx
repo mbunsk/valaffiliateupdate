@@ -7,6 +7,7 @@ import { Mail, Linkedin, ExternalLink, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import aronImage from "@assets/aron_1754236357732.png";
 
 export default function About() {
   const [formData, setFormData] = useState({
@@ -58,10 +59,12 @@ export default function About() {
           <div className="space-y-8">
             <Card className="bg-card/50 backdrop-blur border-primary/20 shadow-lg">
               <CardContent className="p-8">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">AM</span>
-                  </div>
+                <div className="flex items-start space-x-6 mb-6">
+                  <img 
+                    src={aronImage} 
+                    alt="Aron Meystedt" 
+                    className="w-24 h-24 rounded-full object-cover flex-shrink-0"
+                  />
                   <div>
                     <h2 className="text-2xl font-bold text-foreground">Aron Meystedt</h2>
                     <p className="text-foreground/70">Startup Founder, Advisor & Investor</p>
@@ -132,7 +135,7 @@ export default function About() {
           </div>
 
           {/* Contact Form */}
-          <div>
+          <div id="contact">
             <Card className="bg-card/50 backdrop-blur border-primary/20 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-foreground flex items-center space-x-2">

@@ -1,0 +1,52 @@
+Terms of Service
+1. Acceptance of Terms
+Welcome to ValidatorAI.com ("Validator AI," "we," "us," or "our"). By accessing or using our website and services, you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree, please do not use our services.
+
+2. Services Provided
+Validator AI offers the following free services:
+
+An AI startup mentor phone call that provides users with guidance on their business ideas.
+An AI idea generator that suggests potential business ideas based on user input.
+A follow-up email summarizing key points from the AI startup mentor call, including links to third-party service providers who may help users move their ideas forward.
+2.1 Third-Party Service Providers
+We allow third-party service providers to be featured in follow-up emails sent after AI startup mentor calls. These providers pay us for inclusion in these emails.
+We do not share user data (email addresses, phone numbers, or other personal details) with these service providers.
+Users who choose to engage with third-party service providers are responsible for reviewing the terms and conditions of each provider.
+Some third-party service providers may integrate with our AI phone call system via API. However, we do not share sensitive user data through these integrations.
+3. User Eligibility & Restrictions
+Our services are intended for users 18 years or older.
+Users must not use our AI services for ideas related to illegal, harmful, or pornographic businesses.
+Users self-regulate and are responsible for ensuring their ideas align with ethical and legal standards.
+4. Privacy and Data Handling
+User discussions with the AI are private. We do not access or act upon user ideas.
+We do not monitor call transcripts unless a user requests review or for internal quality assurance purposes.
+We may review follow-up emails to ensure our AI system is functioning correctly.
+We respect all user requests to delete their personal information from our database.
+5. No Guarantees & Limitation of Liability
+5.1 Educational & Entertainment Purposes Only
+ValidatorAI.com is an educational tool. The AI startup mentor call and idea generator are designed to teach users about idea validation and market opportunities.
+We do not guarantee the success, viability, or profitability of any idea suggested or discussed.
+Our AI does not replace professional business, legal, or financial advice.
+5.2 Liability Waiver
+Users acknowledge that they are fully responsible for any business decisions made based on Validator AI’s recommendations.
+Validator AI shall not be liable for any losses, damages, or missed opportunities resulting from reliance on AI-generated advice or suggestions.
+We assume no responsibility for any actions taken based on AI discussions or idea generation.
+6. Account Termination
+We reserve the right to terminate or suspend accounts if users violate these Terms.
+If users wish to delete their personal information, we will honor their request promptly.
+7. Future Paid Services & Refund Policy
+Validator AI currently offers all services for free.
+If we introduce paid services in the future, all sales of digital products will be final, and no refunds will be provided.
+Payments will be processed through Stripe.
+8. Modifications to These Terms
+We may update these Terms at any time. Continued use of our services after updates constitutes acceptance of the revised Terms.
+
+9. Contact Us
+If you have any questions regarding these Terms and Conditions, please contact us:
+
+Email: info@napkin.com
+
+Mailing Address:
+
+ValidatorAI.com
+Irvine, California 92618
