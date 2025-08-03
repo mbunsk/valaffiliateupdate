@@ -2,7 +2,7 @@
 
 ## Overview
 
-ValidatorAI is a full-stack web application that helps entrepreneurs validate their startup ideas through AI-powered feedback. The platform guides users through three main steps: validating their idea, getting resources to build a landing page, and submitting their project to a newsletter with 200,000+ readers.
+ValidatorAI is a fun, low-pressure platform for idea exploration that helps anyone validate concepts through AI-powered feedback. The platform guides users through three main steps: exploring their idea, creating free landing page mockups to share with others, and submitting their concept to a newsletter with 200,000+ idea explorers. The goal is to maximize affiliate conversions by positioning free landing page creation as the natural next step for sharing ideas.
 
 ## User Preferences
 

@@ -25,15 +25,15 @@ export default function Hero() {
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
             <span className="gradient-text">
-              Turn Wild Ideas Into
+              Explore Your Ideas
             </span>
             <br />
-            <span className="text-foreground animate-wiggle inline-block">Real Startups! 🚀</span>
+            <span className="text-foreground animate-wiggle inline-block">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get instant AI feedback, build a landing page, and get featured to{" "}
-            <span className="font-bold text-primary bg-primary/10 px-2 py-1 rounded-lg animate-pulse-slow">200,000+ startup explorers</span>{" "}
-            — because every unicorn started as a "crazy" idea! 🦄
+            Get instant AI feedback, mock up a landing page, and share your exploration with{" "}
+            <span className="font-bold text-primary bg-primary/10 px-2 py-1 rounded-lg animate-pulse-slow">200,000+ idea explorers</span>{" "}
+            — every great idea deserves to be explored! 🦄
           </p>
           <Button 
             onClick={scrollToValidation}
@@ -41,18 +41,18 @@ export default function Hero() {
             className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
           >
             <span className="mr-3">🎮</span>
-            Let's Play Startup!
+            Let's Explore Ideas!
             <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
           </Button>
           
           <div className="mt-8 flex justify-center space-x-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">3 min</div>
-              <div className="text-sm text-foreground/60">to validate</div>
+              <div className="text-sm text-foreground/60">to explore</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-accent">5 min</div>
-              <div className="text-sm text-foreground/60">to build</div>
+              <div className="text-sm text-foreground/60">to mock up</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-secondary">∞</div>

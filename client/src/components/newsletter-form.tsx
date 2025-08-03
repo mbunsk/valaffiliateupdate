@@ -107,14 +107,14 @@ export default function NewsletterForm() {
             ⭐ Get Featured!
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Ready for the Spotlight? 🌟
+            Share Your Exploration! 🌟
           </h2>
           <p className="text-xl text-foreground/70 mb-4">
             Submit your project and get featured to our amazing community of{" "}
-            <span className="font-black text-primary bg-primary/10 px-3 py-1 rounded-lg animate-pulse-slow">200,000+ startup explorers</span>!
+            <span className="font-black text-primary bg-primary/10 px-3 py-1 rounded-lg animate-pulse-slow">200,000+ idea explorers</span>!
           </p>
           <p className="text-lg text-foreground/60">
-            Show off your creation and inspire other builders! 🚀✨
+            Show off your concept and inspire other curious minds! 🚀✨
           </p>
         </div>
 
@@ -122,8 +122,8 @@ export default function NewsletterForm() {
           <CardContent className="p-8">
             <div className="text-center mb-8">
               <span className="text-3xl animate-wiggle">📝</span>
-              <h3 className="text-xl font-bold text-foreground mt-2">Share Your Amazing Project!</h3>
-              <p className="text-foreground/70">Fill out the form below to get your startup featured</p>
+              <h3 className="text-xl font-bold text-foreground mt-2">Share Your Amazing Idea!</h3>
+              <p className="text-foreground/70">Fill out the form below to get your concept featured</p>
             </div>
             
             <Form {...form}>
@@ -162,9 +162,9 @@ export default function NewsletterForm() {
                   name="projectName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Project Name</FormLabel>
+                      <FormLabel>Idea Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your startup/project name" {...field} />
+                        <Input placeholder="Your project/concept name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -176,11 +176,11 @@ export default function NewsletterForm() {
                   name="projectSummary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Project Summary</FormLabel>
+                      <FormLabel>Concept Summary</FormLabel>
                       <FormControl>
                         <Textarea
                           rows={4}
-                          placeholder="Brief description of what your project does and why it's unique..."
+                          placeholder="Brief description of your idea and what makes it interesting..."
                           className="resize-none"
                           {...field}
                         />
@@ -195,9 +195,9 @@ export default function NewsletterForm() {
                   name="siteUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Site URL</FormLabel>
+                      <FormLabel>Landing Page URL</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://your-landing-page.com" {...field} />
+                        <Input placeholder="https://your-mockup-page.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -262,7 +262,7 @@ export default function NewsletterForm() {
                   >
                     {submitMutation.isPending && <Loader2 className="mr-3 h-6 w-6 animate-spin" />}
                     <span className="mr-2">🌟</span>
-                    {submitMutation.isPending ? "Submitting..." : "Submit My Project!"}
+                    {submitMutation.isPending ? "Submitting..." : "Submit My Idea!"}
                     {!submitMutation.isPending && <span className="ml-2">🚀</span>}
                   </Button>
                 </div>
@@ -274,10 +274,10 @@ export default function NewsletterForm() {
                 <span className="text-2xl mr-3">👀</span>
                 <div className="text-left">
                   <p className="text-sm font-semibold text-foreground">
-                    We handpick the coolest projects every week!
+                    We handpick the most interesting ideas every week!
                   </p>
                   <p className="text-xs text-foreground/70">
-                    Selected projects get featured to thousands of startup enthusiasts ✨
+                    Selected concepts get featured to thousands of curious explorers ✨
                   </p>
                 </div>
               </div>

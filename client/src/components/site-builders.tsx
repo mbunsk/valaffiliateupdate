@@ -9,7 +9,7 @@ export default function SiteBuilders() {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
-  const samplePrompt = `Create a modern landing page for "FitAI" - a mobile app that uses AI to create personalized workout plans based on fitness goals, available equipment, and schedule. Include a hero section highlighting the AI personalization, features section showing workout customization, testimonials from beta users, pricing plans (free and premium tiers), and a waitlist signup form. Use a clean, fitness-focused design with blue and green accent colors. Target audience: busy professionals who want effective home workouts.`;
+  const samplePrompt = `Create a landing page mockup for "FitAI" - an app concept that uses AI to create personalized workout plans. Include a hero section highlighting the AI personalization, features section showing workout customization, testimonials section, and a signup form to collect interest. Use a clean, fitness-focused design with blue and green accent colors. Perfect for showing the concept to potential partners, friends, or collaborators who might be interested in the idea.`;
 
   const copyPrompt = async () => {
     try {
@@ -32,7 +32,7 @@ export default function SiteBuilders() {
   const builders = [
     {
       name: "Replit",
-      description: "Fastest no-code builder with backend support.",
+      description: "Free builder with powerful features — no credit card needed!",
       url: "https://replit.com",
       color: "bg-orange-600 hover:bg-orange-700",
       iconBg: "bg-orange-100",
@@ -40,7 +40,7 @@ export default function SiteBuilders() {
     },
     {
       name: "Lovable",
-      description: "Visual, drag-and-drop editor. Easy and sleek.",
+      description: "Beautiful visual editor — start creating instantly for free!",
       url: "https://lovable.dev",
       color: "bg-pink-600 hover:bg-pink-700",
       iconBg: "bg-pink-100",
@@ -48,7 +48,7 @@ export default function SiteBuilders() {
     },
     {
       name: "Typedream",
-      description: "Notion-style UI, perfect for fast pages.",
+      description: "Simple as Notion — mock up pages in minutes for free!",
       url: "https://typedream.com",
       color: "bg-purple-600 hover:bg-purple-700",
       iconBg: "bg-purple-100",
@@ -72,12 +72,12 @@ export default function SiteBuilders() {
             🎨 Build Your Landing Page
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Let's Build Something Cool! 🚀
+            Mock Up Your Idea! 🚀
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
-            Pick your favorite builder and turn your idea into a real website in minutes!
+            Create a free landing page to show partners, customers, and friends what you're exploring!
             <br />
-            <span className="text-primary font-semibold">No coding skills needed — just copy, paste, and create! ✨</span>
+            <span className="text-primary font-semibold">Perfect for sharing your concept and getting feedback! ✨</span>
           </p>
         </div>
 
@@ -86,13 +86,13 @@ export default function SiteBuilders() {
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <span className="text-3xl animate-wiggle">📝</span>
-              <h3 className="text-2xl font-black gradient-text mt-2">Magic Prompt Generator!</h3>
-              <p className="text-foreground/70 mt-2">Your personalized website prompt is ready to go!</p>
+              <h3 className="text-2xl font-black gradient-text mt-2">Free Landing Page Prompt!</h3>
+              <p className="text-foreground/70 mt-2">Copy this and create your mockup in minutes — completely free!</p>
             </div>
             
             <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-lg font-semibold text-foreground">✨ Copy & paste this into any builder:</p>
+                <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
                 <Button
                   onClick={copyPrompt}
                   variant="outline"
@@ -143,8 +143,8 @@ export default function SiteBuilders() {
                 <p className="text-foreground/70 mb-6 text-lg">{builder.description}</p>
                 <Button asChild className={`w-full ${builder.color} transition-all duration-300 transform hover:scale-105 rounded-2xl py-6 text-lg font-bold shadow-lg hover:shadow-xl`}>
                   <a href={builder.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
-                    <span className="mr-2">🚀</span>
-                    Start with {builder.name}
+                    <span className="mr-2">🎨</span>
+                    Mock Up For Free
                     <ExternalLink className="ml-2 w-5 h-5" />
                   </a>
                 </Button>

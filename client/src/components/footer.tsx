@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="text-2xl font-black gradient-text">ValidatorAI</span>
             </div>
             <p className="text-white/80 mb-8 max-w-md text-lg leading-relaxed">
-              Where wild ideas become real startups! We help dreamers validate their concepts, build amazing landing pages, and connect with an incredible community of startup explorers.
+              Where wild ideas come to life! We help dreamers explore their concepts, create amazing landing pages, and connect with an incredible community of idea explorers.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-white/60 hover:text-white transition-all duration-300 transform hover:scale-110">

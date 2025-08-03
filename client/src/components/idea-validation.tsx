@@ -88,9 +88,9 @@ export default function IdeaValidation() {
             What's Your Wild Idea? 🤔
           </h2>
           <p className="text-xl text-foreground/70 leading-relaxed">
-            Share your startup idea and our AI will give you honest feedback, market insights, and a roadmap to make it real!
+            Share any idea and our AI will give you thoughtful feedback, insights, and suggestions to explore it further!
             <br />
-            <span className="text-primary font-semibold">No judgment, just helpful insights! ✨</span>
+            <span className="text-primary font-semibold">No pressure, just fun exploration! ✨</span>
           </p>
         </div>
 
@@ -99,10 +99,10 @@ export default function IdeaValidation() {
             <div className="text-center mb-6">
               <span className="text-2xl">💭</span>
               <p className="text-lg font-semibold text-foreground mt-2">
-                Describe your startup idea below
+                Describe any idea you're curious about
               </p>
               <p className="text-sm text-foreground/60">
-                The weirder, the better! We love creative thinking 🎨
+                Business ideas, app concepts, or anything interesting! 🎨
               </p>
             </div>
             
@@ -199,7 +199,7 @@ export default function IdeaValidation() {
                 
                 <div className="text-center mt-6">
                   <p className="text-sm text-foreground/60">
-                    Ready to build? Scroll down to create your landing page! 👇
+                    Ready to visualize it? Scroll down to mock up a free landing page! 👇
                   </p>
                 </div>
               </div>

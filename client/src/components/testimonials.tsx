@@ -3,24 +3,24 @@ import { Card, CardContent } from "@/components/ui/card";
 const testimonials = [
   {
     name: "Jessica Martinez",
-    title: "Founder, MoodTracker",
+    title: "Idea Explorer",
     initials: "JM",
     color: "from-blue-400 to-blue-600",
-    quote: "ValidatorAI helped me refine my mental health app concept. The AI feedback was spot-on, and getting featured in their newsletter brought me 2,000+ signups!"
+    quote: "ValidatorAI helped me explore my mental health app concept. The AI feedback was insightful, and getting featured in their newsletter brought me amazing feedback from the community!"
   },
   {
     name: "Robert Chen",
-    title: "Founder, EcoDelivery",
+    title: "Creative Thinker",
     initials: "RC",
     color: "from-green-400 to-green-600",
-    quote: "The validation process saved me months of building the wrong thing. Now I have a sustainable delivery service with real customers."
+    quote: "The exploration process helped me refine my delivery concept. Now I have a clear vision and a beautiful landing page to share with friends."
   },
   {
     name: "Sarah Parker",
-    title: "Founder, StudyBuddy",
+    title: "Concept Creator",
     initials: "SP",
     color: "from-purple-400 to-purple-600",
-    quote: "From validation to launch in 3 weeks! The site builder recommendations were perfect, and the newsletter feature got me early investors."
+    quote: "From idea to mockup in just hours! The site builder recommendations were perfect, and the newsletter feature connected me with other explorers."
   }
 ];
 
@@ -35,8 +35,8 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <span className="text-4xl animate-wiggle mb-4 block">🏆</span>
-          <h2 className="text-3xl sm:text-5xl font-black mb-4 gradient-text">Success Stories!</h2>
-          <p className="text-xl text-foreground/70">Real people who turned wild ideas into amazing startups 🚀</p>
+          <h2 className="text-3xl sm:text-5xl font-black mb-4 gradient-text">Exploration Stories!</h2>
+          <p className="text-xl text-foreground/70">Real people who brought their wild ideas to life through exploration 🚀</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
