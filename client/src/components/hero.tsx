@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="mb-8 space-y-6">
             <div className="flex justify-center items-center space-x-16">
               {/* Val's Quote Section */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 relative">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
                   <img 
                     src="/attached_assets/AIValFull_1754243498167.jpg" 
@@ -32,6 +32,22 @@ export default function Hero() {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                
+                {/* Thought Bubble */}
+                <div className="relative">
+                  <div className="bg-white rounded-xl p-3 shadow-lg border border-white/20 max-w-xs">
+                    <div className="text-xs text-gray-700 leading-tight">
+                      <span className="font-semibold text-primary">I provide:</span> Market insights, 
+                      customer targeting, revenue ideas, and validation steps!
+                    </div>
+                    
+                    {/* Bubble tail */}
+                    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2">
+                      <div className="w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-white"></div>
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="text-left">
                   <blockquote className="text-lg font-medium text-white mb-1">
                     "Every great idea deserves thoughtful exploration!"
