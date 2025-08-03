@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, CheckCircle, Star } from "lucide-react";
+import validatorIcon from "@assets/Validator AI Icon_1754233923589.png";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function Header() {
             <div className="flex-shrink-0">
               <div className="flex items-center space-x-3">
                 <img 
-                  src="/attached_assets/Validator AI Icon_1754233923589.png" 
+                  src={validatorIcon} 
                   alt="ValidatorAI Logo" 
                   className="w-12 h-12"
                 />
