@@ -133,12 +133,12 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             
 
             
-            <div className="relative bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-1 overflow-hidden neon-border-container">
-              {/* Animated neon border effect */}
+            <div className="relative rounded-2xl p-1 overflow-hidden">
+              {/* Animated neon border effect - only on border */}
               <div className="absolute inset-0 rounded-2xl neon-border-glow"></div>
               
-              {/* Content wrapper */}
-              <div className="relative z-10 bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
+              {/* Content wrapper - restored original styling */}
+              <div className="relative z-10 bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-0">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
                   <Button

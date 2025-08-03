@@ -165,6 +165,17 @@
   .neon-border-glow {
     animation: neon-border-spin 4s linear infinite, neon-pulse 2s ease-in-out infinite;
     background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6);
+    padding: 2px;
+  }
+  
+  .neon-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(4px);
+    opacity: 0.6;
   }
 
   .gradient-text {
