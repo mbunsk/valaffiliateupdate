@@ -98,8 +98,8 @@ export default function Hero() {
             </div>
             <div className="text-center">
               <div className="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl px-4 py-2 shadow-lg border border-white/20">
-                <div className="text-2xl font-bold text-white">∞</div>
-                <div className="text-sm text-white/80">possibilities</div>
+                <div className="text-lg font-bold text-white">200K</div>
+                <div className="text-xs text-white/80">people (if you want)</div>
               </div>
             </div>
           </div>
