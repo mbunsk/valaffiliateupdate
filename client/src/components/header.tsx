@@ -14,45 +14,45 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+    <header className="fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-md border-b-2 border-primary/20 z-50 shadow-lg shadow-primary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-violet-600 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-white" />
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary via-accent to-secondary rounded-xl flex items-center justify-center animate-float shadow-lg">
+                  <CheckCircle className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold text-gray-900">ValidatorAI</span>
+                <span className="text-2xl font-black gradient-text">ValidatorAI</span>
               </div>
             </div>
           </div>
           
           <nav className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline space-x-6">
               <button 
                 onClick={() => scrollToSection('validate')}
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                Validate Your Idea
+                🚀 Validate Idea
               </button>
               <button 
                 onClick={() => scrollToSection('build')}
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                Get a Landing Page
+                🎨 Build Page
               </button>
               <button 
                 onClick={() => scrollToSection('submit')}
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                Submit to Newsletter
+                ⭐ Get Featured
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                About
+                💡 About
               </button>
             </div>
           </nav>

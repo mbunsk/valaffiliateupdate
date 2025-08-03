@@ -57,64 +57,79 @@ export default function SiteBuilders() {
   ];
 
   return (
-    <section id="build" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="build" className="py-20 bg-gradient-to-br from-secondary/20 via-background to-primary/10 relative">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 text-5xl opacity-10 animate-float">🎨</div>
+        <div className="absolute bottom-20 right-20 text-4xl opacity-10 animate-bounce-gentle">⚡</div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4">
-            <span className="w-6 h-6 bg-violet-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-2">
+          <Badge variant="secondary" className="mb-6 px-4 py-2 text-lg bg-gradient-to-r from-secondary/30 to-primary/20 border-secondary/30">
+            <span className="w-8 h-8 bg-gradient-to-br from-secondary to-primary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
               2
             </span>
-            Build Your Landing Page
+            🎨 Build Your Landing Page
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Bring Your Idea to Life
+          <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
+            Let's Build Something Cool! 🚀
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Pick one of our favorite site builders to create your landing page fast — no coding required.
+          <p className="text-xl text-foreground/70 mb-8">
+            Pick your favorite builder and turn your idea into a real website in minutes!
+            <br />
+            <span className="text-primary font-semibold">No coding skills needed — just copy, paste, and create! ✨</span>
           </p>
         </div>
 
         {/* Prompt Generator */}
-        <Card className="mb-12 shadow-lg border border-gray-200">
+        <Card className="mb-12 shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
           <CardContent className="p-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">📝 Generated Prompt for Your Site Builder</h3>
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-              <p className="text-sm text-gray-600 mb-3">Copy this prompt and paste it into any of the builders below:</p>
-              <div className="bg-white p-4 rounded-lg border border-gray-300 font-mono text-sm text-gray-800">
+            <div className="text-center mb-6">
+              <span className="text-3xl animate-wiggle">📝</span>
+              <h3 className="text-2xl font-black gradient-text mt-2">Magic Prompt Generator!</h3>
+              <p className="text-foreground/70 mt-2">Your personalized website prompt is ready to go!</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-lg font-semibold text-foreground">✨ Copy & paste this into any builder:</p>
+                <Button
+                  onClick={copyPrompt}
+                  variant="outline"
+                  className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+                  size="sm"
+                >
+                  {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                  {copied ? "🎉 Copied!" : "📋 Copy Prompt"}
+                </Button>
+              </div>
+              
+              <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
                 {samplePrompt}
               </div>
-              <Button
-                onClick={copyPrompt}
-                variant="outline"
-                className="mt-3"
-                size="sm"
-              >
-                {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-                {copied ? "Copied!" : "Copy Prompt"}
-              </Button>
             </div>
           </CardContent>
         </Card>
 
         {/* Site Builders */}
         <div className="grid md:grid-cols-3 gap-8">
-          {builders.map((builder) => (
-            <Card key={builder.name} className="shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+          {builders.map((builder, index) => (
+            <Card key={builder.name} className="shadow-2xl border-2 border-primary/20 hover:border-primary/40 bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float" style={{animationDelay: `${index * 0.2}s`}}>
               <CardContent className="p-8 text-center">
-                <div className={`w-16 h-16 ${builder.iconBg} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                  <div className={`w-8 h-8 ${builder.iconColor}`}>
+                <div className={`w-20 h-20 ${builder.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg`} style={{animationDelay: `${index * 0.3}s`}}>
+                  <div className={`w-10 h-10 ${builder.iconColor}`}>
                     {builder.name === "Replit" && (
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                       </svg>
                     )}
                     {builder.name === "Lovable" && (
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                       </svg>
                     )}
                     {builder.name === "Typedream" && (
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
                         <polyline points="14,2 14,8 20,8"/>
                         <line x1="16" y1="13" x2="8" y2="13"/>
@@ -124,12 +139,13 @@ export default function SiteBuilders() {
                     )}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{builder.name}</h3>
-                <p className="text-gray-600 mb-6">{builder.description}</p>
-                <Button asChild className={`w-full ${builder.color} transition-colors`}>
+                <h3 className="text-2xl font-black text-foreground mb-3">{builder.name}</h3>
+                <p className="text-foreground/70 mb-6 text-lg">{builder.description}</p>
+                <Button asChild className={`w-full ${builder.color} transition-all duration-300 transform hover:scale-105 rounded-2xl py-6 text-lg font-bold shadow-lg hover:shadow-xl`}>
                   <a href={builder.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                    <span className="mr-2">🚀</span>
                     Start with {builder.name}
-                    <ExternalLink className="ml-2 w-4 h-4" />
+                    <ExternalLink className="ml-2 w-5 h-5" />
                   </a>
                 </Button>
               </CardContent>

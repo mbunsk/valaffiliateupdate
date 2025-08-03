@@ -92,26 +92,40 @@ export default function NewsletterForm() {
   };
 
   return (
-    <section id="submit" className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="submit" className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10 relative">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 text-5xl opacity-10 animate-float">⭐</div>
+        <div className="absolute bottom-20 left-10 text-4xl opacity-10 animate-bounce-gentle">🏆</div>
+      </div>
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4">
-            <span className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-2">
+          <Badge variant="secondary" className="mb-6 px-4 py-2 text-lg bg-gradient-to-r from-accent/20 to-secondary/30 border-accent/30">
+            <span className="w-8 h-8 bg-gradient-to-br from-accent to-secondary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
               3
             </span>
-            Get Featured
+            ⭐ Get Featured!
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Want to Be Featured in Our Newsletter?
+          <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
+            Ready for the Spotlight? 🌟
           </h2>
-          <p className="text-lg text-gray-600">
-            We showcase the best early startup ideas and projects to our audience of{" "}
-            <span className="font-semibold text-primary">200,000+ founders, investors, and builders</span>.
+          <p className="text-xl text-foreground/70 mb-4">
+            Submit your project and get featured to our amazing community of{" "}
+            <span className="font-black text-primary bg-primary/10 px-3 py-1 rounded-lg animate-pulse-slow">200,000+ startup explorers</span>!
+          </p>
+          <p className="text-lg text-foreground/60">
+            Show off your creation and inspire other builders! 🚀✨
           </p>
         </div>
 
-        <Card className="shadow-lg border border-gray-200">
+        <Card className="shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
           <CardContent className="p-8">
+            <div className="text-center mb-8">
+              <span className="text-3xl animate-wiggle">📝</span>
+              <h3 className="text-xl font-bold text-foreground mt-2">Share Your Amazing Project!</h3>
+              <p className="text-foreground/70">Fill out the form below to get your startup featured</p>
+            </div>
+            
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -244,18 +258,30 @@ export default function NewsletterForm() {
                     type="submit"
                     disabled={submitMutation.isPending}
                     size="lg"
-                    className="px-8 py-3 bg-green-600 hover:bg-green-700 shadow-md hover:shadow-lg"
+                    className="px-10 py-4 text-xl font-bold rounded-2xl shadow-2xl shadow-accent/30 bg-gradient-to-r from-accent via-secondary to-accent hover:from-secondary hover:via-accent hover:to-secondary transition-all duration-300 transform hover:scale-110"
                   >
-                    {submitMutation.isPending && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                    Submit for Consideration
+                    {submitMutation.isPending && <Loader2 className="mr-3 h-6 w-6 animate-spin" />}
+                    <span className="mr-2">🌟</span>
+                    {submitMutation.isPending ? "Submitting..." : "Submit My Project!"}
+                    {!submitMutation.isPending && <span className="ml-2">🚀</span>}
                   </Button>
                 </div>
               </form>
             </Form>
 
-            <p className="mt-6 text-sm text-gray-600 text-center">
-              We personally select projects based on usefulness, clarity, and potential. If chosen, your idea will be seen by thousands.
-            </p>
+            <div className="mt-8 text-center">
+              <div className="inline-flex items-center bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl px-6 py-4 border border-primary/20">
+                <span className="text-2xl mr-3">👀</span>
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-foreground">
+                    We handpick the coolest projects every week!
+                  </p>
+                  <p className="text-xs text-foreground/70">
+                    Selected projects get featured to thousands of startup enthusiasts ✨
+                  </p>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

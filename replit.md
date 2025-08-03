@@ -7,6 +7,7 @@ ValidatorAI is a full-stack web application that helps entrepreneurs validate th
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preference: Playful, fun, interesting, engaging look for idea explorers looking to role-play as founders and have fun exploring their ideas. Low pressure and interesting design approach.
 
 ## System Architecture
 
