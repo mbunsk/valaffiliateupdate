@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, CheckCircle } from "lucide-react";
+import { Menu, X, CheckCircle, Star } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +29,24 @@ export default function Header() {
           </div>
           
           <nav className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-6">
+            <div className="ml-10 flex items-center space-x-6">
+              {/* Product Hunt Rating */}
+              <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-lg px-3 py-1 shadow-sm">
+                <div className="bg-orange-500 text-white px-1 py-0.5 rounded text-xs font-bold">
+                  PH
+                </div>
+                <div className="flex items-center space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3 w-3 ${
+                        i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300 dark:text-gray-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm font-bold text-gray-900 dark:text-gray-100">4.85</span>
+              </div>
               <button 
                 onClick={() => scrollToSection('validate')}
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"

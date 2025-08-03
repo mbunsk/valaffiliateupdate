@@ -20,6 +20,30 @@ export default function Hero() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
+          {/* Fullerton Quote and User Stats */}
+          <div className="mb-8 space-y-4">
+            <blockquote className="text-lg font-medium text-gray-700 dark:text-gray-300">
+              "This is the future!"
+            </blockquote>
+            <cite className="text-sm text-gray-500 dark:text-gray-400">
+              - Cal State Fullerton Entrepreneurship Center
+            </cite>
+            <div className="flex justify-center items-center space-x-2 mt-4">
+              <div className="flex items-center space-x-1">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                  >
+                    U
+                  </div>
+                ))}
+              </div>
+              <span className="text-lg font-bold text-gray-900 dark:text-gray-100">278,355</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">entrepreneurs validated</span>
+            </div>
+          </div>
+          
           <div className="inline-block mb-6">
             <span className="text-4xl animate-bounce-gentle">🎯</span>
           </div>
@@ -28,7 +52,7 @@ export default function Hero() {
               Explore Your Ideas
             </span>
             <br />
-            <span className="text-foreground animate-wiggle inline-block">With AI Feedback! 🚀</span>
+            <span className="text-foreground animate-wiggle inline-block">With AI Feedback! <span className="animate-rocket-launch inline-block">🚀</span></span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
             Get instant AI feedback, mock up a landing page, and share your exploration with{" "}
