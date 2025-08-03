@@ -82,8 +82,17 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
   };
 
   const parseFeedback = (feedbackHtml: string) => {
-    // The new AI response comes as HTML, so we'll return it as-is for direct rendering
-    return feedbackHtml;
+    // Clean up any stray HTML text that might appear before the actual content
+    let cleanedHtml = feedbackHtml;
+    
+    // Remove any HTML text that might appear at the beginning
+    cleanedHtml = cleanedHtml.replace(/^[\s\S]*?(<div class="validation-section">)/i, '$1');
+    
+    // Remove any stray ```html tags if they exist
+    cleanedHtml = cleanedHtml.replace(/```html\s*/gi, '');
+    cleanedHtml = cleanedHtml.replace(/```\s*/gi, '');
+    
+    return cleanedHtml;
   };
 
   return (

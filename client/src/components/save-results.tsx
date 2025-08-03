@@ -129,12 +129,14 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         </div>
         
         {/* Encouragement section */}
-        <div className="mt-6 text-center p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+        <div className="mt-8 text-center p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+          <div className="mb-4"></div>
+          <div className="mb-4"></div>
           <p className="text-foreground/80 text-lg mb-2">
             <span className="font-semibold">Great work exploring your idea!</span> 🎉
           </p>
           <p className="text-foreground/70 mb-3">
-            Ready to take the next step? Create a free landing page mockup to share with others!
+            Here is the next step to validate. Create a free landing page mockup to visualize your idea clearly. It's free.
           </p>
           <div className="flex justify-center">
             <ArrowDown className="w-6 h-6 text-primary animate-bounce" />

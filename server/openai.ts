@@ -105,9 +105,12 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 <p>Define 5 key metrics to track progress: early validation signals, user engagement indicators, and business health measurements.</p>
 </div>
 
+<div class="prompt-section">
+<h3>Landing Page Prompt</h3>
+<p>Create a landing page for "[REFINED IDEA NAME]" - [CLEAR VALUE PROPOSITION AND REFINED DESCRIPTION]. Include a compelling hero section that highlights the key benefits, features section showcasing main capabilities, testimonials section, and email signup form. Focus on [SPECIFIC TARGET AUDIENCE] who need [REFINED PROBLEM STATEMENT]. Perfect for validating demand and collecting interested prospects.</p>
+</div>
 
-
-Be encouraging but realistic. Focus on actionable insights without any styling instructions.`
+Be encouraging but realistic. Focus on actionable insights without any styling instructions. In the Landing Page Prompt section, rewrite and refine the user's idea with clear value proposition and professional copy rather than just pasting their original text.`
         },
         {
           role: "user",
@@ -115,7 +118,7 @@ Be encouraging but realistic. Focus on actionable insights without any styling i
 Target Customer: ${targetCustomer}
 Problem Solved: ${problemSolved}
 
-Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified. Make sure to customize the landing page prompt section with the specific idea, target customer, and problem provided above.`
+Please analyze this startup idea and provide comprehensive validation feedback using the exact HTML structure specified. Include a section called "Landing Page Prompt" with a refined and improved version of their idea that includes clear value proposition and professional copy suitable for creating a landing page.`
         }
       ],
       temperature: 0.7,
