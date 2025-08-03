@@ -104,26 +104,28 @@ export default function NewsletterForm() {
             <span className="w-8 h-8 bg-gradient-to-br from-accent to-secondary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
               3
             </span>
-            ⭐ Get Featured!
+            💬 Get Feedback!
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
             Share Your Exploration! <span style={{fontFamily: 'Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols'}}>🌟</span>
           </h2>
           <p className="text-xl text-foreground/70 mb-4">
-            Submit your project and get featured to our amazing community of{" "}
+            Submit your project and get feedback and traction from our amazing community of{" "}
             <span className="font-black text-primary bg-primary/10 px-3 py-1 rounded-lg animate-pulse-slow">200,000+ idea explorers</span>!
           </p>
           <p className="text-lg text-foreground/60">
-            Show off your concept and inspire other curious minds! 🚀✨
+            Let our audience help you refine and improve your concept!
           </p>
         </div>
 
-        <Card className="shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
+        <Card className="shadow-2xl border-2 border-accent/30 bg-gradient-to-br from-card/90 to-accent/5 backdrop-blur-sm animate-pulse-slow">
           <CardContent className="p-8">
             <div className="text-center mb-8">
-              <span className="text-3xl animate-wiggle">📝</span>
-              <h3 className="text-xl font-bold text-foreground mt-2">Share Your Amazing Idea!</h3>
-              <p className="text-foreground/70">Fill out the form below to get your concept featured</p>
+              <div className="inline-block p-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full mb-4">
+                <span className="text-3xl">💡</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">Share Your Amazing Idea!</h3>
+              <p className="text-white/80 text-lg">Fill out this fun form to get valuable feedback from our community</p>
             </div>
             
             <Form {...form}>
@@ -134,11 +136,15 @@ export default function NewsletterForm() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel className="text-white font-semibold">👋 Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your full name" {...field} />
+                          <Input 
+                            placeholder="Your full name" 
+                            {...field} 
+                            className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
+                          />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-300" />
                       </FormItem>
                     )}
                   />
@@ -147,11 +153,16 @@ export default function NewsletterForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-white font-semibold">📧 Email</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="your@email.com" {...field} />
+                          <Input 
+                            type="email" 
+                            placeholder="your@email.com" 
+                            {...field} 
+                            className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
+                          />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-300" />
                       </FormItem>
                     )}
                   />
@@ -162,11 +173,15 @@ export default function NewsletterForm() {
                   name="projectName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Idea Name</FormLabel>
+                      <FormLabel className="text-white font-semibold">🚀 Idea Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your project/concept name" {...field} />
+                        <Input 
+                          placeholder="Your project/concept name" 
+                          {...field} 
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
+                        />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-red-300" />
                     </FormItem>
                   )}
                 />
@@ -176,16 +191,16 @@ export default function NewsletterForm() {
                   name="projectSummary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Concept Summary</FormLabel>
+                      <FormLabel className="text-white font-semibold">📝 Concept Summary</FormLabel>
                       <FormControl>
                         <Textarea
                           rows={4}
                           placeholder="Brief description of your idea and what makes it interesting..."
-                          className="resize-none"
+                          className="resize-none bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-red-300" />
                     </FormItem>
                   )}
                 />
@@ -195,11 +210,15 @@ export default function NewsletterForm() {
                   name="siteUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Landing Page URL</FormLabel>
+                      <FormLabel className="text-white font-semibold">🌐 Landing Page URL</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://your-mockup-page.com" {...field} />
+                        <Input 
+                          placeholder="https://your-mockup-page.com" 
+                          {...field} 
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
+                        />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-red-300" />
                     </FormItem>
                   )}
                 />
@@ -209,10 +228,10 @@ export default function NewsletterForm() {
                   name="platform"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Platform Used</FormLabel>
+                      <FormLabel className="text-white font-semibold">🛠️ Platform Used</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger>
+                          <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-primary">
                             <SelectValue placeholder="Select platform..." />
                           </SelectTrigger>
                         </FormControl>
@@ -223,18 +242,18 @@ export default function NewsletterForm() {
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage />
+                      <FormMessage className="text-red-300" />
                     </FormItem>
                   )}
                 />
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Screenshot (Optional)</label>
-                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-primary-400 transition-colors">
+                  <label className="block text-sm font-medium text-white mb-2">📸 Screenshot (Optional)</label>
+                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-white/20 border-dashed rounded-xl hover:border-primary transition-colors bg-white/5">
                     <div className="space-y-1 text-center">
-                      <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                      <div className="flex text-sm text-gray-600">
-                        <label className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary/80 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary">
+                      <Upload className="mx-auto h-12 w-12 text-white/60" />
+                      <div className="flex text-sm text-white/80">
+                        <label className="relative cursor-pointer bg-primary/20 rounded-md font-medium text-white hover:text-primary hover:bg-primary/30 px-3 py-1 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary">
                           <span>Upload a screenshot</span>
                           <input
                             type="file"
@@ -245,9 +264,9 @@ export default function NewsletterForm() {
                         </label>
                         <p className="pl-1">or drag and drop</p>
                       </div>
-                      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                      <p className="text-xs text-white/50">PNG, JPG, GIF up to 10MB</p>
                       {selectedFile && (
-                        <p className="text-sm text-green-600 font-medium">{selectedFile.name}</p>
+                        <p className="text-sm text-green-300 font-medium">{selectedFile.name}</p>
                       )}
                     </div>
                   </div>
@@ -270,14 +289,14 @@ export default function NewsletterForm() {
             </Form>
 
             <div className="mt-8 text-center">
-              <div className="inline-flex items-center bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl px-6 py-4 border border-primary/20">
-                <span className="text-2xl mr-3">👀</span>
+              <div className="inline-flex items-center bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl px-6 py-4 border border-white/20">
+                <span className="text-2xl mr-3">👥</span>
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-foreground">
-                    We handpick the most interesting ideas every week!
+                  <p className="text-sm font-semibold text-white">
+                    Our community will provide valuable feedback every week!
                   </p>
-                  <p className="text-xs text-foreground/70">
-                    Selected concepts get featured to thousands of curious explorers ✨
+                  <p className="text-xs text-white/70">
+                    Get insights and traction from thousands of curious explorers ✨
                   </p>
                 </div>
               </div>

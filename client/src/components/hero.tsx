@@ -37,24 +37,24 @@ export default function Hero() {
               <div className="flex items-center space-x-2">
                 <div className="flex items-center -space-x-1">
                   <img 
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiNGRkE1MDAiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
                     alt="User"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm object-cover"
                   />
                   <img 
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiM4QjVDRjYiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    src="https://images.unsplash.com/photo-1494790108755-2616c5e1b36e?w=100&h=100&fit=crop&crop=face"
                     alt="User"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm object-cover"
                   />
                   <img 
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiNFRjQ0NDQiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
                     alt="User"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm object-cover"
                   />
                   <img 
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTIiIGZpbGw9IiMxMEI5ODEiLz4KPGNpcmNsZSBjeD0iOSIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxMCIgcj0iMS41IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik04IDE2QzggMTQgMTAgMTMgMTIgMTNDMTQgMTMgMTYgMTQgMTYgMTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg=="
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
                     alt="User"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm object-cover"
                   />
                 </div>
                 <span className="text-lg font-bold text-white">278,355</span>
@@ -64,7 +64,6 @@ export default function Hero() {
           </div>
           
           <div className="inline-block mb-6">
-            <span className="text-4xl animate-bounce-gentle">🎯</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
             <span className="gradient-text">

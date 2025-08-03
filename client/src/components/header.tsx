@@ -63,7 +63,7 @@ export default function Header() {
                 onClick={() => scrollToSection('submit')}
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                ⭐ Get Featured
+                💬 Get Feedback
               </button>
               <a 
                 href="/about"
@@ -106,7 +106,7 @@ export default function Header() {
               onClick={() => scrollToSection('submit')}
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
             >
-              Submit to Newsletter
+              Get Feedback
             </button>
             <a 
               href="/about"
