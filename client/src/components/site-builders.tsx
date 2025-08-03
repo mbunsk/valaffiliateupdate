@@ -184,7 +184,14 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
               </div>
               
               <div className="bg-card/90 p-4 sm:p-6 rounded-xl border-2 border-primary/20 font-mono text-xs sm:text-sm text-foreground shadow-inner backdrop-blur-sm max-h-64 overflow-y-auto">
-                {validationData ? getCustomPrompt() : samplePrompt}
+                {validationData ? (
+                  getCustomPrompt()
+                ) : (
+                  <div className="text-center text-muted-foreground/70 py-8">
+                    <p className="text-sm">Your landing page prompt will appear here</p>
+                    <p className="text-sm">once you validate your startup idea above.</p>
+                  </div>
+                )}
               </div>
             </div>
             
