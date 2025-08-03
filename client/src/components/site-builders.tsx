@@ -133,28 +133,22 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             
 
             
-            <div className="relative rounded-2xl p-1 overflow-hidden">
-              {/* Animated neon border effect - only on border */}
-              <div className="absolute inset-0 rounded-2xl neon-border-glow"></div>
+            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-2 border-accent/20">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
+                <Button
+                  onClick={copyPrompt}
+                  variant="outline"
+                  className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+                  size="sm"
+                >
+                  {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                  {copied ? "🎉 Copied!" : "📋 Copy Prompt"}
+                </Button>
+              </div>
               
-              {/* Content wrapper - restored original styling */}
-              <div className="relative z-10 bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-6 border-0">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
-                  <Button
-                    onClick={copyPrompt}
-                    variant="outline"
-                    className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-                    size="sm"
-                  >
-                    {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-                    {copied ? "🎉 Copied!" : "📋 Copy Prompt"}
-                  </Button>
-                </div>
-              
-                <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
-                  {validationData ? getCustomPrompt() : samplePrompt}
-                </div>
+              <div className="bg-card/90 p-6 rounded-xl border-2 border-primary/20 font-mono text-sm text-foreground shadow-inner backdrop-blur-sm">
+                {validationData ? getCustomPrompt() : samplePrompt}
               </div>
             </div>
             
