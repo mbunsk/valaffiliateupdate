@@ -236,7 +236,7 @@ export default function NewsletterForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="replit">Replit</SelectItem>
+                          <SelectItem value="base44">⭐ Base44 (Recommended)</SelectItem>
                           <SelectItem value="lovable">Lovable</SelectItem>
                           <SelectItem value="bubble">Bubble</SelectItem>
                           <SelectItem value="other">Other</SelectItem>
