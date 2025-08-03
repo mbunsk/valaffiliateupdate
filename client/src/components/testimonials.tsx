@@ -26,10 +26,10 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 bg-gradient-to-br from-secondary/20 via-background to-primary/10 relative">
+    <section className="py-20 bg-gradient-to-br from-secondary/25 via-background to-primary/15 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 text-4xl opacity-10 animate-float">🎉</div>
-        <div className="absolute bottom-10 right-10 text-5xl opacity-10 animate-bounce-gentle">💫</div>
+        <div className="absolute top-10 left-10 text-4xl opacity-20 animate-float">🎉</div>
+        <div className="absolute bottom-10 right-10 text-5xl opacity-20 animate-bounce-gentle">💫</div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

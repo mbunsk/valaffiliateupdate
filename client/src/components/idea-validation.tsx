@@ -70,10 +70,10 @@ export default function IdeaValidation() {
   };
 
   return (
-    <section id="validate" className="py-20 bg-gradient-to-br from-accent/10 to-background relative">
+    <section id="validate" className="py-20 bg-gradient-to-br from-accent/15 to-background relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 right-10 text-6xl opacity-10 animate-float">💡</div>
-        <div className="absolute bottom-10 left-10 text-4xl opacity-10 animate-bounce-gentle">🚀</div>
+        <div className="absolute top-10 right-10 text-6xl opacity-20 animate-float">💡</div>
+        <div className="absolute bottom-10 left-10 text-4xl opacity-20 animate-bounce-gentle">🚀</div>
       </div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">

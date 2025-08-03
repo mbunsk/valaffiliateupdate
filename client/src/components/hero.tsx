@@ -10,7 +10,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-24 pb-20 bg-gradient-to-br from-background via-primary/5 via-accent/10 to-secondary/20 relative overflow-hidden">
+    <section className="pt-24 pb-20 bg-gradient-to-br from-background via-primary/10 via-accent/15 to-secondary/25 relative overflow-hidden">
       {/* Floating decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"></div>
