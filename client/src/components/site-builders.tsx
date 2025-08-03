@@ -79,7 +79,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
     {
       name: "Base44",
       description: "Free builder with powerful features — no credit card needed!",
-      url: "https://base44.com",
+      url: "https://base44.pxf.io/c/4695538/2049275/25619?trafcat=base",
       color: "bg-orange-600 hover:bg-orange-700",
       iconBg: "bg-orange-100",
       iconColor: "text-orange-600",
@@ -88,7 +88,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
     {
       name: "Lovable",
       description: "Beautiful visual editor — start creating instantly for free!",
-      url: "https://lovable.dev",
+      url: "https://lovable.dev/?via=aron",
       color: "bg-pink-600 hover:bg-pink-700",
       iconBg: "bg-pink-100",
       iconColor: "text-pink-600",
@@ -96,7 +96,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
     {
       name: "Bubble",
       description: "Visual programming — build apps without code for free!",
-      url: "https://bubble.io",
+      url: "https://bubble.pxf.io/e1kn1O",
       color: "bg-purple-600 hover:bg-purple-700",
       iconBg: "bg-purple-100",
       iconColor: "text-purple-600",
