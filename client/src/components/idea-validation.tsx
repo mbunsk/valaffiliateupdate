@@ -198,30 +198,70 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                     />
                   </div>
 
-                  {/* Next Steps CTA */}
-                  <Card className="shadow-xl border-2 border-gradient-to-r from-primary to-accent bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10">
-                    <CardContent className="p-6 text-center">
-                      <div className="mb-4">
+                  {/* Landing Page Prompt Section */}
+                  <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10">
+                    <CardContent className="p-8">
+                      <div className="text-center mb-6">
                         <span className="text-4xl">🚀</span>
+                        <h4 className="text-3xl font-black gradient-text mb-3">Ready to Mock It Up?</h4>
+                        <p className="text-foreground/70 mb-6">
+                          Your custom landing page prompt is ready! Copy it and try each builder to see which you like best:
+                        </p>
                       </div>
-                      <h4 className="text-2xl font-bold gradient-text mb-3">Ready to Mock It Up?</h4>
-                      <p className="text-foreground/70 mb-6">
-                        Now that you have Val's insights, create a landing page mockup to share your idea with friends, potential customers, and partners!
-                      </p>
-                      <Button 
-                        onClick={() => {
-                          const element = document.getElementById('build');
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }}
-                        size="lg"
-                        className="px-8 py-3 text-lg font-bold rounded-2xl shadow-xl bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-105"
-                      >
-                        <Zap className="mr-2 w-5 h-5" />
-                        Mock Up For Free
-                        <span className="ml-2">✨</span>
-                      </Button>
+
+                      {/* Landing Page Prompt Box */}
+                      <div className="bg-card/80 border-2 border-primary/20 rounded-xl p-6 mb-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <h5 className="text-lg font-bold text-primary">Your Custom Landing Page Prompt</h5>
+                          <Button
+                            onClick={() => {
+                              const promptText = `I am building ${validationResult.idea}, which helps ${validationResult.targetCustomer} solve ${validationResult.problemSolved} by [describe your unique solution approach based on your UVP insights]. My goal is to validate demand and collect emails from interested ${validationResult.targetCustomer}. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest. Focus on the problem of ${validationResult.problemSolved} and how this solution specifically helps ${validationResult.targetCustomer}.`;
+                              navigator.clipboard.writeText(promptText);
+                              toast({
+                                title: "Copied!",
+                                description: "Landing page prompt copied to clipboard",
+                              });
+                            }}
+                            size="sm"
+                            className="bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                          >
+                            Copy Prompt
+                          </Button>
+                        </div>
+                        <div className="bg-muted/50 rounded-lg p-4 font-mono text-sm leading-relaxed border-l-4 border-primary">
+                          "I am building {validationResult.idea}, which helps {validationResult.targetCustomer} solve {validationResult.problemSolved} by [describe your unique solution approach based on your UVP insights]. My goal is to validate demand and collect emails from interested {validationResult.targetCustomer}. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest. Focus on the problem of {validationResult.problemSolved} and how this solution specifically helps {validationResult.targetCustomer}."
+                        </div>
+                      </div>
+
+                      {/* Site Builder Instructions */}
+                      <div className="text-center">
+                        <p className="text-foreground/70 mb-4">
+                          Try your prompt with each builder to see which creates the best landing page for your idea:
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                          <Button 
+                            onClick={() => window.open('https://validatorai.com/click/?a=bubble', '_blank')}
+                            size="lg"
+                            className="px-6 py-3 text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-2 border-orange-400"
+                          >
+                            Try Bubble
+                          </Button>
+                          <Button 
+                            onClick={() => window.open('https://validatorai.com/click/?a=lovable', '_blank')}
+                            size="lg"
+                            className="px-6 py-3 text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-2 border-purple-400"
+                          >
+                            Try Lovable
+                          </Button>
+                          <Button 
+                            onClick={() => window.open('https://validatorai.com/click/?a=base44', '_blank')}
+                            size="lg"
+                            className="px-6 py-3 text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-2 border-blue-400"
+                          >
+                            Try Base44
+                          </Button>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>

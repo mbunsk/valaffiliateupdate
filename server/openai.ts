@@ -59,14 +59,6 @@ Most scores will fall in the 65-85 range. Only those with a very clear understan
 => Offer one practical suggestion that would make the idea stronger or the user more ready to launch — based on your analysis.
 => Ground it in real time market research using the tools available at your disposal, use your entire knowledge base to analyze the market and competition and find a place the user can succeed by iterating their idea.
 
-<div style="background: linear-gradient(135deg, hsl(280, 100%, 70%, 0.1), hsl(195, 80%, 45%, 0.1)); border: 2px solid hsl(280, 100%, 70%, 0.3); border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0;">
-<strong style="font-size: 1.25rem; color: hsl(280, 100%, 70%);">🚀 Want to keep exploring?</strong><br/>
-Copy and paste this custom prompt into <a target="_blank" href="https://validatorai.com/click/?a=bubble" style="font-weight: bold; color: hsl(280, 100%, 70%); text-decoration: underline;">Bubble</a> to instantly create your landing page:<br/><br/>
-<div style="background: hsl(280, 15%, 12%); padding: 1rem; border-radius: 0.5rem; border-left: 4px solid hsl(280, 100%, 70%); font-family: monospace; font-size: 0.9rem; line-height: 1.5;">
-"I am building ${idea}, which helps ${targetCustomer} solve ${problemSolved} by [describe your unique solution approach based on the UVP insights above]. My goal is to validate demand and collect emails from interested ${targetCustomer}. Please create a landing page that clearly communicates this value proposition, includes a strong call-to-action for email signup, and allows users to express interest. Focus on the problem of ${problemSolved} and how this solution specifically helps ${targetCustomer}."
-</div>
-</div>
-
 <h2>6. Simulation</h2>
 <strong>Customer Interview Simulation.</strong>
 Simulate back and forth 2–3 short conversations with potential customers. Base this customer profile on who you feel the ideal customer is for the user's business idea. What might customers say when this idea is presented to them? Ground it in reality and your knowledge that you have available to you. Goal: Validate demand, uncover objections, and understand customer mindset.
