@@ -47,16 +47,18 @@ export default function Hero() {
           
           <div className="mt-8 flex justify-center space-x-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">3 min</div>
+              <div className="text-2xl font-bold text-primary">30 sec</div>
               <div className="text-sm text-foreground/60">to explore</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-accent">5 min</div>
+              <div className="text-2xl font-bold text-accent">1 min</div>
               <div className="text-sm text-foreground/60">to mock up</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-secondary">∞</div>
-              <div className="text-sm text-foreground/60">possibilities</div>
+              <div className="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl px-4 py-2 shadow-lg border border-white/20">
+                <div className="text-2xl font-bold text-white">∞</div>
+                <div className="text-sm text-white/80">possibilities</div>
+              </div>
             </div>
           </div>
         </div>
