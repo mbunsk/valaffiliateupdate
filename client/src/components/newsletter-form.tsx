@@ -238,7 +238,7 @@ export default function NewsletterForm() {
                         <SelectContent>
                           <SelectItem value="replit">Replit</SelectItem>
                           <SelectItem value="lovable">Lovable</SelectItem>
-                          <SelectItem value="typedream">Typedream</SelectItem>
+                          <SelectItem value="bubble">Bubble</SelectItem>
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>

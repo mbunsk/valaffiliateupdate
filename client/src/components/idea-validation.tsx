@@ -174,30 +174,32 @@ export default function IdeaValidation() {
               </Button>
             </div>
 
-            {validationResult && (
-              <div id="validation-response" className="mt-8 space-y-6 animate-in slide-in-from-bottom-4 duration-600">
-                <div className="text-center mb-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-gentle">
-                    <CheckCircle className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-black gradient-text mb-2">Your AI Analysis is Ready! 🎉</h3>
-                  <p className="text-lg text-foreground/70">Deep insights to help you explore your idea further</p>
-                </div>
-
-                {/* Idea Fit & Alignment */}
-                <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-xl">🔍</span>
-                      </div>
-                      <h4 className="text-xl font-bold gradient-text">1. Idea Fit & Alignment</h4>
+            {validationResult && (() => {
+              const feedback = parseFeedback(validationResult.feedback);
+              return (
+                <div id="validation-response" className="mt-8 space-y-6 animate-in slide-in-from-bottom-4 duration-600">
+                  <div className="text-center mb-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-gentle">
+                      <CheckCircle className="w-10 h-10 text-white" />
                     </div>
-                    <p className="text-foreground/80 leading-relaxed">
-                      {feedback.ideaFitAlignment}
-                    </p>
-                  </CardContent>
-                </Card>
+                    <h3 className="text-3xl font-black gradient-text mb-2">Your AI Analysis is Ready! 🎉</h3>
+                    <p className="text-lg text-foreground/70">Deep insights to help you explore your idea further</p>
+                  </div>
+
+                  {/* Idea Fit & Alignment */}
+                  <Card className="shadow-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-xl">🔍</span>
+                        </div>
+                        <h4 className="text-xl font-bold gradient-text">1. Idea Fit & Alignment</h4>
+                      </div>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {feedback.ideaFitAlignment}
+                      </p>
+                    </CardContent>
+                  </Card>
 
                 {/* Competitor Analysis */}
                 <Card className="shadow-xl border-2 border-accent/30 bg-gradient-to-br from-accent/5 to-accent/10">
@@ -341,8 +343,9 @@ export default function IdeaValidation() {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
-            )}
+                </div>
+              );
+            })()}
           </CardContent>
         </Card>
       </div>

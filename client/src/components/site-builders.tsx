@@ -47,9 +47,9 @@ export default function SiteBuilders() {
       iconColor: "text-pink-600",
     },
     {
-      name: "Typedream",
-      description: "Simple as Notion — mock up pages in minutes for free!",
-      url: "https://typedream.com",
+      name: "Bubble",
+      description: "Visual programming — build apps without code for free!",
+      url: "https://bubble.io",
       color: "bg-purple-600 hover:bg-purple-700",
       iconBg: "bg-purple-100",
       iconColor: "text-purple-600",
