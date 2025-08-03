@@ -85,7 +85,7 @@ export default function IdeaValidation() {
             🎯 Idea Validation Lab
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            What's Your Wild Idea? 🤔
+            What's Your Wild Idea? <span className="text-5xl">🤔</span>
           </h2>
           <p className="text-xl text-foreground/70 leading-relaxed">
             Share any idea and our AI will give you thoughtful feedback, insights, and suggestions to explore it further!
@@ -111,7 +111,7 @@ export default function IdeaValidation() {
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               rows={5}
-              className="text-lg resize-none border-2 border-primary/30 focus:border-primary rounded-xl bg-background/50 backdrop-blur-sm"
+              className="text-lg resize-none border-2 border-primary/30 focus:border-primary rounded-xl bg-input text-foreground placeholder:text-muted-foreground"
               placeholder="e.g., A dating app for plants where people swipe to help their houseplants find compatible roommate plants, with AI-powered care tips and a social community for plant parents... 🌱💚"
             />
             
