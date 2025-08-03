@@ -5,6 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Copy, Check, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import base44Logo from "@assets/base44png_1754234608565.png";
+import bubbleLogo from "@assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png";
+import lovableLogo from "@assets/lovable-icon-bg-light_1754234608566.png";
 
 interface SiteBuildersProps {
   validationData?: {
@@ -179,28 +182,17 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           {builders.map((builder, index) => (
             <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-orange-400 hover:border-orange-500 ring-2 ring-orange-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float`} style={{animationDelay: `${index * 0.2}s`}}>
               <CardContent className="p-8 text-center">
-                <div className={`w-20 h-20 ${builder.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg`} style={{animationDelay: `${index * 0.3}s`}}>
-                  <div className={`w-10 h-10 ${builder.iconColor}`}>
-                    {builder.name === "Base44" && (
-                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                      </svg>
-                    )}
-                    {builder.name === "Lovable" && (
-                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                      </svg>
-                    )}
-                    {builder.name === "Typedream" && (
-                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                        <polyline points="14,2 14,8 20,8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10,9 9,9 8,9"/>
-                      </svg>
-                    )}
-                  </div>
+                <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg" style={{animationDelay: `${index * 0.3}s`}}>
+                  <img 
+                    src={
+                      builder.name === "Base44" ? base44Logo :
+                      builder.name === "Lovable" ? lovableLogo :
+                      builder.name === "Bubble" ? bubbleLogo :
+                      ""
+                    }
+                    alt={`${builder.name} logo`}
+                    className="w-12 h-12 object-contain"
+                  />
                 </div>
                 <h3 className="text-2xl font-black text-foreground mb-3">{builder.name}</h3>
                 <p className="text-foreground/70 mb-6 text-lg">{builder.description}</p>
