@@ -32,7 +32,7 @@ Respond with clean, well-structured HTML that will be beautifully styled. Focus 
 
 <div class="validation-section">
 <h3>Find Your Customers</h3>
-<p>Provide at least 3 specific places to find early customers with detailed examples:</p>
+<p>Here are specific places to find early customers</p>
 <ul>
 <li><strong>Reddit Communities:</strong> List specific subreddits (e.g., r/entrepreneurship, r/startups) relevant to this idea</li>
 <li><strong>Online Groups:</strong> Identify Facebook groups, Discord servers, or LinkedIn communities where target customers spend time</li>

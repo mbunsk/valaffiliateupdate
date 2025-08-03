@@ -159,26 +159,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
               </p>
             </div>
 
-            {/* Quick Win Benefits */}
-            <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-xl p-6 mt-6 border border-green-500/20">
-              <h4 className="text-lg font-bold text-green-600 mb-3 flex items-center justify-center gap-2">
-                ⚡ Why Mockup Your Idea Now for Free?
-              </h4>
-              <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <div className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  <span>Share with friends, partners and customers for feedback</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-blue-500">✓</span>
-                  <span>Test your message before investing time & money</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-purple-500">✓</span>
-                  <span>Collect emails from interested people immediately</span>
-                </div>
-              </div>
-            </div>
+
           </CardContent>
         </Card>
 
