@@ -20,10 +20,12 @@ export default function Header() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary via-accent to-secondary rounded-xl flex items-center justify-center animate-float shadow-lg">
-                  <CheckCircle className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-black gradient-text">ValidatorAI</span>
+                <img 
+                  src="/attached_assets/Validator AI Icon_1754233923589.png" 
+                  alt="ValidatorAI Logo" 
+                  className="w-12 h-12"
+                />
+                <span className="text-2xl font-black text-white">ValidatorAI</span>
               </div>
             </div>
           </div>
