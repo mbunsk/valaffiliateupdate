@@ -20,7 +20,7 @@ export default function Footer() {
               <span className="text-2xl font-black text-white">ValidatorAI</span>
             </div>
             <p className="text-white/80 mb-8 max-w-md text-lg leading-relaxed">
-              Since 2022, we've been helping startup founders validate and explore their ideas. Some of our members are seasoned founders, some are corporate workers exploring ideas and some are just idea-curious. We're glad you're here. Follow along on socials below 👇
+              Since 2022, we've helped several hundred thousand startup founders explore and validate their ideas. Some of our members are seasoned founders, some are corporate workers exploring ideas and some are just idea-curious. We're glad you're here. Follow along on socials below 👇
             </p>
             <div className="flex space-x-6">
               <a href="https://x.com/validatoraiapp" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-all duration-300 transform hover:scale-110">
