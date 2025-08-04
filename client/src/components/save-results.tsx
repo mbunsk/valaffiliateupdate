@@ -59,77 +59,67 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         .replace(/\s{2,}/g, ' ')
         .trim();
 
-      // Parse feedback into sections - much more aggressive section detection
+      // Simple approach - split feedback into organized sections by detecting headers
       const feedbackSections = [];
       
-      // Split by common section patterns
-      const sectionPatterns = [
-        /Overall Fit Score[:\s]/i,
-        /What Makes This Special[:\s]/i,
-        /Market Reality Check[:\s]/i,
-        /Find Your Customers[:\s]/i,
-        /Next Steps[:\s]/i,
-        /Customer Reality Simulation[:\s]/i,
-        /Revenue Potential[:\s&]/i,
-        /Business Model[:\s]/i,
-        /Launch Timeline[:\s]/i,
-        /Risk Assessment[:\s]/i,
-        /Success Metrics[:\s]/i,
-        /One Suggestion[:\s]/i,
-        /Customer #\d+[:\s]/i,
-        /Market Analysis[:\s]/i,
-        /Pricing Strategy[:\s]/i,
-        /Revenue Projections[:\s]/i,
-        /Key Milestones[:\s]/i
-      ];
+      // Split by double newlines first to separate major sections  
+      const majorSections = cleanFeedback.split(/\n\n+/);
       
-      // Split the text into chunks based on these patterns
-      let remainingText = cleanFeedback;
+      let currentSection = { title: "", content: "" };
       
-      for (const pattern of sectionPatterns) {
-        const matches = Array.from(remainingText.matchAll(new RegExp(pattern.source, 'gi')));
+      for (const section of majorSections) {
+        const lines = section.trim().split('\n');
+        if (lines.length === 0) continue;
         
-        for (const match of matches) {
-          const startIndex = match.index!;
-          const sectionTitle = match[0].replace(/[:\s]+$/, '').trim();
-          
-          // Find the end of this section (next section or end of text)
-          let endIndex = remainingText.length;
-          for (const otherPattern of sectionPatterns) {
-            const nextMatch = remainingText.search(new RegExp(otherPattern.source, 'gi'));
-            if (nextMatch > startIndex && nextMatch < endIndex) {
-              endIndex = nextMatch;
-            }
+        const firstLine = lines[0].trim();
+        
+        // Check if first line looks like a header (short line, contains key words, no periods at end)
+        const isHeader = firstLine.length < 100 && 
+                        !firstLine.endsWith('.') && 
+                        (firstLine.includes('Score') || firstLine.includes('Special') || 
+                         firstLine.includes('Market') || firstLine.includes('Customer') || 
+                         firstLine.includes('Steps') || firstLine.includes('Revenue') || 
+                         firstLine.includes('Timeline') || firstLine.includes('Risk') || 
+                         firstLine.includes('Success') || firstLine.includes('Suggestion') ||
+                         firstLine.includes('Simulation') || firstLine.includes('Analysis') ||
+                         firstLine.match(/^(Overall|What|Find|Next|Launch|One|Business)/));
+        
+        if (isHeader) {
+          // Save previous section if it has content
+          if (currentSection.title && currentSection.content.trim()) {
+            feedbackSections.push(currentSection);
           }
           
-          const sectionContent = remainingText.substring(startIndex, endIndex).trim();
-          
-          if (sectionContent.length > sectionTitle.length + 10) { // Ensure there's actual content
-            feedbackSections.push({
-              title: sectionTitle,
-              content: sectionContent.replace(new RegExp(pattern.source, 'i'), '').trim()
-            });
+          // Start new section
+          currentSection = {
+            title: firstLine,
+            content: lines.slice(1).join('\n').trim()
+          };
+        } else {
+          // Add to current section
+          if (currentSection.title) {
+            currentSection.content += '\n\n' + section;
+          } else {
+            // First section without clear header
+            currentSection = {
+              title: "Analysis Overview",
+              content: section
+            };
           }
         }
       }
       
-      // If no sections found, create manual sections by splitting on common delimiters
+      // Add the last section
+      if (currentSection.title && currentSection.content.trim()) {
+        feedbackSections.push(currentSection);
+      }
+      
+      // If no sections were found, create them from the full text
       if (feedbackSections.length === 0) {
-        const manualSections = cleanFeedback.split(/(?=\b(?:Overall|What|Market|Find|Next|Customer|Revenue|Business|Launch|Risk|Success|One)\b)/i);
-        
-        for (let i = 0; i < manualSections.length; i++) {
-          const section = manualSections[i].trim();
-          if (section.length > 50) { // Only include substantial sections
-            const lines = section.split('\n');
-            const title = lines[0].length < 100 ? lines[0] : `Analysis Part ${i + 1}`;
-            const content = lines.slice(1).join('\n').trim();
-            
-            feedbackSections.push({
-              title: title,
-              content: content || section
-            });
-          }
-        }
+        feedbackSections.push({
+          title: "Val's Complete Analysis",
+          content: cleanFeedback
+        });
       }
       
       // Create PDF

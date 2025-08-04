@@ -109,41 +109,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     try {
       
-      // Use AI to refine and rewrite the idea in better language
+      // Create a 2-sentence summary instead of refining individual inputs
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini", // Using gpt-4o-mini for faster response times
         messages: [
           {
             role: "system",
-            content: "You are a professional copywriter who helps entrepreneurs create clear, compelling descriptions of their startup ideas. You MUST rewrite and polish the user's input into professional, marketable language suitable for landing pages. DO NOT copy the user's exact words - transform them into polished, professional copy."
+            content: "You are a professional copywriter who creates compelling startup summaries. Write a clear, professional 2-sentence summary that captures what they're building and why it matters."
           },
           {
             role: "user", 
-            content: `You must completely rewrite and polish this startup idea. Transform the user's rough input into professional, marketable copy for landing pages. DO NOT use any of the user's exact phrases or wording.
+            content: `Create a professional 2-sentence summary of this startup idea:
 
-Original rough input:
-- Idea: ${idea}
-- Customer: ${targetCustomer}  
-- Problem: ${problemSolved}
+Idea: ${idea}
+Target Customer: ${targetCustomer}  
+Problem Solved: ${problemSolved}
 
-REQUIREMENTS:
-1. Completely rewrite each element in polished, professional language
-2. Use better vocabulary and marketing terminology  
-3. Make it sound compelling and professional
-4. Keep the core meaning but improve the presentation
-5. DO NOT copy any of the user's exact words or phrases
+Write it like an elevator pitch - explain what they're launching and why customers will want it. Make it sound professional and exciting.
 
 Return ONLY a JSON object:
 {
-  "refinedIdea": "completely rewritten professional version with better language and marketing appeal",
-  "refinedCustomer": "completely rewritten target audience description using professional terminology", 
-  "refinedProblem": "completely rewritten problem statement with compelling, professional language"
+  "summary": "A compelling 2-sentence summary of the startup idea"
 }`
           }
         ],
         response_format: { type: "json_object" },
         temperature: 0.3,
-        max_tokens: 500
+        max_tokens: 300
       });
 
       const content = response.choices[0].message.content;
@@ -153,15 +145,17 @@ Return ONLY a JSON object:
       
       console.log("Raw AI response:", content);
       
-      const refined = JSON.parse(content);
-      console.log("Parsed refined content:", refined);
+      const result = JSON.parse(content);
+      console.log("Parsed summary result:", result);
       
-      // Validate that we got proper refinements
-      if (!refined.refinedIdea || !refined.refinedCustomer || !refined.refinedProblem) {
-        throw new Error("AI did not provide complete refinements");
+      // Validate that we got a proper summary
+      if (!result.summary) {
+        throw new Error("AI did not provide a summary");
       }
       
-      const prompt = `Create a landing page for "${refined.refinedIdea}" which helps ${refined.refinedCustomer} solve this problem: ${refined.refinedProblem}. The target customer is ${refined.refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      const prompt = `${result.summary}
+
+Create a landing page for this startup. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
       
       console.log("Final generated prompt:", prompt);
       
