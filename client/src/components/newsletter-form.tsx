@@ -140,7 +140,7 @@ export default function NewsletterForm() {
                         <FormLabel className="text-white font-semibold">👋 Name</FormLabel>
                         <FormControl>
                           <Input 
-                            placeholder="Your full name" 
+                            placeholder="Your name" 
                             {...field} 
                             className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-primary focus:bg-white/15"
                           />
