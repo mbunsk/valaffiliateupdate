@@ -74,33 +74,15 @@ export default function NewsletterSignup() {
             Join 200,000+ Entrepreneurs! <span className="emoji">📬</span>
           </h2>
           
-          <p className="text-xl text-foreground/70 mb-4 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground/70 mb-8 max-w-3xl mx-auto">
             Get exclusive startup insights, featured projects, and validation tips delivered weekly. 
-            Be part of the most exciting entrepreneurial community!
+            Be part of the largest group of idea-explorers on the Internet!
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-6 mb-8">
-            <div className="flex items-center space-x-2 text-foreground/60">
-              <Users className="w-5 h-5 text-primary" />
-              <span className="font-medium">200,000+ Members</span>
-            </div>
-            <div className="flex items-center space-x-2 text-foreground/60">
-              <TrendingUp className="w-5 h-5 text-accent" />
-              <span className="font-medium">Weekly Insights</span>
-            </div>
-            <div className="flex items-center space-x-2 text-foreground/60">
-              <span className="text-lg">🎯</span>
-              <span className="font-medium">Featured Projects</span>
-            </div>
-          </div>
         </div>
 
         <Card className="shadow-2xl border-2 border-primary/30 bg-gradient-to-br from-card/90 to-primary/5 backdrop-blur-sm animate-pulse-slow max-w-2xl mx-auto">
           <CardContent className="p-8">
             <div className="text-center mb-6">
-              <div className="inline-block p-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full mb-4">
-                <Mail className="w-8 h-8 text-primary" />
-              </div>
               <h3 className="text-2xl font-bold text-foreground mb-2">Stay In The Loop!</h3>
               <p className="text-foreground/70 text-lg">Join thousands of entrepreneurs getting weekly startup insights</p>
             </div>
