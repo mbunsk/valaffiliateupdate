@@ -183,7 +183,7 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
               >
                 {validateMutation.isPending && <Loader2 className="mr-3 h-6 w-6 animate-spin" />}
                 <span className="mr-2">🔬</span>
-                {validateMutation.isPending ? "AI Analysis Coming in 30 Seconds" : "Get AI Feedback!"}
+                {validateMutation.isPending ? "AI analysis coming in 30 seconds..." : "Get AI Feedback!"}
                 {!validateMutation.isPending && <span className="ml-2">✨</span>}
               </Button>
             </div>

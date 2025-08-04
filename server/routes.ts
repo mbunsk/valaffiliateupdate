@@ -115,21 +115,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         messages: [
           {
             role: "system",
-            content: "You are a professional copywriter who helps entrepreneurs create clear, compelling descriptions of their startup ideas. Rewrite startup concepts in professional, clear language that would work well for landing page prompts. Make the language more polished and marketable while keeping the core concept intact."
+            content: "You are a professional copywriter who helps entrepreneurs create clear, compelling descriptions of their startup ideas. You MUST rewrite and polish the user's input into professional, marketable language suitable for landing pages. DO NOT copy the user's exact words - transform them into polished, professional copy."
           },
           {
             role: "user", 
-            content: `Please rewrite this startup idea in clear, professional language:
+            content: `Please completely rewrite this startup idea in clear, professional language. Transform the user's rough input into polished, marketable copy:
 
 Original idea: ${idea}
 Target customer: ${targetCustomer}  
 Problem it solves: ${problemSolved}
 
-Rewrite each part to be more clear and marketable. Return ONLY a JSON object with these exact keys:
+IMPORTANT: You must rewrite and polish each element in better language - DO NOT copy the user's exact words. Make them more professional and compelling while keeping the core meaning. Return ONLY a JSON object with these exact keys:
 {
-  "refinedIdea": "the polished version of the idea",
-  "refinedCustomer": "the refined target customer description", 
-  "refinedProblem": "the refined problem description"
+  "refinedIdea": "professionally rewritten and polished version of the idea with better language",
+  "refinedCustomer": "professionally rewritten and refined target customer description with better language", 
+  "refinedProblem": "professionally rewritten and refined problem description with better language"
 }`
           }
         ],

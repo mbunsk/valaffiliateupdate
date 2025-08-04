@@ -89,32 +89,43 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         { title: "VAL'S ANALYSIS", content: cleanFeedback }
       ];
 
-      sections.forEach((section) => {
+      sections.forEach((section, index) => {
         // Check if we need a new page
-        if (yPosition > pageHeight - 40) {
+        if (yPosition > pageHeight - 60) {
           doc.addPage();
           yPosition = margin;
         }
 
-        // Section title
-        doc.setFontSize(14);
+        // Add separator line (except for first section)
+        if (index > 0) {
+          doc.setLineWidth(0.5);
+          doc.line(margin, yPosition - 5, pageWidth - margin, yPosition - 5);
+          yPosition += 5;
+        }
+
+        // Section title with background box
+        doc.setFillColor(240, 240, 240);
+        doc.rect(margin, yPosition - 5, pageWidth - 2 * margin, 12, 'F');
+        doc.setFontSize(12);
         doc.setFont("helvetica", "bold");
-        doc.text(section.title, margin, yPosition);
-        yPosition += lineHeight * 1.5;
+        doc.setTextColor(50, 50, 50);
+        doc.text(section.title, margin + 5, yPosition + 3);
+        yPosition += lineHeight * 2.5;
 
         // Section content
+        doc.setTextColor(0, 0, 0);
         doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
-        const splitText = doc.splitTextToSize(section.content, pageWidth - 2 * margin);
+        const splitText = doc.splitTextToSize(section.content, pageWidth - 2 * margin - 10);
         splitText.forEach((line: string) => {
-          if (yPosition > pageHeight - 20) {
+          if (yPosition > pageHeight - 25) {
             doc.addPage();
             yPosition = margin;
           }
-          doc.text(line, margin, yPosition);
+          doc.text(line, margin + 5, yPosition);
           yPosition += lineHeight;
         });
-        yPosition += lineHeight;
+        yPosition += lineHeight * 2;
       });
 
       // Footer
