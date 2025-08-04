@@ -59,46 +59,77 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         .replace(/\s{2,}/g, ' ')
         .trim();
 
-      // Parse feedback into sections based on keywords
+      // Parse feedback into sections - much more aggressive section detection
       const feedbackSections = [];
-      const sectionKeywords = [
-        'Overall Fit Score', 'What Makes This Special', 'Market Reality Check', 
-        'Find Your Customers', 'Next Steps', 'Customer Reality Simulation',
-        'Revenue Potential', 'Business Model', 'Launch Timeline', 'Risk Assessment',
-        'Success Metrics', 'One Suggestion'
+      
+      // Split by common section patterns
+      const sectionPatterns = [
+        /Overall Fit Score[:\s]/i,
+        /What Makes This Special[:\s]/i,
+        /Market Reality Check[:\s]/i,
+        /Find Your Customers[:\s]/i,
+        /Next Steps[:\s]/i,
+        /Customer Reality Simulation[:\s]/i,
+        /Revenue Potential[:\s&]/i,
+        /Business Model[:\s]/i,
+        /Launch Timeline[:\s]/i,
+        /Risk Assessment[:\s]/i,
+        /Success Metrics[:\s]/i,
+        /One Suggestion[:\s]/i,
+        /Customer #\d+[:\s]/i,
+        /Market Analysis[:\s]/i,
+        /Pricing Strategy[:\s]/i,
+        /Revenue Projections[:\s]/i,
+        /Key Milestones[:\s]/i
       ];
       
-      let currentSection = { title: "Overall Analysis", content: "" };
-      const lines = cleanFeedback.split('\n');
+      // Split the text into chunks based on these patterns
+      let remainingText = cleanFeedback;
       
-      for (const line of lines) {
-        const trimmedLine = line.trim();
-        if (trimmedLine) {
-          // Check if this line starts a new section
-          const foundSection = sectionKeywords.find(keyword => 
-            trimmedLine.toLowerCase().includes(keyword.toLowerCase())
-          );
+      for (const pattern of sectionPatterns) {
+        const matches = Array.from(remainingText.matchAll(new RegExp(pattern.source, 'gi')));
+        
+        for (const match of matches) {
+          const startIndex = match.index!;
+          const sectionTitle = match[0].replace(/[:\s]+$/, '').trim();
           
-          if (foundSection && trimmedLine.includes(':')) {
-            // Save previous section if it has content
-            if (currentSection.content.trim()) {
-              feedbackSections.push(currentSection);
+          // Find the end of this section (next section or end of text)
+          let endIndex = remainingText.length;
+          for (const otherPattern of sectionPatterns) {
+            const nextMatch = remainingText.search(new RegExp(otherPattern.source, 'gi'));
+            if (nextMatch > startIndex && nextMatch < endIndex) {
+              endIndex = nextMatch;
             }
-            // Start new section
-            currentSection = {
-              title: foundSection,
-              content: trimmedLine.replace(/\*\*/g, '') + '\n'
-            };
-          } else {
-            // Add to current section
-            currentSection.content += line + '\n';
+          }
+          
+          const sectionContent = remainingText.substring(startIndex, endIndex).trim();
+          
+          if (sectionContent.length > sectionTitle.length + 10) { // Ensure there's actual content
+            feedbackSections.push({
+              title: sectionTitle,
+              content: sectionContent.replace(new RegExp(pattern.source, 'i'), '').trim()
+            });
           }
         }
       }
       
-      // Add the last section
-      if (currentSection.content.trim()) {
-        feedbackSections.push(currentSection);
+      // If no sections found, create manual sections by splitting on common delimiters
+      if (feedbackSections.length === 0) {
+        const manualSections = cleanFeedback.split(/(?=\b(?:Overall|What|Market|Find|Next|Customer|Revenue|Business|Launch|Risk|Success|One)\b)/i);
+        
+        for (let i = 0; i < manualSections.length; i++) {
+          const section = manualSections[i].trim();
+          if (section.length > 50) { // Only include substantial sections
+            const lines = section.split('\n');
+            const title = lines[0].length < 100 ? lines[0] : `Analysis Part ${i + 1}`;
+            const content = lines.slice(1).join('\n').trim();
+            
+            feedbackSections.push({
+              title: title,
+              content: content || section
+            });
+          }
+        }
       }
       
       // Create PDF
