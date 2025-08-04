@@ -34,7 +34,7 @@ export default function Hero() {
                     />
                   </div>
                   {/* Online status indicator */}
-                  <div className="absolute top-0 left-0 w-2 h-2 bg-green-500 rounded-full border border-white shadow-lg animate-pulse z-20"></div>
+                  <div className="absolute top-0 left-0 w-3 h-3 bg-green-500 rounded-full border border-white shadow-lg animate-pulse z-20"></div>
                 </div>
                 
                 {/* Thought Bubble */}
