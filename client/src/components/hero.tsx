@@ -25,14 +25,16 @@ export default function Hero() {
             <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8 xl:space-x-16">
               {/* Val's Quote Section */}
               <div className="flex items-center space-x-4 relative">
-                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0 relative">
-                  <img 
-                    src="/attached_assets/AIValFull_1754243498167.jpg" 
-                    alt="Val - Your AI Mentor" 
-                    className="w-full h-full object-cover"
-                  />
+                <div className="relative">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
+                    <img 
+                      src="/attached_assets/AIValFull_1754243498167.jpg" 
+                      alt="Val - Your AI Mentor" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   {/* Online status indicator */}
-                  <div className="absolute -top-1 -left-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-lg animate-ping z-10"></div>
+                  <div className="absolute top-0 left-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-ping z-20"></div>
                 </div>
                 
                 {/* Thought Bubble */}
