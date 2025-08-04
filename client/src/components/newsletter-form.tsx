@@ -281,10 +281,12 @@ export default function NewsletterForm() {
 
             <div className="mt-8 text-center">
               <div className="inline-flex items-center bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl px-6 py-4 border border-white/20">
-                <span className="text-2xl mr-3">👥</span>
+                <div className="text-2xl mr-3 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent filter drop-shadow-sm">
+                  👥
+                </div>
                 <div className="text-left">
                   <p className="text-sm font-semibold text-white">
-                    Our community will provide valuable feedback every week!
+                    We'll try to share your post in our widely read startup newsletter.
                   </p>
                   <p className="text-xs text-white/70">
                     Get insights and traction from thousands of curious explorers ✨
