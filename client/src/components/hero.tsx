@@ -32,7 +32,7 @@ export default function Hero() {
                     className="w-full h-full object-cover"
                   />
                   {/* Online status indicator */}
-                  <div className="absolute -top-1 -left-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                  <div className="absolute -top-1 -left-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-ping"></div>
                 </div>
                 
                 {/* Thought Bubble */}
