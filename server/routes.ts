@@ -151,21 +151,31 @@ Return ONLY a JSON object:
         throw new Error("No content received from AI");
       }
       
-      const refined = JSON.parse(content);
+      console.log("Raw AI response:", content);
       
-      const prompt = `Create a landing page for "${refined.refinedIdea}" which helps ${refined.refinedCustomer} ${refined.refinedProblem}. The target customer is ${refined.refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      const refined = JSON.parse(content);
+      console.log("Parsed refined content:", refined);
+      
+      // Validate that we got proper refinements
+      if (!refined.refinedIdea || !refined.refinedCustomer || !refined.refinedProblem) {
+        throw new Error("AI did not provide complete refinements");
+      }
+      
+      const prompt = `Create a landing page for "${refined.refinedIdea}" which helps ${refined.refinedCustomer} solve this problem: ${refined.refinedProblem}. The target customer is ${refined.refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
+      
+      console.log("Final generated prompt:", prompt);
       
       res.json({ prompt });
     } catch (error) {
       console.error("Error generating prompt:", error);
-      // Fallback to simple refinement if AI fails
-      const refinedIdea = `${idea.charAt(0).toUpperCase()}${idea.slice(1).toLowerCase()}`;
-      const refinedCustomer = targetCustomer.toLowerCase();
-      const refinedProblem = problemSolved.toLowerCase();
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       
-      const fallbackPrompt = `Create a landing page for "${refinedIdea}" which helps ${refinedCustomer} ${refinedProblem}. The target customer is ${refinedCustomer}. The goal of the site is to highlight our new venture and to collect emails of interested early users. Include a hero section, key features, and an email signup form for early users. Use modern colors and great stock images, as this is going to be perfect for validating demand and collecting interested prospects.`;
-      
-      res.json({ prompt: fallbackPrompt });
+      // Log the exact error so we can debug why AI refinement is failing
+      res.status(500).json({ 
+        message: "Failed to generate refined prompt", 
+        error: errorMessage,
+        details: "AI refinement failed - check server logs"
+      });
     }
   });
 

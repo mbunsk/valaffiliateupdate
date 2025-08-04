@@ -21,7 +21,7 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
   const generatePDF = async () => {
     setGenerating(true);
     try {
-      // Create a clean text version of the feedback - thorough HTML cleaning
+      // Create a clean text version of the feedback with proper sections
       let cleanFeedback = validationData.feedback
         // Remove code blocks and markdown artifacts first
         .replace(/```html/gi, '')
@@ -30,18 +30,18 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         // Replace HTML elements with proper spacing
         .replace(/<div[^>]*>/gi, '\n\n')
         .replace(/<\/div>/gi, '')
-        .replace(/<h3[^>]*>/gi, '\n\n')
-        .replace(/<\/h3>/gi, ': ')
-        .replace(/<h4[^>]*>/gi, '\n\n')
-        .replace(/<\/h4>/gi, ': ')
+        .replace(/<h3[^>]*>/gi, '\n\n**')
+        .replace(/<\/h3>/gi, '**\n')
+        .replace(/<h4[^>]*>/gi, '\n\n**')
+        .replace(/<\/h4>/gi, '**\n')
         .replace(/<p[^>]*>/gi, '\n')
         .replace(/<\/p>/gi, '')
         .replace(/<ul[^>]*>/gi, '\n')
         .replace(/<\/ul>/gi, '')
         .replace(/<li[^>]*>/gi, '\n• ')
         .replace(/<\/li>/gi, '')
-        .replace(/<strong[^>]*>/gi, '')
-        .replace(/<\/strong>/gi, '')
+        .replace(/<strong[^>]*>/gi, '**')
+        .replace(/<\/strong>/gi, '**')
         .replace(/<em[^>]*>/gi, '')
         .replace(/<\/em>/gi, '')
         // Remove any remaining HTML tags
@@ -58,6 +58,48 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
         .replace(/\n{3,}/g, '\n\n')
         .replace(/\s{2,}/g, ' ')
         .trim();
+
+      // Parse feedback into sections based on keywords
+      const feedbackSections = [];
+      const sectionKeywords = [
+        'Overall Fit Score', 'What Makes This Special', 'Market Reality Check', 
+        'Find Your Customers', 'Next Steps', 'Customer Reality Simulation',
+        'Revenue Potential', 'Business Model', 'Launch Timeline', 'Risk Assessment',
+        'Success Metrics', 'One Suggestion'
+      ];
+      
+      let currentSection = { title: "Overall Analysis", content: "" };
+      const lines = cleanFeedback.split('\n');
+      
+      for (const line of lines) {
+        const trimmedLine = line.trim();
+        if (trimmedLine) {
+          // Check if this line starts a new section
+          const foundSection = sectionKeywords.find(keyword => 
+            trimmedLine.toLowerCase().includes(keyword.toLowerCase())
+          );
+          
+          if (foundSection && trimmedLine.includes(':')) {
+            // Save previous section if it has content
+            if (currentSection.content.trim()) {
+              feedbackSections.push(currentSection);
+            }
+            // Start new section
+            currentSection = {
+              title: foundSection,
+              content: trimmedLine.replace(/\*\*/g, '') + '\n'
+            };
+          } else {
+            // Add to current section
+            currentSection.content += line + '\n';
+          }
+        }
+      }
+      
+      // Add the last section
+      if (currentSection.content.trim()) {
+        feedbackSections.push(currentSection);
+      }
       
       // Create PDF
       const doc = new jsPDF();
@@ -81,12 +123,15 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
       doc.text(`Date: ${new Date().toLocaleDateString()}`, pageWidth / 2, yPosition, { align: "center" });
       yPosition += lineHeight * 3;
 
-      // Content sections
+      // Content sections - include individual feedback sections
       const sections = [
         { title: "IDEA", content: validationData.idea },
         { title: "TARGET CUSTOMER", content: validationData.targetCustomer },
         { title: "PROBLEM SOLVED", content: validationData.problemSolved },
-        { title: "VAL'S ANALYSIS", content: cleanFeedback }
+        ...feedbackSections.map(section => ({
+          title: `VAL'S ANALYSIS: ${section.title.toUpperCase()}`,
+          content: section.content.trim()
+        }))
       ];
 
       sections.forEach((section, index) => {
