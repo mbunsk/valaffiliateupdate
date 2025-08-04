@@ -119,17 +119,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
           },
           {
             role: "user", 
-            content: `Please completely rewrite this startup idea in clear, professional language. Transform the user's rough input into polished, marketable copy:
+            content: `You must completely rewrite and polish this startup idea. Transform the user's rough input into professional, marketable copy for landing pages. DO NOT use any of the user's exact phrases or wording.
 
-Original idea: ${idea}
-Target customer: ${targetCustomer}  
-Problem it solves: ${problemSolved}
+Original rough input:
+- Idea: ${idea}
+- Customer: ${targetCustomer}  
+- Problem: ${problemSolved}
 
-IMPORTANT: You must rewrite and polish each element in better language - DO NOT copy the user's exact words. Make them more professional and compelling while keeping the core meaning. Return ONLY a JSON object with these exact keys:
+REQUIREMENTS:
+1. Completely rewrite each element in polished, professional language
+2. Use better vocabulary and marketing terminology  
+3. Make it sound compelling and professional
+4. Keep the core meaning but improve the presentation
+5. DO NOT copy any of the user's exact words or phrases
+
+Return ONLY a JSON object:
 {
-  "refinedIdea": "professionally rewritten and polished version of the idea with better language",
-  "refinedCustomer": "professionally rewritten and refined target customer description with better language", 
-  "refinedProblem": "professionally rewritten and refined problem description with better language"
+  "refinedIdea": "completely rewritten professional version with better language and marketing appeal",
+  "refinedCustomer": "completely rewritten target audience description using professional terminology", 
+  "refinedProblem": "completely rewritten problem statement with compelling, professional language"
 }`
           }
         ],
