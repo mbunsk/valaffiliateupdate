@@ -5,6 +5,7 @@ import IdeaValidation from "@/components/idea-validation";
 import SiteBuilders from "@/components/site-builders";
 import NewsletterForm from "@/components/newsletter-form";
 import Testimonials from "@/components/testimonials";
+import NewsletterSignup from "@/components/newsletter-signup";
 import Footer from "@/components/footer";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <SiteBuilders validationData={validationData} />
       <NewsletterForm />
       <Testimonials />
+      <NewsletterSignup />
       <Footer />
     </div>
   );
