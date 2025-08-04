@@ -20,7 +20,6 @@ export const submissions = pgTable("submissions", {
   projectName: text("project_name").notNull(),
   projectSummary: text("project_summary").notNull(),
   siteUrl: text("site_url").notNull(),
-  platform: text("platform").notNull(),
   whatDoYouNeed: text("what_do_you_need").notNull().default(""),
   screenshotPath: text("screenshot_path"),
   createdAt: timestamp("created_at").defaultNow(),

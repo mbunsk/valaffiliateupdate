@@ -20,7 +20,6 @@ const formSchema = z.object({
   projectName: z.string().min(1, "Project name is required"),
   projectSummary: z.string().min(10, "Project summary must be at least 10 characters"),
   siteUrl: z.string().url("Invalid URL"),
-  platform: z.string().min(1, "Please select a platform"),
   whatDoYouNeed: z.string().min(1, "Please tell us what you need"),
 });
 
@@ -38,7 +37,6 @@ export default function NewsletterForm() {
       projectName: "",
       projectSummary: "",
       siteUrl: "",
-      platform: "",
       whatDoYouNeed: "",
     },
   });
@@ -240,29 +238,7 @@ export default function NewsletterForm() {
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="platform"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white font-semibold">🛠️ Platform Used</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-primary">
-                            <SelectValue placeholder="Select platform..." />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="base44">Base44</SelectItem>
-                          <SelectItem value="lovable">Lovable</SelectItem>
-                          <SelectItem value="bubble">Bubble</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="text-red-300" />
-                    </FormItem>
-                  )}
-                />
+
 
                 <FormField
                   control={form.control}

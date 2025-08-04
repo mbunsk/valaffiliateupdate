@@ -83,7 +83,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         projectName: req.body.projectName,
         projectSummary: req.body.projectSummary,
         siteUrl: req.body.siteUrl,
-        platform: req.body.platform,
         whatDoYouNeed: req.body.whatDoYouNeed,
         screenshotPath: req.file?.path || null,
       };
