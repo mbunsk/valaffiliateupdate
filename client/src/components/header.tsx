@@ -97,12 +97,6 @@ export default function Header() {
               >
                 🎮 Reality Check
               </button>
-              <button 
-                onClick={() => scrollToSection('submit')}
-                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
-              >
-                💬 Get Feedback
-              </button>
               <a 
                 href="/about"
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
