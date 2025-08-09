@@ -127,7 +127,7 @@ export default function Hero() {
               <div className="text-sm text-foreground/60">to mock up</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-500">5 min</div>
+              <div className="text-2xl font-bold text-pink-500">2 min</div>
               <div className="text-sm text-foreground/60">startup simulation</div>
             </div>
           </div>
