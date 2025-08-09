@@ -261,7 +261,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     try {
       const apiResponse = await apiRequest("POST", "/api/challenge-feedback", {
         month,
-        challenge: simulationData[month - 1]?.challenges[0],
+        challenge: simulationData[month - 1]?.challenge || simulationData[month - 1]?.challenges?.[0],
         response,
         validationData,
         simulationData: simulationData[month - 1]

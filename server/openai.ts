@@ -563,16 +563,21 @@ Base revenue calculations on:
 
 Make this feel like a real startup journey with ups and downs, not just linear growth.
 
-Return JSON array with 6 months of data:
+Return JSON with "simulation" array containing exactly 6 months:
 {
-  "month": number,
-  "title": string,
-  "challenge": string (ONE main interactive challenge for this month),
-  "challenges": array of strings (other general challenges),
-  "wins": array of strings, 
-  "revenue": number (realistic monthly revenue),
-  "users": number,
-  "keyDecisions": array of strings
+  "simulation": [
+    {
+      "month": number,
+      "title": string,
+      "challenge": string (ONE main interactive challenge for this month),
+      "challenges": array of strings (other general challenges),
+      "wins": array of strings, 
+      "revenue": number (realistic monthly revenue),
+      "users": number,
+      "keyDecisions": array of strings
+    }
+    // ... repeat for months 1-6
+  ]
 }`
         },
         {
@@ -594,7 +599,9 @@ Customer ${i+1} Insights:
 
 ${landingPageContent ? `**Landing Page Context:**\n${landingPageContent.substring(0, 800)}...` : ''}
 
-Create a realistic simulation with authentic challenges and revenue projections based on the customer price feedback.`
+Create a realistic simulation with authentic challenges and revenue projections based on the customer price feedback.
+
+IMPORTANT: Return exactly 6 months of data in the "simulation" array. Each month should have progressive growth and different challenges.`
         }
       ],
       response_format: { type: "json_object" },
@@ -606,18 +613,68 @@ Create a realistic simulation with authentic challenges and revenue projections 
     return result.simulation || result;
   } catch (error) {
     console.error("OpenAI startup simulation error:", error);
-    // Fallback with realistic data structure
+    // Fallback with complete 6-month data structure
     return [
       {
         month: 1,
-        title: "Launch & Initial Validation", 
+        title: "Launch & Initial Validation",
+        challenge: "You have $5,000 left in your budget and need to decide: spend it on marketing to get more users, or on product development to add the feature customers keep requesting. What's your choice and why?",
         challenges: ["Product-market fit unclear", "Limited initial traction", "Budget constraints"],
         wins: ["First paying customers", "Positive user feedback", "Working MVP"],
         revenue: 1200,
         users: 50,
         keyDecisions: ["Pricing strategy", "Core feature prioritization", "Customer acquisition focus"]
+      },
+      {
+        month: 2,
+        title: "First Growth Sprint",
+        challenge: "A competitor just launched a very similar product with VC funding. They're offering it free for 6 months. How do you respond to protect your early customers and maintain momentum?",
+        challenges: ["Increased competition", "Customer retention concerns", "Limited marketing budget"],
+        wins: ["Word-of-mouth referrals starting", "Product improvements based on feedback", "First repeat customers"],
+        revenue: 2800,
+        users: 120,
+        keyDecisions: ["Competitive positioning", "Customer retention strategy", "Feature prioritization"]
+      },
+      {
+        month: 3,
+        title: "Market Expansion",
+        challenge: "You've validated your solution with early adopters, but now need to reach mainstream customers who are more skeptical. What changes to your messaging, pricing, or product would you make?",
+        challenges: ["Reaching mainstream market", "Scaling customer support", "Cash flow management"],
+        wins: ["Steady customer growth", "Improved conversion rates", "Team expansion"],
+        revenue: 4500,
+        users: 200,
+        keyDecisions: ["Market expansion strategy", "Hiring priorities", "Pricing adjustments"]
+      },
+      {
+        month: 4,
+        title: "Scaling Operations",
+        challenge: "Customer support tickets are overwhelming your small team, and response times are suffering. You could hire more support staff or invest in automation tools. What's your approach?",
+        challenges: ["Customer support bottlenecks", "Quality control issues", "Team burnout"],
+        wins: ["Established customer base", "Proven revenue model", "Strong customer feedback"],
+        revenue: 7200,
+        users: 320,
+        keyDecisions: ["Operational scaling", "Quality vs. speed trade-offs", "Investment priorities"]
+      },
+      {
+        month: 5,
+        title: "Strategic Decisions",
+        challenge: "An acquisition offer comes in for $500K, which would cover your team's salaries for 2 years but means giving up control. You also have interest from VCs. What path do you choose?",
+        challenges: ["Growth plateau", "Funding decisions", "Strategic direction"],
+        wins: ["Market recognition", "Strong unit economics", "Team stability"],
+        revenue: 9800,
+        users: 450,
+        keyDecisions: ["Funding strategy", "Growth vs. profitability", "Long-term vision"]
+      },
+      {
+        month: 6,
+        title: "Future Planning",
+        challenge: "You need to plan your next 6 months. Market research shows opportunity in 3 new segments, but you only have resources for one. How do you choose which market to pursue?",
+        challenges: ["Resource allocation", "Market prioritization", "Sustainable growth"],
+        wins: ["Profitable operations", "Strong market position", "Experienced team"],
+        revenue: 12500,
+        users: 580,
+        keyDecisions: ["Expansion strategy", "Resource management", "Long-term sustainability"]
       }
-      // Additional months would be generated based on customer insights...
     ];
   }
 }
