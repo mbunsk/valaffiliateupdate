@@ -111,7 +111,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           <p className="text-xl text-foreground/70 mb-8">
             Create a free landing page to show partners, customers, and friends what you're exploring!
             <br />
-            <span className="text-primary font-semibold">Perfect for sharing your concept and getting feedback! ✨</span>
+            <span className="text-primary font-semibold">This landing page will enable you to talk to customer personas and simulate a launch! ✨</span>
           </p>
         </div>
 
