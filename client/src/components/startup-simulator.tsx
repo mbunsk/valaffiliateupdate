@@ -55,6 +55,11 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [interviewsCompleted, setInterviewsCompleted] = useState<number[]>([]);
   const [simulationData, setSimulationData] = useState<SimulationPhase[]>([]);
+  const [challengeResponses, setChallengeResponses] = useState<{[key: number]: string}>({});
+  const [challengeFeedback, setChallengeFeedback] = useState<{[key: number]: string}>({});
+  const [activeValChat, setActiveValChat] = useState<number | null>(null);
+  const [valMessages, setValMessages] = useState<{[key: number]: any[]}>({});
+  const [valQuestion, setValQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -242,6 +247,101 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
       toast({
         title: "Error",
         description: "Failed to generate simulation",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const submitChallengeResponse = async (month: number, response: string) => {
+    if (!response.trim()) return;
+    
+    setIsLoading(true);
+    try {
+      const apiResponse = await apiRequest("POST", "/api/challenge-feedback", {
+        month,
+        challenge: simulationData[month - 1]?.challenges[0],
+        response,
+        validationData,
+        simulationData: simulationData[month - 1]
+      });
+      
+      const data = await apiResponse.json();
+      setChallengeFeedback(prev => ({ ...prev, [month]: data.feedback }));
+      
+      toast({
+        title: "Val's Feedback Ready!",
+        description: "See how you handled this challenge"
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to get feedback",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const startValChat = (month: number) => {
+    setActiveValChat(month);
+    if (!valMessages[month]) {
+      setValMessages(prev => ({
+        ...prev,
+        [month]: [{
+          id: 1,
+          isUser: false,
+          text: `Hi! I'm Val, your startup mentor. I'm here to help you with Month ${month} challenges. What specific questions do you have about ${simulationData[month - 1]?.title.toLowerCase()} or the challenges you're facing?`,
+          timestamp: new Date()
+        }]
+      }));
+    }
+  };
+
+  const sendValMessage = async (month: number) => {
+    if (!valQuestion.trim()) return;
+    
+    const userMessage = {
+      id: Date.now(),
+      isUser: true,
+      text: valQuestion,
+      timestamp: new Date()
+    };
+    
+    setValMessages(prev => ({
+      ...prev,
+      [month]: [...(prev[month] || []), userMessage]
+    }));
+    setValQuestion('');
+    setIsLoading(true);
+    
+    try {
+      const response = await apiRequest("POST", "/api/val-chat", {
+        month,
+        question: valQuestion,
+        conversationHistory: valMessages[month] || [],
+        simulationData: simulationData[month - 1],
+        validationData
+      });
+      
+      const data = await response.json();
+      const valResponse = {
+        id: Date.now() + 1,
+        isUser: false,
+        text: data.response,
+        timestamp: new Date()
+      };
+      
+      setValMessages(prev => ({
+        ...prev,
+        [month]: [...(prev[month] || []), valResponse]
+      }));
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to get Val's response",
         variant: "destructive"
       });
     } finally {
@@ -466,13 +566,13 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         {currentPhase === 'simulation' && (
           <div className="space-y-8">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4">Your 6-Month Startup Journey</h3>
+              <h3 className="text-2xl font-bold mb-4">Your 6-Month Interactive Startup Journey</h3>
               <p className="text-muted-foreground">
-                Based on your customer interviews and market analysis
+                Based on your customer interviews - respond to challenges and chat with Val for guidance
               </p>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid gap-8">
               {simulationData.map((phase, index) => (
                 <Card key={phase.month} className="relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary/20 to-primary/40" />
@@ -480,11 +580,11 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                     <CardTitle className="flex items-center justify-between">
                       <span>Month {phase.month}: {phase.title}</span>
                       <Badge variant="outline">
-                        ${phase.revenue.toLocaleString()} Revenue
+                        ${phase.revenue?.toLocaleString()} Revenue
                       </Badge>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <h4 className="font-semibold mb-2 flex items-center">
@@ -492,7 +592,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                           Wins & Progress
                         </h4>
                         <ul className="space-y-1">
-                          {phase.wins.map((win, i) => (
+                          {phase.wins?.map((win, i) => (
                             <li key={i} className="text-sm text-green-600 dark:text-green-400">
                               • {win}
                             </li>
@@ -505,7 +605,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                           Challenges & Learnings
                         </h4>
                         <ul className="space-y-1">
-                          {phase.challenges.map((challenge, i) => (
+                          {phase.challenges?.map((challenge, i) => (
                             <li key={i} className="text-sm text-amber-600 dark:text-amber-400">
                               • {challenge}
                             </li>
@@ -513,9 +613,137 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                         </ul>
                       </div>
                     </div>
+
+                    {/* Interactive Challenge Section */}
+                    {phase.challenge && (
+                      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 mr-4">
+                            <img 
+                              src="/attached_assets/AIValFull_1754243498167.jpg" 
+                              alt="Val - Your AI Mentor" 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-blue-600 dark:text-blue-400">Challenge from Val</h4>
+                            <p className="text-sm text-blue-500 dark:text-blue-300">How would you handle this situation?</p>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-blue-300 dark:border-blue-700 mb-4">
+                          <p className="font-medium text-gray-800 dark:text-gray-200">{phase.challenge}</p>
+                        </div>
+
+                        <div className="space-y-4">
+                          <Textarea
+                            placeholder="Type your response here... How would you address this challenge?"
+                            value={challengeResponses[phase.month] || ''}
+                            onChange={(e) => setChallengeResponses(prev => ({ ...prev, [phase.month]: e.target.value }))}
+                            rows={3}
+                            className="w-full"
+                          />
+                          
+                          <div className="flex space-x-3">
+                            <Button
+                              onClick={() => submitChallengeResponse(phase.month, challengeResponses[phase.month] || '')}
+                              disabled={!challengeResponses[phase.month]?.trim() || isLoading}
+                              className="bg-blue-600 hover:bg-blue-700"
+                            >
+                              {isLoading ? "Getting Feedback..." : "Get Val's Feedback"}
+                            </Button>
+                            
+                            <Button
+                              variant="outline"
+                              onClick={() => startValChat(phase.month)}
+                              className="border-purple-500 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
+                            >
+                              <MessageCircle className="w-4 h-4 mr-2" />
+                              Chat with Val
+                            </Button>
+                          </div>
+
+                          {/* AI Feedback Display */}
+                          {challengeFeedback[phase.month] && (
+                            <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                              <div className="flex items-center mb-2">
+                                <img 
+                                  src="/attached_assets/AIValFull_1754243498167.jpg" 
+                                  alt="Val" 
+                                  className="w-6 h-6 rounded-full mr-2"
+                                />
+                                <span className="font-semibold text-green-600 dark:text-green-400">Val's Feedback:</span>
+                              </div>
+                              <p className="text-sm text-green-700 dark:text-green-300 whitespace-pre-line">
+                                {challengeFeedback[phase.month]}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Val Chat Interface */}
+                          {activeValChat === phase.month && (
+                            <div className="bg-purple-50 dark:bg-purple-950/30 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+                              <div className="flex items-center mb-3">
+                                <img 
+                                  src="/attached_assets/AIValFull_1754243498167.jpg" 
+                                  alt="Val" 
+                                  className="w-6 h-6 rounded-full mr-2"
+                                />
+                                <span className="font-semibold text-purple-600 dark:text-purple-400">Chat with Val - Month {phase.month}</span>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  onClick={() => setActiveValChat(null)}
+                                  className="ml-auto"
+                                >
+                                  ✕
+                                </Button>
+                              </div>
+                              
+                              <div className="max-h-48 overflow-y-auto mb-3 space-y-2">
+                                {valMessages[phase.month]?.map((msg, i) => (
+                                  <div
+                                    key={i}
+                                    className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                                  >
+                                    <div
+                                      className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
+                                        msg.isUser 
+                                          ? 'bg-purple-600 text-white' 
+                                          : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border'
+                                      }`}
+                                    >
+                                      {msg.text}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                              
+                              <div className="flex space-x-2">
+                                <Textarea
+                                  placeholder="Ask Val about this month's challenges..."
+                                  value={valQuestion}
+                                  onChange={(e) => setValQuestion(e.target.value)}
+                                  rows={2}
+                                  className="flex-1"
+                                />
+                                <Button
+                                  onClick={() => sendValMessage(phase.month)}
+                                  disabled={!valQuestion.trim() || isLoading}
+                                  className="self-end bg-purple-600 hover:bg-purple-700"
+                                >
+                                  Send
+                                </Button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="mt-4">
                       <div className="flex justify-between text-sm mb-2">
-                        <span>Users: {phase.users.toLocaleString()}</span>
+                        <span>Users: {phase.users?.toLocaleString()}</span>
                         <span>Growth Rate: {index > 0 ? '+' + Math.round(((phase.users - simulationData[index-1]?.users || 0) / (simulationData[index-1]?.users || 1)) * 100) + '%' : 'Launch'}</span>
                       </div>
                       <Progress value={(phase.users / Math.max(...simulationData.map(p => p.users))) * 100} />

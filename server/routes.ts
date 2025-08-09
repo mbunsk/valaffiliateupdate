@@ -218,6 +218,42 @@ Create a landing page for this startup. The goal of the site is to highlight our
     }
   });
 
+  // Handle challenge feedback
+  app.post("/api/challenge-feedback", async (req, res) => {
+    try {
+      const { month, challenge, response, validationData, simulationData } = req.body;
+      
+      if (!month || !challenge || !response || !validationData) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      const { generateChallengeFeedback } = await import("./openai.js");
+      const feedback = await generateChallengeFeedback(month, challenge, response, validationData, simulationData);
+      res.json({ feedback });
+    } catch (error) {
+      console.error("Challenge feedback error:", error);
+      res.status(500).json({ message: "Failed to generate feedback" });
+    }
+  });
+
+  // Handle Val chat
+  app.post("/api/val-chat", async (req, res) => {
+    try {
+      const { month, question, conversationHistory, simulationData, validationData } = req.body;
+      
+      if (!month || !question || !validationData) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      const { handleValChat } = await import("./openai.js");
+      const response = await handleValChat(month, question, conversationHistory, simulationData, validationData);
+      res.json({ response });
+    } catch (error) {
+      console.error("Val chat error:", error);
+      res.status(500).json({ message: "Failed to get Val's response" });
+    }
+  });
+
   // Generate complete report for download
   app.post("/api/generate-report", async (req, res) => {
     try {

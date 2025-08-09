@@ -444,6 +444,95 @@ Keep responses conversational (2-3 sentences usually), and make sure they feel a
   }
 }
 
+export async function generateChallengeFeedback(month: number, challenge: string, response: string, validationData: any, simulationData: any) {
+  try {
+    const feedbackResponse = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: `You are Val, a warm and thoughtful startup mentor. Analyze the entrepreneur's response to a monthly challenge and provide constructive feedback. 
+
+Your feedback should:
+- Acknowledge what they did well
+- Point out potential risks or blind spots
+- Suggest specific improvements or alternatives
+- Be encouraging but realistic
+- Include actionable next steps
+
+Keep feedback concise (2-3 paragraphs) and personable. Focus on practical business advice that helps them succeed.`
+        },
+        {
+          role: "user",
+          content: `Month ${month} Challenge: "${challenge}"
+
+Entrepreneur's Response: "${response}"
+
+Context:
+- Startup: ${validationData.idea}
+- Target Customer: ${validationData.targetCustomer}
+- Problem: ${validationData.problemSolved}
+- Current Stage: ${simulationData.title}
+
+Provide specific feedback on their approach and suggest improvements.`
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 400
+    });
+
+    return feedbackResponse.choices[0].message.content;
+  } catch (error) {
+    console.error("Challenge feedback error:", error);
+    return "Great thinking! Your approach shows you're considering the key factors. Consider exploring alternative strategies and gathering more customer feedback to validate your assumptions.";
+  }
+}
+
+export async function handleValChat(month: number, question: string, conversationHistory: any[], simulationData: any, validationData: any) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: `You are Val, a warm, thoughtful startup mentor helping entrepreneurs navigate their startup journey. You're chatting with a founder about Month ${month}: "${simulationData.title}".
+
+Your personality:
+- Warm and encouraging but realistic
+- Ask probing questions to help them think deeper
+- Share specific, actionable advice
+- Reference their startup context when relevant
+- Keep responses conversational (2-3 sentences usually)
+
+Context about their startup:
+- Idea: ${validationData.idea}
+- Target Customer: ${validationData.targetCustomer}  
+- Problem: ${validationData.problemSolved}
+- Current Month Focus: ${simulationData.title}
+- Key Challenges: ${simulationData.challenges?.join(', ')}
+
+Be helpful with questions about challenges, strategies, next steps, or any aspect of this month's focus.`
+        },
+        ...conversationHistory.slice(-10).map(msg => ({
+          role: msg.isUser ? "user" : "assistant",
+          content: msg.text
+        })),
+        {
+          role: "user",
+          content: question
+        }
+      ],
+      temperature: 0.8,
+      max_tokens: 300
+    });
+
+    return response.choices[0].message.content;
+  } catch (error) {
+    console.error("Val chat error:", error);
+    return "That's a great question! I'm here to help you think through this challenge. What specific aspect would you like to explore further?";
+  }
+}
+
 export async function generateStartupSimulation(validationData: any, customerInsights: any[], landingPageContent?: string) {
   try {
     const response = await openai.chat.completions.create({
@@ -456,9 +545,15 @@ export async function generateStartupSimulation(validationData: any, customerIns
 For each month, include:
 - Realistic revenue based on actual pricing research and customer feedback
 - User growth that reflects typical startup traction patterns
-- Authentic challenges founders actually face in this industry
+- ONE main interactive challenge that founders actually face in this industry
 - Meaningful wins and milestones
 - Key decisions that impact the business trajectory
+
+The interactive challenge should be:
+- Specific and actionable (not generic)
+- Something the entrepreneur needs to decide/solve
+- Realistic for that stage of business
+- Require strategic thinking
 
 Base revenue calculations on:
 - Customer interview insights about price willingness
@@ -472,7 +567,8 @@ Return JSON array with 6 months of data:
 {
   "month": number,
   "title": string,
-  "challenges": array of strings,
+  "challenge": string (ONE main interactive challenge for this month),
+  "challenges": array of strings (other general challenges),
   "wins": array of strings, 
   "revenue": number (realistic monthly revenue),
   "users": number,
