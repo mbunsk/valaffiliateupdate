@@ -235,6 +235,187 @@ Create a landing page for this startup. The goal of the site is to highlight our
     }
   };
 
+  // Generate customer personas for startup simulator
+  app.post("/api/generate-customers", async (req, res) => {
+    const { idea, targetCustomer, problemSolved, bubbleUrl } = req.body;
+    
+    // Validate Bubble URL
+    const bubblePatterns = [/bubble\.io/i, /bubbleapps\.io/i, /preview.*bubble/i];
+    if (!bubblePatterns.some(pattern => pattern.test(bubbleUrl))) {
+      return res.status(400).json({ message: "Must be a valid Bubble.io preview URL" });
+    }
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert at creating realistic customer personas for startup validation. Generate 3 diverse, realistic potential customers with distinct backgrounds, pain points, and personalities."
+          },
+          {
+            role: "user",
+            content: `Create 3 realistic customer personas for this startup:
+
+Idea: ${idea}
+Target Customer: ${targetCustomer}
+Problem Solved: ${problemSolved}
+Bubble URL: ${bubbleUrl}
+
+For each customer, include:
+- Name and role/job
+- Background and demographics
+- Specific pain points related to the problem
+- Personality traits (helpful for chat simulation)
+- Budget considerations
+- Timeline/urgency for solving the problem
+
+Return JSON with this structure:
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Customer Name",
+      "role": "Job Title / Role",
+      "background": "Brief background",
+      "avatar": "🧑‍💼", 
+      "personality": "Personality description",
+      "painPoints": ["pain 1", "pain 2", "pain 3"],
+      "budget": "Budget range",
+      "timeline": "When they need solution"
+    }
+  ]
+}`
+          }
+        ],
+        response_format: { type: "json_object" }
+      });
+
+      const result = JSON.parse(response.choices[0].message.content!);
+      res.json(result);
+    } catch (error) {
+      console.error("Error generating customers:", error);
+      res.status(500).json({ message: "Failed to generate customer personas" });
+    }
+  });
+
+  // Handle customer interview chat
+  app.post("/api/customer-interview", async (req, res) => {
+    const { customerId, customerData, userMessage, conversationHistory, validationData } = req.body;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `You are ${customerData.name}, a ${customerData.role}. 
+
+Background: ${customerData.background}
+Personality: ${customerData.personality}
+Pain Points: ${customerData.painPoints.join(', ')}
+Budget: ${customerData.budget}
+Timeline: ${customerData.timeline}
+
+The user is pitching this startup idea: ${validationData.idea}
+It helps: ${validationData.targetCustomer}
+By solving: ${validationData.problemSolved}
+
+Respond naturally as this customer would. Be realistic about your interest level, ask relevant questions, express concerns you might have. Keep responses conversational and authentic. Don't be overly enthusiastic unless it genuinely solves a major pain point for you.`
+          },
+          {
+            role: "user",
+            content: userMessage
+          }
+        ]
+      });
+
+      res.json({ response: response.choices[0].message.content });
+    } catch (error) {
+      console.error("Error in customer interview:", error);
+      res.status(500).json({ message: "Failed to generate customer response" });
+    }
+  });
+
+  // Generate startup journey simulation
+  app.post("/api/generate-simulation", async (req, res) => {
+    const { validationData, bubbleUrl, customerInterviews, customersInterviewed } = req.body;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert startup advisor creating realistic 6-month journey simulations. Base your predictions on real market conditions, customer feedback patterns, and startup statistics. Be optimistic but realistic."
+          },
+          {
+            role: "user",
+            content: `Create a realistic 6-month startup journey simulation for:
+
+Startup: ${validationData.idea}
+Target Customer: ${validationData.targetCustomer}
+Problem: ${validationData.problemSolved}
+Bubble Preview: ${bubbleUrl}
+Customers Interviewed: ${customersInterviewed}
+
+Based on the customer interviews and market reality, show month-by-month progression including:
+- Revenue growth (start conservative)
+- User acquisition 
+- Key challenges they'll face
+- Wins and milestones
+- Important decisions to make
+- Market feedback patterns
+
+Make it educational and realistic. Include specific numbers, challenges, and growth patterns typical for this type of startup.
+
+Return JSON:
+{
+  "simulation": [
+    {
+      "month": 1,
+      "title": "Month title",
+      "challenges": ["challenge 1", "challenge 2"],
+      "wins": ["win 1", "win 2"],
+      "revenue": 0,
+      "users": 50,
+      "keyDecisions": ["decision 1", "decision 2"]
+    }
+  ]
+}`
+          }
+        ],
+        response_format: { type: "json_object" }
+      });
+
+      const result = JSON.parse(response.choices[0].message.content!);
+      res.json(result);
+    } catch (error) {
+      console.error("Error generating simulation:", error);
+      res.status(500).json({ message: "Failed to generate startup simulation" });
+    }
+  });
+
+  // Generate comprehensive report PDF
+  app.post("/api/generate-report", async (req, res) => {
+    const { validationData, bubbleUrl, customerInterviews, simulation } = req.body;
+
+    try {
+      // This would generate a comprehensive PDF with:
+      // - Original validation results
+      // - Customer interview insights
+      // - 6-month journey simulation
+      // - Market analysis
+      // - Recommended next steps
+      
+      // For now, return success - PDF generation would be implemented here
+      res.json({ message: "Report generation ready - implementation needed" });
+    } catch (error) {
+      console.error("Error generating report:", error);
+      res.status(500).json({ message: "Failed to generate report" });
+    }
+  });
+
   // Get all submissions (admin only)
   app.get("/api/admin/submissions", requireAdmin, async (req, res) => {
     try {

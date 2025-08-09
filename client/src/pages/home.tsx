@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import Hero from "@/components/hero";
 import IdeaValidation from "@/components/idea-validation";
 import SiteBuilders from "@/components/site-builders";
+import StartupSimulator from "@/components/startup-simulator";
 import NewsletterForm from "@/components/newsletter-form";
 import Testimonials from "@/components/testimonials";
 import NewsletterSignup from "@/components/newsletter-signup";
@@ -22,6 +23,7 @@ export default function Home() {
       <Hero />
       <IdeaValidation onValidationComplete={setValidationData} />
       <SiteBuilders validationData={validationData} />
+      <StartupSimulator validationData={validationData} />
       <NewsletterForm />
       <Testimonials />
       <NewsletterSignup />

@@ -87,39 +87,19 @@ export default function NewsletterSignup() {
               <p className="text-foreground/70 text-lg">Join thousands of entrepreneurs getting weekly startup insights</p>
             </div>
             
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                          <Input 
-                            type="email" 
-                            placeholder="Enter your email address..." 
-                            {...field} 
-                            className="flex-1 h-14 text-lg px-6 bg-white/10 border-2 border-primary/20 focus:border-primary focus:bg-white/15 placeholder:text-foreground/50"
-                          />
-                          <Button
-                            type="submit"
-                            disabled={subscribeMutation.isPending}
-                            size="lg"
-                            className="h-14 px-8 text-lg font-bold rounded-xl shadow-xl shadow-primary/30 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-105"
-                          >
-                            {subscribeMutation.isPending && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                            {subscribeMutation.isPending ? "Joining..." : "Join Now!"}
-                            {!subscribeMutation.isPending && <span className="ml-2">🚀</span>}
-                          </Button>
-                        </div>
-                      </FormControl>
-                      <FormMessage className="text-red-400 text-center" />
-                    </FormItem>
-                  )}
-                />
-              </form>
-            </Form>
+            <div className="text-center">
+              <Button
+                onClick={() => window.open('https://forms.gle/REPLACE-WITH-YOUR-GOOGLE-FORM-ID', '_blank')}
+                size="lg"
+                className="h-14 px-8 text-lg font-bold rounded-xl shadow-xl shadow-primary/30 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+              >
+                Join Newsletter with Google Auth
+                <span className="ml-2">🚀</span>
+              </Button>
+              <p className="text-sm text-foreground/60 mt-4">
+                Secure signup with Google authentication - no spam, no bots!
+              </p>
+            </div>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-foreground/60">
