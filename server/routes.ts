@@ -175,22 +175,7 @@ Create a landing page for this startup. The goal of the site is to highlight our
     }
   });
 
-  // Generate customer personas based on validation data
-  app.post("/api/generate-customers", async (req, res) => {
-    try {
-      const { validationData, landingPageContent } = req.body;
-      
-      if (!validationData?.idea) {
-        return res.status(400).json({ message: "Validation data required" });
-      }
-
-      const customers = await generateCustomerPersonas(validationData, landingPageContent);
-      res.json({ customers });
-    } catch (error) {
-      console.error("Customer generation error:", error);
-      res.status(500).json({ message: "Failed to generate customer personas" });
-    }
-  });
+  // This route is replaced by the more comprehensive one below that handles bubble URL validation and web crawling
 
   // Handle customer interview conversations
   app.post("/api/customer-interview", async (req, res) => {

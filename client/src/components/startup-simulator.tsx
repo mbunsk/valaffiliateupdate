@@ -94,13 +94,11 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     try {
       // Generate customer personas from validation data and landing page content
       const response = await apiRequest("POST", "/api/generate-customers", {
-        validationData: {
-          idea: validationData.idea,
-          targetCustomer: validationData.targetCustomer,
-          problemSolved: validationData.problemSolved,
-          feedback: validationData.feedback
-        },
-        landingPageContent: null // Will add web crawling later
+        idea: validationData.idea,
+        targetCustomer: validationData.targetCustomer,
+        problemSolved: validationData.problemSolved,
+        feedback: validationData.feedback,
+        bubbleUrl: bubbleUrl
       });
 
       const data = await response.json();
@@ -335,13 +333,33 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         )}
 
         {currentPhase === 'interviews' && (
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Customer List */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold">Your Potential Customers</h3>
-              <p className="text-sm text-foreground/70">
-                Talk with each customer until you have your questions answered, then click <strong>DONE</strong>. After all THREE customers are marked DONE, the 6-month simulation starts automatically.
-              </p>
+          <div className="space-y-6">
+            {/* Val's Instructions */}
+            <div className="text-center">
+              <div className="flex items-center justify-center space-x-4 mb-4">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-green-500 shadow-lg animate-bounce-gentle">
+                  <img 
+                    src="/attached_assets/AIValFull_1754243498167.jpg" 
+                    alt="Val - Your AI Mentor" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-green-500/20 max-w-md">
+                  <div className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
+                    <span className="font-semibold text-green-600 dark:text-green-400">Val says:</span> I've created 3 potential customers for your idea! Chat with each one to understand their needs, then click DONE. After all THREE are complete, I'll generate your 6-month startup simulation! 🚀
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Customer List */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold">Your Potential Customers</h3>
+                <p className="text-sm text-foreground/70">
+                  Talk with each customer until you have your questions answered, then click <strong>DONE</strong>. After all THREE customers are marked DONE, the 6-month simulation starts automatically.
+                </p>
               {customers.map((customer) => (
                 <Card 
                   key={customer.id} 
@@ -440,6 +458,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               )}
             </div>
           </div>
+        </div>
         )}
 
         {currentPhase === 'simulation' && (
