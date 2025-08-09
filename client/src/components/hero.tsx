@@ -97,10 +97,10 @@ export default function Hero() {
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
             <span className="gradient-text">
-              Turn Your Ideas Into
+              Explore Your Ideas
             </span>
             <br />
-            <span className="text-foreground">Reality With AI! 🚀</span>
+            <span className="text-foreground">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
             Get instant AI validation, create free landing page mockups, test your startup with realistic simulations — all completely free! 🦄
