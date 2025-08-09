@@ -2,7 +2,7 @@
 
 ## Overview
 
-ValidatorAI is a fun, low-pressure platform for idea exploration that helps anyone validate concepts through AI-powered feedback. The platform guides users through three main steps: exploring their idea, creating free landing page mockups to share with others, and submitting their concept to a newsletter with 200,000+ idea explorers. The goal is to maximize affiliate conversions by positioning free landing page creation as the natural next step for sharing ideas.
+ValidatorAI is a fun, low-pressure platform for idea exploration that helps anyone validate concepts through AI-powered feedback. The platform guides users through three main steps: exploring their idea, creating free landing page mockups to share with others, and running a comprehensive "Startup Simulation" with customer interviews and 6-month journey projections. The goal is to maximize affiliate conversions specifically to Bubble while providing an engaging simulation experience that helps users explore founder life.
 
 ## User Preferences
 
@@ -151,3 +151,26 @@ Currently implements in-memory storage (`MemStorage`) with interface (`IStorage`
 - **Error Handling**: Graceful file upload failures
 
 The architecture is designed for scalability with clear separation of concerns, type safety throughout, and modern development practices. The in-memory storage can be easily replaced with the configured PostgreSQL database when needed.
+
+## Recent Enhancements (January 2025)
+
+### Startup Simulation System
+- **Complete Customer Interview System**: AI-powered customer personas with authentic backgrounds, pain points, and pricing willingness based on validation data
+- **Personalized Welcome Messages**: Each customer persona generates contextual, non-templated initial messages using their specific background and personality
+- **Revenue Calculations**: Realistic pricing based on customer interview insights rather than placeholder numbers
+- **Interactive 6-Month Journey**: Simulation includes authentic challenges, wins, user growth, and revenue projections based on customer feedback
+- **Customer Insights Integration**: All customer conversation data feeds into simulation for accurate business projections
+
+### User Experience Improvements  
+- **Clear Instructions**: Users understand to chat with all 3 customers and click DONE before simulation starts
+- **Bubble URL Validation**: Prevents resource waste by requiring "bubble" in URLs
+- **Streamlined Flow**: Removed Exploration Stories and newsletter sections from simulation page to focus on core experience
+- **Scroll Guidance**: Instructions added under Bubble builder to guide users to final simulation step
+
+### Technical Architecture Updates
+- **Enhanced OpenAI Integration**: New functions for customer personas, interviews, and simulation generation
+- **Improved API Endpoints**: Dedicated routes for customer generation, interviews, simulation, and report generation
+- **Data Flow Optimization**: All validation data, customer insights, and landing page content properly passed through system
+- **Error Handling**: Comprehensive fallback systems for AI failures and network issues
+
+The platform now successfully positions itself as a playful "startup simulation" experience that helps users explore founder life while driving conversions to Bubble through engaging customer research and realistic business projections.

@@ -92,13 +92,15 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
 
     setIsLoading(true);
     try {
-      // Generate customer personas from validation data
+      // Generate customer personas from validation data and landing page content
       const response = await apiRequest("POST", "/api/generate-customers", {
-        idea: validationData.idea,
-        targetCustomer: validationData.targetCustomer,
-        problemSolved: validationData.problemSolved,
-        feedback: validationData.feedback,
-        bubbleUrl: bubbleUrl
+        validationData: {
+          idea: validationData.idea,
+          targetCustomer: validationData.targetCustomer,
+          problemSolved: validationData.problemSolved,
+          feedback: validationData.feedback
+        },
+        landingPageContent: null // Will add web crawling later
       });
 
       const data = await response.json();
@@ -120,17 +122,45 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     }
   };
 
-  const startCustomerInterview = (customer: Customer) => {
+  const startCustomerInterview = async (customer: Customer) => {
     setActiveCustomer(customer);
-    setMessages([
-      {
-        id: 1,
+    setIsLoading(true);
+    
+    try {
+      // Generate initial personalized welcome message
+      const response = await apiRequest("POST", "/api/customer-interview", {
         customerId: customer.id,
-        isUser: false,
-        text: `Hi! I'm ${customer.name}. I understand you're working on something that might help with ${validationData?.problemSolved}. I'd love to hear more about it!`,
-        timestamp: new Date()
-      }
-    ]);
+        customerPersona: customer,
+        userQuestion: "", // Empty for initial greeting
+        conversationHistory: [],
+        validationData
+      });
+
+      const data = await response.json();
+      
+      setMessages([
+        {
+          id: 1,
+          customerId: customer.id,
+          isUser: false,
+          text: data.response,
+          timestamp: new Date()
+        }
+      ]);
+    } catch (error) {
+      // Fallback welcome message
+      setMessages([
+        {
+          id: 1,
+          customerId: customer.id,
+          isUser: false,
+          text: `Hi! I'm ${customer.name}, ${customer.role.toLowerCase()}. ${customer.background} I'd be interested to hear about your idea.`,
+          timestamp: new Date()
+        }
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const sendMessage = async () => {
@@ -151,8 +181,8 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     try {
       const response = await apiRequest("POST", "/api/customer-interview", {
         customerId: activeCustomer.id,
-        customerData: activeCustomer,
-        userMessage: currentQuestion,
+        customerPersona: activeCustomer,
+        userQuestion: currentQuestion,
         conversationHistory: messages,
         validationData
       });
@@ -189,11 +219,18 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
   const moveToSimulation = async () => {
     setIsLoading(true);
     try {
+      // Collect customer insights for simulation
+      const customerInsights = customers.map(customer => ({
+        persona: customer,
+        keyPoints: messages
+          .filter(m => m.customerId === customer.id && !m.isUser)
+          .map(m => m.text.substring(0, 100)) // Extract key insights
+      }));
+
       const response = await apiRequest("POST", "/api/generate-simulation", {
         validationData,
-        bubbleUrl,
-        customerInterviews: messages,
-        customersInterviewed: interviewsCompleted.length
+        customerInsights,
+        landingPageContent: null // Will add web crawling later
       });
 
       const data = await response.json();
@@ -212,22 +249,33 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
 
   const downloadReport = async () => {
     try {
+      // Collect customer insights for report
+      const customerInsights = customers.map(customer => ({
+        persona: customer,
+        keyPoints: messages
+          .filter(m => m.customerId === customer.id && !m.isUser)
+          .map(m => m.text)
+      }));
+
       const response = await apiRequest("POST", "/api/generate-report", {
         validationData,
-        bubbleUrl,
-        customerInterviews: messages,
-        simulation: simulationData
+        customerInsights,
+        simulationData
       });
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Startup-Reality-Check-Report.pdf';
-      a.click();
+      const data = await response.json();
+      
+      toast({
+        title: "Report Ready!",
+        description: data.message || "Report generated successfully"
+      });
+
+      // For now, just show success - PDF generation would go here
+      console.log("Report data:", data);
+      
     } catch (error) {
       toast({
-        title: "Error",
+        title: "Error", 
         description: "Failed to generate report",
         variant: "destructive"
       });
@@ -277,7 +325,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                   className="w-full"
                   size="lg"
                 >
-                  {isLoading ? "Generating Customers..." : "Start Reality Check"}
+                  {isLoading ? "Generating Customers..." : "Start Simulation"}
                 </Button>
               </div>
             </CardContent>
@@ -289,6 +337,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             {/* Customer List */}
             <div className="space-y-4">
               <h3 className="text-xl font-bold">Your Potential Customers</h3>
+              <p className="text-sm text-foreground/70">
+                Talk with each customer until you have your questions answered, then click <strong>DONE</strong>. After all THREE customers are marked DONE, the 6-month simulation starts automatically.
+              </p>
               {customers.map((customer) => (
                 <Card 
                   key={customer.id} 

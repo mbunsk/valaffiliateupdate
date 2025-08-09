@@ -23,8 +23,6 @@ export default function Home() {
       <IdeaValidation onValidationComplete={setValidationData} />
       <SiteBuilders validationData={validationData} />
       <StartupSimulator validationData={validationData} />
-      <Testimonials />
-      <NewsletterSignup />
       <Footer />
     </div>
   );

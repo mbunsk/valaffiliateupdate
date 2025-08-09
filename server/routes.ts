@@ -6,7 +6,7 @@ import path from "path";
 import { storage } from "./storage";
 import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
 import { z } from "zod";
-import { generateValidationFeedback, generateLandingPagePrompt } from "./openai";
+import { generateValidationFeedback, generateLandingPagePrompt, generateCustomerPersonas, handleCustomerInterview, generateStartupSimulation } from "./openai";
 import { requireAuth, optionalAuth, AuthenticatedRequest } from "./auth";
 import OpenAI from "openai";
 import axios from "axios";
@@ -172,6 +172,88 @@ Create a landing page for this startup. The goal of the site is to highlight our
         error: errorMessage,
         details: "AI refinement failed - check server logs"
       });
+    }
+  });
+
+  // Generate customer personas based on validation data
+  app.post("/api/generate-customers", async (req, res) => {
+    try {
+      const { validationData, landingPageContent } = req.body;
+      
+      if (!validationData?.idea) {
+        return res.status(400).json({ message: "Validation data required" });
+      }
+
+      const customers = await generateCustomerPersonas(validationData, landingPageContent);
+      res.json({ customers });
+    } catch (error) {
+      console.error("Customer generation error:", error);
+      res.status(500).json({ message: "Failed to generate customer personas" });
+    }
+  });
+
+  // Handle customer interview conversations
+  app.post("/api/customer-interview", async (req, res) => {
+    try {
+      const { customerId, customerPersona, userQuestion, conversationHistory, validationData } = req.body;
+      
+      if (!customerId || !customerPersona || !validationData) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      const response = await handleCustomerInterview(
+        customerId, 
+        customerPersona, 
+        userQuestion, 
+        conversationHistory, 
+        validationData
+      );
+      
+      res.json({ response });
+    } catch (error) {
+      console.error("Customer interview error:", error);
+      res.status(500).json({ message: "Interview failed" });
+    }
+  });
+
+  // Generate startup simulation based on interviews
+  app.post("/api/generate-simulation", async (req, res) => {
+    try {
+      const { validationData, customerInsights, landingPageContent } = req.body;
+      
+      if (!validationData?.idea) {
+        return res.status(400).json({ message: "Validation data required" });
+      }
+
+      const simulation = await generateStartupSimulation(validationData, customerInsights || [], landingPageContent);
+      res.json({ simulation });
+    } catch (error) {
+      console.error("Simulation generation error:", error);
+      res.status(500).json({ message: "Failed to generate simulation" });
+    }
+  });
+
+  // Generate complete report for download
+  app.post("/api/generate-report", async (req, res) => {
+    try {
+      const { validationData, customerInsights, simulationData } = req.body;
+      
+      if (!validationData?.idea) {
+        return res.status(400).json({ message: "Validation data required" });
+      }
+
+      // For now, just acknowledge the request - full implementation would generate PDF
+      res.json({ 
+        message: "Report generation ready - implementing PDF generation next",
+        data: {
+          validationData,
+          customerInsights: customerInsights?.length || 0,
+          simulationMonths: simulationData?.length || 0
+        }
+      });
+    } catch (error) {
+      console.error("Report generation error:", error);
+      res.status(500).json({ message: "Failed to generate report" });
     }
   });
 

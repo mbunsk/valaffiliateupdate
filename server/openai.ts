@@ -284,3 +284,244 @@ Create an extremely detailed prompt that an AI site builder can use to generate 
 Build this as a single-page application with smooth scrolling navigation and optimized for email conversion.`;
   }
 }
+
+export async function generateCustomerPersonas(validationData: any, landingPageContent?: string) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+      messages: [
+        {
+          role: "system",
+          content: `You are an expert customer research analyst. Create 3 diverse, realistic customer personas based on the startup idea and validation data. Each persona should represent a different segment of the target market.
+
+For each persona, provide:
+- Realistic name, role, and demographic background
+- Specific pain points related to the problem being solved
+- Detailed personality traits and communication style
+- Daily challenges and lifestyle context
+- Decision-making factors and buying motivations
+- Price sensitivity and budget considerations
+- How they currently solve this problem (if at all)
+
+Make each persona feel like a real person with authentic motivations, not generic customer archetypes. Focus on psychological depth and realistic business/personal contexts.
+
+Respond with a JSON array of 3 customer objects with these fields:
+{
+  "id": number,
+  "name": string,
+  "role": string, 
+  "background": string (2-3 sentences about their situation),
+  "avatar": string (single emoji that represents them),
+  "personality": string (communication style and traits),
+  "painPoints": array of strings (3-4 specific pain points),
+  "currentSolution": string (how they solve this now),
+  "priceWillingness": string (what they might pay and why)
+}`
+        },
+        {
+          role: "user",
+          content: `Create customer personas for this startup:
+
+**Validation Data:**
+- Idea: ${validationData.idea}
+- Target Customer: ${validationData.targetCustomer} 
+- Problem Solved: ${validationData.problemSolved}
+- AI Feedback: ${validationData.feedback}
+
+${landingPageContent ? `**Landing Page Context:**\n${landingPageContent.substring(0, 1000)}...` : ''}
+
+Create 3 diverse personas that represent different segments within the target customer base.`
+        }
+      ],
+      response_format: { type: "json_object" },
+      temperature: 0.8,
+      max_tokens: 2000
+    });
+
+    const result = JSON.parse(response.choices[0].message.content || '{}');
+    return result.customers || result;
+  } catch (error) {
+    console.error("OpenAI customer personas error:", error);
+    return [
+      {
+        id: 1,
+        name: "Sarah Chen",
+        role: "Small Business Owner",
+        background: "Runs a local marketing agency with 5 employees. Always looking for tools to streamline operations and impress clients with innovative solutions.",
+        avatar: "👩‍💼",
+        personality: "Direct, results-oriented, skeptical of new tools but willing to try if ROI is clear. Values efficiency and proven solutions.",
+        painPoints: [
+          "Spends too much time on manual processes",
+          "Hard to differentiate from competitors", 
+          "Limited budget for expensive enterprise tools",
+          "Needs quick wins to show clients"
+        ],
+        currentSolution: "Uses basic tools and manual processes",
+        priceWillingness: "$50-200/month if it saves significant time"
+      },
+      {
+        id: 2,
+        name: "Mike Rodriguez", 
+        role: "Freelance Consultant",
+        background: "Independent consultant specializing in process optimization. Works with mid-size companies to improve their operations and reduce costs.",
+        avatar: "🧑‍💻",
+        personality: "Analytical, detail-oriented, price-conscious but understands value. Likes to test thoroughly before committing.",
+        painPoints: [
+          "Inconsistent client pipeline",
+          "Time-consuming client onboarding",
+          "Difficult to scale beyond personal capacity", 
+          "Needs professional-looking deliverables"
+        ],
+        currentSolution: "Combination of spreadsheets and basic software",
+        priceWillingness: "$25-100/month depending on client volume increase"
+      },
+      {
+        id: 3,
+        name: "Jennifer Park",
+        role: "Operations Manager",
+        background: "Works at a growing tech startup, responsible for internal processes and vendor relationships. Always under pressure to do more with less.",
+        avatar: "👩‍🔬", 
+        personality: "Collaborative, process-focused, budget-conscious but willing to invest in proven solutions. Values good support and onboarding.",
+        painPoints: [
+          "Limited budget approval authority",
+          "Needs buy-in from multiple stakeholders",
+          "Pressure to show measurable improvements",
+          "Concerned about team adoption and training"
+        ],
+        currentSolution: "Enterprise tools that are overkill or free tools that lack features",
+        priceWillingness: "$100-500/month if it solves a major pain point"
+      }
+    ];
+  }
+}
+
+export async function handleCustomerInterview(customerId: number, customerPersona: any, userQuestion: string, conversationHistory: any[], validationData: any) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+      messages: [
+        {
+          role: "system", 
+          content: `You are ${customerPersona.name}, a ${customerPersona.role}. 
+
+**Your Background:** ${customerPersona.background}
+**Your Personality:** ${customerPersona.personality}  
+**Your Pain Points:** ${customerPersona.painPoints.join(', ')}
+**How You Currently Solve This:** ${customerPersona.currentSolution}
+**Your Price Sensitivity:** ${customerPersona.priceWillingness}
+
+**The Startup Being Discussed:**
+- Idea: ${validationData.idea}
+- Target Customer: ${validationData.targetCustomer}
+- Problem It Solves: ${validationData.problemSolved}
+
+You are being interviewed about this startup idea. Respond authentically as this persona:
+- Stay in character with your personality and communication style
+- Reference your specific pain points and current situation
+- Be honest about concerns, skepticism, or excitement 
+- Ask follow-up questions when curious
+- Share relevant experiences from your background
+- Give realistic feedback about pricing and adoption barriers
+- Don't just agree with everything - be genuinely helpful but honest
+
+Keep responses conversational (2-3 sentences usually), and make sure they feel authentic to your persona's voice and concerns.`
+        },
+        {
+          role: "user",
+          content: conversationHistory.length === 0 
+            ? `Hi ${customerPersona.name}! I'm working on ${validationData.idea.split(' ').slice(0, 6).join(' ')} and would love to get your perspective. I understand you're ${customerPersona.role.toLowerCase()} - what's your biggest challenge when it comes to ${validationData.problemSolved.toLowerCase()}?`
+            : userQuestion
+        }
+      ],
+      temperature: 0.9,
+      max_tokens: 300
+    });
+
+    return response.choices[0].message.content;
+  } catch (error) {
+    console.error("OpenAI customer interview error:", error);
+    return "Thanks for the question! I'd be happy to discuss this further. What specific aspects would you like to know more about?";
+  }
+}
+
+export async function generateStartupSimulation(validationData: any, customerInsights: any[], landingPageContent?: string) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+      messages: [
+        {
+          role: "system",
+          content: `You are a startup simulation expert creating a realistic 6-month founder journey. Generate month-by-month scenarios with authentic challenges, wins, and growth metrics.
+
+For each month, include:
+- Realistic revenue based on actual pricing research and customer feedback
+- User growth that reflects typical startup traction patterns
+- Authentic challenges founders actually face in this industry
+- Meaningful wins and milestones
+- Key decisions that impact the business trajectory
+
+Base revenue calculations on:
+- Customer interview insights about price willingness
+- Realistic conversion rates for the industry
+- Seasonal trends and market factors
+- Competitor pricing research
+
+Make this feel like a real startup journey with ups and downs, not just linear growth.
+
+Return JSON array with 6 months of data:
+{
+  "month": number,
+  "title": string,
+  "challenges": array of strings,
+  "wins": array of strings, 
+  "revenue": number (realistic monthly revenue),
+  "users": number,
+  "keyDecisions": array of strings
+}`
+        },
+        {
+          role: "user",
+          content: `Generate a 6-month startup simulation for:
+
+**Startup Details:**
+- Idea: ${validationData.idea}
+- Target Customer: ${validationData.targetCustomer}
+- Problem Solved: ${validationData.problemSolved}
+
+**Customer Interview Insights:**
+${customerInsights.map((insight, i) => `
+Customer ${i+1} Insights:
+- Persona: ${insight.persona?.name} (${insight.persona?.role})
+- Price Willingness: ${insight.persona?.priceWillingness}
+- Key Concerns: ${insight.keyPoints?.join(', ') || 'General interest in solution'}
+`).join('')}
+
+${landingPageContent ? `**Landing Page Context:**\n${landingPageContent.substring(0, 800)}...` : ''}
+
+Create a realistic simulation with authentic challenges and revenue projections based on the customer price feedback.`
+        }
+      ],
+      response_format: { type: "json_object" },
+      temperature: 0.7,
+      max_tokens: 2500
+    });
+
+    const result = JSON.parse(response.choices[0].message.content || '{}');
+    return result.simulation || result;
+  } catch (error) {
+    console.error("OpenAI startup simulation error:", error);
+    // Fallback with realistic data structure
+    return [
+      {
+        month: 1,
+        title: "Launch & Initial Validation", 
+        challenges: ["Product-market fit unclear", "Limited initial traction", "Budget constraints"],
+        wins: ["First paying customers", "Positive user feedback", "Working MVP"],
+        revenue: 1200,
+        users: 50,
+        keyDecisions: ["Pricing strategy", "Core feature prioritization", "Customer acquisition focus"]
+      }
+      // Additional months would be generated based on customer insights...
+    ];
+  }
+}
