@@ -97,6 +97,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         idea: validationData.idea,
         targetCustomer: validationData.targetCustomer,
         problemSolved: validationData.problemSolved,
+        feedback: validationData.feedback,
         bubbleUrl: bubbleUrl
       });
 

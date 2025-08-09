@@ -103,7 +103,7 @@ export default function Hero() {
             <span className="text-foreground">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get instant AI validation, create free landing page mockups and connect with{" "}
+            Get instant AI validation, create free landing page mockups, test your startup with realistic simulations and connect with{" "}
             <span className="font-bold text-primary bg-primary/10 px-2 py-1 rounded-lg animate-pulse-slow">200,000+ entrepreneurs</span>{" "}
             — all completely free! 🦄
           </p>
@@ -127,8 +127,8 @@ export default function Hero() {
               <div className="text-sm text-foreground/60">to mock up</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-500">1 min</div>
-              <div className="text-sm text-foreground/60">for feedback</div>
+              <div className="text-2xl font-bold text-pink-500">5 min</div>
+              <div className="text-sm text-foreground/60">startup simulation</div>
             </div>
           </div>
         </div>

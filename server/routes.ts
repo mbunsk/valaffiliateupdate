@@ -9,6 +9,8 @@ import { z } from "zod";
 import { generateValidationFeedback, generateLandingPagePrompt } from "./openai";
 import { requireAuth, optionalAuth, AuthenticatedRequest } from "./auth";
 import OpenAI from "openai";
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 // Validate that OpenAI API key is present
 if (!process.env.OPENAI_API_KEY) {
@@ -237,7 +239,7 @@ Create a landing page for this startup. The goal of the site is to highlight our
 
   // Generate customer personas for startup simulator
   app.post("/api/generate-customers", async (req, res) => {
-    const { idea, targetCustomer, problemSolved, bubbleUrl } = req.body;
+    const { idea, targetCustomer, problemSolved, feedback, bubbleUrl } = req.body;
     
     // Validate Bubble URL
     if (!/bubble/i.test(bubbleUrl)) {
@@ -245,23 +247,55 @@ Create a landing page for this startup. The goal of the site is to highlight our
     }
 
     try {
+      // Crawl the Bubble URL to get landing page content
+      let landingPageContent = "";
+      try {
+        const pageResponse = await axios.get(bubbleUrl, { 
+          timeout: 10000,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; ValidatorAI-Bot/1.0)'
+          }
+        });
+        const $ = cheerio.load(pageResponse.data);
+        
+        // Extract relevant content
+        const title = $('title').text() || "";
+        const headings = $('h1, h2, h3').map((_, el) => $(el).text()).get().join(' | ');
+        const paragraphs = $('p').map((_, el) => $(el).text()).get().slice(0, 10).join(' ');
+        const buttons = $('button, .btn, a[class*="btn"]').map((_, el) => $(el).text()).get().join(' | ');
+        
+        landingPageContent = `LANDING PAGE CONTENT:
+Title: ${title}
+Headings: ${headings}
+Key Text: ${paragraphs}
+Call-to-Actions: ${buttons}`;
+      } catch (crawlError) {
+        console.log("Could not crawl landing page, proceeding with validation data only:", crawlError);
+        landingPageContent = "Landing page content unavailable - using validation data only.";
+      }
+
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content: "You are an expert at creating realistic customer personas for startup validation. Generate 3 diverse, realistic potential customers with distinct backgrounds, pain points, and personalities."
+            content: "You are an expert at creating realistic customer personas for startup validation. Generate 3 diverse, realistic potential customers with distinct backgrounds, pain points, and personalities. Use both the validation feedback and landing page content to create highly relevant personas."
           },
           {
             role: "user",
             content: `Create 3 realistic customer personas for this startup:
 
+ORIGINAL VALIDATION:
 Idea: ${idea}
 Target Customer: ${targetCustomer}
 Problem Solved: ${problemSolved}
+AI Feedback: ${feedback}
+
+${landingPageContent}
+
 Bubble URL: ${bubbleUrl}
 
-For each customer, include:
+Based on both the validation data AND the landing page content, create 3 diverse customer personas that would realistically be interested in this solution. For each customer, include:
 - Name and role/job
 - Background and demographics
 - Specific pain points related to the problem
@@ -341,6 +375,26 @@ Respond naturally as this customer would. Be realistic about your interest level
     const { validationData, bubbleUrl, customerInterviews, customersInterviewed } = req.body;
 
     try {
+      // Also crawl landing page for simulation context
+      let landingPageContent = "";
+      try {
+        const pageResponse = await axios.get(bubbleUrl, { 
+          timeout: 10000,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; ValidatorAI-Bot/1.0)'
+          }
+        });
+        const $ = cheerio.load(pageResponse.data);
+        
+        const title = $('title').text() || "";
+        const headings = $('h1, h2, h3').map((_, el) => $(el).text()).get().join(' | ');
+        const paragraphs = $('p').map((_, el) => $(el).text()).get().slice(0, 10).join(' ');
+        
+        landingPageContent = `Landing Page: ${title} | ${headings} | ${paragraphs}`;
+      } catch (crawlError) {
+        landingPageContent = "Landing page unavailable";
+      }
+
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
@@ -352,21 +406,29 @@ Respond naturally as this customer would. Be realistic about your interest level
             role: "user",
             content: `Create a realistic 6-month startup journey simulation for:
 
+ORIGINAL VALIDATION:
 Startup: ${validationData.idea}
 Target Customer: ${validationData.targetCustomer}
 Problem: ${validationData.problemSolved}
-Bubble Preview: ${bubbleUrl}
-Customers Interviewed: ${customersInterviewed}
+AI Feedback: ${validationData.feedback}
 
-Based on the customer interviews and market reality, show month-by-month progression including:
-- Revenue growth (start conservative)
-- User acquisition 
-- Key challenges they'll face
-- Wins and milestones
+CURRENT LANDING PAGE:
+${landingPageContent}
+Bubble Preview: ${bubbleUrl}
+
+CUSTOMER RESEARCH:
+Customers Interviewed: ${customersInterviewed}
+Customer Interview Insights: ${JSON.stringify(customerInterviews).slice(0, 1000)}
+
+Based on the validation data, landing page content, and customer interviews, show month-by-month progression including:
+- Revenue growth (start conservative but realistic for this specific idea)
+- User acquisition based on the target market
+- Key challenges they'll face specific to this business model
+- Wins and milestones realistic for their market
 - Important decisions to make
 - Market feedback patterns
 
-Make it educational and realistic. Include specific numbers, challenges, and growth patterns typical for this type of startup.
+Make it educational and realistic. Include specific numbers, challenges, and growth patterns typical for this type of startup and market.
 
 Return JSON:
 {
