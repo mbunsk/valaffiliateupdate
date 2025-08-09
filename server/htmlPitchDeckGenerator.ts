@@ -1,0 +1,544 @@
+import * as htmlPdf from 'html-pdf-node';
+
+export interface PitchDeckData {
+  validationData: {
+    idea: string;
+    targetCustomer: string;
+    problemSolved: string;
+    feedback: string;
+  };
+  customerInsights: Array<{
+    persona: {
+      name: string;
+      role: string;
+      background: string;
+      painPoints: string[];
+      priceWillingness: string;
+    };
+    conversations?: Array<{
+      question: string;
+      response: string;
+    }>;
+  }>;
+  simulationData: Array<{
+    month: number;
+    title: string;
+    challenges: string[];
+    wins: string[];
+    users: number;
+    keyDecisions: string[];
+  }>;
+  landingPageContent?: string;
+}
+
+export class HtmlPitchDeckGenerator {
+  private parseFeedbackScore(feedback: string): number {
+    const scoreMatch = feedback.match(/(\d+)\/100/);
+    return scoreMatch ? parseInt(scoreMatch[1]) : 75;
+  }
+
+  private extractFeedbackSection(feedback: string, sectionTitle: string): string[] {
+    const regex = new RegExp(`<h3>${sectionTitle}</h3>[\\s\\S]*?(?=<h3>|$)`, 'i');
+    const match = feedback.match(regex);
+    if (!match) return [];
+    
+    // Extract text content, remove HTML tags
+    const content = match[0].replace(/<[^>]*>/g, '').replace(/\n+/g, ' ').trim();
+    const lines = content.split('\n').filter(line => line.trim() && !line.includes(sectionTitle));
+    return lines.length > 0 ? lines : [content.replace(sectionTitle, '').trim()];
+  }
+
+  generatePitchDeckHtml(data: PitchDeckData): string {
+    const score = this.parseFeedbackScore(data.validationData.feedback);
+    const uniqueValue = this.extractFeedbackSection(data.validationData.feedback, "What Makes This Special");
+    const marketReality = this.extractFeedbackSection(data.validationData.feedback, "Market Reality Check");
+
+    return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>${data.validationData.idea} - Pitch Deck</title>
+        <style>
+            body { 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                margin: 0; 
+                padding: 40px; 
+                line-height: 1.6;
+                color: #333;
+            }
+            .slide { 
+                page-break-after: always; 
+                min-height: 90vh; 
+                padding: 40px;
+                box-sizing: border-box;
+            }
+            .slide:last-child { page-break-after: avoid; }
+            h1 { 
+                font-size: 2.5em; 
+                color: #1a56db; 
+                margin-bottom: 20px;
+                border-bottom: 3px solid #1a56db;
+                padding-bottom: 10px;
+            }
+            h2 { 
+                font-size: 2em; 
+                color: #1a56db; 
+                margin-bottom: 15px; 
+            }
+            h3 { 
+                font-size: 1.4em; 
+                color: #4f46e5; 
+                margin-bottom: 10px; 
+            }
+            .score { 
+                font-size: 3em; 
+                color: #16a34a; 
+                font-weight: bold; 
+                text-align: center; 
+                margin: 20px 0; 
+            }
+            .highlight { 
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                color: white; 
+                padding: 30px; 
+                border-radius: 10px; 
+                margin: 20px 0; 
+            }
+            ul { 
+                padding-left: 30px; 
+            }
+            li { 
+                margin-bottom: 10px; 
+                font-size: 1.1em; 
+            }
+            .customer-card { 
+                border: 2px solid #e5e7eb; 
+                border-radius: 10px; 
+                padding: 20px; 
+                margin: 15px 0; 
+                background: #f9fafb; 
+            }
+            .month-card { 
+                border-left: 4px solid #1a56db; 
+                padding-left: 20px; 
+                margin: 20px 0; 
+            }
+            .center { text-align: center; }
+            .subtitle { 
+                font-size: 1.2em; 
+                color: #6b7280; 
+                margin-bottom: 30px; 
+            }
+            .footer-text { 
+                font-size: 0.9em; 
+                color: #9ca3af; 
+                text-align: center; 
+                margin-top: 40px; 
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Cover Slide -->
+        <div class="slide">
+            <div class="center">
+                <h1>${data.validationData.idea}</h1>
+                <p class="subtitle">Startup Pitch Deck</p>
+                <div class="highlight">
+                    <p><strong>Target Customer:</strong> ${data.validationData.targetCustomer}</p>
+                    <p><strong>Problem Solved:</strong> ${data.validationData.problemSolved}</p>
+                </div>
+                <p class="footer-text">Generated by ValidatorAI - Startup Simulation Platform</p>
+            </div>
+        </div>
+
+        <!-- Problem Slide -->
+        <div class="slide">
+            <h1>The Problem</h1>
+            <div class="highlight">
+                <h3>Core Issue:</h3>
+                <p>${data.validationData.problemSolved}</p>
+            </div>
+            ${marketReality.length > 0 ? `
+            <h3>Market Context:</h3>
+            <ul>
+                ${marketReality.map(insight => `<li>${insight}</li>`).join('')}
+            </ul>
+            ` : ''}
+        </div>
+
+        <!-- Solution Slide -->
+        <div class="slide">
+            <h1>Our Solution</h1>
+            <div class="highlight">
+                <p>${data.validationData.idea}</p>
+            </div>
+            ${uniqueValue.length > 0 ? `
+            <h3>What Makes Us Special:</h3>
+            <ul>
+                ${uniqueValue.map(value => `<li>${value}</li>`).join('')}
+            </ul>
+            ` : ''}
+        </div>
+
+        <!-- Market Validation Slide -->
+        <div class="slide">
+            <h1>Market Validation</h1>
+            <div class="center">
+                <div class="score">${score}/100</div>
+                <p class="subtitle">Validation Score</p>
+            </div>
+            <p>Our comprehensive validation process shows strong market fit and customer demand for this solution.</p>
+        </div>
+
+        <!-- Customer Research Slide -->
+        <div class="slide">
+            <h1>Customer Research</h1>
+            <p class="subtitle">Interviewed ${data.customerInsights.length} Target Customers:</p>
+            ${data.customerInsights.map(insight => `
+            <div class="customer-card">
+                <h3>${insight.persona.name} - ${insight.persona.role}</h3>
+                <p><strong>Background:</strong> ${insight.persona.background}</p>
+                <p><strong>Pain Points:</strong> ${insight.persona.painPoints.join(', ')}</p>
+                <p><strong>Price Willingness:</strong> ${insight.persona.priceWillingness}</p>
+            </div>
+            `).join('')}
+        </div>
+
+        <!-- Customer Feedback -->
+        ${data.customerInsights.some(insight => insight.conversations && insight.conversations.length > 0) ? `
+        <div class="slide">
+            <h1>Customer Feedback Highlights</h1>
+            ${data.customerInsights.filter(insight => insight.conversations && insight.conversations.length > 0).map(insight => `
+            <div class="customer-card">
+                <h3>${insight.persona.name}:</h3>
+                <p><strong>Q:</strong> ${insight.conversations?.[0]?.question}</p>
+                <p><strong>A:</strong> ${insight.conversations?.[0]?.response}</p>
+            </div>
+            `).join('')}
+        </div>
+        ` : ''}
+
+        <!-- Business Model & Traction -->
+        ${data.simulationData && data.simulationData.length > 0 ? `
+        <div class="slide">
+            <h1>Business Model & Traction</h1>
+            <h3>6-Month Projection:</h3>
+            <div class="highlight">
+                <p><strong>Projected Users:</strong> ${data.simulationData[data.simulationData.length - 1].users?.toLocaleString()} users by Month 6</p>
+            </div>
+            <h3>Key Milestones:</h3>
+            <ul>
+                ${data.simulationData.slice(0, 3).filter(month => month.wins && month.wins.length > 0).map(month => 
+                    `<li>Month ${month.month}: ${month.wins[0]}</li>`
+                ).join('')}
+            </ul>
+        </div>
+        ` : ''}
+
+        <!-- Revenue Model -->
+        <div class="slide">
+            <h1>Revenue Model</h1>
+            ${data.customerInsights.some(c => c.persona.priceWillingness) ? `
+            <h3>Customer Price Research:</h3>
+            <ul>
+                ${data.customerInsights.filter(c => c.persona.priceWillingness).map(c => 
+                    `<li>${c.persona.name}: ${c.persona.priceWillingness}</li>`
+                ).join('')}
+            </ul>
+            ` : ''}
+            <div class="highlight">
+                <p>Subscription-based model with tiered pricing to accommodate different customer segments and use cases.</p>
+            </div>
+        </div>
+
+        <!-- Challenges & Risks -->
+        ${data.simulationData && data.simulationData.length > 0 ? `
+        <div class="slide">
+            <h1>Challenges & Risk Mitigation</h1>
+            <h3>Identified Challenges:</h3>
+            <ul>
+                ${Array.from(new Set(data.simulationData.flatMap(month => month.challenges || []))).slice(0, 5).map(challenge => 
+                    `<li>${challenge}</li>`
+                ).join('')}
+            </ul>
+            <p>We have comprehensive strategies to address each of these challenges based on our market research and customer feedback.</p>
+        </div>
+        ` : ''}
+
+        <!-- Next Steps -->
+        <div class="slide">
+            <h1>Next Steps & Milestones</h1>
+            ${data.simulationData && data.simulationData.length > 0 && data.simulationData[0].keyDecisions ? `
+            <h3>Immediate Actions:</h3>
+            <ul>
+                ${data.simulationData[0].keyDecisions.map(decision => `<li>${decision}</li>`).join('')}
+            </ul>
+            ` : ''}
+            <div class="highlight">
+                <h3>Ready to Move Forward</h3>
+                <p>Based on our validation and customer research, we're ready to proceed with confidence in this market opportunity.</p>
+            </div>
+        </div>
+
+        <!-- Thank You -->
+        <div class="slide">
+            <div class="center">
+                <h1>Thank You</h1>
+                <p class="subtitle">This pitch deck was generated based on AI-powered validation and customer research through ValidatorAI platform.</p>
+                <div class="highlight">
+                    <h3>Ready to validate your startup idea?</h3>
+                    <p>Visit ValidatorAI.com for free idea validation</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+  }
+
+  generateBusinessReportHtml(data: PitchDeckData): string {
+    const score = this.parseFeedbackScore(data.validationData.feedback);
+    const marketInsights = this.extractFeedbackSection(data.validationData.feedback, "Market Reality Check");
+
+    return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>${data.validationData.idea} - Business Report</title>
+        <style>
+            body { 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                margin: 0; 
+                padding: 40px; 
+                line-height: 1.8;
+                color: #374151;
+            }
+            .page { 
+                page-break-after: always; 
+                min-height: 90vh; 
+                padding: 30px;
+            }
+            .page:last-child { page-break-after: avoid; }
+            h1 { 
+                font-size: 2.2em; 
+                color: #1f2937; 
+                margin-bottom: 25px;
+                border-bottom: 2px solid #3b82f6;
+                padding-bottom: 15px;
+            }
+            h2 { 
+                font-size: 1.8em; 
+                color: #374151; 
+                margin: 30px 0 20px 0; 
+            }
+            h3 { 
+                font-size: 1.3em; 
+                color: #4b5563; 
+                margin: 20px 0 15px 0; 
+            }
+            p { 
+                margin-bottom: 15px; 
+                font-size: 1.05em; 
+            }
+            .summary-box { 
+                background: #f3f4f6; 
+                border-left: 4px solid #3b82f6; 
+                padding: 25px; 
+                margin: 25px 0; 
+                border-radius: 5px; 
+            }
+            .customer-detail { 
+                background: #fafafa; 
+                border: 1px solid #e5e7eb; 
+                padding: 20px; 
+                margin: 20px 0; 
+                border-radius: 8px; 
+            }
+            .month-detail { 
+                border-left: 3px solid #10b981; 
+                padding-left: 20px; 
+                margin: 25px 0; 
+            }
+            ul { 
+                padding-left: 25px; 
+            }
+            li { 
+                margin-bottom: 8px; 
+            }
+            .score-display { 
+                text-align: center; 
+                font-size: 2.5em; 
+                color: #059669; 
+                font-weight: bold; 
+                margin: 20px 0; 
+            }
+            .header-info { 
+                text-align: center; 
+                margin-bottom: 40px; 
+            }
+            .subtitle { 
+                color: #6b7280; 
+                font-size: 1.1em; 
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Title Page -->
+        <div class="page">
+            <div class="header-info">
+                <h1>Startup Validation Report</h1>
+                <h2>${data.validationData.idea}</h2>
+                <p class="subtitle">Comprehensive Business Analysis</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Executive Summary</h3>
+                <p><strong>Business Concept:</strong> ${data.validationData.idea}</p>
+                <p><strong>Target Market:</strong> ${data.validationData.targetCustomer}</p>
+                <p><strong>Problem Addressed:</strong> ${data.validationData.problemSolved}</p>
+                <div class="score-display">${score}/100</div>
+                <p style="text-align: center;"><em>Validation Score</em></p>
+            </div>
+        </div>
+
+        <!-- Market Analysis -->
+        <div class="page">
+            <h1>Market Analysis</h1>
+            ${marketInsights.length > 0 ? `
+            <div class="summary-box">
+                <h3>Market Insights</h3>
+                ${marketInsights.map(insight => `<p>${insight}</p>`).join('')}
+            </div>
+            ` : ''}
+            
+            <h3>Market Validation Score Breakdown</h3>
+            <p>Our validation score of ${score}/100 reflects comprehensive analysis across multiple factors including market potential, differentiation, feasibility, and problem-solution fit.</p>
+        </div>
+
+        <!-- Customer Research Details -->
+        <div class="page">
+            <h1>Customer Research Findings</h1>
+            <p>We conducted in-depth interviews with ${data.customerInsights.length} target customers to validate our assumptions and gather market insights.</p>
+            
+            ${data.customerInsights.map((insight, index) => `
+            <div class="customer-detail">
+                <h3>Customer Profile ${index + 1}: ${insight.persona.name}</h3>
+                <p><strong>Role:</strong> ${insight.persona.role}</p>
+                <p><strong>Background:</strong> ${insight.persona.background}</p>
+                
+                <h4>Key Pain Points:</h4>
+                <ul>
+                    ${insight.persona.painPoints.map(pain => `<li>${pain}</li>`).join('')}
+                </ul>
+                
+                <p><strong>Price Sensitivity:</strong> ${insight.persona.priceWillingness}</p>
+                
+                ${insight.conversations && insight.conversations.length > 0 ? `
+                <h4>Interview Highlights:</h4>
+                ${insight.conversations.map(conv => `
+                <p><strong>Q:</strong> ${conv.question}</p>
+                <p><strong>A:</strong> ${conv.response}</p>
+                `).join('')}
+                ` : ''}
+            </div>
+            `).join('')}
+        </div>
+
+        <!-- Detailed Simulation Results -->
+        ${data.simulationData && data.simulationData.length > 0 ? `
+        <div class="page">
+            <h1>6-Month Business Simulation</h1>
+            <p>Based on our customer research and market analysis, here's a detailed month-by-month projection of your startup journey:</p>
+            
+            ${data.simulationData.map(month => `
+            <div class="month-detail">
+                <h3>Month ${month.month}: ${month.title}</h3>
+                <p><strong>Projected Users:</strong> ${month.users?.toLocaleString()}</p>
+                
+                ${month.wins && month.wins.length > 0 ? `
+                <h4>Key Wins:</h4>
+                <ul>
+                    ${month.wins.map(win => `<li>${win}</li>`).join('')}
+                </ul>
+                ` : ''}
+                
+                ${month.challenges && month.challenges.length > 0 ? `
+                <h4>Challenges:</h4>
+                <ul>
+                    ${month.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+                </ul>
+                ` : ''}
+                
+                ${month.keyDecisions && month.keyDecisions.length > 0 ? `
+                <h4>Strategic Decisions:</h4>
+                <ul>
+                    ${month.keyDecisions.map(decision => `<li>${decision}</li>`).join('')}
+                </ul>
+                ` : ''}
+            </div>
+            `).join('')}
+        </div>
+        ` : ''}
+
+        <!-- Recommendations -->
+        <div class="page">
+            <h1>Recommendations & Next Steps</h1>
+            
+            <div class="summary-box">
+                <h3>Key Recommendations</h3>
+                <p>Based on our comprehensive analysis, we recommend proceeding with this business concept while focusing on the following areas:</p>
+                
+                <ul>
+                    <li>Customer validation through continued interviews and feedback collection</li>
+                    <li>MVP development focusing on core customer pain points</li>
+                    <li>Pricing strategy validation with target customer segments</li>
+                    <li>Market positioning to differentiate from competitors</li>
+                </ul>
+            </div>
+            
+            <h3>Success Metrics to Track</h3>
+            <ul>
+                <li>Customer acquisition rate and cost</li>
+                <li>User engagement and retention rates</li>
+                <li>Revenue growth and pricing validation</li>
+                <li>Customer satisfaction and Net Promoter Score</li>
+                <li>Market share and competitive positioning</li>
+            </ul>
+            
+            <p style="margin-top: 40px; text-align: center; color: #6b7280;">
+                <em>This report was generated through ValidatorAI's comprehensive startup validation platform.</em>
+            </p>
+        </div>
+    </body>
+    </html>
+    `;
+  }
+
+  async generatePitchDeck(data: PitchDeckData): Promise<Buffer> {
+    const html = this.generatePitchDeckHtml(data);
+    const options = { 
+      format: 'A4',
+      margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' },
+      printBackground: true
+    };
+    
+    const file = { content: html };
+    const pdfBuffer = await htmlPdf.generatePdf(file, options);
+    return pdfBuffer;
+  }
+
+  async generateBusinessReport(data: PitchDeckData): Promise<Buffer> {
+    const html = this.generateBusinessReportHtml(data);
+    const options = { 
+      format: 'A4',
+      margin: { top: '1.5cm', right: '2cm', bottom: '1.5cm', left: '2cm' },
+      printBackground: true
+    };
+    
+    const file = { content: html };
+    const pdfBuffer = await htmlPdf.generatePdf(file, options);
+    return pdfBuffer;
+  }
+}

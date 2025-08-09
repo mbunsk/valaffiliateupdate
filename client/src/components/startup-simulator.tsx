@@ -349,31 +349,63 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     }
   };
 
-  const downloadReport = async () => {
+  const downloadReport = async (reportType: 'business' | 'pitch' = 'business') => {
     try {
+      setIsLoading(true);
+      
       // Collect customer insights for report
       const customerInsights = customers.map(customer => ({
         persona: customer,
-        keyPoints: messages
-          .filter(m => m.customerId === customer.id && !m.isUser)
-          .map(m => m.text)
+        conversations: messages
+          .filter(m => m.customerId === customer.id)
+          .reduce((acc, msg, index, array) => {
+            if (msg.isUser && array[index + 1] && !array[index + 1].isUser) {
+              acc.push({
+                question: msg.text,
+                response: array[index + 1].text
+              });
+            }
+            return acc;
+          }, [] as Array<{question: string, response: string}>)
       }));
 
-      const response = await apiRequest("POST", "/api/generate-report", {
-        validationData,
-        customerInsights,
-        simulationData
+      const response = await fetch("/api/generate-report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          validationData,
+          customerInsights,
+          simulationData,
+          reportType
+        })
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error('Failed to generate report');
+      }
+
+      // Get the text content
+      const textContent = await response.text();
+      
+      // Create download link
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = reportType === 'pitch' 
+        ? `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`
+        : `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
       
       toast({
-        title: "Report Ready!",
-        description: data.message || "Report generated successfully"
+        title: "Download Started!",
+        description: reportType === 'pitch' ? "Pitch deck downloaded" : "Business report downloaded"
       });
-
-      // For now, just show success - PDF generation would go here
-      console.log("Report data:", data);
       
     } catch (error) {
       toast({
@@ -381,6 +413,8 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         description: "Failed to generate report",
         variant: "destructive"
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -580,7 +614,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                     <CardTitle className="flex items-center justify-between">
                       <span>Month {phase.month}: {phase.title}</span>
                       <Badge variant="outline">
-                        ${phase.revenue?.toLocaleString()} Revenue
+                        {phase.users?.toLocaleString()} Users
                       </Badge>
                     </CardTitle>
                   </CardHeader>
@@ -753,11 +787,30 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               ))}
             </div>
 
-            <div className="text-center">
-              <Button onClick={downloadReport} size="lg" className="bg-gradient-to-r from-primary to-secondary">
-                <Download className="mr-2 w-5 h-5" />
-                Download Complete Report & Pitch Deck
-              </Button>
+            <div className="text-center space-y-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  onClick={() => downloadReport('business')} 
+                  size="lg" 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  disabled={isLoading}
+                >
+                  <Download className="mr-2 w-5 h-5" />
+                  {isLoading ? "Generating..." : "Download Business Report"}
+                </Button>
+                <Button 
+                  onClick={() => downloadReport('pitch')} 
+                  size="lg" 
+                  className="bg-gradient-to-r from-primary to-secondary"
+                  disabled={isLoading}
+                >
+                  <Download className="mr-2 w-5 h-5" />
+                  {isLoading ? "Generating..." : "Download Pitch Deck"}
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Business Report: Detailed analysis & customer insights • Pitch Deck: Investor-ready presentation
+              </p>
             </div>
           </div>
         )}

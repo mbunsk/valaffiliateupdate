@@ -257,21 +257,35 @@ Create a landing page for this startup. The goal of the site is to highlight our
   // Generate complete report for download
   app.post("/api/generate-report", async (req, res) => {
     try {
-      const { validationData, customerInsights, simulationData } = req.body;
+      const { validationData, customerInsights, simulationData, reportType = 'business' } = req.body;
       
       if (!validationData?.idea) {
         return res.status(400).json({ message: "Validation data required" });
       }
 
-      // For now, just acknowledge the request - full implementation would generate PDF
-      res.json({ 
-        message: "Report generation ready - implementing PDF generation next",
-        data: {
-          validationData,
-          customerInsights: customerInsights?.length || 0,
-          simulationMonths: simulationData?.length || 0
-        }
-      });
+      const { TextReportGenerator } = await import("./textReportGenerator.js");
+      const generator = new TextReportGenerator();
+      
+      const pitchDeckData = {
+        validationData,
+        customerInsights: customerInsights || [],
+        simulationData: simulationData || [],
+        landingPageContent: undefined
+      };
+
+      const reportBuffer = reportType === 'pitch' 
+        ? generator.generatePitchDeck(pitchDeckData)
+        : generator.generateBusinessReport(pitchDeckData);
+
+      const filename = reportType === 'pitch' 
+        ? `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`
+        : `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Length', reportBuffer.length);
+      
+      res.send(reportBuffer);
     } catch (error) {
       console.error("Report generation error:", error);
       res.status(500).json({ message: "Failed to generate report" });
