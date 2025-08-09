@@ -387,26 +387,26 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         throw new Error('Failed to generate report');
       }
 
-      // Handle both PDF and text downloads
+      // Handle text downloads for both reports
       if (reportType === 'pitch') {
-        // Handle PDF download
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-      } else {
-        // Handle text download
+        // Handle text pitch deck download
         const textContent = await response.text();
         const blob = new Blob([textContent], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      } else {
+        // Handle PDF download for business report
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.pdf`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -799,28 +799,19 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             </div>
 
             <div className="text-center space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Button 
                   onClick={() => downloadReport('business')} 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating..." : "Download Business Report"}
-                </Button>
-                <Button 
-                  onClick={() => downloadReport('pitch')} 
-                  size="lg" 
-                  className="bg-gradient-to-r from-primary to-secondary"
-                  disabled={isLoading}
-                >
-                  <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating..." : "Download Pitch Deck"}
+                  {isLoading ? "Generating PDF..." : "Download Business Report (PDF)"}
                 </Button>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Business Report: Detailed analysis & customer insights (Text) • Pitch Deck: Investor-ready presentation (PDF)
+              <p className="text-sm text-muted-foreground text-center">
+                Professional PDF report with AI validation analysis, customer research insights, and 6-month growth projections
               </p>
             </div>
           </div>

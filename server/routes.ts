@@ -274,15 +274,17 @@ Create a landing page for this startup. The goal of the site is to highlight our
         landingPageContent: undefined
       };
 
-      // Only generate business reports as text - skip pitch decks
+      // Only generate business reports as PDF - skip pitch decks
       if (reportType === 'pitch') {
-        return res.status(400).json({ message: "Use /api/generate-pitch-deck for PDF pitch decks" });
+        return res.status(400).json({ message: "Pitch deck generation disabled" });
       }
 
-      const reportBuffer = generator.generateBusinessReport(pitchDeckData);
-      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+      const { SimplePDFGenerator } = await import("./simplePdfGenerator.js");
+      const pdfGenerator = new SimplePDFGenerator();
+      const reportBuffer = pdfGenerator.generateBusinessReportPDF(pitchDeckData);
+      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.pdf`;
 
-      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
       res.setHeader('Content-Length', reportBuffer.length);
       
@@ -308,15 +310,17 @@ Create a landing page for this startup. The goal of the site is to highlight our
         simulationData: simulationData || []
       };
 
-      const generator = new PDFPitchDeckGenerator();
-      const pdfBuffer = await generator.generatePitchDeckPDF(pitchDeckData);
-      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.pdf`;
+      // Fallback to text-based pitch deck since PDF generation failed
+      const { TextReportGenerator } = await import("./textReportGenerator.js");
+      const generator = new TextReportGenerator();
+      const pitchDeckContent = generator.generatePitchDeck(pitchDeckData);
+      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`;
 
-      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-      res.setHeader('Content-Length', pdfBuffer.length);
+      res.setHeader('Content-Length', pitchDeckContent.length);
       
-      res.send(pdfBuffer);
+      res.send(pitchDeckContent);
     } catch (error) {
       console.error("Pitch deck generation error:", error);
       res.status(500).json({ message: "Failed to generate pitch deck" });
