@@ -805,7 +805,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating PDF..." : "Download Business Report (PDF)"}
+                  {isLoading ? "Generating Report..." : "Download Business Report"}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">

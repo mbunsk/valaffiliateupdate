@@ -274,32 +274,15 @@ Create a landing page for this startup. The goal of the site is to highlight our
         landingPageContent: undefined
       };
 
-      // Only generate business reports now - pitch deck removed
+      // Generate comprehensive AI-written text business report
+      const reportContent = generator.generateBusinessReportText(pitchDeckData);
+      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
 
-      // Try PDF generation one more time with proper jsPDF setup
-      try {
-        const { SimplePDFGenerator } = await import("./simplePdfGenerator.js");
-        const pdfGenerator = new SimplePDFGenerator();
-        const reportBuffer = pdfGenerator.generateBusinessReportPDF(pitchDeckData);
-        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.pdf`;
-
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-        res.setHeader('Content-Length', reportBuffer.length);
-        
-        res.send(reportBuffer);
-      } catch (pdfError) {
-        console.error("PDF generation failed, falling back to text:", pdfError);
-        // Fallback to text if PDF fails
-        const reportContent = generator.generateBusinessReportText(pitchDeckData);
-        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
-
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-        res.setHeader('Content-Length', reportContent.length);
-        
-        res.send(reportContent);
-      }
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Length', reportContent.length);
+      
+      res.send(reportContent);
     } catch (error) {
       console.error("Report generation error:", error);
       res.status(500).json({ message: "Failed to generate report" });
