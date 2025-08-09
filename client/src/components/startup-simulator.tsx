@@ -349,34 +349,17 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     }
   };
 
-  const downloadReport = async () => {
+  const downloadSimulationPDF = async () => {
     try {
       setIsLoading(true);
       
-      // Collect customer insights for report
-      const customerInsights = customers.map(customer => ({
-        persona: customer,
-        conversations: messages
-          .filter(m => m.customerId === customer.id)
-          .reduce((acc, msg, index, array) => {
-            if (msg.isUser && array[index + 1] && !array[index + 1].isUser) {
-              acc.push({
-                question: msg.text,
-                response: array[index + 1].text
-              });
-            }
-            return acc;
-          }, [] as Array<{question: string, response: string}>)
-      }));
-
-      const response = await fetch("/api/generate-report", {
+      const response = await fetch("/api/generate-simulation-pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
           validationData,
-          customerInsights,
           simulationData
         })
       });
@@ -799,17 +782,17 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             <div className="text-center space-y-4">
               <div className="flex justify-center">
                 <Button 
-                  onClick={() => downloadReport()} 
+                  onClick={() => downloadSimulationPDF()} 
                   size="lg" 
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating Report..." : "Download Business Report"}
+                  {isLoading ? "Generating PDF..." : "Download 6-Month Roadmap"}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                Comprehensive AI-written business analysis with validation insights and growth projections
+                Clean PDF summary of your 6-month startup simulation roadmap
               </p>
             </div>
           </div>
