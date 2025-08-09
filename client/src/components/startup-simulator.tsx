@@ -59,12 +59,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
   const { toast } = useToast();
 
   const validateBubbleUrl = (url: string) => {
-    const bubblePatterns = [
-      /bubble\.io/i,
-      /bubbleapps\.io/i,
-      /preview.*bubble/i
-    ];
-    return bubblePatterns.some(pattern => pattern.test(url));
+    return /bubble/i.test(url);
   };
 
   const startSimulation = async () => {
@@ -80,7 +75,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     if (!validateBubbleUrl(bubbleUrl)) {
       toast({
         title: "Invalid URL",
-        description: "Please enter a valid Bubble.io preview URL",
+        description: "URL must contain 'bubble' to continue",
         variant: "destructive"
       });
       return;
@@ -273,7 +268,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                   className="text-lg p-4"
                 />
                 <p className="text-sm text-muted-foreground">
-                  Must be a Bubble.io preview URL to continue
+                  URL must contain 'bubble' to continue (any Bubble preview URL works)
                 </p>
                 <Button
                   onClick={startSimulation}

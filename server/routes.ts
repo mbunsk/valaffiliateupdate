@@ -240,9 +240,8 @@ Create a landing page for this startup. The goal of the site is to highlight our
     const { idea, targetCustomer, problemSolved, bubbleUrl } = req.body;
     
     // Validate Bubble URL
-    const bubblePatterns = [/bubble\.io/i, /bubbleapps\.io/i, /preview.*bubble/i];
-    if (!bubblePatterns.some(pattern => pattern.test(bubbleUrl))) {
-      return res.status(400).json({ message: "Must be a valid Bubble.io preview URL" });
+    if (!/bubble/i.test(bubbleUrl)) {
+      return res.status(400).json({ message: "URL must contain 'bubble' to continue" });
     }
 
     try {
