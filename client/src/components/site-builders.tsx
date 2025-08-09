@@ -80,29 +80,13 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
 
   const builders = [
     {
-      name: "Base44",
-      description: "Free builder with powerful features — no credit card needed!",
-      url: "https://base44.pxf.io/c/4695538/2049275/25619?trafcat=base",
-      color: "bg-orange-600 hover:bg-orange-700",
-      iconBg: "bg-orange-100",
-      iconColor: "text-orange-600",
-      recommended: true,
-    },
-    {
-      name: "Lovable",
-      description: "Beautiful visual editor — start creating instantly for free!",
-      url: "https://lovable.dev/?via=aron",
-      color: "bg-pink-600 hover:bg-pink-700",
-      iconBg: "bg-pink-100",
-      iconColor: "text-pink-600",
-    },
-    {
       name: "Bubble",
       description: "Visual programming — build apps without code for free!",
       url: "https://bubble.pxf.io/e1kn1O",
       color: "bg-purple-600 hover:bg-purple-700",
       iconBg: "bg-purple-100",
       iconColor: "text-purple-600",
+      recommended: true,
     },
   ];
 
@@ -198,7 +182,7 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
             {/* Instructions to use builders */}
             <div className="text-center mt-6 p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
               <p className="text-foreground/80 text-lg">
-                <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with the site builders below</span> to see what your idea looks like live!
+                <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with our site builder partner, Bubble below</span> to see what your idea looks like live!
               </p>
             </div>
 
@@ -206,10 +190,10 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           </CardContent>
         </Card>
 
-        {/* Site Builders */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Site Builder */}
+        <div className="flex justify-center">
           {builders.map((builder, index) => (
-            <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-orange-400 hover:border-orange-500 ring-2 ring-orange-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float`} style={{animationDelay: `${index * 0.2}s`}}>
+            <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-purple-400 hover:border-purple-500 ring-2 ring-purple-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float max-w-md`} style={{animationDelay: `${index * 0.2}s`}}>
               <CardContent className="p-8 text-center">
                 <a 
                   href={builder.url} 
