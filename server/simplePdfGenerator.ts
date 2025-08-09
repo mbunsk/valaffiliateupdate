@@ -1,4 +1,4 @@
-import jsPDF from 'jspdf';
+const { jsPDF } = require('jspdf');
 
 interface ReportData {
   validationData: {

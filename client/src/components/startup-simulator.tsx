@@ -491,7 +491,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-green-500/20 max-w-md">
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 shadow-lg border border-green-500/20 max-w-xs sm:max-w-md">
                   <div className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
                     <span className="font-semibold text-green-600 dark:text-green-400">Val says:</span> I've created 3 potential customers for your idea! Chat with each one to understand their needs, then click DONE. After all THREE are complete, I'll generate your 6-month startup simulation! 🚀
                   </div>
@@ -500,7 +500,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {/* Customer List */}
               <div className="space-y-4">
                 <h3 className="text-xl font-bold">Your Potential Customers</h3>
@@ -799,20 +799,20 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             </div>
 
             <div className="text-center space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col gap-4 justify-center">
                 <Button 
                   onClick={() => downloadReport('business')} 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 w-full sm:w-auto"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating PDF..." : "Download Business Report (PDF)"}
+                  {isLoading ? "Generating Report..." : "Download Business Report"}
                 </Button>
                 <Button 
                   onClick={() => downloadReport('pitch')} 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
@@ -820,7 +820,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                Business Report: Professional PDF with analysis • Pitch Deck: Investor-ready presentation with design elements
+                Business Report: Comprehensive AI analysis • Pitch Deck: Investor-ready presentation with design elements
               </p>
             </div>
           </div>
