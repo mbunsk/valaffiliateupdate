@@ -242,13 +242,13 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             <span className="w-8 h-8 bg-gradient-to-br from-accent to-secondary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
               3
             </span>
-            🎮 Startup Reality Check
+            🎮 Startup Simulation
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Test Your Idea Like a Real Founder! <span className="text-4xl">🚀</span>
+            Experience Your Startup Journey! <span className="text-4xl">🚀</span>
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
-            Chat with AI customers, discover insights, and see your 6-month startup journey simulation
+            Chat with AI customers, discover insights, and see your 6-month startup simulation with realistic challenges and growth
           </p>
         </div>
 
