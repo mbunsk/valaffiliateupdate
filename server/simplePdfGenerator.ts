@@ -1,4 +1,4 @@
-const { jsPDF } = require('jspdf');
+import jsPDF from 'jspdf';
 
 interface ReportData {
   validationData: {
@@ -27,7 +27,7 @@ interface ReportData {
 
 export class SimplePDFGenerator {
   generateBusinessReportPDF(data: ReportData): Buffer {
-    const doc = new jsPDF();
+    const doc = new jsPDF('p', 'mm', 'a4');
     let yPosition = 20;
     const pageWidth = doc.internal.pageSize.width;
     const margin = 20;

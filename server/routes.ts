@@ -274,29 +274,32 @@ Create a landing page for this startup. The goal of the site is to highlight our
         landingPageContent: undefined
       };
 
-      if (reportType === 'pitch') {
-        // Generate text-based pitch deck with design elements
-        const { TextReportGenerator } = await import("./textReportGenerator.js");
-        const textGenerator = new TextReportGenerator();
-        const pitchDeckContent = textGenerator.generatePitchDeck(pitchDeckData);
-        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`;
+      // Only generate business reports now - pitch deck removed
+
+      // Try PDF generation one more time with proper jsPDF setup
+      try {
+        const { SimplePDFGenerator } = await import("./simplePdfGenerator.js");
+        const pdfGenerator = new SimplePDFGenerator();
+        const reportBuffer = pdfGenerator.generateBusinessReportPDF(pitchDeckData);
+        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.pdf`;
+
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Length', reportBuffer.length);
+        
+        res.send(reportBuffer);
+      } catch (pdfError) {
+        console.error("PDF generation failed, falling back to text:", pdfError);
+        // Fallback to text if PDF fails
+        const reportContent = generator.generateBusinessReportText(pitchDeckData);
+        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
 
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-        res.setHeader('Content-Length', pitchDeckContent.length);
+        res.setHeader('Content-Length', reportContent.length);
         
-        return res.send(pitchDeckContent);
+        res.send(reportContent);
       }
-
-      // Generate AI-written business report text instead of PDF due to jsPDF issues
-      const reportContent = generator.generateBusinessReportText(pitchDeckData);
-      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
-
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-      res.setHeader('Content-Length', reportContent.length);
-      
-      res.send(reportContent);
     } catch (error) {
       console.error("Report generation error:", error);
       res.status(500).json({ message: "Failed to generate report" });

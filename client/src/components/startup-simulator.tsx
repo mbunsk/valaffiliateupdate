@@ -349,7 +349,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     }
   };
 
-  const downloadReport = async (reportType: 'business' | 'pitch' = 'business') => {
+  const downloadReport = async () => {
     try {
       setIsLoading(true);
       
@@ -369,8 +369,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           }, [] as Array<{question: string, response: string}>)
       }));
 
-      const apiEndpoint = reportType === 'pitch' ? "/api/generate-pitch-deck" : "/api/generate-report";
-      const response = await fetch(apiEndpoint, {
+      const response = await fetch("/api/generate-report", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -378,8 +377,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         body: JSON.stringify({
           validationData,
           customerInsights,
-          simulationData,
-          reportType: reportType === 'pitch' ? undefined : reportType
+          simulationData
         })
       });
 
@@ -799,28 +797,19 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             </div>
 
             <div className="text-center space-y-4">
-              <div className="flex flex-col gap-4 justify-center">
+              <div className="flex justify-center">
                 <Button 
-                  onClick={() => downloadReport('business')} 
+                  onClick={() => downloadReport()} 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating Report..." : "Download Business Report"}
-                </Button>
-                <Button 
-                  onClick={() => downloadReport('pitch')} 
-                  size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto"
-                  disabled={isLoading}
-                >
-                  <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating..." : "Download Pitch Deck (Text)"}
+                  {isLoading ? "Generating PDF..." : "Download Business Report (PDF)"}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                Business Report: Comprehensive AI analysis • Pitch Deck: Investor-ready presentation with design elements
+                Comprehensive AI-written business analysis with validation insights and growth projections
               </p>
             </div>
           </div>
