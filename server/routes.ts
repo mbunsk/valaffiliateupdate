@@ -8,6 +8,7 @@ import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
 import { z } from "zod";
 import { generateValidationFeedback, generateLandingPagePrompt, generateCustomerPersonas, handleCustomerInterview, generateStartupSimulation } from "./openai";
 import { requireAuth, optionalAuth, AuthenticatedRequest } from "./auth";
+import { PDFPitchDeckGenerator } from "./pdfPitchDeckGenerator";
 import OpenAI from "openai";
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -273,13 +274,13 @@ Create a landing page for this startup. The goal of the site is to highlight our
         landingPageContent: undefined
       };
 
-      const reportBuffer = reportType === 'pitch' 
-        ? generator.generatePitchDeck(pitchDeckData)
-        : generator.generateBusinessReport(pitchDeckData);
+      // Only generate business reports as text - skip pitch decks
+      if (reportType === 'pitch') {
+        return res.status(400).json({ message: "Use /api/generate-pitch-deck for PDF pitch decks" });
+      }
 
-      const filename = reportType === 'pitch' 
-        ? `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`
-        : `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+      const reportBuffer = generator.generateBusinessReport(pitchDeckData);
+      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
 
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
@@ -289,6 +290,36 @@ Create a landing page for this startup. The goal of the site is to highlight our
     } catch (error) {
       console.error("Report generation error:", error);
       res.status(500).json({ message: "Failed to generate report" });
+    }
+  });
+
+  // Generate and download pitch deck (PDF format)
+  app.post("/api/generate-pitch-deck", async (req, res) => {
+    try {
+      const { validationData, customerInsights, simulationData } = req.body;
+
+      if (!validationData?.idea) {
+        return res.status(400).json({ message: "Validation data required" });
+      }
+
+      const pitchDeckData = {
+        validationData,
+        customerInsights: customerInsights || [],
+        simulationData: simulationData || []
+      };
+
+      const generator = new PDFPitchDeckGenerator();
+      const pdfBuffer = await generator.generatePitchDeckPDF(pitchDeckData);
+      const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.pdf`;
+
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Length', pdfBuffer.length);
+      
+      res.send(pdfBuffer);
+    } catch (error) {
+      console.error("Pitch deck generation error:", error);
+      res.status(500).json({ message: "Failed to generate pitch deck" });
     }
   });
 

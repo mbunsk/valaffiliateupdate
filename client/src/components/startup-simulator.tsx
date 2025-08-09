@@ -369,7 +369,8 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           }, [] as Array<{question: string, response: string}>)
       }));
 
-      const response = await fetch("/api/generate-report", {
+      const apiEndpoint = reportType === 'pitch' ? "/api/generate-pitch-deck" : "/api/generate-report";
+      const response = await fetch(apiEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -378,7 +379,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           validationData,
           customerInsights,
           simulationData,
-          reportType
+          reportType: reportType === 'pitch' ? undefined : reportType
         })
       });
 
@@ -386,21 +387,31 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
         throw new Error('Failed to generate report');
       }
 
-      // Get the text content
-      const textContent = await response.text();
-      
-      // Create download link
-      const blob = new Blob([textContent], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = reportType === 'pitch' 
-        ? `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`
-        : `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
+      // Handle both PDF and text downloads
+      if (reportType === 'pitch') {
+        // Handle PDF download
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      } else {
+        // Handle text download
+        const textContent = await response.text();
+        const blob = new Blob([textContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${validationData?.idea.replace(/[^a-zA-Z0-9]/g, '_')}_BusinessReport.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }
       
       toast({
         title: "Download Started!",
@@ -523,7 +534,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               
               {interviewsCompleted.length >= 1 && (
                 <Button onClick={moveToSimulation} disabled={isLoading} className="w-full" size="lg">
-                  {isLoading ? "Generating Simulation..." : "Generate Journey Simulation"}
+                  {isLoading ? "Generating Simulation. Wait 30 Seconds..." : "Generate Journey Simulation"}
                 </Button>
               )}
             </div>
@@ -809,7 +820,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Business Report: Detailed analysis & customer insights • Pitch Deck: Investor-ready presentation
+                Business Report: Detailed analysis & customer insights (Text) • Pitch Deck: Investor-ready presentation (PDF)
               </p>
             </div>
           </div>
