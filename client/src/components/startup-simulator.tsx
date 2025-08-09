@@ -234,7 +234,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
       });
 
       const data = await response.json();
-      setSimulationData(data.simulation);
+      // Handle both direct array and nested object responses
+      const simulation = Array.isArray(data.simulation) ? data.simulation : (data.simulation?.phases || data.phases || []);
+      setSimulationData(simulation);
       setCurrentPhase('simulation');
     } catch (error) {
       toast({
@@ -358,7 +360,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               <div className="space-y-4">
                 <h3 className="text-xl font-bold">Your Potential Customers</h3>
                 <p className="text-sm text-foreground/70">
-                  Talk with each customer until you have your questions answered, then click <strong>DONE</strong>. After all THREE customers are marked DONE, the 6-month simulation starts automatically.
+                  Talk with each customer until you have your questions answered, then click <strong>DONE</strong>. After talking with customers, click the <strong>Generate Journey Simulation</strong> button below.
                 </p>
               {customers.map((customer) => (
                 <Card 
@@ -386,8 +388,8 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               ))}
               
               {interviewsCompleted.length >= 1 && (
-                <Button onClick={moveToSimulation} className="w-full" size="lg">
-                  Generate Journey Simulation
+                <Button onClick={moveToSimulation} disabled={isLoading} className="w-full" size="lg">
+                  {isLoading ? "Generating Simulation..." : "Generate Journey Simulation"}
                 </Button>
               )}
             </div>
