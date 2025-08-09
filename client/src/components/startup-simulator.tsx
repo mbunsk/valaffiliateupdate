@@ -799,19 +799,28 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             </div>
 
             <div className="text-center space-y-4">
-              <div className="flex justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   onClick={() => downloadReport('business')} 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
                   {isLoading ? "Generating PDF..." : "Download Business Report (PDF)"}
                 </Button>
+                <Button 
+                  onClick={() => downloadReport('pitch')} 
+                  size="lg" 
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  disabled={isLoading}
+                >
+                  <Download className="mr-2 w-5 h-5" />
+                  {isLoading ? "Generating..." : "Download Pitch Deck (Text)"}
+                </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                Professional PDF report with AI validation analysis, customer research insights, and 6-month growth projections
+                Business Report: Professional PDF with analysis • Pitch Deck: Investor-ready presentation with design elements
               </p>
             </div>
           </div>

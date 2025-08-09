@@ -274,9 +274,18 @@ Create a landing page for this startup. The goal of the site is to highlight our
         landingPageContent: undefined
       };
 
-      // Only generate business reports as PDF - skip pitch decks
       if (reportType === 'pitch') {
-        return res.status(400).json({ message: "Pitch deck generation disabled" });
+        // Generate text-based pitch deck with design elements
+        const { TextReportGenerator } = await import("./textReportGenerator.js");
+        const textGenerator = new TextReportGenerator();
+        const pitchDeckContent = textGenerator.generatePitchDeck(pitchDeckData);
+        const filename = `${validationData.idea.replace(/[^a-zA-Z0-9]/g, '_')}_PitchDeck.txt`;
+
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Length', pitchDeckContent.length);
+        
+        return res.send(pitchDeckContent);
       }
 
       const { SimplePDFGenerator } = await import("./simplePdfGenerator.js");
