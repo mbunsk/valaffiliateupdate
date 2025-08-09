@@ -104,7 +104,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
       });
 
       const data = await response.json();
-      setCustomers(data.customers);
+      // Handle both direct array and nested object responses
+      const customers = Array.isArray(data.customers) ? data.customers : (data.customers?.personas || data.personas || []);
+      setCustomers(customers);
       setCurrentPhase('interviews');
       
       toast({

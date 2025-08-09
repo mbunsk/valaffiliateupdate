@@ -212,6 +212,22 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                     />
                   </div>
 
+                  {/* Next Steps Component */}
+                  <div className="mt-8 text-center">
+                    <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 p-6 rounded-xl border border-green-500/20">
+                      <h4 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-3">
+                        Great work exploring your idea! 🎉
+                      </h4>
+                      <p className="text-lg text-foreground/80 mb-4">
+                        Here is the next step to validate: Create a free landing page mockup to visualize your idea clearly. 
+                        <span className="font-semibold text-primary"> You need to go to Step 2 in order to talk to customer personas and simulate a launch!</span>
+                      </p>
+                      <div className="text-sm text-foreground/60">
+                        It's completely free and takes just 1 minute ✨
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Save Results Component */}
                   <div className="mt-6">
                     <SaveResults validationData={validationResult} />
