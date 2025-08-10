@@ -124,8 +124,11 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
                 <h3 className="text-xl font-semibold mb-3 text-muted-foreground">
                   Site Builder Will Appear Here
                 </h3>
-                <p className="text-muted-foreground">
-                  Complete the idea validation above to unlock the site builder and create your landing page!
+                <p className="text-muted-foreground mb-2">
+                  Complete the idea validation above to unlock the site builder!
+                </p>
+                <p className="text-sm text-muted-foreground/80">
+                  AI will provide a custom prompt for you to create a free landing page based on your validated idea.
                 </p>
               </CardContent>
             </Card>
