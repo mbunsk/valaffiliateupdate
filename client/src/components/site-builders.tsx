@@ -115,97 +115,103 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           </p>
         </div>
 
-        {/* Prompt Generator */}
-        <Card className="mb-12 shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
-          <CardContent className="p-8">
-            <div className="text-center mb-6">
-              <span className="text-3xl animate-wiggle">📝</span>
-              <h3 className="text-2xl font-black gradient-text mt-2">
-                {validationData ? "Your Custom Landing Page Prompt!" : "Free Landing Page Prompt!"}
-              </h3>
-              <p className="text-foreground/70 mt-2">
-                {validationData 
-                  ? "AI-generated prompt based on your idea and validation feedback" 
-                  : "Copy this and create your mockup in minutes — completely free!"
-                }
-              </p>
-            </div>
-            
+        {/* Show message if no validation data yet */}
+        {!validationData && (
+          <div className="text-center mb-12">
+            <Card className="max-w-2xl mx-auto border-2 border-dashed border-muted-foreground/30 bg-muted/20">
+              <CardContent className="p-8">
+                <div className="text-4xl mb-4">🔒</div>
+                <h3 className="text-xl font-semibold mb-3 text-muted-foreground">
+                  Site Builder Will Appear Here
+                </h3>
+                <p className="text-muted-foreground">
+                  Complete the idea validation above to unlock the site builder and create your landing page!
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
-            
-            <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-4 sm:p-6 border-2 border-accent/30 highlight-border">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
-                <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
-                <Button
-                  onClick={async () => {
-                    if (validationData && !currentPrompt) {
-                      await generateRefinedPrompt();
-                    }
-                    copyPrompt();
-                  }}
-                  variant="outline"
-                  className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-                  size="sm"
-                  disabled={generatingPrompt}
-                >
-                  {generatingPrompt ? (
-                    <div className="flex items-center">
-                      <div className="animate-spin w-4 h-4 mr-2 border-2 border-primary border-t-transparent rounded-full" />
-                      Generating...
-                    </div>
-                  ) : copied ? (
-                    <>
-                      <Check className="w-4 h-4 mr-2" />
-                      🎉 Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4 mr-2" />
-                      📋 Copy Prompt
-                    </>
-                  )}
-                </Button>
-              </div>
-              
-              <div className="bg-card/90 p-4 sm:p-6 rounded-xl border-2 border-primary/20 font-mono text-xs sm:text-sm text-foreground shadow-inner backdrop-blur-sm max-h-64 overflow-y-auto">
-                {validationData ? (
-                  getCustomPrompt()
-                ) : (
-                  <div className="text-center text-muted-foreground/70 py-8">
-                    <p className="text-sm">Your landing page prompt will appear here</p>
-                    <p className="text-sm">once you validate your startup idea above.</p>
+        {/* Only show prompt generator and builder if validation data exists */}
+        {validationData && (
+          <>
+            {/* Prompt Generator */}
+            <Card className="mb-12 shadow-2xl border-2 border-accent/30 bg-card/80 backdrop-blur-sm animate-pulse-slow">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <span className="text-3xl animate-wiggle">📝</span>
+                  <h3 className="text-2xl font-black gradient-text mt-2">
+                    Your Custom Landing Page Prompt!
+                  </h3>
+                  <p className="text-foreground/70 mt-2">
+                    AI-generated prompt based on your idea and validation feedback
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-4 sm:p-6 border-2 border-accent/30 highlight-border">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
+                    <p className="text-lg font-semibold text-foreground">✨ Copy & paste to get started free:</p>
+                    <Button
+                      onClick={async () => {
+                        if (!currentPrompt) {
+                          await generateRefinedPrompt();
+                        }
+                        copyPrompt();
+                      }}
+                      variant="outline"
+                      className="rounded-full border-2 border-primary/30 hover:bg-primary/10 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                      size="sm"
+                      disabled={generatingPrompt}
+                    >
+                      {generatingPrompt ? (
+                        <div className="flex items-center">
+                          <div className="animate-spin w-4 h-4 mr-2 border-2 border-primary border-t-transparent rounded-full" />
+                          Generating...
+                        </div>
+                      ) : copied ? (
+                        <>
+                          <Check className="w-4 h-4 mr-2" />
+                          🎉 Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 mr-2" />
+                          📋 Copy Prompt
+                        </>
+                      )}
+                    </Button>
                   </div>
-                )}
-              </div>
-            </div>
-            
-            {/* Instructions to use builders */}
-            <div className="text-center mt-6 p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
-              <p className="text-foreground/80 text-lg mb-2">
-                <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with our site builder partner, Bubble below</span> to see what your idea looks like live!
-              </p>
-              <p className="text-foreground/60 text-sm">
-                After creating your landing page, scroll down for the final step where you can simulate customer exploration, simulate a launch and download your report.
-              </p>
-            </div>
+                  
+                  <div className="bg-card/90 p-4 sm:p-6 rounded-xl border-2 border-primary/20 font-mono text-xs sm:text-sm text-foreground shadow-inner backdrop-blur-sm max-h-64 overflow-y-auto">
+                    {getCustomPrompt()}
+                  </div>
+                </div>
+                
+                {/* Instructions to use builders */}
+                <div className="text-center mt-6 p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+                  <p className="text-foreground/80 text-lg mb-2">
+                    <span className="pulse-pointer text-2xl">👇</span> <span className="font-semibold">Paste your prompt with our site builder partner, Bubble below</span> to see what your idea looks like live!
+                  </p>
+                  <p className="text-foreground/60 text-sm">
+                    After creating your landing page, scroll down for the final step where you can simulate customer exploration, simulate a launch and download your report.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
 
-
-          </CardContent>
-        </Card>
-
-        {/* Site Builder */}
-        <div className="flex justify-center">
-          {builders.map((builder, index) => (
-            <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-purple-400 hover:border-purple-500 ring-2 ring-purple-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float max-w-md`} style={{animationDelay: `${index * 0.2}s`}}>
-              <CardContent className="p-8 text-center">
-                <a 
-                  href={builder.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
-                  style={{animationDelay: `${index * 0.3}s`}}
-                >
-                  <img 
+            {/* Site Builder */}
+            <div className="flex justify-center">
+              {builders.map((builder, index) => (
+                <Card key={builder.name} className={`shadow-2xl border-2 ${builder.recommended ? 'border-purple-400 hover:border-purple-500 ring-2 ring-purple-200' : 'border-primary/20 hover:border-primary/40'} bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float max-w-md`} style={{animationDelay: `${index * 0.2}s`}}>
+                  <CardContent className="p-8 text-center">
+                    <a 
+                      href={builder.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce-gentle shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+                      style={{animationDelay: `${index * 0.3}s`}}
+                    >
+                      <img 
                     src={
                       builder.name === "Base44" ? base44Logo :
                       builder.name === "Lovable" ? lovableLogo :
@@ -230,16 +236,18 @@ export default function SiteBuilders({ validationData }: SiteBuildersProps) {
           ))}
         </div>
         
-        {/* Next Step Instructions */}
-        <div className="text-center mt-8">
-          <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary/10 to-accent/10 px-6 py-4 rounded-xl border border-primary/20">
-            <span className="text-2xl">👇</span>
-            <p className="text-lg text-foreground/80">
-              Once you visit Bubble and get your landing page URL, <span className="font-semibold text-primary">move to Step 3</span> for customer interviews and launch simulation!
-            </p>
-            <span className="text-xl">🚀</span>
-          </div>
-        </div>
+            {/* Next Step Instructions */}
+            <div className="text-center mt-8">
+              <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary/10 to-accent/10 px-6 py-4 rounded-xl border border-primary/20">
+                <span className="text-2xl">👇</span>
+                <p className="text-lg text-foreground/80">
+                  Once you visit Bubble and get your landing page URL, <span className="font-semibold text-primary">move to Step 3</span> for customer interviews and launch simulation!
+                </p>
+                <span className="text-xl">🚀</span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
