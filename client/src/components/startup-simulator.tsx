@@ -349,11 +349,11 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
     }
   };
 
-  const downloadSimulationPDF = async () => {
+  const downloadSimulationRoadmap = async () => {
     try {
       setIsLoading(true);
       
-      const response = await fetch("/api/generate-simulation-pdf", {
+      const response = await fetch("/api/generate-simulation-roadmap", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -782,17 +782,17 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             <div className="text-center space-y-4">
               <div className="flex justify-center">
                 <Button 
-                  onClick={() => downloadSimulationPDF()} 
+                  onClick={() => downloadSimulationRoadmap()} 
                   size="lg" 
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
                   disabled={isLoading}
                 >
                   <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating PDF..." : "Download 6-Month Roadmap"}
+                  {isLoading ? "Generating..." : "Download 6-Month Roadmap"}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground text-center">
-                Clean PDF summary of your 6-month startup simulation roadmap
+                Clean text summary of your 6-month startup simulation roadmap
               </p>
             </div>
           </div>
