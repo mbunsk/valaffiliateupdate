@@ -780,19 +780,11 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             </div>
 
             <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <Button 
-                  onClick={() => downloadSimulationRoadmap()} 
-                  size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3"
-                  disabled={isLoading}
-                >
-                  <Download className="mr-2 w-5 h-5" />
-                  {isLoading ? "Generating..." : "Download 6-Month Roadmap"}
-                </Button>
-              </div>
-              <p className="text-sm text-muted-foreground text-center">
-                Clean text summary of your 6-month startup simulation roadmap
+              <p className="text-lg font-medium text-green-600">
+                🎉 Simulation Complete!
+              </p>
+              <p className="text-sm text-muted-foreground text-center max-w-md mx-auto">
+                You've successfully validated your startup idea through customer interviews and explored your 6-month journey. Use these insights to move forward with confidence!
               </p>
             </div>
           </div>
