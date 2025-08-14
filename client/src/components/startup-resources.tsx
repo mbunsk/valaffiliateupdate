@@ -72,7 +72,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
                 <p className="text-lg text-muted-foreground mb-6">
                   Complete Step 1 (idea validation) to unlock your personalized toolkit including:
                 </p>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-left max-w-2xl mx-auto">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-center max-w-2xl mx-auto">
                   <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-200 dark:border-purple-700">
                     <div className="font-semibold text-purple-700 dark:text-purple-300">🌐 Website Builder</div>
                     <div className="text-sm text-purple-600 dark:text-purple-400">Create landing pages</div>
