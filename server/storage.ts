@@ -1,6 +1,6 @@
-import { users, validations, submissions, adminSessions, type User, type InsertUser, type Validation, type InsertValidation, type Submission, type InsertSubmission, type AdminSession, type InsertAdminSession } from "@shared/schema";
+import { users, validations, submissions, adminSessions, linkClicks, type User, type InsertUser, type Validation, type InsertValidation, type Submission, type InsertSubmission, type AdminSession, type InsertAdminSession, type LinkClick, type InsertLinkClick } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql, and } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -15,6 +15,8 @@ export interface IStorage {
   createAdminSession(insertSession: InsertAdminSession): Promise<AdminSession>;
   getAdminSession(id: string): Promise<AdminSession | undefined>;
   deleteExpiredAdminSessions(): Promise<void>;
+  trackLinkClick(company: string, linkType: string, url: string): Promise<void>;
+  getLinkClickStats(): Promise<LinkClick[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -85,6 +87,43 @@ export class DatabaseStorage implements IStorage {
   async deleteExpiredAdminSessions(): Promise<void> {
     const now = new Date();
     await db.delete(adminSessions).where(eq(adminSessions.expiresAt, now));
+  }
+
+  async trackLinkClick(company: string, linkType: string, url: string): Promise<void> {
+    // Try to find existing record
+    const [existing] = await db
+      .select()
+      .from(linkClicks)
+      .where(and(
+        eq(linkClicks.company, company),
+        eq(linkClicks.linkType, linkType)
+      ));
+
+    if (existing) {
+      // Update existing record
+      await db
+        .update(linkClicks)
+        .set({ 
+          clickCount: sql`${linkClicks.clickCount} + 1`,
+          lastClicked: new Date()
+        })
+        .where(eq(linkClicks.id, existing.id));
+    } else {
+      // Create new record
+      await db
+        .insert(linkClicks)
+        .values({
+          company,
+          linkType,
+          url,
+          clickCount: 1,
+          lastClicked: new Date()
+        });
+    }
+  }
+
+  async getLinkClickStats(): Promise<LinkClick[]> {
+    return await db.select().from(linkClicks).orderBy(linkClicks.company, linkClicks.linkType);
   }
 }
 

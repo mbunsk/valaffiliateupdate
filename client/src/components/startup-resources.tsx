@@ -3,6 +3,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 
+// Track link clicks
+const trackClick = async (company: string, linkType: string, url: string) => {
+  try {
+    await fetch('/api/track-click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ company, linkType, url })
+    });
+  } catch (error) {
+    console.log('Click tracking failed:', error);
+  }
+};
+
 import bubbleLogo from "@assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png";
 import beehiivLogo from "@assets/beehiivlogopng_1755201488531.png";
 import liveplanLogo from "@assets/liveplanlogo_1755201488533.png";
@@ -184,7 +197,13 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             >
               <CardContent className="p-6 text-center">
                 {/* Logo */}
-                <a href={resource.url} target="_blank" rel="noopener noreferrer" className="inline-block">
+                <a 
+                  href={resource.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-block"
+                  onClick={() => trackClick(resource.name.toLowerCase(), 'logo', resource.url)}
+                >
                   <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
                     {resource.logo ? (
                       <img 
@@ -214,7 +233,13 @@ export default function StartupResources({ validationData }: StartupResourcesPro
                   asChild 
                   className={`w-full ${resource.color} transition-all duration-300 transform hover:scale-105 rounded-xl py-4 text-sm font-bold shadow-lg hover:shadow-xl`}
                 >
-                  <a href={resource.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                  <a 
+                    href={resource.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center justify-center"
+                    onClick={() => trackClick(resource.name.toLowerCase(), 'button', resource.url)}
+                  >
                     <span className="mr-2">🚀</span>
                     Try {resource.name}
                     <ExternalLink className="ml-2 w-4 h-4" />

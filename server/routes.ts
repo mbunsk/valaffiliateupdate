@@ -4,7 +4,7 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import { storage } from "./storage";
-import { insertSubmissionSchema, insertValidationSchema } from "@shared/schema";
+import { insertSubmissionSchema, insertValidationSchema, insertLinkClickSchema } from "@shared/schema";
 import { z } from "zod";
 import { generateValidationFeedback, generateLandingPagePrompt, generateCustomerPersonas, handleCustomerInterview, generateStartupSimulation } from "./openai";
 import { requireAuth, optionalAuth, AuthenticatedRequest } from "./auth";
@@ -408,6 +408,34 @@ Create a landing page for this startup. The goal of the site is to highlight our
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  // Track link clicks
+  app.post("/api/track-click", async (req, res) => {
+    try {
+      const { company, linkType, url } = req.body;
+      
+      if (!company || !linkType || !url) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      await storage.trackLinkClick(company, linkType, url);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Click tracking error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Get link click stats (admin only)
+  app.get("/api/admin/link-stats", requireAdmin, async (req, res) => {
+    try {
+      const stats = await storage.getLinkClickStats();
+      res.json(stats);
+    } catch (error) {
+      console.error("Link stats error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
 
   // Generate customer personas for startup simulator
   app.post("/api/generate-customers", async (req, res) => {
