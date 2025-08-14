@@ -29,10 +29,19 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       category: "Website Builder"
     },
     {
+      name: "Beehiiv",
+      title: "Build Your Audience",
+      description: "The best way to validate is to build an audience! Create newsletters and grow your subscriber base to validate demand before you build.",
+      url: "https://beehiiv.com",
+      logo: null, // Need logo
+      color: "bg-yellow-600 hover:bg-yellow-700",
+      category: "Audience Building"
+    },
+    {
       name: "LivePlan",
       title: "Turn Into Business Plan",
       description: "Transform your validated idea into a comprehensive business plan with financial projections and investor-ready documents.",
-      url: "#", // Replace with affiliate link
+      url: "https://liveplan.com",
       logo: null, // Need logo
       color: "bg-blue-600 hover:bg-blue-700",
       category: "Business Planning"
@@ -41,7 +50,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       name: "Gamma",
       title: "Create Pitch Deck",
       description: "Build beautiful pitch decks powered by AI. Turn your idea validation into compelling presentation slides in minutes.",
-      url: "#", // Replace with affiliate link  
+      url: "https://gamma.app",
       logo: null, // Need logo
       color: "bg-green-600 hover:bg-green-700",
       category: "Presentations"
@@ -50,7 +59,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       name: "Miro",
       title: "Whiteboard Your Idea",
       description: "Visualize and map out your startup concept with collaborative whiteboarding. Perfect for brainstorming and team planning.",
-      url: "#", // Replace with affiliate link
+      url: "https://miro.com",
       logo: null, // Need logo
       color: "bg-orange-600 hover:bg-orange-700",
       category: "Collaboration"
@@ -59,7 +68,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       name: "Notion",
       title: "Organize & Analyze",
       description: "Keep all your startup research, customer feedback, and business insights organized in one powerful workspace.",
-      url: "#", // Replace with affiliate link
+      url: "https://notion.so",
       logo: null, // Need logo
       color: "bg-gray-600 hover:bg-gray-700",
       category: "Organization"
