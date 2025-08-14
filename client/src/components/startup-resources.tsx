@@ -4,6 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 
 import bubbleLogo from "@assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png";
+import beehiivLogo from "@assets/beehiivlogopng_1755201488531.png";
+import liveplanLogo from "@assets/liveplanlogo_1755201488533.png";
+import gammaLogo from "@assets/gamma_1755201488532.png";
+import miroLogo from "@assets/mirologo_1755201488533.png";
+import notionLogo from "@assets/notionlogopng_1755201488534.png";
 
 interface StartupResourcesProps {
   validationData?: {
@@ -33,7 +38,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       title: "Build Your Audience",
       description: "The best way to validate is to build an audience! Create newsletters and grow your subscriber base to validate demand before you build.",
       url: "https://beehiiv.com",
-      logo: null, // Need logo
+      logo: beehiivLogo,
       color: "bg-yellow-600 hover:bg-yellow-700",
       category: "Audience Building"
     },
@@ -42,7 +47,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       title: "Turn Into Business Plan",
       description: "Transform your validated idea into a comprehensive business plan with financial projections and investor-ready documents.",
       url: "https://liveplan.com",
-      logo: null, // Need logo
+      logo: liveplanLogo,
       color: "bg-blue-600 hover:bg-blue-700",
       category: "Business Planning"
     },
@@ -51,7 +56,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       title: "Create Pitch Deck",
       description: "Build beautiful pitch decks powered by AI. Turn your idea validation into compelling presentation slides in minutes.",
       url: "https://gamma.app",
-      logo: null, // Need logo
+      logo: gammaLogo,
       color: "bg-green-600 hover:bg-green-700",
       category: "Presentations"
     },
@@ -60,7 +65,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       title: "Whiteboard Your Idea",
       description: "Visualize and map out your startup concept with collaborative whiteboarding. Perfect for brainstorming and team planning.",
       url: "https://miro.com",
-      logo: null, // Need logo
+      logo: miroLogo,
       color: "bg-orange-600 hover:bg-orange-700",
       category: "Collaboration"
     },
@@ -69,7 +74,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       title: "Organize & Analyze",
       description: "Keep all your startup research, customer feedback, and business insights organized in one powerful workspace.",
       url: "https://notion.so",
-      logo: null, // Need logo
+      logo: notionLogo,
       color: "bg-gray-600 hover:bg-gray-700",
       category: "Organization"
     }
@@ -109,13 +114,13 @@ export default function StartupResources({ validationData }: StartupResourcesPro
               style={{animationDelay: `${index * 0.1}s`}}
             >
               <CardContent className="p-6 text-center">
-                {/* Logo placeholder */}
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                {/* Logo */}
+                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg p-2">
                   {resource.logo ? (
                     <img 
                       src={resource.logo}
                       alt={`${resource.name} logo`}
-                      className="w-10 h-10 object-contain"
+                      className="max-w-full max-h-full object-contain"
                     />
                   ) : (
                     <div className="text-2xl font-bold text-gray-400">
