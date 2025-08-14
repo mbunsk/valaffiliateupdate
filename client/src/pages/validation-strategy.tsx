@@ -36,7 +36,7 @@ export default function ValidationStrategy() {
           </div>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none dark:prose-invert text-foreground/90">
+          <div className="prose prose-lg max-w-none dark:prose-invert text-foreground/80 [&>*]:text-foreground/80 [&>h2]:text-foreground/90 [&>h3]:text-foreground/90 [&>h4]:text-foreground/90">
             
             <p className="text-xl text-foreground/80 mb-8">
               The startup world has changed dramatically. While most entrepreneurs are still using validation methods from 2020, the smart ones have moved on to AI-powered validation that gives them a massive competitive advantage.
