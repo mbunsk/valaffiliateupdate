@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import aronHeadshot from "@assets/aron_1755207186305.png";
 
 export default function ValidationStrategy() {
   return (
@@ -25,7 +26,7 @@ export default function ValidationStrategy() {
           {/* Article Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl sm:text-6xl font-black mb-6 gradient-text">
-              ✨This is how ideas are validated in 2026 and beyond.
+              <span className="inline-block">✨</span>This is how ideas are validated in 2026 and beyond.
             </h1>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto mb-8">
               Are you using dated methods to validate your ideas?
@@ -38,13 +39,21 @@ export default function ValidationStrategy() {
           {/* Article Content */}
           <div className="prose prose-lg max-w-none text-white [&>*]:text-white [&>h2]:text-white [&>h3]:text-white [&>h4]:text-white [&>p]:text-white [&>li]:text-white [&>blockquote]:text-white [&>ul]:text-white [&>ol]:text-white">
             
-            <p className="text-lg text-white mb-8">
-              🙋‍♂️ Hello! Aron here w/ ValidatorAI.com
-            </p>
-
-            <p className="text-white mb-12">
-              I am going to tell you the validation method that is your best bet for success going forward.
-            </p>
+            <div className="flex items-start gap-6 mb-12">
+              <img 
+                src={aronHeadshot}
+                alt="Aron Meystedt headshot" 
+                className="w-20 h-20 rounded-full flex-shrink-0"
+              />
+              <div>
+                <p className="text-lg text-white mb-4">
+                  Hi, I'm Aron 🙋‍♂️
+                </p>
+                <p className="text-white">
+                  I am going to tell you the validation method that is your best bet for success going forward.
+                </p>
+              </div>
+            </div>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">🏆 Attention is the scarce asset now.</h2>
             
@@ -53,7 +62,7 @@ export default function ValidationStrategy() {
             </p>
 
             <p className="text-white mb-6">
-              Here's the secret: Validation and audience building should happen simultaneously. Test your ideas with your audience as you grow it.
+              <strong>Here's the secret: Validation and audience building should happen simultaneously. Test your ideas with your audience as you grow it.</strong>
             </p>
 
             <p className="text-white mb-6">
@@ -80,12 +89,12 @@ export default function ValidationStrategy() {
 
             <div className="bg-gradient-to-r from-blue-50/20 to-purple-50/20 dark:from-blue-950/40 dark:to-purple-950/40 border border-blue-200/30 dark:border-blue-800/30 rounded-lg p-6 my-8">
               <h4 className="text-lg font-bold mb-4 text-white">Examples:</h4>
-              <ul className="text-white space-y-2">
-                <li>• Calculate your [X] score</li>
-                <li>• Personalized profile generator "What type of [X] are you?"</li>
-                <li>• Leaderboards "Where do you rank on [X]?"</li>
-                <li>• Simulations "See how your [X] ranks in the market"</li>
-                <li>• Fun quizzes with sharable results and leaderboards</li>
+              <ul className="text-white space-y-2 list-none">
+                <li>Calculate your [X] score</li>
+                <li>Personalized profile generator "What type of [X] are you?"</li>
+                <li>Leaderboards "Where do you rank on [X]?"</li>
+                <li>Simulations "See how your [X] ranks in the market"</li>
+                <li>Fun quizzes with sharable results and leaderboards</li>
               </ul>
             </div>
 
@@ -95,28 +104,28 @@ export default function ValidationStrategy() {
 
             <div className="bg-gradient-to-r from-green-50/20 to-emerald-50/20 dark:from-green-950/40 dark:to-emerald-950/40 border border-green-200/30 dark:border-green-800/30 rounded-lg p-6 my-8">
               <h4 className="text-lg font-bold mb-4 text-white">Where to Build:</h4>
-              <ul className="text-white space-y-2">
-                <li>• Bubble</li>
-                <li>• Lovable</li>
+              <ul className="text-white space-y-2 list-none">
+                <li><a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a></li>
+                <li>Lovable</li>
               </ul>
             </div>
 
             <p className="text-white mb-12">
-              When describing your AI tool idea on Bubble or Lovable, explain that it's free-to-use, helpful, and designed to capture leads. Always capture emails when people use your tool… what you do next depends on that list.
+              When describing your AI tool idea on <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable, explain that it's free-to-use, helpful, and designed to capture leads. <strong>Always capture emails when people use your tool… what you do next depends on that list.</strong>
             </p>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">2️⃣ Launch Your Audience Platform</h2>
 
             <p className="text-white mb-6">
-              Join a newsletter platform like Beehiiv or Substack. Both are free to start. Import every tool user into your list.
+              Join a newsletter platform like <a href="https://www.beehiiv.com/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Beehiiv</a> or Substack. Both are free to start. Import every tool user into your list.
             </p>
 
             <div className="bg-gradient-to-r from-yellow-50/20 to-orange-50/20 dark:from-yellow-950/40 dark:to-orange-950/40 border border-yellow-200/30 dark:border-yellow-800/30 rounded-lg p-6 my-8">
               <h4 className="text-lg font-bold mb-4 text-white">Use polls, surveys, and open-ended questions in the newsletter to:</h4>
-              <ul className="text-white space-y-2">
-                <li>• Spot which problems resonate most</li>
-                <li>• Test product ideas before building</li>
-                <li>• Let your audience guide and select your product development</li>
+              <ul className="text-white space-y-2 list-none">
+                <li>Spot which problems resonate most</li>
+                <li>Test product ideas before building</li>
+                <li>Let your audience guide and select your product development</li>
               </ul>
             </div>
 
@@ -132,30 +141,26 @@ export default function ValidationStrategy() {
               Post 3–5 short videos per week on TikTok, Instagram Reels, or YouTube Shorts:
             </p>
             
-            <div className="bg-gradient-to-r from-purple-50/20 to-pink-50/20 dark:from-purple-950/40 dark:to-pink-950/40 border border-purple-200/30 dark:border-purple-800/30 rounded-lg p-6 my-8">
-              <ul className="text-white space-y-2">
-                <li>• Quick wins your tool delivers</li>
-                <li>• Surprising industry facts</li>
-                <li>• Live demo moments "I built this AI tool that personalizes your investment strategy in 30 seconds…"</li>
-                <li>• Testing random scenarios in your market with your AI tool</li>
-                <li>• Stitches reacting to popular videos in your market, running them through your AI tool</li>
-              </ul>
-            </div>
+            <ul className="text-white space-y-2 mb-8 list-none">
+              <li>• Quick wins your tool delivers</li>
+              <li>• Surprising industry facts</li>
+              <li>• Live demo moments "I built this AI tool that personalizes your investment strategy in 30 seconds…"</li>
+              <li>• Testing random scenarios in your market with your AI tool</li>
+              <li>• Stitches reacting to popular videos in your market, running them through your AI tool</li>
+            </ul>
 
             <p className="text-white mb-8">
-              End every video with: "Link in bio - try it FREE" (not "subscribe" or "sign up").
+              End every video with: <strong>"Link in bio - try it FREE"</strong> (not "subscribe" or "sign up").
             </p>
 
             <h3 className="text-2xl font-bold mt-12 mb-6">Additional Traffic Plays:</h3>
 
-            <div className="bg-gradient-to-r from-cyan-50/20 to-blue-50/20 dark:from-cyan-950/40 dark:to-blue-950/40 border border-cyan-200/30 dark:border-cyan-800/30 rounded-lg p-6 my-8">
-              <ul className="text-white space-y-2">
-                <li>• Partner with other newsletters & creators to embed your tool (win–win: you get exposure, they get value)</li>
-                <li>• Run live streams where you take audience requests and run them through your tool with live commentary</li>
-                <li>• Blog, write on Medium and compose helpful LinkedIn articles</li>
-                <li>• Encourage users to share their results. Every share = more eyeballs</li>
-              </ul>
-            </div>
+            <ul className="text-white space-y-2 mb-8 list-none">
+              <li>• Partner with other newsletters & creators to embed your tool (win–win: you get exposure, they get value)</li>
+              <li>• Run live streams where you take audience requests and run them through your tool with live commentary</li>
+              <li>• Blog, write on Medium and compose helpful LinkedIn articles</li>
+              <li>• Encourage users to share their results. Every share = more eyeballs</li>
+            </ul>
 
             <div className="bg-gradient-to-r from-indigo-50/20 to-violet-50/20 dark:from-indigo-950/40 dark:to-violet-950/40 border border-indigo-200/30 dark:border-indigo-800/30 rounded-lg p-6 my-12">
               <h3 className="text-2xl font-bold mb-6 text-white">Remember Our Mindset Shift:</h3>
@@ -171,15 +176,13 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-16 mb-6">4️⃣ Work Your Newsletter</h2>
 
-            <div className="bg-gradient-to-r from-teal-50/20 to-green-50/20 dark:from-teal-950/40 dark:to-green-950/40 border border-teal-200/30 dark:border-teal-800/30 rounded-lg p-6 my-8">
-              <ul className="text-white space-y-2">
-                <li>• Share helpful market insights</li>
-                <li>• Let the audience vote on product development</li>
-                <li>• Keep comments and emails open</li>
-                <li>• Engage personally - send calls, videos, and messages to those who want to dive deeper</li>
-                <li>• Get validation and engagement at the same time</li>
-              </ul>
-            </div>
+            <ul className="text-white space-y-2 mb-8 list-none">
+              <li>• Share helpful market insights</li>
+              <li>• Let the audience vote on product development</li>
+              <li>• Keep comments and emails open</li>
+              <li>• Engage personally - send calls, videos, and messages to those who want to dive deeper</li>
+              <li>• Get validation and engagement at the same time</li>
+            </ul>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">5️⃣ Optimize for AI Agents</h2>
 
@@ -188,20 +191,18 @@ export default function ValidationStrategy() {
             </p>
 
             <p className="text-white mb-12">
-              Run our free AI Agent Readiness Test to optimize your website so AI agents pull your site as the answer. This makes you discoverable in the AI-driven search world.
+              Run our free <a href="https://agentic.validatorai.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">AI Agent Readiness Test</a> to optimize your website so AI agents pull your site as the answer. This makes you discoverable in the AI-driven search world.
             </p>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">⚡ Here's the Loop</h2>
 
-            <div className="bg-gradient-to-r from-amber-50/20 to-yellow-50/20 dark:from-amber-950/40 dark:to-yellow-950/40 border border-amber-200/30 dark:border-amber-800/30 rounded-lg p-6 my-8">
-              <ul className="text-white space-y-2">
-                <li>• Traffic flows to your tool - Build it at Bubble or Lovable</li>
-                <li>• Tool collects emails into your newsletter - Signup at Beehiiv</li>
-                <li>• The newsletter polls & engages audience to validate ideas</li>
-                <li>• Launch new tools and develop your product based on votes</li>
-                <li>• Repeat… audience size and idea accuracy grow each cycle</li>
-              </ul>
-            </div>
+            <ul className="text-white space-y-2 mb-8 list-none">
+              <li>• Traffic flows to your tool - Build it at <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable</li>
+              <li>• Tool collects emails into your newsletter - Signup at <a href="https://www.beehiiv.com/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Beehiiv</a></li>
+              <li>• The newsletter polls & engages audience to validate ideas</li>
+              <li>• Launch new tools and develop your product based on votes</li>
+              <li>• Repeat… audience size and idea accuracy grow each cycle</li>
+            </ul>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">😎 Final thought…</h2>
 
@@ -214,15 +215,15 @@ export default function ValidationStrategy() {
             </p>
 
             <p className="text-white text-center mb-12">
-              👍 Let's connect on LinkedIn! 👍
+              👍 <a href="https://www.linkedin.com/in/aronmeystedt/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Let's connect on LinkedIn!</a> 👍
             </p>
 
             <div className="text-center mt-16 pt-8 border-t border-foreground/10">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                <Link to="/" className="inline-flex items-center">
+                <a href="/#validation" className="inline-flex items-center">
                   Try AI Validation Free
                   <TrendingUp className="w-4 h-4 ml-2" />
-                </Link>
+                </a>
               </Button>
             </div>
 
