@@ -223,7 +223,7 @@ export default function ValidationStrategy() {
               <img 
                 src={aronSignature}
                 alt="Aron Meystedt signature" 
-                className="h-12 w-auto opacity-90"
+                className="h-24 w-auto opacity-90"
               />
             </div>
 
