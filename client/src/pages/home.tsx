@@ -43,6 +43,21 @@ export default function Home() {
       
       {!validationData && (
         <>
+          {/* Section Divider before testimonials */}
+          <div className="py-12 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center">
+                <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-primary/60"></div>
+                <div className="mx-8 flex items-center gap-3 text-3xl">
+                  <span>⭐</span>
+                  <span>✨</span>
+                  <span>⭐</span>
+                </div>
+                <div className="flex-1 h-0.5 bg-gradient-to-r from-primary/60 via-primary/40 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          
           <TestimonialsGrid />
           <NewsletterSection />
           <FinalCTA />
