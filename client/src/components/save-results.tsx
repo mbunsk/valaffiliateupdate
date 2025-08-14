@@ -221,32 +221,16 @@ export default function SaveResults({ validationData }: SaveResultsProps) {
   };
 
   return (
-    <Card className="shadow-lg border-2 border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-green-500/10">
-      <CardContent className="p-6">
-        <h4 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-3">
-          Great work exploring your idea! 🎉
-        </h4>
-        <p className="text-lg text-foreground/80 mb-4">
-          Your idea is now validated! Next, explore your personalized startup resources and simulate customer conversations to refine your strategy.
-        </p>
-        <div className="text-sm text-foreground/60 mb-4">
-          Continue below to access your custom toolkit ✨
-        </div>
-        
-        <div className="flex justify-center">
-          <Button
-            onClick={generatePDF}
-            disabled={generating}
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700"
-          >
-            <Download className="w-4 h-4 mr-2" />
-{generating ? "Generating PDF..." : "Download PDF Report"}
-          </Button>
-        </div>
-        
-
-      </CardContent>
-    </Card>
+    <div className="flex justify-center">
+      <Button
+        onClick={generatePDF}
+        disabled={generating}
+        size="lg"
+        className="bg-blue-600 hover:bg-blue-700"
+      >
+        <Download className="w-4 h-4 mr-2" />
+        {generating ? "Generating PDF..." : "Download PDF Report"}
+      </Button>
+    </div>
   );
 }

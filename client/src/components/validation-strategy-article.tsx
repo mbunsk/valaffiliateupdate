@@ -138,11 +138,6 @@ export default function ValidationStrategyArticle() {
                   <TrendingUp className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/validation-strategy" className="inline-flex items-center">
-                  Learn More About Our Method
-                </Link>
-              </Button>
             </div>
           </CardContent>
         </Card>

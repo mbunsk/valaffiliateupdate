@@ -5,6 +5,7 @@ import IdeaValidation from "@/components/idea-validation";
 import StartupResources from "@/components/startup-resources";
 import StartupSimulator from "@/components/startup-simulator";
 import ValidationStrategyArticle from "@/components/validation-strategy-article";
+import AudienceBuildingSection from "@/components/audience-building-section";
 import TestimonialsGrid from "@/components/testimonials-grid";
 import NewsletterSection from "@/components/newsletter-section";
 import FinalCTA from "@/components/final-cta";
@@ -50,7 +51,12 @@ export default function Home() {
       )}
       
       {/* Show validation strategy article after simulation */}
-      {validationData && <ValidationStrategyArticle />}
+      {validationData && (
+        <>
+          <ValidationStrategyArticle />
+          <AudienceBuildingSection />
+        </>
+      )}
       
       <Footer />
     </div>

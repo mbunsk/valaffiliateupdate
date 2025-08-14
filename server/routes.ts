@@ -439,40 +439,13 @@ Create a landing page for this startup. The goal of the site is to highlight our
 
   // Generate customer personas for startup simulator
   app.post("/api/generate-customers", async (req, res) => {
-    const { idea, targetCustomer, problemSolved, feedback, bubbleUrl } = req.body;
+    const { idea, targetCustomer, problemSolved, feedback } = req.body;
     
-    // Validate Bubble URL
-    if (!/bubble/i.test(bubbleUrl)) {
-      return res.status(400).json({ message: "URL must contain 'bubble' to continue" });
-    }
+    // Skip URL validation - working with validation data only
 
     try {
-      // Crawl the Bubble URL to get landing page content
-      let landingPageContent = "";
-      try {
-        const pageResponse = await axios.get(bubbleUrl, { 
-          timeout: 10000,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (compatible; ValidatorAI-Bot/1.0)'
-          }
-        });
-        const $ = cheerio.load(pageResponse.data);
-        
-        // Extract relevant content
-        const title = $('title').text() || "";
-        const headings = $('h1, h2, h3').map((_, el) => $(el).text()).get().join(' | ');
-        const paragraphs = $('p').map((_, el) => $(el).text()).get().slice(0, 10).join(' ');
-        const buttons = $('button, .btn, a[class*="btn"]').map((_, el) => $(el).text()).get().join(' | ');
-        
-        landingPageContent = `LANDING PAGE CONTENT:
-Title: ${title}
-Headings: ${headings}
-Key Text: ${paragraphs}
-Call-to-Actions: ${buttons}`;
-      } catch (crawlError) {
-        console.log("Could not crawl landing page, proceeding with validation data only:", crawlError);
-        landingPageContent = "Landing page content unavailable - using validation data only.";
-      }
+      // Skip URL crawling - use validation data only
+      const landingPageContent = "Using validation data only - no URL crawling needed.";
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",

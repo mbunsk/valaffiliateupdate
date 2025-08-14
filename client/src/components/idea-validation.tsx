@@ -212,7 +212,7 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                     />
                   </div>
 
-                  {/* Next Steps Component */}
+                  {/* Save Your Results Section with Download Button */}
                   <div className="mt-8 text-center">
                     <div className="bg-gradient-to-r from-blue-500/10 to-green-500/10 p-6 rounded-xl border border-blue-500/20">
                       <h4 className="text-lg font-bold text-blue-600 mb-4 flex items-center justify-center gap-2">
@@ -221,12 +221,8 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                       <p className="text-sm text-foreground/80 mb-4">
                         Download your complete validation report to keep and share with others!
                       </p>
+                      <SaveResults validationData={validationResult} />
                     </div>
-                  </div>
-
-                  {/* Save Results Component */}
-                  <div className="mt-6">
-                    <SaveResults validationData={validationResult} />
                   </div>
 
 
