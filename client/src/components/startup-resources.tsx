@@ -168,8 +168,8 @@ export default function StartupResources({ validationData }: StartupResourcesPro
     {
       name: "Augment",
       title: "Learn from Top Entrepreneurs",
-      description: "An MBA for entrepreneurs, by entrepreneurs: entirely practical, taught by the world's greatest entrepreneurs, on your terms, and costing less than 1% of a traditional MBA.",
-      url: "https://augment.org",
+      description: "An MBA for entrepreneurs, by entrepreneurs: entirely practical, taught by the world's greatest entrepreneurs, on your terms, and costing less than 1% of a traditional MBA. Validator AI members get 30% off!",
+      url: "https://agmntbiz.link/validatorai",
       logo: augmentLogo,
       color: "bg-lime-600 hover:bg-lime-700",
       category: "Education"

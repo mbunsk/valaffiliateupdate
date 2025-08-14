@@ -36,6 +36,13 @@ The application follows a modern full-stack architecture with clear separation b
 
 ## Key Components
 
+### Affiliate Partners
+- **Total Partners**: 7 partner companies with click tracking system
+- **Partner List**: Bubble, Beehiiv, LivePlan, Gamma, Miro, Notion, Augment
+- **Special Offers**: Augment offers 30% discount for ValidatorAI members via custom affiliate link
+- **Click Tracking**: Full analytics dashboard at /aron for monitoring partner engagement
+- **Revenue Strategy**: Maximize conversions through strategic placement and user journey optimization
+
 ### SEO Optimization
 - **Primary Target**: Idea validation, validate startup ideas, startup idea validator terms
 - **Title**: "ValidatorAI - Free AI-Powered Startup Idea Validation Tool"
