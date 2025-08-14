@@ -4,8 +4,9 @@ import Hero from "@/components/hero";
 import IdeaValidation from "@/components/idea-validation";
 import StartupResources from "@/components/startup-resources";
 import StartupSimulator from "@/components/startup-simulator";
-import Testimonials from "@/components/testimonials";
-import NewsletterSignup from "@/components/newsletter-signup";
+import TestimonialsGrid from "@/components/testimonials-grid";
+import NewsletterSection from "@/components/newsletter-section";
+import FinalCTA from "@/components/final-cta";
 import Footer from "@/components/footer";
 
 export default function Home() {
@@ -23,6 +24,9 @@ export default function Home() {
       <IdeaValidation onValidationComplete={setValidationData} />
       <StartupResources validationData={validationData} />
       <StartupSimulator validationData={validationData} />
+      <TestimonialsGrid />
+      <NewsletterSection />
+      <FinalCTA />
       <Footer />
     </div>
   );
