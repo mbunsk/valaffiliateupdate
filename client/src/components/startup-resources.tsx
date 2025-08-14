@@ -20,8 +20,77 @@ interface StartupResourcesProps {
 }
 
 export default function StartupResources({ validationData }: StartupResourcesProps) {
-  // Only show if validation is complete
-  if (!validationData) return null;
+  // Show preview version if validation not complete
+  if (!validationData) {
+    return (
+      <section id="resources" className="py-20 bg-gradient-to-br from-accent/10 via-background to-primary/10 relative">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-20 text-5xl opacity-20 animate-float">🚀</div>
+          <div className="absolute bottom-20 right-20 text-4xl opacity-20 animate-bounce-gentle">💼</div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <Badge variant="secondary" className="mb-6 px-4 py-2 text-lg bg-gradient-to-r from-secondary/30 to-primary/20 border-secondary/30">
+              <span className="w-8 h-8 bg-gradient-to-br from-secondary to-primary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
+                2
+              </span>
+              🛠️ Your Startup Resources Kit
+            </Badge>
+            <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
+              Ready to Build? <span className="emoji">⚡</span>
+            </h2>
+            <p className="text-xl text-foreground/70 mb-8">
+              After validating your idea, you'll get access to personalized startup and idea validation resources.
+              <br />
+              <span className="text-primary font-semibold">Choose from 6 trusted partner tools to turn your validated idea into reality! ✨</span>
+            </p>
+          </div>
+
+          {/* Preview Grid */}
+          <div className="text-center">
+            <Card className="max-w-4xl mx-auto border-2 border-dashed border-muted-foreground/30 bg-muted/20">
+              <CardContent className="p-12">
+                <div className="text-6xl mb-6">🔒</div>
+                <h3 className="text-2xl font-bold mb-4 text-muted-foreground">
+                  Startup Resources Coming Soon!
+                </h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Complete Step 1 (idea validation) to unlock your personalized toolkit including:
+                </p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-left max-w-2xl mx-auto">
+                  <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-200 dark:border-purple-700">
+                    <div className="font-semibold text-purple-700 dark:text-purple-300">🌐 Website Builder</div>
+                    <div className="text-sm text-purple-600 dark:text-purple-400">Create landing pages</div>
+                  </div>
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                    <div className="font-semibold text-yellow-700 dark:text-yellow-300">📧 Audience Building</div>
+                    <div className="text-sm text-yellow-600 dark:text-yellow-400">Build your community</div>
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-700">
+                    <div className="font-semibold text-blue-700 dark:text-blue-300">📋 Business Planning</div>
+                    <div className="text-sm text-blue-600 dark:text-blue-400">Create business plans</div>
+                  </div>
+                  <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-700">
+                    <div className="font-semibold text-green-700 dark:text-green-300">🎨 Presentations</div>
+                    <div className="text-sm text-green-600 dark:text-green-400">Build pitch decks</div>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg border border-orange-200 dark:border-orange-700">
+                    <div className="font-semibold text-orange-700 dark:text-orange-300">🤝 Collaboration</div>
+                    <div className="text-sm text-orange-600 dark:text-orange-400">Whiteboard ideas</div>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-900/20 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                    <div className="font-semibold text-gray-700 dark:text-gray-300">📊 Organization</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Manage research</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const resources = [
     {
@@ -99,7 +168,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             Ready to Build? <span className="emoji">⚡</span>
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
-            Your idea is validated! Now choose your next step with our trusted partner tools.
+            Your idea is validated! Now access your personalized startup and idea validation resources.
             <br />
             <span className="text-primary font-semibold">Each tool is specifically chosen to help turn your validated idea into reality! ✨</span>
           </p>
