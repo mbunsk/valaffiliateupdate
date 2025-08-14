@@ -22,6 +22,7 @@ import liveplanLogo from "@assets/liveplanlogo_1755201488533.png";
 import gammaLogo from "@assets/gamma_1755201488532.png";
 import miroLogo from "@assets/mirologo_1755201488533.png";
 import notionLogo from "@assets/notionlogopng_1755201488534.png";
+import augmentLogo from "@assets/augmentbestlogo_1755203840573.png";
 
 interface StartupResourcesProps {
   validationData?: {
@@ -56,7 +57,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             <p className="text-xl text-foreground/70 mb-8">
               After validating your idea, you'll get access to personalized startup and idea validation resources.
               <br />
-              <span className="text-primary font-semibold">Choose from 6 trusted partner tools to turn your validated idea into reality! ✨</span>
+              <span className="text-primary font-semibold">Choose from 7 trusted partner tools to turn your validated idea into reality! ✨</span>
             </p>
           </div>
 
@@ -95,6 +96,10 @@ export default function StartupResources({ validationData }: StartupResourcesPro
                   <div className="bg-gray-50 dark:bg-gray-900/20 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
                     <div className="font-semibold text-gray-700 dark:text-gray-300">📊 Organization</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Manage research</div>
+                  </div>
+                  <div className="bg-lime-50 dark:bg-lime-900/20 p-3 rounded-lg border border-lime-200 dark:border-lime-700 md:col-span-2 lg:col-span-1">
+                    <div className="font-semibold text-lime-700 dark:text-lime-300">🎓 Education</div>
+                    <div className="text-sm text-lime-600 dark:text-lime-400">Entrepreneur MBA</div>
                   </div>
                 </div>
               </CardContent>
@@ -159,6 +164,15 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       logo: notionLogo,
       color: "bg-gray-600 hover:bg-gray-700",
       category: "Organization"
+    },
+    {
+      name: "Augment",
+      title: "Learn from Top Entrepreneurs",
+      description: "An MBA for entrepreneurs, by entrepreneurs: entirely practical, taught by the world's greatest entrepreneurs, on your terms, and costing less than 1% of a traditional MBA.",
+      url: "https://augment.org",
+      logo: augmentLogo,
+      color: "bg-lime-600 hover:bg-lime-700",
+      category: "Education"
     }
   ];
 
