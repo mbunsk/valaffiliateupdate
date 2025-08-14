@@ -187,64 +187,120 @@ export default function StartupResources({ validationData }: StartupResourcesPro
           </p>
         </div>
 
-        {/* Resources Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {/* Resources List */}
+        <div className="space-y-4 mb-12">
           {resources.map((resource, index) => (
             <Card 
               key={resource.name} 
-              className="shadow-2xl border-2 border-primary/20 hover:border-primary/40 bg-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 animate-float" 
-              style={{animationDelay: `${index * 0.1}s`}}
+              className="shadow-lg border border-primary/20 hover:border-primary/40 bg-card/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300"
             >
-              <CardContent className="p-6 text-center">
-                {/* Logo */}
-                <a 
-                  href={resource.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-block"
-                  onClick={() => trackClick(resource.name.toLowerCase(), 'logo', resource.url)}
-                >
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
-                    {resource.logo ? (
-                      <img 
-                        src={resource.logo}
-                        alt={`${resource.name} logo`}
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    ) : (
-                      <div className="text-2xl font-bold text-gray-400">
-                        {resource.name.charAt(0)}
+              <CardContent className="p-6">
+                <div className="flex items-center gap-6">
+                  {/* Logo positioned alternately left/right */}
+                  {index % 2 === 0 ? (
+                    <>
+                      <a 
+                        href={resource.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-shrink-0"
+                        onClick={() => trackClick(resource.name.toLowerCase(), 'logo', resource.url)}
+                      >
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
+                          {resource.logo ? (
+                            <img 
+                              src={resource.logo}
+                              alt={`${resource.name} logo`}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          ) : (
+                            <div className="text-2xl font-bold text-gray-400">
+                              {resource.name.charAt(0)}
+                            </div>
+                          )}
+                        </div>
+                      </a>
+                      
+                      <div className="flex-1">
+                        <div className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">
+                          {resource.category}
+                        </div>
+                        <h3 className="text-xl font-black text-foreground mb-2">{resource.title}</h3>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          {resource.description}
+                        </p>
                       </div>
-                    )}
-                  </div>
-                </a>
-                
-                <div className="text-xs text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
-                  {resource.category}
+                      
+                      <Button 
+                        asChild 
+                        className={`flex-shrink-0 ${resource.color} transition-all duration-300 transform hover:scale-105 rounded-xl px-6 py-3 text-sm font-bold shadow-lg hover:shadow-xl`}
+                      >
+                        <a 
+                          href={resource.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex items-center justify-center"
+                          onClick={() => trackClick(resource.name.toLowerCase(), 'button', resource.url)}
+                        >
+                          <span className="mr-2">🚀</span>
+                          Try {resource.name}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </a>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button 
+                        asChild 
+                        className={`flex-shrink-0 ${resource.color} transition-all duration-300 transform hover:scale-105 rounded-xl px-6 py-3 text-sm font-bold shadow-lg hover:shadow-xl`}
+                      >
+                        <a 
+                          href={resource.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex items-center justify-center"
+                          onClick={() => trackClick(resource.name.toLowerCase(), 'button', resource.url)}
+                        >
+                          <span className="mr-2">🚀</span>
+                          Try {resource.name}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </a>
+                      </Button>
+                      
+                      <div className="flex-1">
+                        <div className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">
+                          {resource.category}
+                        </div>
+                        <h3 className="text-xl font-black text-foreground mb-2">{resource.title}</h3>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          {resource.description}
+                        </p>
+                      </div>
+                      
+                      <a 
+                        href={resource.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-shrink-0"
+                        onClick={() => trackClick(resource.name.toLowerCase(), 'logo', resource.url)}
+                      >
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
+                          {resource.logo ? (
+                            <img 
+                              src={resource.logo}
+                              alt={`${resource.name} logo`}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          ) : (
+                            <div className="text-2xl font-bold text-gray-400">
+                              {resource.name.charAt(0)}
+                            </div>
+                          )}
+                        </div>
+                      </a>
+                    </>
+                  )}
                 </div>
-                
-                <h3 className="text-xl font-black text-foreground mb-2">{resource.title}</h3>
-                
-                <p className="text-foreground/70 mb-4 text-sm leading-relaxed">
-                  {resource.description}
-                </p>
-                
-                <Button 
-                  asChild 
-                  className={`w-full ${resource.color} transition-all duration-300 transform hover:scale-105 rounded-xl py-4 text-sm font-bold shadow-lg hover:shadow-xl`}
-                >
-                  <a 
-                    href={resource.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center justify-center"
-                    onClick={() => trackClick(resource.name.toLowerCase(), 'button', resource.url)}
-                  >
-                    <span className="mr-2">🚀</span>
-                    Try {resource.name}
-                    <ExternalLink className="ml-2 w-4 h-4" />
-                  </a>
-                </Button>
               </CardContent>
             </Card>
           ))}
