@@ -38,13 +38,13 @@ export default function ValidationStrategy() {
           {/* Article Content */}
           <div className="prose prose-lg max-w-none text-white [&>*]:text-white [&>h2]:text-white [&>h3]:text-white [&>h4]:text-white [&>p]:text-white [&>li]:text-white [&>blockquote]:text-white [&>ul]:text-white [&>ol]:text-white">
             
-            <p className="text-xl text-foreground/80 mb-8">
+            <p className="text-xl text-white mb-8">
               The startup world has changed dramatically. While most entrepreneurs are still using validation methods from 2020, the smart ones have moved on to AI-powered validation that gives them a massive competitive advantage.
             </p>
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The Problem with Traditional Validation</h2>
             
-            <p className="text-foreground/80">
+            <p className="text-white">
               If you're still manually surveying friends and family, building full prototypes before validation, or guessing at pricing, you're using methods that worked in 2020 but are now costing you time, money, and opportunities.
             </p>
 
@@ -60,19 +60,19 @@ export default function ValidationStrategy() {
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-red-700 dark:text-red-300"><strong>Manual surveys:</strong> Takes weeks to get meaningful responses, and most people lie or give socially desirable answers</p>
+                      <p className="text-sm text-red-800 dark:text-red-200"><strong>Manual surveys:</strong> Takes weeks to get meaningful responses, and most people lie or give socially desirable answers</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-red-700 dark:text-red-300"><strong>Building before validating:</strong> Spending months on prototypes only to discover nobody wants them</p>
+                      <p className="text-sm text-red-800 dark:text-red-200"><strong>Building before validating:</strong> Spending months on prototypes only to discover nobody wants them</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-red-700 dark:text-red-300"><strong>Friends and family feedback:</strong> Biased responses that don't reflect real market demand</p>
+                      <p className="text-sm text-red-800 dark:text-red-200"><strong>Friends and family feedback:</strong> Biased responses that don't reflect real market demand</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-red-700 dark:text-red-300"><strong>Pricing guesswork:</strong> Making up prices without understanding what customers actually pay for similar solutions</p>
+                      <p className="text-sm text-red-800 dark:text-red-200"><strong>Pricing guesswork:</strong> Making up prices without understanding what customers actually pay for similar solutions</p>
                     </div>
                   </div>
                 </CardContent>
@@ -81,7 +81,7 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The AI-Powered Validation Revolution</h2>
 
-            <p className="text-foreground/80">
+            <p className="text-white">
               In 2026, the smartest entrepreneurs are using AI to simulate customer interviews, generate diverse personas, and predict market response before they write a single line of code or spend a dollar on development.
             </p>
 
@@ -97,19 +97,19 @@ export default function ValidationStrategy() {
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-green-700 dark:text-green-300"><strong>AI-generated customer personas:</strong> Creates diverse, realistic customers based on your idea and market research</p>
+                      <p className="text-sm text-green-800 dark:text-green-200"><strong>AI-generated customer personas:</strong> Creates diverse, realistic customers based on your idea and market research</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-green-700 dark:text-green-300"><strong>Simulated customer interviews:</strong> Conduct realistic conversations with AI customers to uncover real pain points</p>
+                      <p className="text-sm text-green-800 dark:text-green-200"><strong>Simulated customer interviews:</strong> Conduct realistic conversations with AI customers to uncover real pain points</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-green-700 dark:text-green-300"><strong>Data-driven pricing insights:</strong> Learn what customers are willing to pay based on simulated conversations</p>
+                      <p className="text-sm text-green-800 dark:text-green-200"><strong>Data-driven pricing insights:</strong> Learn what customers are willing to pay based on simulated conversations</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-green-700 dark:text-green-300"><strong>6-month business simulation:</strong> See how your startup could evolve based on real customer feedback</p>
+                      <p className="text-sm text-green-800 dark:text-green-200"><strong>6-month business simulation:</strong> See how your startup could evolve based on real customer feedback</p>
                     </div>
                   </div>
                 </CardContent>
@@ -124,21 +124,21 @@ export default function ValidationStrategy() {
                   <TrendingUp className="w-8 h-8 text-primary" />
                 </div>
                 <h4 className="font-bold mb-2">90% Startup Failure Rate</h4>
-                <p className="text-sm text-foreground/70">Most startups fail because they build something nobody wants. AI validation helps you avoid this expensive mistake.</p>
+                <p className="text-sm text-white">Most startups fail because they build something nobody wants. AI validation helps you avoid this expensive mistake.</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="w-8 h-8 text-primary" />
                 </div>
                 <h4 className="font-bold mb-2">Customer-Centric Approach</h4>
-                <p className="text-sm text-foreground/70">AI simulates diverse customer perspectives you might never have considered on your own, revealing hidden opportunities.</p>
+                <p className="text-sm text-white">AI simulates diverse customer perspectives you might never have considered on your own, revealing hidden opportunities.</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Target className="w-8 h-8 text-primary" />
                 </div>
                 <h4 className="font-bold mb-2">Speed & Precision</h4>
-                <p className="text-sm text-foreground/70">Get comprehensive validation in minutes instead of months of manual research and guesswork.</p>
+                <p className="text-sm text-white">Get comprehensive validation in minutes instead of months of manual research and guesswork.</p>
               </div>
             </div>
 
@@ -214,22 +214,22 @@ export default function ValidationStrategy() {
               <div className="flex items-center gap-4 p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
                 <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">B</div>
                 <div>
-                  <h4 className="font-bold">Bubble for Landing Pages</h4>
-                  <p className="text-sm text-foreground/70">Rapid prototyping and testing without code</p>
+                  <h4 className="font-bold text-white">Bubble for Landing Pages</h4>
+                  <p className="text-sm text-white">Rapid prototyping and testing without code</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
                 <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center text-white font-bold">B</div>
                 <div>
-                  <h4 className="font-bold">Beehiiv for Community Building</h4>
-                  <p className="text-sm text-foreground/70">Newsletter platform that helped us reach 200K+ entrepreneurs</p>
+                  <h4 className="font-bold text-white">Beehiiv for Community Building</h4>
+                  <p className="text-sm text-white">Newsletter platform that helped us reach 200K+ entrepreneurs</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 bg-lime-50 dark:bg-lime-950/20 rounded-lg border border-lime-200 dark:border-lime-800">
                 <div className="w-12 h-12 bg-lime-600 rounded-lg flex items-center justify-center text-white font-bold">A</div>
                 <div>
-                  <h4 className="font-bold">Augment for Learning</h4>
-                  <p className="text-sm text-foreground/70">Practical entrepreneur education that actually works</p>
+                  <h4 className="font-bold text-white">Augment for Learning</h4>
+                  <p className="text-sm text-white">Practical entrepreneur education that actually works</p>
                 </div>
               </div>
             </div>
@@ -252,12 +252,12 @@ export default function ValidationStrategy() {
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-primary/20">
                       <BarChart className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <h4 className="font-bold mb-1">Start Today</h4>
-                      <p className="text-sm text-foreground/70">Use our AI validation tool to test your current idea</p>
+                      <h4 className="font-bold mb-1 text-gray-800 dark:text-white">Start Today</h4>
+                      <p className="text-sm text-gray-700 dark:text-gray-200">Use our AI validation tool to test your current idea</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-primary/20">
                       <Target className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <p className="text-sm text-foreground/70">Join the community of forward-thinking entrepreneurs</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-200">Join the community of forward-thinking entrepreneurs</p>
                     </div>
                   </div>
 
@@ -284,7 +284,7 @@ export default function ValidationStrategy() {
             </p>
 
             <div className="text-center mt-12 pt-8 border-t border-foreground/10">
-              <p className="text-foreground/70 mb-4">Ready to validate your idea the modern way?</p>
+              <p className="text-white mb-4">Ready to validate your idea the modern way?</p>
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
                 <Link to="/" className="inline-flex items-center">
                   Start Your AI Validation Now
