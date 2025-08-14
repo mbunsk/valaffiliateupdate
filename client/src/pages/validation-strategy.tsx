@@ -62,7 +62,7 @@ export default function ValidationStrategy() {
             </p>
 
             <p className="text-white mb-6">
-              <strong>Here's the secret: Validation and audience building should happen simultaneously. Test your ideas with your audience as you grow it.</strong>
+              <strong className="text-white">Here's the secret: Validation and audience building should happen simultaneously. Test your ideas with your audience as you grow it.</strong>
             </p>
 
             <p className="text-white mb-6">
@@ -99,7 +99,7 @@ export default function ValidationStrategy() {
             </div>
 
             <p className="text-white mb-6">
-              <strong>Key Rule:</strong> Your tool should give your audience something to do, not just read or watch. Make results sharable… encourage posting of scores, rankings, or personalized reports.
+              <strong className="text-white">Key Rule:</strong> Your tool should give your audience something to do, not just read or watch. Make results sharable… encourage posting of scores, rankings, or personalized reports.
             </p>
 
             <div className="bg-gradient-to-r from-green-50/20 to-emerald-50/20 dark:from-green-950/40 dark:to-emerald-950/40 border border-green-200/30 dark:border-green-800/30 rounded-lg p-6 my-8">
@@ -111,7 +111,7 @@ export default function ValidationStrategy() {
             </div>
 
             <p className="text-white mb-12">
-              When describing your AI tool idea on <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable, explain that it's free-to-use, helpful, and designed to capture leads. <strong>Always capture emails when people use your tool… what you do next depends on that list.</strong>
+              When describing your AI tool idea on <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable, explain that it's free-to-use, helpful, and designed to capture leads. <strong className="text-white">Always capture emails when people use your tool… what you do next depends on that list.</strong>
             </p>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">2️⃣ Launch Your Audience Platform</h2>
