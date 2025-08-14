@@ -38,7 +38,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
               🛠️ Your Startup Resources Kit
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-              Ready to Build? <span className="emoji">⚡</span>
+              Ready to Continue?
             </h2>
             <p className="text-xl text-foreground/70 mb-8">
               After validating your idea, you'll get access to personalized startup and idea validation resources.
@@ -53,7 +53,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
               <CardContent className="p-12">
                 <div className="text-6xl mb-6">🔒</div>
                 <h3 className="text-2xl font-bold mb-4 text-muted-foreground">
-                  Startup Resources Coming Soon!
+                  Your Startup Resources Kit
                 </h3>
                 <p className="text-lg text-muted-foreground mb-6">
                   Complete Step 1 (idea validation) to unlock your personalized toolkit including:
@@ -165,7 +165,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             🛠️ Your Startup Resources Kit
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Ready to Build? <span className="emoji">⚡</span>
+            Ready to Continue?
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
             Your idea is validated! Now access your personalized startup and idea validation resources.
