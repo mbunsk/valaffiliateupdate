@@ -113,7 +113,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
     },
     {
       name: "LivePlan",
-      title: "Turn Into Business Plan",
+      title: "Create a Full Business Plan",
       description: "Transform your validated idea into a comprehensive business plan with financial projections and investor-ready documents.",
       url: "https://liveplan.com",
       logo: liveplanLogo,
