@@ -229,6 +229,28 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                     <SaveResults validationData={validationResult} />
                   </div>
 
+                  {/* Free Resource Link */}
+                  <div className="mt-8">
+                    <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-2 border-green-500/20">
+                      <CardContent className="p-6 text-center">
+                        <h4 className="text-xl font-bold text-green-600 dark:text-green-400 mb-3 flex items-center justify-center gap-2">
+                          📖 Free Resource: Advanced Validation Strategy
+                        </h4>
+                        <p className="text-foreground/80 mb-4">
+                          Want to take your validation to the next level? Read our comprehensive guide on how ideas are validated in 2026 and beyond.
+                        </p>
+                        <a href="/validation-strategy">
+                          <Button 
+                            className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
+                          >
+                            Read the Full Strategy Guide
+                            <span className="ml-2">→</span>
+                          </Button>
+                        </a>
+                      </CardContent>
+                    </Card>
+                  </div>
+
                 </div>
               );
             })()}

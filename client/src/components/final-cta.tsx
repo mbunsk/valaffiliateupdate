@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 
 export default function FinalCTA() {
-  const scrollToTop = () => {
+  const scrollToValidation = () => {
     const validationSection = document.getElementById('validation');
     if (validationSection) {
       validationSection.scrollIntoView({ behavior: 'smooth' });
@@ -29,7 +29,7 @@ export default function FinalCTA() {
         </p>
 
         <Button 
-          onClick={scrollToTop}
+          onClick={scrollToValidation}
           size="lg"
           className="px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-110"
         >

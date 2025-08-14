@@ -52,33 +52,15 @@ export default function NewsletterSection() {
               Get the latest startup validation tips, AI insights, and exclusive features delivered to your inbox.
             </p>
 
-            {!isSubscribed ? (
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-3 mb-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 h-12 text-lg"
-                    required
-                  />
-                  <Button 
-                    type="submit"
-                    disabled={isSubmitting || !email}
-                    size="lg"
-                    className="px-8 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary transition-all duration-300 transform hover:scale-105"
-                  >
-                    {isSubmitting ? "Joining..." : "Join Newsletter"}
-                  </Button>
-                </div>
-              </form>
-            ) : (
-              <div className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400 text-lg font-semibold">
-                <CheckCircle className="w-6 h-6" />
-                Successfully subscribed!
-              </div>
-            )}
+            <Button 
+              size="lg"
+              className="px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent transition-all duration-300 transform hover:scale-110"
+              onClick={() => window.open('https://www.beehiiv.com/?via=aron-meystedt&_bhlid=bfc4afcba0acc7ca8c69966bb231bf46b6adfee0', '_blank')}
+            >
+              <Mail className="w-6 h-6 mr-3" />
+              Join Our Newsletter
+              <span className="ml-3">📧</span>
+            </Button>
 
             <p className="text-sm text-muted-foreground mt-4">
               No spam, unsubscribe anytime. Used by founders at top startups.
