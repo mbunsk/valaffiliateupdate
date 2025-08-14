@@ -57,7 +57,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             <p className="text-xl text-foreground/70 mb-8">
               After validating your idea, you'll get access to personalized startup and idea validation resources.
               <br />
-              <span className="text-primary font-semibold">Choose from 7 trusted partner tools to turn your validated idea into reality! ✨</span>
+              <span className="text-primary font-semibold">Choose from 7 trusted partner tools to continue your exploration journey! ✨</span>
             </p>
           </div>
 
