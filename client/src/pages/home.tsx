@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import IdeaValidation from "@/components/idea-validation";
-import SiteBuilders from "@/components/site-builders";
+import StartupResources from "@/components/startup-resources";
 import StartupSimulator from "@/components/startup-simulator";
 import Testimonials from "@/components/testimonials";
 import NewsletterSignup from "@/components/newsletter-signup";
@@ -21,7 +21,7 @@ export default function Home() {
       <Header />
       <Hero />
       <IdeaValidation onValidationComplete={setValidationData} />
-      <SiteBuilders validationData={validationData} />
+      <StartupResources validationData={validationData} />
       <StartupSimulator validationData={validationData} />
       <Footer />
     </div>

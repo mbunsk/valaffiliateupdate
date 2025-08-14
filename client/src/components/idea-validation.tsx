@@ -219,11 +219,10 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
                         Great work exploring your idea! 🎉
                       </h4>
                       <p className="text-lg text-foreground/80 mb-4">
-                        Here is the next step to validate: Create a free landing page mockup to visualize your idea clearly. 
-                        <span className="font-semibold text-primary"> You need to go to Step 2 in order to talk to customer personas and simulate a launch!</span>
+                        Your idea is now validated! Next, explore your personalized startup resources and simulate customer conversations to refine your strategy.
                       </p>
                       <div className="text-sm text-foreground/60">
-                        It's completely free and takes just 1 minute ✨
+                        Continue below to access your custom toolkit ✨
                       </div>
                     </div>
                   </div>

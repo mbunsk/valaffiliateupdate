@@ -86,16 +86,16 @@ export default function Header() {
                 🚀 Validate Idea
               </button>
               <button 
-                onClick={() => scrollToSection('build')}
+                onClick={() => scrollToSection('resources')}
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                🎨 Build Page
+                🛠️ Resources
               </button>
               <button 
                 onClick={() => scrollToSection('simulate')}
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
               >
-                🎮 Startup Simulation
+                💬 Customer Simulation
               </button>
               <a 
                 href="/about"
@@ -129,16 +129,16 @@ export default function Header() {
               Validate Your Idea
             </button>
             <button 
-              onClick={() => scrollToSection('build')}
+              onClick={() => scrollToSection('resources')}
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
             >
-              Get a Landing Page
+              Startup Resources
             </button>
             <button 
-              onClick={() => scrollToSection('submit')}
+              onClick={() => scrollToSection('simulate')}
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
             >
-              Get Feedback
+              Customer Simulation
             </button>
             <a 
               href="/about"

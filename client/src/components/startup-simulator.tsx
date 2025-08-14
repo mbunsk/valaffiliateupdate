@@ -47,8 +47,7 @@ interface SimulationPhase {
 }
 
 export default function StartupSimulator({ validationData }: StartupSimulatorProps) {
-  const [bubbleUrl, setBubbleUrl] = useState("");
-  const [currentPhase, setCurrentPhase] = useState<'url' | 'interviews' | 'simulation' | 'results'>('url');
+  const [currentPhase, setCurrentPhase] = useState<'start' | 'interviews' | 'simulation' | 'results'>('start');
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [activeCustomer, setActiveCustomer] = useState<Customer | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -63,29 +62,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const validateBubbleUrl = (url: string) => {
-    return /bubble/i.test(url);
-  };
-
   const startSimulation = async () => {
-    if (!bubbleUrl.trim()) {
-      toast({
-        title: "URL Required",
-        description: "Please enter your Bubble preview URL first",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!validateBubbleUrl(bubbleUrl)) {
-      toast({
-        title: "Invalid URL",
-        description: "URL must contain 'bubble' to continue",
-        variant: "destructive"
-      });
-      return;
-    }
-
     if (!validationData) {
       toast({
         title: "Validation Required",
@@ -97,13 +74,12 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
 
     setIsLoading(true);
     try {
-      // Generate customer personas from validation data and landing page content
+      // Generate customer personas from validation data
       const response = await apiRequest("POST", "/api/generate-customers", {
         idea: validationData.idea,
         targetCustomer: validationData.targetCustomer,
         problemSolved: validationData.problemSolved,
-        feedback: validationData.feedback,
-        bubbleUrl: bubbleUrl
+        feedback: validationData.feedback
       });
 
       const data = await response.json();
@@ -428,36 +404,54 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           </p>
         </div>
 
-        {currentPhase === 'url' && (
-          <Card className="max-w-2xl mx-auto">
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <TrendingUp className="mr-2" />
-                Step 1: Share Your Bubble Preview
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <Input
-                  placeholder="https://your-app.bubbleapps.io/version-test..."
-                  value={bubbleUrl}
-                  onChange={(e) => setBubbleUrl(e.target.value)}
-                  className="text-lg p-4"
-                />
-                <p className="text-sm text-muted-foreground">
-                  URL must contain 'bubble' to continue (any Bubble preview URL works)
+        {!validationData && (
+          <div className="text-center">
+            <Card className="max-w-2xl mx-auto border-2 border-dashed border-muted-foreground/30 bg-muted/20">
+              <CardContent className="p-8">
+                <div className="text-4xl mb-4">🔒</div>
+                <h3 className="text-xl font-semibold mb-3 text-muted-foreground">
+                  Customer Simulation Will Appear Here
+                </h3>
+                <p className="text-muted-foreground">
+                  Complete Steps 1 and 2 above to unlock customer interviews and startup simulation!
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {validationData && currentPhase === 'start' && (
+          <div className="text-center">
+            <Card className="max-w-2xl mx-auto">
+              <CardContent className="p-8">
+                <div className="text-6xl mb-4">💬</div>
+                <h3 className="text-2xl font-bold mb-4">Ready to Simulate Customer Conversations?</h3>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Based on your validated idea, I'll create 3 AI customer personas for you to interview. 
+                  These conversations will help refine your go-to-market strategy.
                 </p>
                 <Button
                   onClick={startSimulation}
                   disabled={isLoading}
-                  className="w-full"
                   size="lg"
+                  className="px-8 py-4 text-lg font-bold rounded-2xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110"
                 >
-                  {isLoading ? "Generating Customers..." : "Start Simulation"}
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <div className="animate-spin w-5 h-5 mr-3 border-2 border-white border-t-transparent rounded-full" />
+                      Generating Customers...
+                    </div>
+                  ) : (
+                    <>
+                      <span className="mr-2">🚀</span>
+                      Simulate Customer Conversations
+                      <span className="ml-2">✨</span>
+                    </>
+                  )}
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         )}
 
         {currentPhase === 'interviews' && (
