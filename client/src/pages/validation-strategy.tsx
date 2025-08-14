@@ -150,7 +150,7 @@ export default function ValidationStrategy() {
             </ul>
 
             <p className="text-white mb-8">
-              End every video with: <strong>"Link in bio - try it FREE"</strong> (not "subscribe" or "sign up").
+              End every video with: <strong className="text-white">"Link in bio - try it FREE"</strong> (not "subscribe" or "sign up").
             </p>
 
             <h3 className="text-2xl font-bold mt-12 mb-6">Additional Traffic Plays:</h3>
