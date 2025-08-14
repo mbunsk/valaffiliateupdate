@@ -184,19 +184,21 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             >
               <CardContent className="p-6 text-center">
                 {/* Logo */}
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg p-2">
-                  {resource.logo ? (
-                    <img 
-                      src={resource.logo}
-                      alt={`${resource.name} logo`}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  ) : (
-                    <div className="text-2xl font-bold text-gray-400">
-                      {resource.name.charAt(0)}
-                    </div>
-                  )}
-                </div>
+                <a href={resource.url} target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
+                    {resource.logo ? (
+                      <img 
+                        src={resource.logo}
+                        alt={`${resource.name} logo`}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    ) : (
+                      <div className="text-2xl font-bold text-gray-400">
+                        {resource.name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+                </a>
                 
                 <div className="text-xs text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
                   {resource.category}
