@@ -98,8 +98,8 @@ export default function StartupResources({ validationData }: StartupResourcesPro
                     <div className="text-sm text-gray-600 dark:text-gray-400">Manage research</div>
                   </div>
                 </div>
-                <div className="flex justify-center mt-4">
-                  <div className="bg-lime-50 dark:bg-lime-900/20 p-3 rounded-lg border border-lime-200 dark:border-lime-700" style={{ width: 'calc((100% - 2rem) / 3)' }}>
+                <div className="grid grid-cols-3 gap-4 mt-4 max-w-2xl mx-auto">
+                  <div className="col-start-2 bg-lime-50 dark:bg-lime-900/20 p-3 rounded-lg border border-lime-200 dark:border-lime-700">
                     <div className="font-semibold text-lime-700 dark:text-lime-300">🎓 Education</div>
                     <div className="text-sm text-lime-600 dark:text-lime-400">Entrepreneur MBA</div>
                   </div>
