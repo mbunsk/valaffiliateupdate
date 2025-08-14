@@ -106,7 +106,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       name: "Beehiiv",
       title: "Build Your Audience",
       description: "The best way to validate is to build an audience! Create newsletters and grow your subscriber base to validate demand before you build.",
-      url: "https://beehiiv.com",
+      url: "https://www.beehiiv.com/?via=aron-meystedt&_bhlid=bfc4afcba0acc7ca8c69966bb231bf46b6adfee0",
       logo: beehiivLogo,
       color: "bg-yellow-600 hover:bg-yellow-700",
       category: "Audience Building"
@@ -124,7 +124,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
       name: "Gamma",
       title: "Create Pitch Deck",
       description: "Build beautiful pitch decks powered by AI. Turn your idea validation into compelling presentation slides in minutes.",
-      url: "https://gamma.app",
+      url: "https://try.gamma.app/9mp9k1gqybqf",
       logo: gammaLogo,
       color: "bg-green-600 hover:bg-green-700",
       category: "Presentations"
