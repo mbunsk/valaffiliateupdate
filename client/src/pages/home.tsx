@@ -28,16 +28,19 @@ export default function Home() {
       {/* Section Divider */}
       <div className="py-8 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-            <div className="px-6 text-primary/60">
+          <div className="relative flex items-center justify-center">
+            {/* Full width horizontal line behind everything */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+            </div>
+            {/* Stars on top of the line */}
+            <div className="relative px-6 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 text-primary/60">
               <div className="flex items-center gap-2 text-2xl">
                 <span>⭐</span>
                 <span>✨</span>
                 <span>⭐</span>
               </div>
             </div>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
           </div>
         </div>
       </div>
