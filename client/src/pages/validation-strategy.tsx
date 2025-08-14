@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import aronHeadshot from "@assets/aron_1755207186305.png";
-import aronSignature from "@assets/Aron_Signature_block_1755215051180.gif";
+import aronSignature from "@assets/Aron_-_New_Sign-transparent_1755215307685.avif";
 
 export default function ValidationStrategy() {
   return (
@@ -219,11 +219,11 @@ export default function ValidationStrategy() {
               Aron Meystedt
             </p>
 
-            <div className="mb-12">
+            <div className="mb-12 flex justify-start">
               <img 
                 src={aronSignature}
                 alt="Aron Meystedt signature" 
-                className="max-w-full h-auto"
+                className="h-16 w-auto opacity-90"
               />
             </div>
 
