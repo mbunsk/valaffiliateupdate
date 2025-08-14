@@ -214,16 +214,13 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
 
                   {/* Next Steps Component */}
                   <div className="mt-8 text-center">
-                    <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 p-6 rounded-xl border border-green-500/20">
-                      <h4 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-3">
-                        Great work exploring your idea! 🎉
+                    <div className="bg-gradient-to-r from-blue-500/10 to-green-500/10 p-6 rounded-xl border border-blue-500/20">
+                      <h4 className="text-lg font-bold text-blue-600 mb-4 flex items-center justify-center gap-2">
+                        💾 Save Your Results
                       </h4>
-                      <p className="text-lg text-foreground/80 mb-4">
-                        Your idea is now validated! Next, explore your personalized startup resources and simulate customer conversations to refine your strategy.
+                      <p className="text-sm text-foreground/80 mb-4">
+                        Download your complete validation report to keep and share with others!
                       </p>
-                      <div className="text-sm text-foreground/60">
-                        Continue below to access your custom toolkit ✨
-                      </div>
                     </div>
                   </div>
 
