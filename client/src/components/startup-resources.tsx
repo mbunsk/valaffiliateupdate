@@ -225,29 +225,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
           ))}
         </div>
 
-        {/* Next Step Call-to-Action */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-8 rounded-2xl border border-primary/20 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-black gradient-text mb-4">
-              Ready to Test with Real Customers? 
-            </h3>
-            <p className="text-lg text-foreground/80 mb-6">
-              Now that you have the tools to build, let's simulate real customer conversations to refine your go-to-market strategy.
-            </p>
-            <div className="flex justify-center">
-              <a href="#simulate" className="scroll-smooth">
-                <Button 
-                  size="lg" 
-                  className="px-8 py-4 text-lg font-bold rounded-2xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110"
-                >
-                  <span className="mr-2">💬</span>
-                  Simulate Customer Conversations
-                  <span className="ml-2">✨</span>
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );
