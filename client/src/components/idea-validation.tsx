@@ -32,7 +32,41 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
   const [idea, setIdea] = useState("");
   const [targetCustomer, setTargetCustomer] = useState("");
   const [problemSolved, setProblemSolved] = useState("");
-  const [validationResult, setValidationResult] = useState<ValidationResponse | null>(null);
+  // Temporary demo data - remove this to restore normal functionality
+  const [validationResult, setValidationResult] = useState<ValidationResponse | null>({
+    id: "demo-123",
+    idea: "A mobile app that helps people find and book local fitness classes",
+    targetCustomer: "Busy professionals aged 25-40 who want convenient fitness options",
+    problemSolved: "Difficulty finding and booking fitness classes that fit busy schedules",
+    feedback: `<div class="validation-sections">
+      <h3>🎯 Overall Fit Score: 85/100</h3>
+      <p>Your fitness class booking app shows strong market potential with excellent problem-solution alignment!</p>
+      
+      <h3>💡 Market Opportunity Analysis</h3>
+      <p>The fitness app market is experiencing rapid growth, especially in the post-pandemic era where people seek flexible, convenient fitness solutions. Your target demographic of busy professionals represents a lucrative segment willing to pay for convenience.</p>
+      
+      <h3>⚡ Competitive Advantages</h3>
+      <ul>
+        <li>Local focus creates community connections</li>
+        <li>Real-time booking reduces friction</li>
+        <li>Professional target market has higher spending power</li>
+      </ul>
+      
+      <h3>🚨 Key Challenges to Address</h3>
+      <ul>
+        <li>Competition from established players like ClassPass</li>
+        <li>Need to build relationships with local fitness studios</li>
+        <li>User acquisition costs in competitive fitness market</li>
+      </ul>
+      
+      <h3>💰 Revenue Potential</h3>
+      <p>Conservative estimate: $15-25 per active user per month through booking fees and premium features. With 1,000 active users, you could generate $15,000-25,000 monthly revenue.</p>
+      
+      <h3>🎯 Next Steps</h3>
+      <p>Start by validating demand in your local market. Create landing pages for 2-3 neighborhoods, partner with 3-5 local studios, and test booking demand before building the full platform.</p>
+    </div>`,
+    createdAt: new Date().toISOString()
+  });
   const { toast } = useToast();
 
   const validateMutation = useMutation({
