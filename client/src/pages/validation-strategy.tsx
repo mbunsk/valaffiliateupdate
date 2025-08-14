@@ -44,7 +44,7 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The Problem with Traditional Validation</h2>
             
-            <p>
+            <p className="text-foreground/80">
               If you're still manually surveying friends and family, building full prototypes before validation, or guessing at pricing, you're using methods that worked in 2020 but are now costing you time, money, and opportunities.
             </p>
 
@@ -81,7 +81,7 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The AI-Powered Validation Revolution</h2>
 
-            <p>
+            <p className="text-foreground/80">
               In 2026, the smartest entrepreneurs are using AI to simulate customer interviews, generate diverse personas, and predict market response before they write a single line of code or spend a dollar on development.
             </p>
 
@@ -148,13 +148,13 @@ export default function ValidationStrategy() {
               "I spent 6 months building my first startup without proper validation. It failed. With AI validation, I validated my second idea in 30 minutes, pivoted based on the insights, and now I'm at $10K MRR."
             </blockquote>
 
-            <p>
+            <p className="text-foreground/80">
               This isn't just theory. Entrepreneurs using AI validation are seeing dramatically better success rates because they're making data-driven decisions from day one.
             </p>
 
             <h2 className="text-3xl font-bold mt-12 mb-6">How We Built Our 200,000+ Member Community</h2>
 
-            <p>
+            <p className="text-foreground/80">
               ValidatorAI didn't start with 200,000 entrepreneurs. We began with zero, just like you. But we applied the same validation principles we teach to grow our own community.
             </p>
 
@@ -206,7 +206,7 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The Tools That Made the Difference</h2>
 
-            <p>
+            <p className="text-foreground/80">
               We didn't just use any tools – we carefully selected partners that shared our mission of helping entrepreneurs succeed:
             </p>
 
@@ -236,7 +236,7 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">The Future is Here: Don't Get Left Behind</h2>
 
-            <p>
+            <p className="text-foreground/80">
               We're at an inflection point in entrepreneurship. The tools and methods that worked in 2020 are becoming obsolete. AI-powered validation is the new standard, and early adopters are seeing massive advantages.
             </p>
 
@@ -275,11 +275,11 @@ export default function ValidationStrategy() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6">Final Thoughts</h2>
 
-            <p>
+            <p className="text-foreground/80">
               The entrepreneurs who embrace AI-powered validation today will have a massive competitive advantage. Those who stick with outdated methods will continue to struggle with the same problems that have plagued startups for decades.
             </p>
 
-            <p>
+            <p className="text-foreground/80">
               Don't be the entrepreneur who spends months building something nobody wants. Join the 200,000+ entrepreneurs who are using modern validation methods to build successful businesses.
             </p>
 
