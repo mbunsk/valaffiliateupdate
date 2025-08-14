@@ -4,6 +4,7 @@ import Hero from "@/components/hero";
 import IdeaValidation from "@/components/idea-validation";
 import StartupResources from "@/components/startup-resources";
 import StartupSimulator from "@/components/startup-simulator";
+import ValidationStrategyArticle from "@/components/validation-strategy-article";
 import TestimonialsGrid from "@/components/testimonials-grid";
 import NewsletterSection from "@/components/newsletter-section";
 import FinalCTA from "@/components/final-cta";
@@ -40,9 +41,17 @@ export default function Home() {
         </div>
       </div>
       
-      <TestimonialsGrid />
-      <NewsletterSection />
-      <FinalCTA />
+      {!validationData && (
+        <>
+          <TestimonialsGrid />
+          <NewsletterSection />
+          <FinalCTA />
+        </>
+      )}
+      
+      {/* Show validation strategy article after simulation */}
+      {validationData && <ValidationStrategyArticle />}
+      
       <Footer />
     </div>
   );
