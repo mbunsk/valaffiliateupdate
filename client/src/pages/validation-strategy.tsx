@@ -33,7 +33,7 @@ export default function ValidationStrategy() {
               Are you using dated methods to validate your ideas?
             </p>
             <div className="text-sm text-foreground/60">
-              August 11, 2025
+              August 14, 2025
             </div>
           </div>
 
