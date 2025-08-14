@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import aronHeadshot from "@assets/aron_1755207186305.png";
+import aronSignature from "@assets/Aron_Signature_block_1755215051180.gif";
 
 export default function ValidationStrategy() {
   return (
@@ -50,7 +51,7 @@ export default function ValidationStrategy() {
                   Hi, I'm Aron 🙋‍♂️
                 </p>
                 <p className="text-white">
-                  I am going to tell you the validation method that is your best bet for success going forward.
+                  I am going to tell you exactly the validation method we used to attract over 500,000 people here!
                 </p>
               </div>
             </div>
@@ -106,12 +107,12 @@ export default function ValidationStrategy() {
               <h4 className="text-lg font-bold mb-4 text-white">Where to Build:</h4>
               <ul className="text-white space-y-2 list-none">
                 <li><a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a></li>
-                <li>Lovable</li>
+                <li><a href="https://lovable.dev/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Lovable</a></li>
               </ul>
             </div>
 
             <p className="text-white mb-12">
-              When describing your AI tool idea on <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable, explain that it's free-to-use, helpful, and designed to capture leads. <strong className="text-white">Always capture emails when people use your tool… what you do next depends on that list.</strong>
+              When describing your AI tool idea on <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or <a href="https://lovable.dev/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Lovable</a>, explain that it's free-to-use, helpful, and designed to capture leads. <strong className="text-white">Always capture emails when people use your tool… what you do next depends on that list.</strong>
             </p>
 
             <h2 className="text-3xl font-bold mt-16 mb-6">2️⃣ Launch Your Audience Platform</h2>
@@ -197,7 +198,7 @@ export default function ValidationStrategy() {
             <h2 className="text-3xl font-bold mt-16 mb-6">⚡ Here's the Loop</h2>
 
             <ul className="text-white space-y-2 mb-8 list-none">
-              <li>• Traffic flows to your tool - Build it at <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or Lovable</li>
+              <li>• Traffic flows to your tool - Build it at <a href="https://bubble.io/?ref=validatorai" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Bubble</a> or <a href="https://lovable.dev/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Lovable</a></li>
               <li>• Tool collects emails into your newsletter - Signup at <a href="https://www.beehiiv.com/?via=aron" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Beehiiv</a></li>
               <li>• The newsletter polls & engages audience to validate ideas</li>
               <li>• Launch new tools and develop your product based on votes</li>
@@ -213,6 +214,18 @@ export default function ValidationStrategy() {
             <p className="text-white mb-6">
               Take Care!
             </p>
+
+            <p className="text-white mb-4">
+              Aron Meystedt
+            </p>
+
+            <div className="mb-12">
+              <img 
+                src={aronSignature}
+                alt="Aron Meystedt signature" 
+                className="max-w-full h-auto"
+              />
+            </div>
 
             <p className="text-white text-center mb-12">
               👍 <a href="https://www.linkedin.com/in/aronmeystedt/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline">Let's connect on LinkedIn!</a> 👍

@@ -52,7 +52,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
               🛠️ Your Startup Resources Kit
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-              Ready to Continue?
+              Ready to Keep Exploring?
             </h2>
             <p className="text-xl text-foreground/70 mb-8">
               After validating your idea, you'll get access to personalized startup and idea validation resources.
