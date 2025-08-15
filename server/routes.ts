@@ -466,7 +466,7 @@ AI Feedback: ${feedback}
 
 ${landingPageContent}
 
-Bubble URL: ${bubbleUrl}
+Landing Page: Using validation data for customer generation
 
 Based on both the validation data AND the landing page content, create 3 diverse customer personas that would realistically be interested in this solution. For each customer, include:
 - Name and role/job

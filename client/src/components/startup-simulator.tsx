@@ -422,7 +422,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
 
         {validationData && currentPhase === 'start' && (
           <div className="text-center">
-            <Card className="max-w-2xl mx-auto">
+            <Card className="max-w-2xl mx-auto border-2 border-primary/30 shadow-2xl shadow-primary/20 bg-gradient-to-br from-card/90 to-primary/5 backdrop-blur-sm animate-pulse-slow">
               <CardContent className="p-8">
                 <div className="text-6xl mb-4">💬</div>
                 <h3 className="text-2xl font-bold mb-4">Ready to Simulate Customer Conversations?</h3>

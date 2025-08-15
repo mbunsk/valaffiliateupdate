@@ -24,7 +24,7 @@ export default function FinalCTA() {
         </h2>
         
         <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
-          Join thousands of entrepreneurs who have explored their wild ideas with our AI.. 
+          Join thousands of entrepreneurs who have explored their wild ideas with our AI. 
           Get your AI-powered validation report in just 30 seconds.
         </p>
 
