@@ -103,7 +103,7 @@ export default function Hero() {
             <span className="text-foreground">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get instant AI validation, explore personalized startup resources, then chat with 3 customer personas to refine your idea.   ALL FREE! 🦄
+            Get instant AI validation, explore personalized startup resources, then chat with AI-generated customer personas to refine your idea. ALL FREE!
           </p>
           <Button 
             onClick={scrollToValidation}
