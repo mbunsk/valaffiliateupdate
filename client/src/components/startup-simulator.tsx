@@ -676,9 +676,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                             <Button
                               variant="outline"
                               onClick={() => startValChat(phase.month)}
-                              className="border-purple-500 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
+                              className="border-purple-500 text-white hover:bg-purple-50 dark:hover:bg-purple-950/30 bg-black"
                             >
-                              <MessageCircle className="w-4 h-4 mr-2" />
+                              <MessageCircle className="w-4 h-4 mr-2 text-white" />
                               Chat with Val
                             </Button>
                           </div>
@@ -780,6 +780,56 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               <p className="text-sm text-muted-foreground text-center max-w-md mx-auto">
                 You've successfully validated your startup idea through customer interviews and explored your 6-month journey. Use these insights to move forward with confidence!
               </p>
+            </div>
+
+            {/* Bubble CTA Section */}
+            <div className="mt-12">
+              <Card className="shadow-lg border-2 border-purple-400 hover:border-purple-500 shadow-purple-200/50 dark:shadow-purple-900/50 bg-card/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 max-w-4xl mx-auto">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-6">
+                    <a 
+                      href="https://bubble.pxf.io/e1kn1O" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex-shrink-0"
+                    >
+                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 hover:shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer">
+                        <img 
+                          src="/attached_assets/bubble-icon-logo-png_seeklogo-448116_1754234608565.png"
+                          alt="Bubble logo"
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    </a>
+                    
+                    <div className="flex-1">
+                      <div className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">
+                        Website Builder
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">Ready to Build Your Landing Page?</h3>
+                      <p className="text-muted-foreground mb-4">
+                        Create a professional landing page mockup in minutes. No coding required - perfect for validating your idea with real visitors.
+                      </p>
+                    </div>
+                    
+                    <Button 
+                      asChild 
+                      size="lg"
+                      className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    >
+                      <a 
+                        href="https://bubble.pxf.io/e1kn1O" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center"
+                      >
+                        Start Building
+                        <span className="ml-2">→</span>
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         )}
