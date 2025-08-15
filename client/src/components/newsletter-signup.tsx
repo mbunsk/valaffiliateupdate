@@ -80,7 +80,7 @@ export default function NewsletterSignup() {
           </p>
         </div>
 
-        <Card className="shadow-2xl border-2 border-primary/30 bg-gradient-to-br from-card/90 to-primary/5 backdrop-blur-sm animate-pulse-slow max-w-2xl mx-auto">
+        <Card className="shadow-2xl shadow-primary/20 border-2 border-primary/30 bg-gradient-to-br from-card/90 to-primary/5 backdrop-blur-sm animate-pulse-slow max-w-2xl mx-auto">
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-bold text-foreground mb-2">Stay In The Loop!</h3>
