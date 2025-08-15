@@ -103,7 +103,7 @@ export default function Hero() {
             <span className="text-foreground">With AI Feedback! 🚀</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get instant <strong className="text-white dark:text-white">AI validation</strong>, explore personalized <strong className="text-white dark:text-white">startup resources</strong>, then chat with AI-generated <strong className="text-white dark:text-white">customer personas</strong> to refine your idea. <strong className="text-white dark:text-white">ALL FREE!</strong>
+            Get instant <strong className="text-white dark:text-white">AI validation</strong>, <strong className="text-white dark:text-white">startup resources</strong>, chat with <strong className="text-white dark:text-white">AI-customer personas</strong> and complete a <strong className="text-white dark:text-white">6 challenge launch simulation</strong>. <strong className="text-white dark:text-white">ALL FREE!</strong>
           </p>
           <Button 
             onClick={scrollToValidation}

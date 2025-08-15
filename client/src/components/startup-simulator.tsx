@@ -509,7 +509,14 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
               
               {interviewsCompleted.length >= 1 && (
                 <Button onClick={moveToSimulation} disabled={isLoading} className="w-full" size="lg">
-                  {isLoading ? "Generating Simulation. Wait 30 Seconds..." : "Generate Journey Simulation"}
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <span>Generating Simulation. Wait 30 seconds</span>
+                      <span className="ml-1 animate-pulse">.</span>
+                      <span className="animate-pulse" style={{animationDelay: '0.2s'}}>.</span>
+                      <span className="animate-pulse" style={{animationDelay: '0.4s'}}>.</span>
+                    </div>
+                  ) : "Generate Journey Simulation"}
                 </Button>
               )}
             </div>
