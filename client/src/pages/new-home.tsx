@@ -86,10 +86,10 @@ export default function NewHome() {
         </div>
       </div>
 
-      {/* Testimonials */}
+      {/* Original Testimonials */}
       <TestimonialsSection />
 
-      {/* Newsletter Section */}
+      {/* Original Newsletter Section */}
       <NewsletterSignup />
 
       {/* Footer */}

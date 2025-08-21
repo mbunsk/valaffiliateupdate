@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Users, FileText, ArrowRight, Star, TrendingUp } from "lucide-react";
+import { Clock, Users, FileText, ArrowRight, Star, TrendingUp, Zap, Brain, Rocket, DollarSign, Shield, CheckCircle, Sparkles, Target, BarChart3, Lightbulb } from "lucide-react";
 
 interface Product {
   id: string;
@@ -170,63 +170,88 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {perfectProducts.map((product) => (
-              <Card 
-                key={product.id}
-                className="shadow-lg border-2 border-green-200 dark:border-green-800 hover:border-green-300 dark:hover:border-green-700 bg-gradient-to-br from-green-50/50 to-emerald-50/30 dark:from-green-950/30 dark:to-emerald-950/20 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-                onClick={() => handleProductClick(product)}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <Badge variant="secondary" className="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
-                      {product.category}
-                    </Badge>
-                    {product.perfect && (
-                      <Badge variant="outline" className="text-xs border-green-300 text-green-600 dark:border-green-700 dark:text-green-400">
-                        ⚡ Quick
-                      </Badge>
-                    )}
-                  </div>
-                  <CardTitle className="text-xl font-bold text-green-900 dark:text-green-100">
-                    {product.title}
-                  </CardTitle>
-                  <p className="text-foreground/70 text-sm leading-relaxed">
-                    {product.description}
-                  </p>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-3 gap-2 py-3 px-2 bg-green-50/50 dark:bg-green-950/30 rounded-lg">
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-green-600 dark:text-green-400">{product.agents}</div>
-                      <div className="text-xs text-green-700 dark:text-green-300">Agents</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-blue-600 dark:text-blue-400">{product.sources}</div>
-                      <div className="text-xs text-blue-700 dark:text-blue-300">Sources</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-purple-600 dark:text-purple-400">{product.runtime}</div>
-                      <div className="text-xs text-purple-700 dark:text-purple-300">Runtime</div>
-                    </div>
-                  </div>
+            {perfectProducts.map((product, index) => {
+              const isFirst = index === 0;
+              const iconClass = isFirst ? "w-8 h-8 text-emerald-600" : "w-8 h-8 text-blue-600";
+              const Icon = isFirst ? Zap : Target;
+              
+              return (
+                <Card 
+                  key={product.id}
+                  className="group relative overflow-hidden shadow-2xl border-0 bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/50 dark:to-blue-950/30 hover:shadow-3xl transition-all duration-500 cursor-pointer transform hover:scale-[1.02] hover:-translate-y-2"
+                  onClick={() => handleProductClick(product)}
+                >
+                  {/* Animated background gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Floating decorative elements */}
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-emerald-400/20 to-blue-400/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
 
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-2xl font-black text-green-600">${product.price}</span>
-                      <span className="text-sm text-foreground/60 line-through">${product.originalPrice.toLocaleString()}</span>
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-sm">
+                          <Icon className={iconClass} />
+                        </div>
+                        <Badge variant="outline" className="border-emerald-300 text-emerald-600 dark:border-emerald-700 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/30">
+                          <Sparkles className="w-3 h-3 mr-1" />
+                          Perfect Start
+                        </Badge>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                          ${product.price}
+                        </div>
+                        <div className="text-xs text-foreground/60 line-through">${product.originalPrice}</div>
+                      </div>
                     </div>
+                    
+                    <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+                      {product.title}
+                    </CardTitle>
+                    <p className="text-foreground/70 text-sm leading-relaxed">
+                      {product.description}
+                    </p>
+                  </CardHeader>
+                  
+                  <CardContent className="relative z-10 space-y-4">
+                    <div className="grid grid-cols-3 gap-3 p-4 bg-gradient-to-r from-emerald-50/50 via-blue-50/50 to-purple-50/50 dark:from-emerald-950/30 dark:via-blue-950/30 dark:to-purple-950/30 rounded-xl border border-white/20">
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <Brain className="w-4 h-4 text-emerald-600 mr-1" />
+                          <div className="text-sm font-bold text-emerald-600">{product.agents}</div>
+                        </div>
+                        <div className="text-xs text-emerald-700 dark:text-emerald-300">AI Agents</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <FileText className="w-4 h-4 text-blue-600 mr-1" />
+                          <div className="text-sm font-bold text-blue-600">{product.sources}</div>
+                        </div>
+                        <div className="text-xs text-blue-700 dark:text-blue-300">Sources</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <Clock className="w-4 h-4 text-purple-600 mr-1" />
+                          <div className="text-sm font-bold text-purple-600">{product.runtime}</div>
+                        </div>
+                        <div className="text-xs text-purple-700 dark:text-purple-300">Delivery</div>
+                      </div>
+                    </div>
+
                     <Button 
-                      size="sm"
-                      className="bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300"
+                      size="lg"
                     >
-                      Get Analysis
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <Rocket className="w-5 h-5 mr-2" />
+                      Start Analysis
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
 
@@ -238,68 +263,116 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...featuredProducts, ...regularProducts].map((product) => (
-              <Card 
-                key={product.id}
-                className={`shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 ${
-                  product.featured 
-                    ? 'border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50/50 to-indigo-50/30 dark:from-blue-950/30 dark:to-indigo-950/20' 
-                    : 'border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700'
-                }`}
-                onClick={() => handleProductClick(product)}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {product.category}
-                    </Badge>
-                    {product.featured && (
-                      <Badge variant="outline" className="text-xs border-blue-300 text-blue-600 dark:border-blue-700 dark:text-blue-400">
-                        ⭐ Featured
-                      </Badge>
-                    )}
-                  </div>
-                  <CardTitle className="text-lg font-bold">
-                    {product.title}
-                  </CardTitle>
-                  <p className="text-foreground/70 text-sm leading-relaxed">
-                    {product.description}
-                  </p>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between text-xs text-foreground/60">
-                    <div className="flex items-center">
-                      <Users className="w-3 h-3 mr-1" />
-                      {product.agents} agents
-                    </div>
-                    <div className="flex items-center">
-                      <FileText className="w-3 h-3 mr-1" />
-                      {product.sources} sources
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1" />
-                      {product.runtime}
-                    </div>
-                  </div>
+            {[...featuredProducts, ...regularProducts].map((product, index) => {
+              const isFeatured = product.featured;
+              const icons = [BarChart3, TrendingUp, Target, Lightbulb, DollarSign, Shield];
+              const Icon = icons[index % icons.length];
+              const gradients = [
+                'from-blue-500/20 to-indigo-500/20',
+                'from-purple-500/20 to-pink-500/20', 
+                'from-green-500/20 to-emerald-500/20',
+                'from-orange-500/20 to-red-500/20',
+                'from-cyan-500/20 to-blue-500/20',
+                'from-yellow-500/20 to-orange-500/20'
+              ];
+              const gradient = gradients[index % gradients.length];
+              
+              return (
+                <Card 
+                  key={product.id}
+                  className={`group relative overflow-hidden shadow-2xl border-0 hover:shadow-3xl transition-all duration-500 cursor-pointer transform hover:scale-[1.02] hover:-translate-y-2 ${
+                    isFeatured 
+                      ? 'bg-gradient-to-br from-blue-50 via-indigo-50/50 to-purple-50/30 dark:from-blue-950/50 dark:via-indigo-950/30 dark:to-purple-950/20' 
+                      : 'bg-gradient-to-br from-white via-gray-50/50 to-gray-100/30 dark:from-gray-900 dark:via-gray-800/50 dark:to-gray-700/30'
+                  }`}
+                  onClick={() => handleProductClick(product)}
+                >
+                  {/* Animated background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  
+                  {/* Floating elements */}
+                  <div className={`absolute top-3 right-3 w-16 h-16 bg-gradient-to-br ${gradient} rounded-full blur-xl group-hover:scale-150 transition-transform duration-700`}></div>
+                  {isFeatured && (
+                    <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-full blur-lg animate-pulse"></div>
+                  )}
 
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-xl font-black text-blue-600">${product.price}</span>
-                      <span className="text-xs text-foreground/60 line-through">${product.originalPrice.toLocaleString()}</span>
+                  <CardHeader className="relative z-10 pb-3">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center space-x-2">
+                        <div className={`p-2 rounded-lg bg-gradient-to-br ${gradient} backdrop-blur-sm`}>
+                          <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                        </div>
+                        {isFeatured && (
+                          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 shadow-lg">
+                            <Star className="w-3 h-3 mr-1" />
+                            Featured
+                          </Badge>
+                        )}
+                      </div>
+                      <Badge variant="outline" className="text-xs bg-white/50 dark:bg-gray-800/50">
+                        {product.category}
+                      </Badge>
                     </div>
-                    <Button 
-                      size="sm"
-                      variant={product.featured ? "default" : "outline"}
-                      className={product.featured ? "bg-blue-600 hover:bg-blue-700" : ""}
-                    >
-                      Learn More
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    
+                    <CardTitle className={`text-lg font-bold mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors ${
+                      isFeatured ? 'text-blue-900 dark:text-blue-100' : 'text-gray-900 dark:text-gray-100'
+                    }`}>
+                      {product.title}
+                    </CardTitle>
+                    <p className="text-foreground/70 text-sm leading-relaxed">
+                      {product.description}
+                    </p>
+                  </CardHeader>
+                  
+                  <CardContent className="relative z-10 space-y-4">
+                    <div className="grid grid-cols-3 gap-2 p-3 bg-white/50 dark:bg-gray-800/30 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <Brain className="w-3 h-3 text-blue-600 mr-1" />
+                          <div className="text-sm font-bold text-blue-600">{product.agents}</div>
+                        </div>
+                        <div className="text-xs text-blue-700 dark:text-blue-300">Agents</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <FileText className="w-3 h-3 text-green-600 mr-1" />
+                          <div className="text-sm font-bold text-green-600">{product.sources}</div>
+                        </div>
+                        <div className="text-xs text-green-700 dark:text-green-300">Sources</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <Clock className="w-3 h-3 text-purple-600 mr-1" />
+                          <div className="text-sm font-bold text-purple-600">{product.runtime}</div>
+                        </div>
+                        <div className="text-xs text-purple-700 dark:text-purple-300">Time</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center space-x-2">
+                        <span className={`text-2xl font-black ${
+                          isFeatured ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-900 dark:text-gray-100'
+                        }`}>${product.price}</span>
+                        <span className="text-sm text-foreground/60 line-through">${product.originalPrice.toLocaleString()}</span>
+                      </div>
+                      <Button 
+                        size="sm"
+                        className={`${
+                          isFeatured 
+                            ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg' 
+                            : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white'
+                        } group-hover:shadow-xl transition-all duration-300`}
+                      >
+                        <Rocket className="w-4 h-4 mr-2" />
+                        Get Report
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
 
