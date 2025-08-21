@@ -126,7 +126,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ip: req.ip || req.connection.remoteAddress
       };
 
-      // You can extend this to store in database if needed
+      // Store in database for analytics
+      await storage.trackProductClick(product, location, inputs, email, req.get('User-Agent') || '', req.ip || '');
       console.log('Product click tracked:', clickData);
       
       res.json({ message: "Click tracked successfully" });
@@ -463,6 +464,17 @@ Create a landing page for this startup. The goal of the site is to highlight our
       res.json(stats);
     } catch (error) {
       console.error("Link stats error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Get product click stats (admin only)
+  app.get("/api/admin/product-stats", requireAdmin, async (req, res) => {
+    try {
+      const stats = await storage.getProductClickStats();
+      res.json(stats);
+    } catch (error) {
+      console.error("Product stats error:", error);
       res.status(500).json({ message: "Internal server error" });
     }
   });

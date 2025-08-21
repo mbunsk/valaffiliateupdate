@@ -26,12 +26,23 @@ interface CompanyStats {
   lastClicked?: string;
 }
 
+interface ProductClick {
+  product: string;
+  location: string;
+  clickCount: number;
+  lastClicked: string;
+  totalInputs: number;
+  uniqueEmails: number;
+}
+
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<LinkClick[]>([]);
+  const [productStats, setProductStats] = useState<ProductClick[]>([]);
   const [loadingStats, setLoadingStats] = useState(false);
+  const [activeTab, setActiveTab] = useState<'partners' | 'products'>('products');
   const { toast } = useToast();
 
   // Check if already logged in
@@ -91,10 +102,19 @@ export default function AdminPage() {
   const fetchStats = async () => {
     setLoadingStats(true);
     try {
-      const response = await fetch("/api/admin/link-stats");
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data);
+      const [linkResponse, productResponse] = await Promise.all([
+        fetch("/api/admin/link-stats"),
+        fetch("/api/admin/product-stats")
+      ]);
+      
+      if (linkResponse.ok) {
+        const linkData = await linkResponse.json();
+        setStats(linkData);
+      }
+      
+      if (productResponse.ok) {
+        const productData = await productResponse.json();
+        setProductStats(productData);
       }
     } catch (error) {
       toast({
@@ -172,8 +192,8 @@ export default function AdminPage() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Partner Link Analytics</h1>
-            <p className="text-muted-foreground mt-1">Track affiliate partner engagement</p>
+            <h1 className="text-3xl font-bold text-foreground">ValidatorAI Analytics Dashboard</h1>
+            <p className="text-muted-foreground mt-1">Track product engagement and partner link performance</p>
           </div>
           <Button 
             onClick={fetchStats} 
@@ -184,9 +204,144 @@ export default function AdminPage() {
           </Button>
         </div>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
+        {/* Tab Navigation */}
+        <div className="flex space-x-1 bg-muted p-1 rounded-lg mb-8 w-fit">
+          <button
+            onClick={() => setActiveTab('products')}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              activeTab === 'products' 
+                ? 'bg-background text-foreground shadow-sm' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Product Clicks
+          </button>
+          <button
+            onClick={() => setActiveTab('partners')}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              activeTab === 'partners' 
+                ? 'bg-background text-foreground shadow-sm' 
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Partner Links
+          </button>
+        </div>
+
+        {/* Product Analytics */}
+        {activeTab === 'products' && (
+          <>
+            {/* Product Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <BarChart3 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Product Clicks</p>
+                      <p className="text-2xl font-bold">{productStats.reduce((sum, stat) => sum + stat.clickCount, 0)}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                      <TrendingUp className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Most Popular Product</p>
+                      <p className="text-2xl font-bold">{productStats[0]?.product || "None"}</p>
+                      <p className="text-xs text-muted-foreground">{productStats[0]?.clickCount || 0} clicks</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                      <Clock className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total User Inputs</p>
+                      <p className="text-2xl font-bold">{productStats.reduce((sum, stat) => sum + stat.totalInputs, 0)}</p>
+                      <p className="text-xs text-muted-foreground">form submissions</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Product Performance Table */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Product Performance
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {loadingStats ? (
+                  <div className="text-center py-8">
+                    <p>Loading product analytics...</p>
+                  </div>
+                ) : productStats.length > 0 ? (
+                  <div className="space-y-4">
+                    {productStats.map((stat, index) => (
+                      <div key={`${stat.product}-${stat.location}`} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                            <span className="text-sm font-bold text-primary">#{index + 1}</span>
+                          </div>
+                          <div>
+                            <h3 className="font-medium">{stat.product}</h3>
+                            <p className="text-sm text-muted-foreground">Location: {stat.location}</p>
+                            <p className="text-xs text-muted-foreground">Last clicked: {new Date(stat.lastClicked).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground">Clicks</p>
+                              <p className="font-medium">{stat.clickCount}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Inputs</p>
+                              <p className="font-medium">{stat.totalInputs}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Emails</p>
+                              <p className="font-medium">{stat.uniqueEmails}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-muted-foreground">
+                      No product clicks tracked yet. Product engagement will appear here once users interact with the research products.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </>
+        )}
+
+        {/* Partner Analytics */}
+        {activeTab === 'partners' && (
+          <>
+            {/* Partner Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="p-2 bg-primary/10 rounded-lg">
@@ -316,6 +471,8 @@ export default function AdminPage() {
             )}
           </CardContent>
         </Card>
+          </>
+        )}
       </div>
     </div>
   );

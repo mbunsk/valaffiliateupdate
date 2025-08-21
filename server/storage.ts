@@ -17,6 +17,10 @@ export interface IStorage {
   deleteExpiredAdminSessions(): Promise<void>;
   trackLinkClick(company: string, linkType: string, url: string): Promise<void>;
   getLinkClickStats(): Promise<LinkClick[]>;
+  
+  // Product click tracking
+  trackProductClick(product: string, location: string, inputs: number, email: string | null, userAgent: string, ip: string): Promise<void>;
+  getProductClickStats(): Promise<any[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -124,6 +128,45 @@ export class DatabaseStorage implements IStorage {
 
   async getLinkClickStats(): Promise<LinkClick[]> {
     return await db.select().from(linkClicks).orderBy(linkClicks.company, linkClicks.linkType);
+  }
+
+  // In-memory storage for product clicks (can be moved to database later)
+  private productClicks: Map<string, { product: string; location: string; count: number; lastClicked: Date; inputs: number; emails: string[] }> = new Map();
+
+  async trackProductClick(product: string, location: string, inputs: number, email: string | null, userAgent: string, ip: string): Promise<void> {
+    const key = `${product}-${location}`;
+    const existing = this.productClicks.get(key);
+    
+    if (existing) {
+      existing.count += 1;
+      existing.lastClicked = new Date();
+      existing.inputs += inputs;
+      if (email && !existing.emails.includes(email)) {
+        existing.emails.push(email);
+      }
+    } else {
+      this.productClicks.set(key, {
+        product,
+        location,
+        count: 1,
+        lastClicked: new Date(),
+        inputs,
+        emails: email ? [email] : []
+      });
+    }
+  }
+
+  async getProductClickStats(): Promise<any[]> {
+    const stats = Array.from(this.productClicks.values()).map(click => ({
+      product: click.product,
+      location: click.location,
+      clickCount: click.count,
+      lastClicked: click.lastClicked.toISOString(),
+      totalInputs: click.inputs,
+      uniqueEmails: click.emails.length
+    }));
+    
+    return stats.sort((a, b) => b.clickCount - a.clickCount);
   }
 }
 
