@@ -1,0 +1,125 @@
+Ok
+We are going to do another test to see how a paid product converts this time.
+We have partnered with FifthRow.com - who creates amazing deep research and analysis for startups and businesses.
+Their AI generated reports replace hours and hours of work that a consultant would do.  In fact, they show the time and money savings on their site. They use 30-60 sources for their data… so it’s not something we could create on our own just by using an Open AI API.
+Most reports take 5-10 minutes to run while all the agents are working.  Some take an hour or more.  So the user will get a notification when their report is ready.  Perhaps via email.
+
+Typically, we’ve used our free AI tools as a lead generation and lead capture magnet.  Free advice and help.  We’ve never had a paid product to offer them, until now.  We are going to connect with Fifth Rows API and offer 5-10 of their deep analysis reports as our main product – to see how it converts.  If we are seeing some sales, we can really improve the landing page and user flow and offers etc.  But, for now, let’s test 5-10 products and see what lands with our users.  We will probably skip the free tool to capture leads and just go straight to offering 5-10 great products to validate ideas, markets, customers, competition and more.  
+
+I am sending the list of the products we should offer below.  Each offer should be placed on the homepage, and when clicked, the user should be taken to a product page for that individual product that explains exactly what they will receive.  I am copying and linking the fifth row product pages here as well.  We need to rewrite the features and benefits in our own language (Let’s not copy theirs word for word)  and we need to layout and design the pages so it looks professional and enticing for the user.  These reports are delivered via PDF, presentation or a link, as you can see on Fifth Rows site.
+
+My dev and I will take care of stripe implementation.  We just need each product page built and designed and we need buy buttons.  I will handle stripe checkout and delivery of the assets to the users.  If you can, capture some screenshots of the product from each page that I link and include them in the product pages.
+
+For the homepage:
+
+We need to completely revamp the messaging to reflect our new products.  We don’t have the 1, 2, 3 steps anymore.  There won’t be a free validation tool.  There wont be customer simuolations and affiliate links.  Messaging needs to explain that we are offering deep analysis, previously only available to large companies who hire teams of consultants.  These products save dozens of hours of manual work and save thousands of dollars.  We pull from up to 50 sources and bring it all together for comprehensive analysis.  Customers, products, idea validation, market analysis… it’s all much more than asking chatgpt.  You can write the homepage content as you see fit (it’s up to you if we want to continue with the branding of Val, the helpful AI agent… if you want, we can pretend that she is the research assistant pulling it all together with her superpowers).
+
+Once i give you the exact products, below, that we’ll be listing for sale, you’ll be able to organize the homepage with the product offerings and you’ll know what to write for our homepage copy.
+
+Let’s start here…
+
+These are the products I want us to sell.  Everyone coming to our site is exploring a new idea, either for an existing business or a new startup.  SO this deep research fits the needs of everyone (and from our current test, people actually want more analysis and research before tehy build - so this is a good fit)
+
+Let’s launch with these products from fifth row:
+Please create listings for each of these on the homepage with an image and a description of what is offered.  NONE OF THESE products require a subscription… they are all singe purchases… so any language around monthly pricing, we can skip that… just set a one time price for each and I’ll adjust it accordingly.  Be sure to highlight the key elements of research hours saved, money saved, what the product helps with, a brief summary of the product etc.
+Then the individual product pages will go into much greater detail on what the customer receives.
+
+Please go to each of these URLs and pull the fifth row content so you know exactly what to put on the homepage and each individual product page.  Make the product pages well organized and prominently place the buy buttons on the page.  Make sure the product highlights are clearly featured.  Make the design optimized for digital purchase products.  
+
+Here are the items I want us to sell:  
+NOTE… all of these have a ‘start your first run’ button… which then shows the inputs the user needs to make.  If you have the ability - crawl those pages as well
+So you know exactly what the user needs to input once they hit the buy button.
+We want them to hit the buy button, go to the next screen where they place their inputs
+And then my dev and I will take them to stripe after tehy submit their inputs.
+
+If you need to see where all of these are listed, crawl this page:  https://www.fifthrow.com/marketplace
+Here you can see the individual listings of each of these I show below:
+
+We might want to feature one product at the top of the homepage, just as a quick place to start.  It will look like our free feedback form but we can actually describe the paid tool, what it does and have the user inputs right there.
+
+Important:
+I think the above the fold on the homepage needs to have the main title, subheading and information about us on teh LEFT and then the one featured product with the user inputs on teh RIGHT side of the page, so it’s all above the fold.
+
+Then the main site content below all if it can be layed out how you feel is best to display the products to entice people to click to their indifvidual pages to learn more and then buy.
+
+I will tell you, below, which product should be above the fold on the homepage.
+
+Here are the products we’ll offer (again, crawl the URLs to pull more info about each product and
+Then crawl the button to find out what the user inputs are for each product, because you need to build that functionality… after they click the buy button, a pop up will appear with the 
+Inputs the user needs to enter and then a submit button… also on this pop up, we have a chance
+To show, again, the main value proposition and the savings they get and a message that their product will be delivered to them via pdf, presentation or link and they will be notified via email when it is ready with a link to the deliverable.
+
+For each of these, remember to list the # of sources and other stats.. Both on the homepage and on each product page:
+
+1.  https://www.fifthrow.com/marketplace/flows/new-product-feasibility-study
+Crawl that URL to pull the main offering and all information.
+Make this the featured product on the homepage:  New Product Feasibility Study
+Create a heading, description, quick snapshot of the benefits and teh sources, ai agents used, time and money saved etc.
+And then the inputs from the user:
+Target Market
+Product Idea
+
+I hope you are able to crawl these URLs for all the info and you can click the button: Start Your First Run on each of these for the page that shows the user inputs needed.
+
+2. https://www.fifthrow.com/marketplace/flows/porter-s-5-forces-market-analysis
+
+3. https://www.fifthrow.com/marketplace/apps/market-intelligence-and-strategic-insights
+
+4. https://www.fifthrow.com/marketplace/flows/market-pain-points-analysis
+
+5. https://www.fifthrow.com/marketplace/flows/voice-of-customer-insight-builder
+
+6. https://www.fifthrow.com/marketplace/flows/customer-feedback-synthesis
+
+7. https://www.fifthrow.com/marketplace/flows/customer-and-market-insights-analysis
+
+8/ https://www.fifthrow.com/marketplace/flows/mini-strategic-wargaming
+
+9. https://www.fifthrow.com/marketplace/apps/strategic-foresight
+
+10.  https://www.fifthrow.com/marketplace/flows/business-idea-evaluation
+
+11. https://www.fifthrow.com/marketplace/flows/idea-desirability-assessment  
+This one also fits our users perfectly and should be at the top of the list of products when you show all the products on the homepage.  This one is a quick idea feedback tool and it’s perfect for our users.  It analyzes their idea.  Make sure this one is prominently displayed.  
+
+12.   https://www.fifthrow.com/marketplace/flows/brand-and-market-insights-analysis
+
+13.  https://www.fifthrow.com/marketplace/flows/tam-assessment-for-ideas
+This one is also perfect for our users.  TAM and other stats for their idea.  Make sur eit has a good position on the homepage as well.
+
+14. https://www.fifthrow.com/marketplace/flows/revenue-opportunity-validation
+
+15.  https://www.fifthrow.com/marketplace/flows/business-model-canvas-development
+
+
+
+
+
+Again, for all products, be sure we are highlighting the number of AI agents that are working simultaneously so users know amazing deep work is being performed.
+
+Most of these are perfect for our users that are pursuing ideas.  Some are best for established companies… but we do have a few users that fit there.
+
+Be sure to organize the homepage to make the products organized and attractive.  Pull any images you need from all pages.  I do like the part on the product pages where it says how many agents are used and what each agent does.  That’s helpful information.
+
+The goal here is to track what purchases are made to see if our users are willing to pay.  I also want to track which ones get clicked on the most from the homepage.
+
+Can you change the /aron page to just track clicks to each of these 15 products form the homepage?
+Then I can see which products get the most interest - even if they don’t convert to a sale… maybe our messaging, pricing etc will need adjusted – but make that /aron page simply track clicks from the homepage to each of the 15 items so i can see which are being targeted the most.
+
+Do you need anything else from me?
+
+Make a light/dark toggle button at the top please - this MIGHT look better with a lighter background.
+Also, i do like the playful and stress free branding we have incorporated. 
+These analysis reports are very serious and more corporate feeling but I dont want our site to
+Seem too corporate… keep the playful branding but don’t overdo it with emojis and such.
+It’s not a fun free site anymore - we want to optimize for conversions.
+Make sure each product has a good representation on the homepage.
+
+DEFAULT to the lighter colored layout please.
+I think it might look better.
+Add some product screen shots to the homepage and explain what we’re all about now.
+
+You can keep the newsletter section and the user testimonials on the homepage.
+
+Thanks!
+ANY questions?

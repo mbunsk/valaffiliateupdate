@@ -106,6 +106,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Track product clicks for analytics
+  app.post("/api/track-product-click", async (req, res) => {
+    try {
+      const { product, location, inputs, email } = req.body;
+      
+      if (!product) {
+        return res.status(400).json({ message: "Product name is required" });
+      }
+
+      // Store click data for analytics
+      const clickData = {
+        product,
+        location: location || 'unknown',
+        timestamp: new Date().toISOString(),
+        inputs: inputs || 0,
+        email: email || null,
+        userAgent: req.get('User-Agent') || '',
+        ip: req.ip || req.connection.remoteAddress
+      };
+
+      // You can extend this to store in database if needed
+      console.log('Product click tracked:', clickData);
+      
+      res.json({ message: "Click tracked successfully" });
+    } catch (error) {
+      console.error("Click tracking error:", error);
+      res.status(500).json({ message: "Failed to track click" });
+    }
+  });
+
   // Generate refined landing page prompt using AI (no auth required for public use)
   app.post("/api/generate-prompt", async (req, res) => {
     const { idea, targetCustomer, problemSolved } = req.body;
@@ -270,7 +300,7 @@ Create a landing page for this startup. The goal of the site is to highlight our
       roadmapText += `Startup Idea: ${validationData.idea}\n`;
       roadmapText += `Generated: ${new Date().toLocaleDateString()}\n\n`;
       
-      simulationData.forEach((month, index) => {
+      simulationData.forEach((month: any, index: number) => {
         roadmapText += `MONTH ${month.month}: ${month.title}\n`;
         roadmapText += `${'='.repeat(40)}\n`;
         roadmapText += `👥 Users: ${month.users?.toLocaleString() || 'N/A'}\n`;
@@ -281,7 +311,7 @@ Create a landing page for this startup. The goal of the site is to highlight our
         
         if (month.wins?.length > 0) {
           roadmapText += `🎉 KEY WINS:\n`;
-          month.wins.forEach(win => {
+          month.wins.forEach((win: string) => {
             roadmapText += `   • ${win}\n`;
           });
           roadmapText += `\n`;
@@ -289,7 +319,7 @@ Create a landing page for this startup. The goal of the site is to highlight our
         
         if (month.challenges?.length > 0) {
           roadmapText += `⚠️  CHALLENGES:\n`;
-          month.challenges.forEach(challenge => {
+          month.challenges.forEach((challenge: string) => {
             roadmapText += `   • ${challenge}\n`;
           });
           roadmapText += `\n`;
