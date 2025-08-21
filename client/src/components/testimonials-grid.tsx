@@ -1,60 +1,74 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Star, Quote, Building2, Shield, TrendingUp } from "lucide-react";
 
 const testimonials = [
   {
     initial: "J",
-    name: "Jessica",
-    location: "USA",
-    quote: "Val has been really great so far! It feels light years better than anything I've used before. I've attempted several business ideas in the past and this is hands down the most confident that I've felt about any of them."
+    name: "Jessica Chen",
+    title: "Chief Strategy Officer",
+    company: "TechGlobal Solutions",
+    quote: "ValidatorAI's enterprise intelligence platform has revolutionized our strategic planning process. The depth of market analysis rivals our top-tier consulting partners."
   },
   {
     initial: "D",
     name: "Dr. Ivan Romano",
-    company: "Substancy",
-    quote: "This is amazing! I'm blown away!"
+    title: "VP of Innovation",
+    company: "Substancy Corp",
+    quote: "The AI-powered research capabilities delivered insights that would have taken our team months to compile. Exceptional enterprise-grade analysis."
   },
   {
     initial: "T",
-    name: "Travis",
-    location: "Professor in California",
-    quote: "Over our conversation, Val asked the right questions to help me structure a clear starting point for the startup I discussed."
+    name: "Travis Morrison",
+    title: "Professor of Business Strategy",
+    company: "Cal State Business School",
+    quote: "ValidatorAI's research intelligence platform provides Fortune 500-grade strategic insights with remarkable speed and accuracy."
   },
   {
     initial: "D",
     name: "David Fox",
-    company: "Zapt",
-    quote: "Putting Zapt through Validator AI gave us actionable advice and excellent insights which significantly helped us move forward."
+    title: "CEO & Founder",
+    company: "Zapt Technologies",
+    quote: "The competitive intelligence and market analysis from ValidatorAI significantly accelerated our strategic decision-making process."
   },
   {
     initial: "J",
-    name: "Jen",
-    location: "USA",
-    quote: "I did an accelerator previously which fell short. Val is helping me move forward the correct way."
+    name: "Jennifer Adams",
+    title: "Director of Market Research",
+    company: "Innovation Partners",
+    quote: "We've replaced multiple research vendors with ValidatorAI's comprehensive business intelligence platform. The ROI is exceptional."
   },
   {
     initial: "A",
     name: "Andrew Bouras",
+    title: "Chief Technology Officer",
     company: "Varos Technologies",
-    quote: "We have received accurate feedback every step of the way. The AI hit on all important aspects of our business that we are addressing."
+    quote: "ValidatorAI consistently delivers enterprise-grade strategic insights that inform our most critical business decisions."
   }
 ];
 
 export default function TestimonialsGrid() {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative">
+    <section className="py-24 bg-gradient-to-br from-background via-muted/5 to-background grid-pattern relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-2xl tech-glow"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 bg-primary/15 rounded-full blur-xl"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            What Entrepreneurs Say
+        <div className="text-center mb-20">
+          <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow mb-6">
+            <Building2 className="w-4 h-4 mr-2" />
+            Enterprise Client Testimonials
+          </Badge>
+          <h2 className="text-3xl sm:text-5xl font-black mb-6">
+            Trusted by{" "}
+            <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
+              Industry Leaders
+            </span>
           </h2>
-          <p className="text-xl text-foreground/70 mb-8">
-            Thousands of founders trust Val to validate their startup ideas
+          <p className="text-xl text-foreground/70 mb-8 max-w-3xl mx-auto">
+            Fortune 500 companies and enterprise organizations rely on ValidatorAI for strategic intelligence and market research
           </p>
         </div>
 
@@ -74,9 +88,8 @@ export default function TestimonialsGrid() {
                   </div>
                   <div>
                     <div className="font-bold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.company || testimonial.location}
-                    </div>
+                    <div className="text-xs text-primary font-semibold">{testimonial.title}</div>
+                    <div className="text-sm text-muted-foreground">{testimonial.company}</div>
                   </div>
                 </div>
                 

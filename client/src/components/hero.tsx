@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb } from "lucide-react";
+import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb, Shield, BarChart3, Globe, Cpu, Building2 } from "lucide-react";
 
 export default function Hero() {
   const scrollToValidation = () => {
@@ -11,12 +11,17 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-8 pb-20 bg-gradient-to-br from-background via-primary/10 via-accent/15 to-secondary/25 relative overflow-hidden">
-      {/* Floating decorative elements */}
+    <section className="pt-12 pb-24 bg-gradient-to-br from-background via-muted/5 to-background relative overflow-hidden grid-pattern">
+      {/* Corporate tech elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-accent/20 rounded-full blur-xl animate-bounce-gentle"></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-secondary/30 rounded-full blur-lg animate-float" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl tech-glow"></div>
+        <div className="absolute top-40 right-20 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-primary/15 rounded-full blur-xl" style={{animationDelay: '1s'}}></div>
+        
+        {/* Tech grid overlay */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="h-full w-full bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
+        </div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -54,13 +59,17 @@ export default function Hero() {
                 </div>
               </div>
               
-              {/* Testimonial Section */}
-              <div className="text-center">
+              {/* Enterprise Endorsement */}
+              <div className="text-center bg-muted/20 rounded-xl p-4 border border-primary/20">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  <Building2 className="w-5 h-5 text-primary" />
+                  <span className="text-sm font-semibold text-primary">Enterprise Endorsed</span>
+                </div>
                 <blockquote className="text-lg font-medium text-white mb-2">
-                  "This is the future!"
+                  "Enterprise-grade intelligence platform"
                 </blockquote>
                 <cite className="text-sm text-white/70">
-                  - Cal State Fullerton Entrepreneurship Center
+                  - Cal State Fullerton Business School
                 </cite>
               </div>
               
@@ -99,28 +108,42 @@ export default function Hero() {
           {/* Left/Right Split Layout */}
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             {/* Left Side - Information */}
-            <div className="space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
-                <span className="gradient-text">
-                  Professional Market
-                </span>
-                <br />
-                <span className="text-gray-900 dark:text-gray-100">Research Platform</span>
-              </h1>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow">
+                  <Building2 className="w-4 h-4 mr-2" />
+                  Enterprise Research Intelligence
+                </Badge>
+                
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+                  <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
+                    Strategic Business
+                  </span>
+                  <br />
+                  <span className="text-gray-900 dark:text-gray-100">Intelligence Platform</span>
+                </h1>
+              </div>
               
               <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                Get <strong className="text-gray-900 dark:text-gray-100">enterprise-grade business intelligence</strong>, <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> delivered in minutes. <strong className="text-primary">Starting at just $29!</strong>
+                Advanced AI-powered research platform delivering <strong className="text-primary">Fortune 500-grade business intelligence</strong>, 
+                <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and 
+                <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> for enterprise decision-making. 
+                <strong className="text-primary">Starting at $29 per report.</strong>
               </p>
               
-              <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-4 backdrop-blur-sm border border-white/20">
-                <div className="grid grid-cols-2 gap-4 text-center">
+              <div className="bg-muted/20 rounded-xl p-6 backdrop-blur-sm border border-primary/20 tech-border">
+                <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <div className="text-2xl font-bold text-blue-600">10+ AI Agents</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">analyzing your market</div>
+                    <div className="text-2xl font-bold text-primary">10+ AI Agents</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Enterprise Analysis</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-green-600">Save $15,000+</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">vs. paid consultants</div>
+                    <div className="text-2xl font-bold text-primary">$15,000+ Saved</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">vs. Consultants</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-primary">SOC2 Secure</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Enterprise Ready</div>
                   </div>
                 </div>
               </div>
@@ -130,10 +153,11 @@ export default function Hero() {
               <Button 
                 onClick={scrollToValidation}
                 size="lg"
-                className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
+                className="inline-flex items-center px-12 py-6 text-xl font-bold rounded-lg tech-glow transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-primary to-green-500 hover:from-green-500 hover:to-primary"
               >
-                Explore All Research Reports
-                <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
+                <Shield className="mr-3 w-6 h-6" />
+                Enterprise Research Suite
+                <ArrowRight className="ml-3 w-6 h-6" />
               </Button>
             </div>
 

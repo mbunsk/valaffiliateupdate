@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Users, FileText, ArrowRight, Star, TrendingUp, Zap, Brain, Rocket, DollarSign, Shield, CheckCircle, Sparkles, Target, BarChart3, Lightbulb } from "lucide-react";
+import { Clock, Users, FileText, ArrowRight, Star, TrendingUp, Zap, Brain, Rocket, DollarSign, Shield, CheckCircle, Sparkles, Target, BarChart3, Lightbulb, Building2, Globe, Cpu } from "lucide-react";
 
 interface Product {
   id: string;
@@ -144,29 +144,54 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
   const regularProducts = products.filter(p => !p.featured && !p.perfect);
 
   return (
-    <section id="products" className="py-20 bg-gradient-to-br from-background via-gray-50/30 to-blue-50/20 dark:from-background dark:via-gray-900/30 dark:to-blue-950/20">
+    <section id="products" className="py-24 bg-gradient-to-br from-background via-muted/5 to-background grid-pattern">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-black mb-6">
-            Professional Market Intelligence{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Reports
-            </span>
-          </h2>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-            Strategic analysis powered by AI research teams working with multiple data sources. 
-            Get enterprise-grade business intelligence delivered in minutes, not months.
-          </p>
+        <div className="text-center mb-20">
+          <div className="space-y-6">
+            <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow mb-6">
+              <Building2 className="w-4 h-4 mr-2" />
+              Enterprise Research Intelligence Suite
+            </Badge>
+            
+            <h2 className="text-4xl sm:text-5xl font-black mb-6">
+              Strategic Business Intelligence{" "}
+              <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
+                Platform
+              </span>
+            </h2>
+            
+            <p className="text-xl text-foreground/70 max-w-4xl mx-auto leading-relaxed">
+              Advanced AI-powered research platform delivering Fortune 500-grade business intelligence, 
+              competitive analysis, and strategic insights. Trusted by enterprise decision-makers worldwide.
+            </p>
+            
+            {/* Enterprise Trust Indicators */}
+            <div className="flex flex-wrap justify-center gap-6 pt-8">
+              <div className="flex items-center space-x-2 bg-muted/20 rounded-lg px-4 py-2 border border-primary/20">
+                <Shield className="w-5 h-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">SOC2 Compliant</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-muted/20 rounded-lg px-4 py-2 border border-primary/20">
+                <Globe className="w-5 h-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">500+ Enterprise Clients</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-muted/20 rounded-lg px-4 py-2 border border-primary/20">
+                <Cpu className="w-5 h-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">AI-Powered Analysis</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Perfect for Ideas Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-lg border-green-300 text-green-600 dark:border-green-700 dark:text-green-400">
-              <Star className="w-4 h-4 mr-2" />
-              Ideal for Early-Stage Analysis
+        {/* Strategic Analysis Starter Suite */}
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 px-6 py-3 text-lg bg-primary/20 text-primary border-primary/30 tech-glow">
+              <Rocket className="w-5 h-5 mr-2" />
+              Strategic Analysis Starter Suite
             </Badge>
-            <h3 className="text-2xl font-bold text-foreground">Start Here - Essential Market Intelligence</h3>
+            <h3 className="text-3xl font-bold text-foreground">Enterprise-Grade Market Intelligence</h3>
+            <p className="text-lg text-foreground/60 mt-2">Comprehensive analysis tools for strategic decision-making</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, CheckCircle, Star, Sun, Moon } from "lucide-react";
+import { Menu, X, CheckCircle, Star, Sun, Moon, Zap, Shield } from "lucide-react";
 import validatorIcon from "@assets/Validator AI Icon_1754233923589.png";
 import { useLocation } from "wouter";
 import { useTheme } from "next-themes";
@@ -30,33 +30,43 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-background border-b-2 border-primary/20 shadow-lg shadow-primary/10">
+    <header className="bg-background/95 backdrop-blur-sm border-b border-primary/20 shadow-lg shadow-primary/10 tech-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <button 
                 onClick={goToHome}
-                className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
+                className="flex items-center space-x-4 hover:opacity-80 transition-all duration-300 group"
               >
-                <img 
-                  src={validatorIcon} 
-                  alt="ValidatorAI Logo" 
-                  className="w-12 h-12"
-                />
-                <span className="text-2xl font-black text-white">ValidatorAI</span>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/20 rounded-xl blur-md group-hover:blur-lg transition-all duration-300"></div>
+                  <div className="relative w-14 h-14 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center">
+                    <Zap className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-2xl font-black text-white tracking-tight">ValidatorAI</span>
+                  <span className="text-xs text-primary font-semibold tracking-wider uppercase">Research Intelligence</span>
+                </div>
               </button>
             </div>
           </div>
           
           <nav className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6">
+            <div className="ml-10 flex items-center space-x-8">
+              {/* Enterprise Badge */}
+              <div className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-2 tech-glow">
+                <Shield className="w-4 h-4 text-primary" />
+                <span className="text-sm font-semibold text-primary">Enterprise Grade</span>
+              </div>
+              
               {/* Product Hunt Rating */}
               <a 
                 href="https://www.producthunt.com/products/validator-ai?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-validator-ai&launch=validator-ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-lg px-3 py-1 shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="flex items-center space-x-2 bg-muted/50 border border-primary/20 rounded-lg px-3 py-2 hover:bg-muted transition-all duration-200"
               >
                 <div className="bg-orange-500 text-white px-1 py-0.5 rounded text-xs font-bold">
                   PH
