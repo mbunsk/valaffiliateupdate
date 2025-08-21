@@ -35,14 +35,14 @@ export default function NewHero() {
             
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-6xl font-black leading-tight">
-                Deep Research &{" "}
+                Professional Market{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  Analysis Reports
+                  Research Platform
                 </span>
               </h1>
               
               <p className="text-xl text-foreground/80 leading-relaxed max-w-2xl">
-                Access professional-grade market research and strategic analysis that was previously only available to Fortune 500 companies with dedicated consultant teams.
+                Enterprise-grade business intelligence and market analysis reports delivered in minutes, not months. Get the strategic insights that drive successful business decisions.
               </p>
 
               <div className="grid grid-cols-2 gap-4 max-w-md">
@@ -51,23 +51,23 @@ export default function NewHero() {
                   <div className="text-sm text-green-700 dark:text-green-300">Consultant Costs Saved</div>
                 </div>
                 <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">70+ Hours</div>
-                  <div className="text-sm text-blue-700 dark:text-blue-300">Research Time Saved</div>
+                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">48+ Hours</div>
+                  <div className="text-sm text-blue-700 dark:text-blue-300">Analysis Time Saved</div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-6 text-sm text-foreground/70">
                 <div className="flex items-center">
                   <Users className="w-4 h-4 mr-2 text-blue-500" />
-                  <span>5 AI Agents</span>
+                  <span>AI Research Team</span>
                 </div>
                 <div className="flex items-center">
                   <FileText className="w-4 h-4 mr-2 text-indigo-500" />
-                  <span>60+ Sources</span>
+                  <span>Cited Sources</span>
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-2 text-purple-500" />
-                  <span>25 Min Runtime</span>
+                  <span>Fast Delivery</span>
                 </div>
               </div>
             </div>
@@ -78,13 +78,13 @@ export default function NewHero() {
             <Card className="shadow-2xl border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-white/90 to-blue-50/50 dark:from-gray-900/90 dark:to-blue-950/30 backdrop-blur-sm">
               <CardHeader className="text-center pb-4">
                 <Badge variant="outline" className="mx-auto mb-3 border-blue-300 text-blue-600 dark:border-blue-700 dark:text-blue-400">
-                  Most Popular
+                  Featured Analysis
                 </Badge>
                 <CardTitle className="text-2xl font-bold text-blue-900 dark:text-blue-100">
                   New Product Feasibility Study
                 </CardTitle>
                 <p className="text-foreground/70 leading-relaxed">
-                  Get a comprehensive analysis of your product idea's market viability, positioning strategy, and go/no-go recommendation.
+                  Comprehensive market positioning analysis with customer segmentation, competitive landscape assessment, and structured risk management framework to support your go/no-go decision.
                 </p>
               </CardHeader>
               
@@ -132,7 +132,7 @@ export default function NewHero() {
 
                 <div className="text-center space-y-4">
                   <div className="flex items-center justify-center space-x-4">
-                    <div className="text-3xl font-black text-green-600">$197</div>
+                    <div className="text-3xl font-black text-green-600">$119</div>
                     <div className="text-sm text-foreground/70 line-through">$15,000</div>
                   </div>
                   
@@ -147,7 +147,7 @@ export default function NewHero() {
                   </Button>
                   
                   <p className="text-xs text-foreground/60 text-center">
-                    ✅ PDF + PowerPoint delivery • 📧 Email notification when ready • 🔒 SOC2 & GDPR compliant
+                    PDF + PowerPoint + Public Link delivery • Email notification when complete • SOC2 & GDPR compliant
                   </p>
                 </div>
               </CardContent>

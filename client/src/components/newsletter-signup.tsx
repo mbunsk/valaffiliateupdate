@@ -35,11 +35,11 @@ export default function NewsletterSignup() {
               Stay Updated
             </Badge>
             <CardTitle className="text-3xl font-bold text-indigo-900 dark:text-indigo-100">
-              Get Research Insights & New Reports
+              Business Intelligence Updates
             </CardTitle>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Join 10,000+ entrepreneurs and executives getting the latest business research trends, 
-              product updates, and exclusive discounts on premium reports.
+              Join 10,000+ business leaders receiving strategic market insights, 
+              new research product announcements, and exclusive member pricing.
             </p>
           </CardHeader>
           
@@ -81,21 +81,21 @@ export default function NewsletterSignup() {
             
             <div className="grid md:grid-cols-3 gap-4 pt-6 border-t border-indigo-200 dark:border-indigo-800">
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600">Weekly</div>
-                <div className="text-sm text-indigo-700 dark:text-indigo-300">Research Insights</div>
+                <div className="text-2xl font-bold text-indigo-600">Monthly</div>
+                <div className="text-sm text-indigo-700 dark:text-indigo-300">Market Intelligence</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">Exclusive</div>
-                <div className="text-sm text-purple-700 dark:text-purple-300">Early Access</div>
+                <div className="text-2xl font-bold text-purple-600">Priority</div>
+                <div className="text-sm text-purple-700 dark:text-purple-300">Product Access</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">20% Off</div>
-                <div className="text-sm text-green-700 dark:text-green-300">Member Discounts</div>
+                <div className="text-2xl font-bold text-green-600">15% Off</div>
+                <div className="text-sm text-green-700 dark:text-green-300">Member Pricing</div>
               </div>
             </div>
             
             <p className="text-xs text-center text-foreground/60">
-              No spam. Unsubscribe anytime. 10,000+ professionals trust our insights.
+              Professional insights only. Unsubscribe anytime. 10,000+ business leaders trust our research.
             </p>
           </CardContent>
         </Card>

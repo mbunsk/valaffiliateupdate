@@ -24,7 +24,7 @@ const products: Product[] = [
     name: "Idea Desirability Assessment",
     title: "Quick Idea Validation",
     description: "Get an instant desirability score for your business idea based on customer pain points, problem severity, and adoption feasibility.",
-    price: 47,
+    price: 29,
     originalPrice: 800,
     agents: 1,
     sources: 17,
@@ -33,24 +33,72 @@ const products: Product[] = [
     perfect: true
   },
   {
+    id: "market-pain-points-analysis",
+    name: "Market Pain Points Analysis",
+    title: "Market Opportunity Discovery",
+    description: "Uncover market pain points and innovation opportunities through comprehensive user and industry analysis.",
+    price: 49,
+    originalPrice: 3000,
+    agents: 3,
+    sources: 69,
+    runtime: "11m 48s",
+    category: "Market Research",
+    perfect: true
+  },
+  {
     id: "tam-assessment-for-ideas", 
     name: "TAM Assessment for Ideas",
     title: "Total Addressable Market Analysis",
     description: "Map your total addressable market opportunity with clear industry boundaries, growth projections, and profit margin estimates.",
-    price: 147,
+    price: 89,
     originalPrice: 15000,
     agents: 5,
     sources: 61,
     runtime: "21m 16s",
-    category: "Market Sizing",
-    perfect: true
+    category: "Market Sizing"
+  },
+  {
+    id: "voice-of-customer-insights",
+    name: "Voice of Customer Insights",
+    title: "Customer Research Analysis", 
+    description: "Extract actionable customer insights aligned with your product goals using authentic Voice of Customer data analysis.",
+    price: 79,
+    originalPrice: 9000,
+    agents: 3,
+    sources: 112,
+    runtime: "25m 20s",
+    category: "Customer Insights"
+  },
+  {
+    id: "revenue-opportunity-validation",
+    name: "Revenue Opportunity Analysis",
+    title: "Revenue Stream Validation",
+    description: "Map and validate potential revenue streams with high-value market segments and competitor benchmarking.",
+    price: 95,
+    originalPrice: 15200,
+    agents: 4,
+    sources: 50,
+    runtime: "25m 34s",
+    category: "Financial Analysis"
+  },
+  {
+    id: "porter-5-forces-analysis",
+    name: "Porter's 5 Forces Analysis",
+    title: "Competitive Market Analysis",
+    description: "Analyze market dynamics using Porter's 5 Forces framework to assess competitive pressures and market attractiveness.",
+    price: 109,
+    originalPrice: 15200,
+    agents: 4,
+    sources: 156,
+    runtime: "34m 15s",
+    category: "Market Intelligence"
   },
   {
     id: "new-product-feasibility-study",
     name: "New Product Feasibility Study",
     title: "Complete Feasibility Analysis",
     description: "Comprehensive market positioning analysis with customer segmentation and structured risk management for go/no-go decisions.",
-    price: 197,
+    price: 119,
     originalPrice: 15000,
     agents: 5,
     sources: 66,
@@ -63,60 +111,12 @@ const products: Product[] = [
     name: "Business Opportunity Evaluation",
     title: "Enterprise Idea Assessment",
     description: "Comprehensive business opportunity evaluation with strategic alignment scoring, market trends analysis, and capability audits.",
-    price: 297,
+    price: 149,
     originalPrice: 58000,
     agents: 10,
     sources: 267,
     runtime: "49m 46s",
     category: "Idea Validation"
-  },
-  {
-    id: "porter-5-forces-analysis",
-    name: "Porter's 5 Forces Analysis",
-    title: "Competitive Market Analysis",
-    description: "Analyze market dynamics using Porter's 5 Forces framework to assess competitive pressures and market attractiveness.",
-    price: 197,
-    originalPrice: 15200,
-    agents: 4,
-    sources: 156,
-    runtime: "34m 15s",
-    category: "Market Intelligence"
-  },
-  {
-    id: "voice-of-customer-insights",
-    name: "Voice of Customer Insights",
-    title: "Customer Research Analysis", 
-    description: "Extract actionable customer insights aligned with your product goals using authentic Voice of Customer data analysis.",
-    price: 147,
-    originalPrice: 9000,
-    agents: 3,
-    sources: 112,
-    runtime: "25m 20s",
-    category: "Customer Insights"
-  },
-  {
-    id: "market-pain-points-analysis",
-    name: "Market Pain Points Analysis",
-    title: "Opportunity Discovery",
-    description: "Uncover market pain points and innovation opportunities through comprehensive user and industry analysis.",
-    price: 67,
-    originalPrice: 3000,
-    agents: 3,
-    sources: 69,
-    runtime: "11m 48s",
-    category: "Market Research"
-  },
-  {
-    id: "revenue-opportunity-validation",
-    name: "Revenue Opportunity Analysis",
-    title: "Revenue Stream Validation",
-    description: "Map and validate potential revenue streams with high-value market segments and competitor benchmarking.",
-    price: 197,
-    originalPrice: 15200,
-    agents: 4,
-    sources: 50,
-    runtime: "25m 34s",
-    category: "Financial Analysis"
   }
 ];
 
@@ -148,14 +148,14 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-black mb-6">
-            Enterprise-Grade Research{" "}
+            Professional Market Intelligence{" "}
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Reports
             </span>
           </h2>
           <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-            Deep analysis reports powered by multiple AI agents working simultaneously. 
-            Get the insights that Fortune 500 companies pay consultants $15,000+ to deliver.
+            Strategic analysis powered by AI research teams working with multiple data sources. 
+            Get enterprise-grade business intelligence delivered in minutes, not months.
           </p>
         </div>
 
@@ -164,9 +164,9 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
           <div className="text-center mb-8">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-lg border-green-300 text-green-600 dark:border-green-700 dark:text-green-400">
               <Star className="w-4 h-4 mr-2" />
-              Perfect for New Ideas
+              Ideal for Early-Stage Analysis
             </Badge>
-            <h3 className="text-2xl font-bold text-foreground">Start Here - Quick Validation</h3>
+            <h3 className="text-2xl font-bold text-foreground">Start Here - Essential Market Intelligence</h3>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

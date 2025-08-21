@@ -148,28 +148,33 @@ export default function ProductModal({ product, isOpen, onClose, onPurchase }: P
 
             {/* What you get */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold">What You Get:</h3>
+              <h3 className="text-lg font-bold">Delivery & Timeline:</h3>
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                  Comprehensive PDF report with citations
+                  <strong>PDF Report:</strong> Comprehensive analysis with source citations
                 </div>
                 <div className="flex items-center text-sm">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                  PowerPoint presentation ready for sharing
+                  <strong>PowerPoint Deck:</strong> Executive presentation ready for sharing
                 </div>
                 <div className="flex items-center text-sm">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                  Public link for easy collaboration
+                  <strong>Public Link:</strong> Shareable web version for team collaboration
                 </div>
                 <div className="flex items-center text-sm">
-                  <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                  Email notification when ready
+                  <Mail className="w-4 h-4 mr-2 text-blue-500" />
+                  <strong>Delivered via email in {product.runtime}</strong>
                 </div>
                 <div className="flex items-center text-sm">
                   <Shield className="w-4 h-4 mr-2 text-blue-500" />
-                  SOC2 & GDPR compliant processing
+                  SOC2 & GDPR compliant data processing
                 </div>
+              </div>
+              <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  <strong>Note:</strong> After payment, you can safely leave this page. Your report will be automatically generated and emailed to you when complete.
+                </p>
               </div>
             </div>
 
@@ -274,7 +279,7 @@ export default function ProductModal({ product, isOpen, onClose, onPurchase }: P
                     </Button>
                     
                     <p className="text-xs text-center text-foreground/60">
-                      Your report will be delivered via email when ready • Secure payment with Stripe
+                      Report delivered via email in {product.runtime} • Secure payment processing • You can leave after payment
                     </p>
                   </div>
                 </CardContent>

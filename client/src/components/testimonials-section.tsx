@@ -51,13 +51,13 @@ export default function TestimonialsSection() {
             Trusted by Fortune 500
           </Badge>
           <h2 className="text-4xl sm:text-5xl font-black mb-6">
-            Loved by Innovation{" "}
+            Trusted by Business{" "}
             <span className="bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
               Leaders
             </span>
           </h2>
           <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-            See what executives and innovation teams at leading companies say about our research platform.
+            See what executives and strategy teams at Fortune 500 companies say about our market intelligence platform.
           </p>
         </div>
 
