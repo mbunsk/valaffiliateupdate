@@ -368,27 +368,7 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
           </div>
         </div>
 
-        {/* Trust Indicators */}
-        <div className="text-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">100+</div>
-              <div className="text-sm text-foreground/70">Available Reports</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">SOC2</div>
-              <div className="text-sm text-foreground/70">Compliant</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">$58K+</div>
-              <div className="text-sm text-foreground/70">Value Delivered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-indigo-600">600+</div>
-              <div className="text-sm text-foreground/70">Hours Saved</div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );
