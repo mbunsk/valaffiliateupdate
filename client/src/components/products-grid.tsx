@@ -148,10 +148,7 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <div className="space-y-6">
-            <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow mb-6">
-              <Building2 className="w-4 h-4 mr-2" />
-              Enterprise Research Intelligence Suite
-            </Badge>
+
             
             <h2 className="text-4xl sm:text-5xl font-black mb-6">
               Strategic Business Intelligence{" "}

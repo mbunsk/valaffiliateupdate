@@ -55,11 +55,7 @@ export default function Header() {
           
           <nav className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
-              {/* Enterprise Badge */}
-              <div className="flex items-center space-x-2 bg-primary/10 border border-primary/30 rounded-lg px-4 py-2 tech-glow">
-                <Shield className="w-4 h-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">Enterprise Grade</span>
-              </div>
+
               
               {/* Product Hunt Rating */}
               <a 
