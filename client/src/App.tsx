@@ -34,8 +34,7 @@ function App() {
       <ThemeProvider
         attribute="class"
         defaultTheme="dark"
-        enableSystem={false}
-        forcedTheme="dark"
+        enableSystem={true}
         disableTransitionOnChange
       >
         <TooltipProvider>

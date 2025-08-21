@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, CheckCircle, Star } from "lucide-react";
+import { Menu, X, CheckCircle, Star, Sun, Moon } from "lucide-react";
 import validatorIcon from "@assets/Validator AI Icon_1754233923589.png";
 import { useLocation } from "wouter";
+import { useTheme } from "next-themes";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
+  const { theme, setTheme } = useTheme();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -103,17 +105,47 @@ export default function Header() {
               >
                 💡 About
               </a>
+              
+              {/* Theme Toggle Button */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="text-foreground/80 hover:text-primary px-3 py-2 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-105"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </Button>
             </div>
           </nav>
           
-          <div className="md:hidden">
+          <div className="flex items-center space-x-2">
+            {/* Theme Toggle for Mobile */}
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-foreground/80 hover:text-primary px-3 py-2 rounded-full transition-all duration-300 hover:bg-primary/10"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
             </Button>
+            
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
