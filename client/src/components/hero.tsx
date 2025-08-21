@@ -112,20 +112,7 @@ export default function Hero() {
                 Get <strong className="text-gray-900 dark:text-gray-100">enterprise-grade business intelligence</strong>, <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> delivered in minutes. <strong className="text-primary">Starting at just $29!</strong>
               </p>
 
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
-                  <div className="text-2xl font-bold text-primary">$29-$149</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">pricing range</div>
-                </div>
-                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
-                  <div className="text-2xl font-bold text-accent">25-50 min</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">delivery time</div>
-                </div>
-                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
-                  <div className="text-2xl font-bold text-secondary">8 Reports</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">available</div>
-                </div>
-              </div>
+
 
               <Button 
                 onClick={scrollToValidation}
