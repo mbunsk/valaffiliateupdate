@@ -99,7 +99,7 @@ export default function Hero() {
           {/* Left/Right Split Layout */}
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             {/* Left Side - Information */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
                 <span className="gradient-text">
                   Professional Market
@@ -111,6 +111,19 @@ export default function Hero() {
               <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
                 Get <strong className="text-gray-900 dark:text-gray-100">enterprise-grade business intelligence</strong>, <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> delivered in minutes. <strong className="text-primary">Starting at just $29!</strong>
               </p>
+              
+              <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-4 backdrop-blur-sm border border-white/20">
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-blue-600">10+ AI Agents</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">analyzing your market</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-green-600">Save $15,000+</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">vs. paid consultants</div>
+                  </div>
+                </div>
+              </div>
 
 
 
