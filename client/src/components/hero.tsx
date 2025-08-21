@@ -181,13 +181,37 @@ export default function Hero() {
                     </div>
                   </div>
 
+                  {/* Input Form */}
+                  <div className="space-y-4 mb-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        What is your product or business idea?
+                      </label>
+                      <textarea 
+                        placeholder="e.g., A mobile app that helps people track their daily water intake with smart reminders..."
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
+                        rows={3}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        Who is your target customer?
+                      </label>
+                      <input 
+                        type="text"
+                        placeholder="e.g., Health-conscious millennials aged 25-35"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
+                      />
+                    </div>
+                  </div>
+
                   <Button 
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
-                    onClick={scrollToValidation}
                   >
                     <Rocket className="w-5 h-5 mr-2" />
-                    Get Feasibility Study
+                    Start Feasibility Analysis - $119
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
 
