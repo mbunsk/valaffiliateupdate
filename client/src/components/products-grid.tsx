@@ -262,7 +262,7 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
             <p className="text-foreground/70">Professional analysis for every stage of your business journey</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="space-y-6">
             {[...featuredProducts, ...regularProducts].map((product, index) => {
               const isFeatured = product.featured;
               const icons = [BarChart3, TrendingUp, Target, Lightbulb, DollarSign, Shield];
@@ -296,80 +296,72 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
                     <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-full blur-lg animate-pulse"></div>
                   )}
 
-                  <CardHeader className="relative z-10 pb-3">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center space-x-2">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${gradient} backdrop-blur-sm`}>
-                          <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                        </div>
-                        {isFeatured && (
-                          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 shadow-lg">
-                            <Star className="w-3 h-3 mr-1" />
-                            Featured
+                  <div className="relative z-10 p-6 flex items-center justify-between">
+                    {/* Left side - Icon, Category, and Details */}
+                    <div className="flex items-center space-x-6 flex-1">
+                      <div className={`p-4 rounded-xl bg-gradient-to-br ${gradient} backdrop-blur-sm flex-shrink-0`}>
+                        <Icon className="w-10 h-10 text-blue-600" />
+                      </div>
+                      
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3 mb-2">
+                          <Badge variant="outline" className="text-xs border-blue-300 text-blue-600 dark:border-blue-700 dark:text-blue-400">
+                            {product.category}
                           </Badge>
-                        )}
-                      </div>
-                      <Badge variant="outline" className="text-xs bg-white/50 dark:bg-gray-800/50">
-                        {product.category}
-                      </Badge>
-                    </div>
-                    
-                    <CardTitle className={`text-lg font-bold mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors ${
-                      isFeatured ? 'text-blue-900 dark:text-blue-100' : 'text-gray-900 dark:text-gray-100'
-                    }`}>
-                      {product.title}
-                    </CardTitle>
-                    <p className="text-foreground/70 text-sm leading-relaxed">
-                      {product.description}
-                    </p>
-                  </CardHeader>
-                  
-                  <CardContent className="relative z-10 space-y-4">
-                    <div className="grid grid-cols-3 gap-2 p-3 bg-white/50 dark:bg-gray-800/30 rounded-lg backdrop-blur-sm border border-white/20">
-                      <div className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <Brain className="w-3 h-3 text-blue-600 mr-1" />
-                          <div className="text-sm font-bold text-blue-600">{product.agents}</div>
+                          {isFeatured && (
+                            <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 shadow-lg">
+                              <Star className="w-3 h-3 mr-1" />
+                              Featured
+                            </Badge>
+                          )}
                         </div>
-                        <div className="text-xs text-blue-700 dark:text-blue-300">Agents</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <FileText className="w-3 h-3 text-green-600 mr-1" />
-                          <div className="text-sm font-bold text-green-600">{product.sources}</div>
+                        
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                          {product.title}
+                        </h3>
+                        <p className="text-foreground/70 text-sm leading-relaxed mb-4 max-w-2xl">
+                          {product.description}
+                        </p>
+                        
+                        {/* Stats Row */}
+                        <div className="flex items-center space-x-6">
+                          <div className="flex items-center space-x-1 text-sm">
+                            <Brain className="w-4 h-4 text-blue-600" />
+                            <span className="font-bold text-blue-600">{product.agents}</span>
+                            <span className="text-blue-700 dark:text-blue-300">AI Agents</span>
+                          </div>
+                          <div className="flex items-center space-x-1 text-sm">
+                            <FileText className="w-4 h-4 text-green-600" />
+                            <span className="font-bold text-green-600">{product.sources}</span>
+                            <span className="text-green-700 dark:text-green-300">Sources</span>
+                          </div>
+                          <div className="flex items-center space-x-1 text-sm">
+                            <Clock className="w-4 h-4 text-purple-600" />
+                            <span className="font-bold text-purple-600">{product.runtime}</span>
+                            <span className="text-purple-700 dark:text-purple-300">Delivery</span>
+                          </div>
                         </div>
-                        <div className="text-xs text-green-700 dark:text-green-300">Sources</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <Clock className="w-3 h-3 text-purple-600 mr-1" />
-                          <div className="text-sm font-bold text-purple-600">{product.runtime}</div>
-                        </div>
-                        <div className="text-xs text-purple-700 dark:text-purple-300">Time</div>
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center space-x-2">
-                        <span className={`text-2xl font-black ${
-                          isFeatured ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-900 dark:text-gray-100'
-                        }`}>${product.price}</span>
-                        <span className="text-sm text-foreground/60 line-through">${product.originalPrice.toLocaleString()}</span>
+                    {/* Right side - Pricing and CTA Button */}
+                    <div className="flex items-center space-x-4 flex-shrink-0 ml-6">
+                      <div className="text-right">
+                        <div className="text-2xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                          ${product.price}
+                        </div>
+                        <div className="text-sm text-foreground/60 line-through">${product.originalPrice}</div>
                       </div>
                       <Button 
-                        size="sm"
-                        className={`${
-                          isFeatured 
-                            ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg' 
-                            : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white'
-                        } group-hover:shadow-xl transition-all duration-300`}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300"
+                        size="lg"
                       >
-                        <Rocket className="w-4 h-4 mr-2" />
-                        Get Report
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        <Rocket className="w-5 h-5 mr-2" />
+                        Start Analysis
+                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
-                  </CardContent>
+                  </div>
                 </Card>
               );
             })}
