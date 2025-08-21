@@ -144,38 +144,38 @@ export default function Hero() {
                     </div>
                     <div className="text-right">
                       <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        $119
+                        $29
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$15,000</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$800</div>
                     </div>
                   </div>
 
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-                    New Product Feasibility Study
+                    Quick Idea Validation
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                    Comprehensive market positioning analysis with customer segmentation, competitive landscape assessment, and structured risk management framework.
+                    Get an instant desirability score for your business idea based on customer pain points, problem severity, and adoption feasibility.
                   </p>
 
                   <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-white/50 dark:bg-gray-800/30 rounded-xl border border-white/20">
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Brain className="w-4 h-4 text-blue-600 mr-1" />
-                        <div className="text-sm font-bold text-blue-600">5</div>
+                        <div className="text-sm font-bold text-blue-600">1</div>
                       </div>
-                      <div className="text-xs text-blue-700 dark:text-blue-300">AI Agents</div>
+                      <div className="text-xs text-blue-700 dark:text-blue-300">AI Agent</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <FileText className="w-4 h-4 text-green-600 mr-1" />
-                        <div className="text-sm font-bold text-green-600">66</div>
+                        <div className="text-sm font-bold text-green-600">17</div>
                       </div>
                       <div className="text-xs text-green-700 dark:text-green-300">Sources</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Clock className="w-4 h-4 text-purple-600 mr-1" />
-                        <div className="text-sm font-bold text-purple-600">25m 54s</div>
+                        <div className="text-sm font-bold text-purple-600">3m 19s</div>
                       </div>
                       <div className="text-xs text-purple-700 dark:text-purple-300">Delivery</div>
                     </div>
@@ -185,38 +185,27 @@ export default function Hero() {
                   <div className="space-y-4 mb-6">
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        What is your product or business idea?
+                        What is your startup idea?
                       </label>
                       <textarea 
-                        placeholder="e.g., A mobile app that helps people track their daily water intake with smart reminders..."
+                        placeholder="e.g., A mobile app that helps people track their daily water intake with smart reminders and gamification..."
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
-                        rows={3}
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        Who is your target customer?
-                      </label>
-                      <input 
-                        type="text"
-                        placeholder="e.g., Health-conscious millennials aged 25-35"
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
+                        rows={4}
                       />
                     </div>
                   </div>
 
                   <Button 
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
                   >
                     <Rocket className="w-5 h-5 mr-2" />
-                    Start Feasibility Analysis - $119
+                    Start Quick Validation - $29
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
 
                   <p className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
-                    PDF + PowerPoint + Public Link • Delivered in 25 minutes • SOC2 Compliant
+                    PDF + PowerPoint + Public Link • Delivered in 3 minutes • Perfect for first-time validation
                   </p>
                 </div>
               </div>
