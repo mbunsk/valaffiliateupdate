@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb } from "lucide-react";
 
 export default function Hero() {
   const scrollToValidation = () => {
@@ -95,38 +96,120 @@ export default function Hero() {
           
           <div className="inline-block mb-6">
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
-            <span className="gradient-text">
-              Professional Market
-            </span>
-            <br />
-            <span className="text-foreground">Research Platform 🎯</span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get <strong className="text-white dark:text-white">enterprise-grade business intelligence</strong>, <strong className="text-white dark:text-white">strategic market analysis</strong>, and <strong className="text-white dark:text-white">competitive insights</strong> delivered in minutes. <strong className="text-white dark:text-white">Starting at just $29!</strong>
-          </p>
-          <Button 
-            onClick={scrollToValidation}
-            size="lg"
-            className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
-          >
-            <span className="mr-3">📊</span>
-            Explore Research Reports
-            <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
-          </Button>
-          
-          <div className="mt-8 flex justify-center space-x-8">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary">$29-$149</div>
-              <div className="text-sm text-foreground/60">pricing range</div>
+          {/* Left/Right Split Layout */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            {/* Left Side - Information */}
+            <div className="space-y-8">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+                <span className="gradient-text">
+                  Professional Market
+                </span>
+                <br />
+                <span className="text-gray-900 dark:text-gray-100">Research Platform 🎯</span>
+              </h1>
+              
+              <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                Get <strong className="text-gray-900 dark:text-gray-100">enterprise-grade business intelligence</strong>, <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> delivered in minutes. <strong className="text-primary">Starting at just $29!</strong>
+              </p>
+
+              <div className="grid grid-cols-3 gap-6">
+                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-primary">$29-$149</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">pricing range</div>
+                </div>
+                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-accent">25-50 min</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">delivery time</div>
+                </div>
+                <div className="text-center p-4 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-secondary">8 Reports</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">available</div>
+                </div>
+              </div>
+
+              <Button 
+                onClick={scrollToValidation}
+                size="lg"
+                className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
+              >
+                <span className="mr-3">📊</span>
+                Explore All Research Reports
+                <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
+              </Button>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-accent">25-50 min</div>
-              <div className="text-sm text-foreground/60">delivery time</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-secondary">8 Reports</div>
-              <div className="text-sm text-foreground/60">available</div>
+
+            {/* Right Side - Featured Product Card */}
+            <div className="relative">
+              <div className="relative bg-gradient-to-br from-white via-blue-50/50 to-indigo-50/30 dark:from-gray-900 dark:via-blue-950/30 dark:to-indigo-950/20 rounded-3xl shadow-2xl border-2 border-blue-200/50 dark:border-blue-800/50 p-8 backdrop-blur-sm">
+                {/* Floating decorative elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-full blur-xl animate-pulse"></div>
+                <div className="absolute top-6 left-6 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-lg"></div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm">
+                        <Lightbulb className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 shadow-lg">
+                        <Star className="w-4 h-4 mr-1" />
+                        Most Popular
+                      </Badge>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        $119
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$15,000</div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                    New Product Feasibility Study
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                    Comprehensive market positioning analysis with customer segmentation, competitive landscape assessment, and structured risk management framework.
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-white/50 dark:bg-gray-800/30 rounded-xl border border-white/20">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-1">
+                        <Brain className="w-4 h-4 text-blue-600 mr-1" />
+                        <div className="text-sm font-bold text-blue-600">5</div>
+                      </div>
+                      <div className="text-xs text-blue-700 dark:text-blue-300">AI Agents</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-1">
+                        <FileText className="w-4 h-4 text-green-600 mr-1" />
+                        <div className="text-sm font-bold text-green-600">66</div>
+                      </div>
+                      <div className="text-xs text-green-700 dark:text-green-300">Sources</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-1">
+                        <Clock className="w-4 h-4 text-purple-600 mr-1" />
+                        <div className="text-sm font-bold text-purple-600">25m 54s</div>
+                      </div>
+                      <div className="text-xs text-purple-700 dark:text-purple-300">Delivery</div>
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    size="lg"
+                    onClick={scrollToValidation}
+                  >
+                    <Rocket className="w-5 h-5 mr-2" />
+                    Get Feasibility Study
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+
+                  <p className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
+                    PDF + PowerPoint + Public Link • Delivered in 25 minutes • SOC2 Compliant
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
