@@ -44,8 +44,8 @@ export default function TestimonialsGrid() {
   return (
     <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 text-5xl opacity-20 animate-float">💬</div>
-        <div className="absolute bottom-20 right-20 text-4xl opacity-20 animate-bounce-gentle">⭐</div>
+        <div className="absolute top-20 left-20 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

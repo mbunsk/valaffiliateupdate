@@ -98,8 +98,8 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
   return (
     <section id="validate" className="py-20 bg-gradient-to-br from-accent/15 to-background relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 right-10 text-6xl opacity-20 animate-float">💡</div>
-        <div className="absolute bottom-10 left-10 text-4xl opacity-20 animate-bounce-gentle">🚀</div>
+        <div className="absolute top-10 right-10 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
       </div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -108,27 +108,29 @@ export default function IdeaValidation({ onValidationComplete }: IdeaValidationP
             <span className="w-8 h-8 bg-gradient-to-br from-primary to-accent text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
               1
             </span>
-            🎯 Idea Validation Lab
+            Idea Validation Lab
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            What's Your Wild Idea? <span className="text-5xl emoji">🤔</span>
+            What's Your Wild Idea?
           </h2>
           <p className="text-xl text-foreground/70 leading-relaxed">
             Share any idea and our AI will give you thoughtful feedback, the ability to refine your idea with customer conversations and a simulation of what a lunch might look like - with an AI copilot!
             <br />
-            <span className="text-primary font-semibold">No pressure, just fun exploration! ✨</span>
+            <span className="text-primary font-semibold">No pressure, just fun exploration!</span>
           </p>
         </div>
 
         <Card className="shadow-2xl border-2 border-primary/20 bg-card/80 backdrop-blur-sm animate-pulse-slow">
           <CardContent className="p-8">
             <div className="text-center mb-8">
-              <span className="text-3xl">💭</span>
+              <div className="w-12 h-12 bg-primary/20 rounded-full mx-auto flex items-center justify-center">
+                <Lightbulb className="w-6 h-6 text-primary" />
+              </div>
               <p className="text-lg font-semibold text-foreground mt-2">
                 Tell us about your idea in 3 quick steps
               </p>
               <p className="text-sm text-foreground/60">
-                Just the basics - we'll do the deep thinking for you! 🎨
+                Just the basics - we'll do the deep thinking for you!
               </p>
             </div>
             

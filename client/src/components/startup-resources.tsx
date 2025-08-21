@@ -39,8 +39,8 @@ export default function StartupResources({ validationData }: StartupResourcesPro
     return (
       <section id="resources" className="py-20 bg-gradient-to-br from-accent/10 via-background to-primary/10 relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-20 text-5xl opacity-20 animate-float">🚀</div>
-          <div className="absolute bottom-20 right-20 text-4xl opacity-20 animate-bounce-gentle">💼</div>
+          <div className="absolute top-20 left-20 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
+          <div className="absolute bottom-20 right-20 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -49,7 +49,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
               <span className="w-8 h-8 bg-gradient-to-br from-secondary to-primary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
                 2
               </span>
-              🛠️ Your Startup Resources Kit
+              Your Startup Resources Kit
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
               Ready to Keep Exploring?
@@ -57,7 +57,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             <p className="text-xl text-foreground/70 mb-8">
               After validating your idea, you'll get access to personalized startup and idea validation resources.
               <br />
-              <span className="text-primary font-semibold">Choose from 7 trusted partner tools to continue your exploration journey! ✨</span>
+              <span className="text-primary font-semibold">Choose from 7 trusted partner tools to continue your exploration journey!</span>
             </p>
           </div>
 
@@ -65,7 +65,9 @@ export default function StartupResources({ validationData }: StartupResourcesPro
           <div className="text-center">
             <Card className="max-w-4xl mx-auto border-2 border-dashed border-muted-foreground/30 bg-muted/20">
               <CardContent className="p-12">
-                <div className="text-6xl mb-6">🔒</div>
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gray-400 rounded"></div>
+                </div>
                 <h3 className="text-2xl font-bold mb-4 text-muted-foreground">
                   Your Startup Resources Kit
                 </h3>
@@ -181,8 +183,8 @@ export default function StartupResources({ validationData }: StartupResourcesPro
   return (
     <section id="resources" className="py-20 bg-gradient-to-br from-accent/10 via-background to-primary/10 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 text-5xl opacity-20 animate-float">🚀</div>
-        <div className="absolute bottom-20 right-20 text-4xl opacity-20 animate-bounce-gentle">💼</div>
+        <div className="absolute top-20 left-20 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -191,7 +193,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
             <span className="w-8 h-8 bg-gradient-to-br from-secondary to-primary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 animate-pulse-slow">
               2
             </span>
-            🛠️ Your Startup Resources Kit
+            Your Startup Resources Kit
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
             Ready to Continue?
@@ -199,7 +201,7 @@ export default function StartupResources({ validationData }: StartupResourcesPro
           <p className="text-xl text-foreground/70 mb-8">
             Your idea is validated! Now access your personalized startup and idea validation resources.
             <br />
-            <span className="text-primary font-semibold">Each tool is specifically chosen to help assist in planning, mockups, presentations and education! ✨</span>
+            <span className="text-primary font-semibold">Each tool is specifically chosen to help assist in planning, mockups, presentations and education!</span>
           </p>
         </div>
 

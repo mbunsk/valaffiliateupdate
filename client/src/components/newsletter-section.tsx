@@ -32,8 +32,8 @@ export default function NewsletterSection() {
   return (
     <section className="py-20 bg-gradient-to-br from-accent/10 via-background to-primary/10 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 text-5xl opacity-20 animate-float">📧</div>
-        <div className="absolute bottom-20 right-20 text-4xl opacity-20 animate-bounce-gentle">🚀</div>
+        <div className="absolute top-20 left-20 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-12 h-12 bg-accent/10 rounded-full animate-bounce-gentle"></div>
       </div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -59,7 +59,6 @@ export default function NewsletterSection() {
             >
               <Mail className="w-6 h-6 mr-3" />
               Join Our Newsletter
-              <span className="ml-3">📧</span>
             </Button>
 
             <p className="text-sm text-muted-foreground mt-4">

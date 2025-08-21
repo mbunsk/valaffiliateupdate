@@ -394,10 +394,10 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
             <span className="w-8 h-8 bg-gradient-to-br from-accent to-secondary text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
               3
             </span>
-            🎮 Startup Simulation
+            Startup Simulation
           </Badge>
           <h2 className="text-3xl sm:text-5xl font-black mb-6 gradient-text">
-            Experience Your Startup Journey! <span className="text-4xl">🚀</span>
+            Experience Your Startup Journey!
           </h2>
           <p className="text-xl text-foreground/70 mb-8">
             Chat with AI customers, discover insights, and see your 6-month startup simulation with realistic challenges and growth
@@ -408,7 +408,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           <div className="text-center">
             <Card className="max-w-2xl mx-auto border-2 border-dashed border-muted-foreground/30 bg-muted/20">
               <CardContent className="p-8">
-                <div className="text-4xl mb-4">🔒</div>
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gray-400 rounded"></div>
+                </div>
                 <h3 className="text-xl font-semibold mb-3 text-muted-foreground">
                   Customer Simulation Will Appear Here
                 </h3>
@@ -424,7 +426,9 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
           <div className="text-center">
             <Card className="max-w-2xl mx-auto border-2 border-primary/30 shadow-2xl shadow-primary/20 bg-gradient-to-br from-card/90 to-primary/5 backdrop-blur-sm animate-pulse-slow">
               <CardContent className="p-8">
-                <div className="text-6xl mb-4">💬</div>
+                <div className="w-16 h-16 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-8 h-8 bg-primary/40 rounded-full"></div>
+                </div>
                 <h3 className="text-2xl font-bold mb-4">Ready to Simulate Customer Conversations?</h3>
                 <p className="text-lg text-muted-foreground mb-6">
                   Based on your validated idea, I'll create 3 AI customer personas for you to interview. 
@@ -443,9 +447,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                     </div>
                   ) : (
                     <>
-                      <span className="mr-2">🚀</span>
                       Simulate Customer Conversations
-                      <span className="ml-2">✨</span>
                     </>
                   )}
                 </Button>
@@ -468,7 +470,7 @@ export default function StartupSimulator({ validationData }: StartupSimulatorPro
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 shadow-lg border border-green-500/20 max-w-xs sm:max-w-md">
                   <div className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
-                    <span className="font-semibold text-green-600 dark:text-green-400">Val says:</span> I've created 3 potential customers for your idea! Chat with each one to understand their needs, then click DONE. After all THREE are complete, I'll generate your 6-month startup simulation! 🚀
+                    <span className="font-semibold text-green-600 dark:text-green-400">Val says:</span> I've created 3 potential customers for your idea! Chat with each one to understand their needs, then click DONE. After all THREE are complete, I'll generate your 6-month startup simulation!
                   </div>
 
                 </div>
