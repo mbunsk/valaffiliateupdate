@@ -3,8 +3,8 @@ import Header from "@/components/header";
 import Hero from "@/components/hero";
 import ProductsGrid from "@/components/products-grid";
 import ProductModal from "@/components/product-modal";
-import NewsletterSignup from "@/components/newsletter-signup";
-import TestimonialsSection from "@/components/testimonials-section";
+import TestimonialsGrid from "@/components/testimonials-grid";
+import NewsletterSection from "@/components/newsletter-section";
 import ThemeToggle from "@/components/theme-toggle";
 import Footer from "@/components/footer";
 
@@ -87,10 +87,10 @@ export default function NewHome() {
       </div>
 
       {/* Original Testimonials */}
-      <TestimonialsSection />
+      <TestimonialsGrid />
 
       {/* Original Newsletter Section */}
-      <NewsletterSignup />
+      <NewsletterSection />
 
       {/* Footer */}
       <Footer />
