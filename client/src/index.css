@@ -1,3 +1,4 @@
+@import './styles/design-system.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,7 +84,7 @@
   }
   
   html {
-    @apply dark;
+    @apply light;
   }
   
   /* Corporate grid pattern */

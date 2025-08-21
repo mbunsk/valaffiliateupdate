@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NewHome from "@/pages/new-home";
+import EnterpriseHome from "@/pages/enterprise-home";
 import About from "@/pages/about";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
@@ -16,7 +17,8 @@ import ValidationStrategy from "@/pages/validation-strategy";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={NewHome} />
+      <Route path="/" component={EnterpriseHome} />
+      <Route path="/new" component={NewHome} />
       <Route path="/old" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/terms" component={Terms} />
@@ -33,7 +35,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="dark"
+        defaultTheme="light"
         enableSystem={true}
         disableTransitionOnChange
       >
