@@ -133,20 +133,6 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-2">
-            {/* Theme Toggle for Mobile */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-foreground/80 hover:text-primary px-3 py-2 rounded-full transition-all duration-300 hover:bg-primary/10"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </Button>
-            
             <div className="md:hidden">
               <Button
                 variant="ghost"

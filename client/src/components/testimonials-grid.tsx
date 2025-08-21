@@ -5,45 +5,39 @@ import { Star, Quote, Building2, Shield, TrendingUp } from "lucide-react";
 const testimonials = [
   {
     initial: "J",
-    name: "Jessica Chen",
-    title: "Chief Strategy Officer",
-    company: "TechGlobal Solutions",
-    quote: "ValidatorAI's enterprise intelligence platform has revolutionized our strategic planning process. The depth of market analysis rivals our top-tier consulting partners."
+    name: "Jessica",
+    location: "USA",
+    quote: "Val has been really great so far! It feels light years better than anything I've used before. I've attempted several business ideas in the past and this is hands down the most confident that I've felt about any of them."
   },
   {
     initial: "D",
     name: "Dr. Ivan Romano",
-    title: "VP of Innovation",
-    company: "Substancy Corp",
-    quote: "The AI-powered research capabilities delivered insights that would have taken our team months to compile. Exceptional enterprise-grade analysis."
+    company: "Substancy",
+    quote: "This is amazing! I'm blown away!"
   },
   {
     initial: "T",
-    name: "Travis Morrison",
-    title: "Professor of Business Strategy",
-    company: "Cal State Business School",
-    quote: "ValidatorAI's research intelligence platform provides Fortune 500-grade strategic insights with remarkable speed and accuracy."
+    name: "Travis",
+    location: "Professor in California",
+    quote: "Over our conversation, Val asked the right questions to help me structure a clear starting point for the startup I discussed."
   },
   {
     initial: "D",
     name: "David Fox",
-    title: "CEO & Founder",
-    company: "Zapt Technologies",
-    quote: "The competitive intelligence and market analysis from ValidatorAI significantly accelerated our strategic decision-making process."
+    company: "Zapt",
+    quote: "Putting Zapt through Validator AI gave us actionable advice and excellent insights which significantly helped us move forward."
   },
   {
     initial: "J",
-    name: "Jennifer Adams",
-    title: "Director of Market Research",
-    company: "Innovation Partners",
-    quote: "We've replaced multiple research vendors with ValidatorAI's comprehensive business intelligence platform. The ROI is exceptional."
+    name: "Jen",
+    location: "USA",
+    quote: "I did an accelerator previously which fell short. Val is helping me move forward the correct way."
   },
   {
     initial: "A",
     name: "Andrew Bouras",
-    title: "Chief Technology Officer",
     company: "Varos Technologies",
-    quote: "ValidatorAI consistently delivers enterprise-grade strategic insights that inform our most critical business decisions."
+    quote: "We have received accurate feedback every step of the way. The AI hit on all important aspects of our business that we are addressing."
   }
 ];
 
@@ -88,8 +82,9 @@ export default function TestimonialsGrid() {
                   </div>
                   <div>
                     <div className="font-bold text-foreground">{testimonial.name}</div>
-                    <div className="text-xs text-primary font-semibold">{testimonial.title}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.company}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {testimonial.company || testimonial.location}
+                    </div>
                   </div>
                 </div>
                 
