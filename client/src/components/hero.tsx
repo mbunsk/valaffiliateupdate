@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const scrollToValidation = () => {
-    const element = document.getElementById('validate');
+    const element = document.getElementById('products');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -41,8 +41,8 @@ export default function Hero() {
                 <div className="relative">
                   <div className="bg-white rounded-xl p-3 shadow-lg border border-white/20 max-w-xs">
                     <div className="text-xs text-gray-700 leading-tight">
-                      <span className="font-semibold text-primary">Val provides:</span> Market insights, 
-                      customer conversation simulations, revenue ideas and key next steps!
+                      <span className="font-semibold text-primary">Val - Super Research Assistant:</span> Deep market analysis, 
+                      competitive intelligence, customer insights & strategic recommendations!
                     </div>
                     
                     {/* Bubble tail */}
@@ -97,36 +97,36 @@ export default function Hero() {
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
             <span className="gradient-text">
-              Explore Your Ideas
+              Professional Market
             </span>
             <br />
-            <span className="text-foreground">With AI Feedback! 🚀</span>
+            <span className="text-foreground">Research Platform 🎯</span>
           </h1>
           <p className="text-xl sm:text-2xl text-foreground/70 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Get instant <strong className="text-white dark:text-white">AI validation</strong>, <strong className="text-white dark:text-white">startup resources</strong>, chat with <strong className="text-white dark:text-white">AI-customer personas</strong> and complete a <strong className="text-white dark:text-white">6 challenge launch simulation</strong>. <strong className="text-white dark:text-white">ALL FREE!</strong>
+            Get <strong className="text-white dark:text-white">enterprise-grade business intelligence</strong>, <strong className="text-white dark:text-white">strategic market analysis</strong>, and <strong className="text-white dark:text-white">competitive insights</strong> delivered in minutes. <strong className="text-white dark:text-white">Starting at just $29!</strong>
           </p>
           <Button 
             onClick={scrollToValidation}
             size="lg"
             className="inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 transform hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary hover:from-accent hover:via-primary hover:to-accent animate-pulse-slow"
           >
-            <span className="mr-3">🎮</span>
-            Lets Validate Your Idea Now!
+            <span className="mr-3">📊</span>
+            Explore Research Reports
             <ArrowRight className="ml-3 w-6 h-6 animate-bounce-gentle" />
           </Button>
           
           <div className="mt-8 flex justify-center space-x-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">30 sec</div>
-              <div className="text-sm text-foreground/60">to explore</div>
+              <div className="text-2xl font-bold text-primary">$29-$149</div>
+              <div className="text-sm text-foreground/60">pricing range</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-accent">1 min</div>
-              <div className="text-sm text-foreground/60">startup resources</div>
+              <div className="text-2xl font-bold text-accent">25-50 min</div>
+              <div className="text-sm text-foreground/60">delivery time</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-500">2 min</div>
-              <div className="text-sm text-foreground/60">customer simulation</div>
+              <div className="text-2xl font-bold text-secondary">8 Reports</div>
+              <div className="text-sm text-foreground/60">available</div>
             </div>
           </div>
         </div>

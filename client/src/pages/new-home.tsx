@@ -1,10 +1,12 @@
 import { useState } from "react";
-import NewHero from "@/components/new-hero";
+import Header from "@/components/header";
+import Hero from "@/components/hero";
 import ProductsGrid from "@/components/products-grid";
 import ProductModal from "@/components/product-modal";
 import NewsletterSignup from "@/components/newsletter-signup";
 import TestimonialsSection from "@/components/testimonials-section";
 import ThemeToggle from "@/components/theme-toggle";
+import Footer from "@/components/footer";
 
 interface Product {
   id: string;
@@ -55,22 +57,43 @@ export default function NewHome() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header with theme toggle */}
-      <header className="absolute top-0 right-0 z-50 p-4">
-        <ThemeToggle />
-      </header>
+      {/* Original Header */}
+      <Header />
 
-      {/* Hero Section */}
-      <NewHero />
+      {/* Theme toggle in top right */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
+      {/* Original Hero Section */}
+      <Hero />
 
       {/* Products Grid */}
       <ProductsGrid onProductClick={handleProductClick} />
 
-      {/* Newsletter Section */}
-      <NewsletterSignup />
+      {/* Section Divider */}
+      <div className="py-12 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center">
+            <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-primary/60"></div>
+            <div className="mx-8 flex items-center gap-3 text-3xl">
+              <span>⭐</span>
+              <span>✨</span>
+              <span>⭐</span>
+            </div>
+            <div className="flex-1 h-0.5 bg-gradient-to-r from-primary/60 via-primary/40 to-transparent"></div>
+          </div>
+        </div>
+      </div>
 
       {/* Testimonials */}
       <TestimonialsSection />
+
+      {/* Newsletter Section */}
+      <NewsletterSignup />
+
+      {/* Footer */}
+      <Footer />
 
       {/* Product Modal */}
       <ProductModal

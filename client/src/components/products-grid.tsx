@@ -144,7 +144,7 @@ export default function ProductsGrid({ onProductClick }: ProductsGridProps) {
   const regularProducts = products.filter(p => !p.featured && !p.perfect);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-gray-50/30 to-blue-50/20 dark:from-background dark:via-gray-900/30 dark:to-blue-950/20">
+    <section id="products" className="py-20 bg-gradient-to-br from-background via-gray-50/30 to-blue-50/20 dark:from-background dark:via-gray-900/30 dark:to-blue-950/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-black mb-6">
