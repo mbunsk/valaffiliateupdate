@@ -43,18 +43,14 @@ const testimonials = [
 
 export default function TestimonialsGrid() {
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-muted/5 to-background grid-pattern relative">
+    <section className="py-16 bg-gradient-to-br from-background via-muted/5 to-background grid-pattern relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-2xl tech-glow"></div>
         <div className="absolute bottom-20 right-20 w-24 h-24 bg-primary/15 rounded-full blur-xl"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-20">
-          <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow mb-6">
-            <Building2 className="w-4 h-4 mr-2" />
-            Enterprise Client Testimonials
-          </Badge>
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl font-black mb-6">
             Trusted by{" "}
             <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
