@@ -40,7 +40,7 @@ export default function Hero({ onProductClick }: HeroProps) {
   };
 
   return (
-    <section className="pt-12 pb-24 bg-gradient-to-br from-background via-muted/5 to-background relative overflow-hidden grid-pattern">
+    <section className="pt-2 pb-12 bg-gradient-to-br from-background via-muted/5 to-background relative overflow-hidden grid-pattern">
       {/* Corporate tech elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl tech-glow"></div>
@@ -56,12 +56,12 @@ export default function Hero({ onProductClick }: HeroProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
           {/* Hero Top Section with Val and Stats */}
-          <div className="mb-8 space-y-6">
-            <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8 xl:space-x-16">
+          <div className="mb-1 space-y-1">
+            <div className="flex flex-col lg:flex-row justify-center items-center space-y-2 lg:space-y-0 lg:space-x-6 xl:space-x-12">
               {/* Val's Quote Section */}
               <div className="flex items-center space-x-4 relative">
                 <div className="relative">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
+                  <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/30 shadow-lg flex-shrink-0">
                     <img 
                       src="/attached_assets/AIValFull_1754243498167.jpg" 
                       alt="Val - Your AI Mentor" 
@@ -88,14 +88,10 @@ export default function Hero({ onProductClick }: HeroProps) {
                 </div>
               </div>
               
-              {/* Enterprise Endorsement */}
+              {/* Quote Section */}
               <div className="text-center bg-muted/20 rounded-xl p-4 border border-primary/20">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <Building2 className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-semibold text-primary">Enterprise Endorsed</span>
-                </div>
                 <blockquote className="text-lg font-medium text-white mb-2">
-                  "Enterprise-grade intelligence platform"
+                  "This is the future!"
                 </blockquote>
                 <cite className="text-sm text-white/70">
                   - Cal State Fullerton Business School
@@ -132,24 +128,18 @@ export default function Hero({ onProductClick }: HeroProps) {
             </div>
           </div>
           
-          <div className="inline-block mb-6">
-          </div>
           {/* Left/Right Split Layout */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 items-start max-w-7xl mx-auto">
             {/* Left Side - Information */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <Badge className="bg-primary/20 text-primary border-primary/30 tech-glow">
-                  <Building2 className="w-4 h-4 mr-2" />
-                  Enterprise Research Intelligence
-                </Badge>
+            <div className="space-y-4">
+              <div className="space-y-3">
                 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
                   <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
-                    Strategic Business
+                    Deep Market Research
                   </span>
                   <br />
-                  <span className="text-gray-900 dark:text-gray-100">Intelligence Platform</span>
+                  <span className="text-gray-900 dark:text-gray-100">for Your Idea</span>
                 </h1>
               </div>
               
@@ -160,7 +150,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                 <strong className="text-primary">Save $15,000+ vs. hiring consultants.</strong>
               </p>
               
-              <div className="bg-muted/20 rounded-xl p-6 backdrop-blur-sm border border-primary/20 tech-border">
+              <div className="bg-muted/20 rounded-xl p-4 backdrop-blur-sm border border-primary/20 tech-border">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-2xl font-bold text-primary">10+ AI Agents</div>
@@ -214,7 +204,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                     Comprehensive feasibility analysis and market positioning with real-time agent collaboration. Professional-grade business intelligence for strategic decision-making.
                   </p>
 
-                  <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-white/50 dark:bg-gray-800/30 rounded-xl border border-white/20">
+                  <div className="grid grid-cols-3 gap-3 mb-4 p-3 bg-white/50 dark:bg-gray-800/30 rounded-xl border border-white/20">
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Brain className="w-4 h-4 text-blue-600 mr-1" />
@@ -239,7 +229,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                   </div>
 
                   {/* Input Form */}
-                  <div className="space-y-4 mb-6">
+                  <div className="space-y-3 mb-4">
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                         TARGET MARKET
@@ -247,7 +237,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                       <textarea 
                         placeholder="e.g., Maritime Logistics"
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
-                        rows={2}
+                        rows={1}
                         data-testid="input-target-market"
                       />
                     </div>
@@ -258,7 +248,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                       <textarea 
                         placeholder="A concept, initiative, or proposal being explored or evaluated"
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
-                        rows={3}
+                        rows={2}
                         data-testid="input-product-idea"
                       />
                     </div>
@@ -266,7 +256,7 @@ export default function Hero({ onProductClick }: HeroProps) {
 
                   <Button 
                     onClick={handleFeasibilityClick}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
                     data-testid="button-start-feasibility"
                   >
@@ -280,7 +270,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                       PDF + PowerPoint + Public Link • Real-time agent collaboration • SOC2 & GDPR compliant
                     </p>
                     <p className="text-xs text-center font-semibold text-blue-600 dark:text-blue-400">
-                      ~$15 · 25M 54S vs ~$3,000 · 92 HOURS analysts • Access to all 100+ apps
+                      ~$49 · 25M 54S vs ~$3,000 · 92 HOURS analysts • Access to all 100+ apps
                     </p>
                   </div>
                 </div>
