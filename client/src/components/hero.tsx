@@ -184,10 +184,13 @@ export default function Hero({ onProductClick }: HeroProps) {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-4">
                       <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm">
                         <Lightbulb className="w-8 h-8 text-blue-600" />
                       </div>
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent leading-tight">
+                        New Product<br />Feasibility Study
+                      </h3>
                     </div>
                     <div className="text-right">
                       <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -196,10 +199,6 @@ export default function Hero({ onProductClick }: HeroProps) {
                       <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$3,000</div>
                     </div>
                   </div>
-
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-                    New Product Feasibility Study
-                  </h3>
                   <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                     Comprehensive feasibility analysis and market positioning with real-time agent collaboration. Professional-grade business intelligence for strategic decision-making.
                   </p>
