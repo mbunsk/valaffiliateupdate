@@ -215,9 +215,9 @@ export default function Hero({ onProductClick }: HeroProps) {
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <FileText className="w-4 h-4 text-green-600 mr-1" />
-                        <div className="text-sm font-bold text-green-600">1500</div>
+                        <div className="text-sm font-bold text-green-600">90+</div>
                       </div>
-                      <div className="text-xs text-green-700 dark:text-green-300">Credits</div>
+                      <div className="text-xs text-green-700 dark:text-green-300">Hours Saved</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
