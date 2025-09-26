@@ -184,11 +184,8 @@ export default function Hero({ onProductClick }: HeroProps) {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm">
-                        <Lightbulb className="w-8 h-8 text-blue-600" />
-                      </div>
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent leading-tight">
+                    <div className="flex items-center">
+                      <h3 className="text-3xl font-black text-white leading-tight">
                         New Product<br />Feasibility Study
                       </h3>
                     </div>
