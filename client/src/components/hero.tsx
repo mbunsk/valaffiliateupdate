@@ -76,8 +76,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                 <div className="relative">
                   <div className="bg-white rounded-xl p-3 shadow-lg border border-white/20 max-w-xs">
                     <div className="text-xs text-gray-700 leading-tight">
-                      <span className="font-semibold text-primary">Val - Super Research Assistant:</span> Deep market analysis, 
-                      competitive intelligence, customer insights & strategic recommendations!
+                      <span className="font-semibold text-primary">Val - Super Research Assistant:</span> I analyze markets, assess risks, forecast profitability & deliver clear go/no-go recommendations!
                     </div>
                     
                     {/* Bubble tail */}
