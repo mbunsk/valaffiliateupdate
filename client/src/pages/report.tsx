@@ -91,75 +91,156 @@ export default function ReportPage() {
       setReportData({
         title: "New Product Feasibility Study",
         duration: "25m 54s",
-        sourceCount: 66,
-        answers: "Complete feasibility analysis with market positioning, customer segmentation, competitive landscape assessment, and structured risk management framework to support your go/no-go decision.",
+        sourceCount: 88,
+        answers: "Complete feasibility analysis with market positioning, customer segmentation, competitive landscape assessment, profitability forecasting, technical resource review, risk analysis, and structured go/no-go evaluation framework to support your strategic decision-making.",
         sections: [
           {
-            id: "customer-segments",
-            title: "1. Target Customer Segments & Their Needs",
-            content: "Below is a comprehensive analysis of target customer segments, their specific needs, and pain points. Each segment benefits from data-driven evaluations that improve confidence, efficiency, and market positioning.",
+            id: "opportunity-mapping",
+            title: "1. Opportunity Mapping & Market Insights",
+            content: "Comprehensive analysis of target customer segments, market trends, innovations, and competitive landscape to identify strategic opportunities.",
+            subsections: [
+              {
+                title: "Target Customer Segments & Their Needs",
+                content: "Below is a comprehensive analysis of target customer segments, their specific needs, and pain points. Each segment benefits from data-driven evaluations that improve confidence, efficiency, and market positioning."
+              },
+              {
+                title: "Market Trends, Innovations & Competitor Landscape", 
+                content: "Recent advancements in AI are fundamentally reshaping how markets operate. Key trends include AI-powered autonomous agents, domain-specific AI models, real-time analytics, and enhanced efficiency through automation."
+              },
+              {
+                title: "Regulatory Impact & Technology Advancements",
+                content: "Integration of legal frameworks and advanced analytics is critical, including compliance requirements, security enhancements, and advanced AI & analytics deployment."
+              }
+            ],
             tables: [
               {
-                title: "Customer Segment Analysis",
-                headers: ["Customer Segment", "Description", "Key Needs", "Pain Points", "Market Size"],
+                title: "Target Customer Segments Analysis",
+                headers: ["Customer Segment", "Description", "Key Needs", "Pain Points", "Sources"],
                 rows: [
-                  ["Early Adopters", "Tech-savvy users seeking innovative solutions", "• Cutting-edge features\n• Fast implementation\n• Competitive advantage", "• Limited proven solutions\n• High switching costs", "$2.5B"],
-                  ["Enterprise Clients", "Large organizations with established processes", "• Scalability\n• Integration capabilities\n• Support & training", "• Complex approval processes\n• Risk aversion", "$8.1B"],
-                  ["SMB Market", "Small to medium businesses", "• Cost-effective solutions\n• Easy implementation\n• Quick ROI", "• Limited budgets\n• Resource constraints", "$1.8B"]
+                  ["Early Adopters", "Tech-savvy users seeking innovative solutions", "• Predictive insights\n• Data-driven scoring\n• Transparency", "• Opaque valuations\n• Limited market data", "BCG, CMSWire"],
+                  ["Enterprise Clients", "Large organizations with established processes", "• Automated valuations\n• Efficiency tools\n• Rapid liquidity", "• Manual evaluation\n• High operational costs", "Flippa, Afternic"],
+                  ["SMB Market", "Small to medium businesses", "• Instant evaluation\n• Transaction efficiency\n• Low overhead", "• Scalability issues\n• Administrative costs", "DNIB, Afternic"],
+                  ["Digital Asset Managers", "Firms managing large inventories", "• Dynamic analytics\n• System integration\n• Real-time tracking", "• Data overload\n• Operational inefficiencies", "Relevance AI, Medium"]
                 ]
               }
             ]
           },
           {
-            id: "market-trends",
-            title: "2. Market Trends, Innovations & Competitor Landscape",
-            content: "Recent advancements in AI and technology are fundamentally reshaping how markets operate and how customers interact with products.",
+            id: "profitability-forecast",
+            title: "2. Profitability Forecast & Cost Modeling",
+            content: "Detailed financial analysis including development costs, revenue projections, and profitability scenarios based on industry benchmarks and market data.",
             subsections: [
               {
-                title: "Emerging Trends and Technological Advancements",
-                content: "Key trends driving market evolution include AI-powered automation, real-time analytics, and enhanced user experiences that reduce operational costs while improving efficiency."
+                title: "Development & Production Cost Estimate",
+                content: "Itemized breakdown of estimated development and production costs for launching the product, including pre-development, design, engineering, AI integration, testing, and ongoing maintenance."
               },
               {
-                title: "Competitor Landscape",
-                content: "Leading competitors demonstrate strategies that align with technological advancements, focusing on data transparency, rapid transaction cycles, and integrated analytics platforms."
+                title: "Revenue & Profitability Projection",
+                content: "Analysis of multiple revenue streams, market size assessments, and projected profitability scenarios across a 3-year timeline with realistic growth assumptions."
+              }
+            ],
+            tables: [
+              {
+                title: "Development Cost Breakdown",
+                headers: ["Category", "Low-End Estimate", "High-End Estimate", "Details"],
+                rows: [
+                  ["Pre-Development & Planning", "$6,000", "$16,000", "Market research, business model, feature planning"],
+                  ["Design", "$5,000", "$30,000+", "UI/UX wireframes, mockups, custom design"],
+                  ["Core Development", "$60,000", "$150,000+", "Frontend, backend, mobile development"],
+                  ["Advanced Add-Ons", "$13,000", "$55,000+", "AI integration, legal/IP tools, security"],
+                  ["Testing & Launch", "$7,000", "$25,000", "QA testing, beta launch, marketing"],
+                  ["Annual Maintenance", "$5,000/yr", "$15,000/yr", "Updates, hosting, scaling costs"]
+                ]
+              },
+              {
+                title: "Revenue Projection (3-Year Scenario)",
+                headers: ["Metric", "Year 1", "Year 2", "Year 3"],
+                rows: [
+                  ["Product Sales", "1,000", "2,500", "7,500"],
+                  ["Average Transaction Value", "$250", "$300", "$350"],
+                  ["Gross Sales", "$250,000", "$750,000", "$2,625,000"],
+                  ["Revenue (10% Commission)", "$25,000", "$75,000", "$262,500"],
+                  ["Additional Revenue Streams", "$275,000", "$550,000", "$1,375,000"],
+                  ["Total Revenue", "$300,000", "$625,000", "$1,637,500"]
+                ]
               }
             ]
           },
           {
-            id: "regulatory-impact",
-            title: "3. Regulatory Impact & Technology Advancements",
-            content: "Integration of legal frameworks and advanced analytics is critical for market success, including compliance requirements and technological infrastructure needs."
+            id: "technical-feasibility",
+            title: "3. Technical Feasibility & Resource Review",
+            content: "Assessment of core technology requirements, architecture design, scalability considerations, and technical innovations needed for successful implementation.",
+            subsections: [
+              {
+                title: "Core Technology and Architecture",
+                content: "Implementation requires multimodal AI/ML models, real-time data engineering pipelines, blockchain integration, and scalable cloud infrastructure with GPU optimization."
+              },
+              {
+                title: "Technical Innovations",
+                content: "Hybrid AI models with recursive learning, explainable AI (XAI) techniques, interactive dashboards, and user feedback loops for continuous model refinement."
+              }
+            ],
+            tables: [
+              {
+                title: "Technical Architecture Components",
+                headers: ["Layer", "Technology", "Purpose", "Implementation"],
+                rows: [
+                  ["AI/ML Model Layer", "Deep Learning, NLP, Graph Neural Networks", "Evaluate quality, brand potential, SEO metrics", "Multimodal analysis with XAI"],
+                  ["Data Engineering", "Real-time pipelines, ETL processes", "Integrate WHOIS, DNS, sales data", "Continuous data quality assurance"],
+                  ["Blockchain Integration", "Smart contracts, Multisig wallets", "Secure transactions, escrow automation", "2-of-3 schemes, tamper-proof recording"],
+                  ["API Layer", "RESTful/GraphQL interfaces", "External integrations, CRM connectivity", "Modular design for partnerships"],
+                  ["Cloud Infrastructure", "GPU-optimized, Kubernetes", "Scalability, real-time processing", "Sub-second response times"]
+                ]
+              }
+            ]
           },
           {
-            id: "strategic-implications",
-            title: "4. Strategic Market Implications",
-            content: "Analysis reveals key opportunities for enhanced market positioning, data-driven confidence building, regulatory assurance, and competitive differentiation through advanced technology integration."
+            id: "strategic-risk",
+            title: "4. Strategic Risk & Exposure Analysis",
+            content: "Comprehensive risk assessment covering algorithmic, operational, regulatory, and market risks with specific mitigation strategies for each identified threat.",
+            tables: [
+              {
+                title: "Risk Assessment & Mitigation Strategies",
+                headers: ["Risk Category", "Impact Level", "Mitigation Strategy", "Implementation"],
+                rows: [
+                  ["Algorithmic Mispricing & Model Bias", "High", "Implement robust XAI, continuous audits", "SHAP, LIME analysis, human oversight"],
+                  ["Data Vulnerabilities", "Medium", "Automated ETL with anomaly detection", "Diverse data sources, adversarial testing"],
+                  ["Regulatory & Legal Risks", "High", "Automated legal/IP vetting modules", "Compliance documentation, human-in-loop"],
+                  ["Transparency Issues", "Medium", "Interactive visual XAI dashboards", "Model cards, detailed scoring rubrics"],
+                  ["Operational Risks", "Medium", "Cloud-native auto-scaling", "Kubernetes orchestration, redundancy"],
+                  ["Market Confidence Risk", "High", "Constant feedback loops, anomaly detection", "Rapid corrective measures, model retraining"]
+                ]
+              }
+            ]
           },
           {
-            id: "mindmap",
-            title: "5. Strategic Opportunity Mindmap",
-            content: "Visual representation of key strategic opportunities and market relationships.",
-            mindmap: {
-              centralTopic: "Market Opportunity",
-              branches: [
-                {
-                  title: "Target Customers",
-                  items: ["Early Adopters", "Enterprise Clients", "SMB Market", "Industry Specialists"]
-                },
-                {
-                  title: "Core Features",
-                  items: ["AI-Powered Analytics", "Real-Time Insights", "Automated Processes", "Integration Capabilities"]
-                },
-                {
-                  title: "Market Advantages",
-                  items: ["First-Mover Advantage", "Technology Leadership", "Cost Efficiency", "Scalability"]
-                },
-                {
-                  title: "Growth Strategies",
-                  items: ["Partner Ecosystem", "Platform Expansion", "Geographic Growth", "Vertical Integration"]
-                }
-              ]
-            }
+            id: "synthesis-evaluation",
+            title: "5. Synthesis Go/No-Go Evaluation",
+            content: "Final strategic recommendations based on comprehensive analysis of market opportunity, financial viability, technical feasibility, and risk assessment.",
+            subsections: [
+              {
+                title: "Final Recommendations",
+                content: "The feasibility study shows strong market demand, viable revenue models, and technically proven solutions. The integration of advanced AI scoring, blockchain escrow, and compliance frameworks lays a solid foundation."
+              },
+              {
+                title: "Key Success Factors",
+                content: "Prioritize transparency through explainable AI, deploy smart escrow systems, monitor competitive fee structures, invest in continuous compliance, and implement feedback loops for model refinement."
+              }
+            ],
+            tables: [
+              {
+                title: "Go/No-Go Decision Matrix",
+                headers: ["Evaluation Criteria", "Score (1-10)", "Weight", "Weighted Score", "Comments"],
+                rows: [
+                  ["Market Opportunity", "9", "25%", "2.25", "Strong demand, growing TAM of $500M+"],
+                  ["Financial Viability", "8", "25%", "2.0", "Multiple revenue streams, 60-80% margins"],
+                  ["Technical Feasibility", "8", "20%", "1.6", "Proven technologies, scalable architecture"],
+                  ["Competitive Position", "7", "15%", "1.05", "Differentiated AI approach, established competitors"],
+                  ["Risk Management", "7", "15%", "1.05", "Identifiable risks with mitigation strategies"],
+                  ["Total Score", "", "100%", "7.95", "STRONG GO - Proceed with implementation"]
+                ]
+              }
+            ]
           }
         ],
         sources: [
@@ -289,11 +370,11 @@ export default function ReportPage() {
               >
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-xl font-semibold flex items-center">
-                    {section.id === 'customer-segments' && <Users className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'market-trends' && <TrendingUp className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'regulatory-impact' && <Shield className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'strategic-implications' && <Target className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'mindmap' && <BarChart3 className="w-5 h-5 mr-3 text-primary" />}
+                    {section.id === 'opportunity-mapping' && <Users className="w-5 h-5 mr-3 text-primary" />}
+                    {section.id === 'profitability-forecast' && <TrendingUp className="w-5 h-5 mr-3 text-primary" />}
+                    {section.id === 'technical-feasibility' && <BarChart3 className="w-5 h-5 mr-3 text-primary" />}
+                    {section.id === 'strategic-risk' && <Shield className="w-5 h-5 mr-3 text-primary" />}
+                    {section.id === 'synthesis-evaluation' && <Target className="w-5 h-5 mr-3 text-primary" />}
                     {section.title}
                   </CardTitle>
                   {expandedSections.has(section.id) ? 
