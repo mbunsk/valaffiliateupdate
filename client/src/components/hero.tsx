@@ -184,7 +184,7 @@ export default function Hero({ onProductClick }: HeroProps) {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center">
+                    <div className="flex-1 text-center">
                       <h3 className="text-3xl font-black text-white leading-tight">
                         New Product<br />Feasibility Study
                       </h3>
