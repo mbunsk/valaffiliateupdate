@@ -252,13 +252,13 @@ export default function Hero({ onProductClick }: HeroProps) {
 
                   <Button 
                     onClick={handleFeasibilityClick}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-black text-xl py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
                     data-testid="button-start-feasibility"
                   >
-                    <Rocket className="w-5 h-5 mr-2" />
+                    <Rocket className="w-6 h-6 mr-3" />
                     Start Feasibility Study - $49
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <ArrowRight className="w-6 h-6 ml-3" />
                   </Button>
 
                   <div className="space-y-2 mt-4">
