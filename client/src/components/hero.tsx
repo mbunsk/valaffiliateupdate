@@ -181,40 +181,40 @@ export default function Hero() {
                     </div>
                     <div className="text-right">
                       <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        $29
+                        $49
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$800</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$3,000</div>
                     </div>
                   </div>
 
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-                    Quick Idea Validation
+                    New Product Feasibility Study
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                    Get an instant desirability score for your business idea based on customer pain points, problem severity, and adoption feasibility.
+                    Comprehensive feasibility analysis and market positioning with real-time agent collaboration. Professional-grade business intelligence for strategic decision-making.
                   </p>
 
                   <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-white/50 dark:bg-gray-800/30 rounded-xl border border-white/20">
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Brain className="w-4 h-4 text-blue-600 mr-1" />
-                        <div className="text-sm font-bold text-blue-600">1</div>
+                        <div className="text-sm font-bold text-blue-600">Multiple</div>
                       </div>
-                      <div className="text-xs text-blue-700 dark:text-blue-300">AI Agent</div>
+                      <div className="text-xs text-blue-700 dark:text-blue-300">AI Agents</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <FileText className="w-4 h-4 text-green-600 mr-1" />
-                        <div className="text-sm font-bold text-green-600">17</div>
+                        <div className="text-sm font-bold text-green-600">1500</div>
                       </div>
-                      <div className="text-xs text-green-700 dark:text-green-300">Sources</div>
+                      <div className="text-xs text-green-700 dark:text-green-300">Credits</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Clock className="w-4 h-4 text-purple-600 mr-1" />
-                        <div className="text-sm font-bold text-purple-600">3m 19s</div>
+                        <div className="text-sm font-bold text-purple-600">25m 54s</div>
                       </div>
-                      <div className="text-xs text-purple-700 dark:text-purple-300">Delivery</div>
+                      <div className="text-xs text-purple-700 dark:text-purple-300">Runtime</div>
                     </div>
                   </div>
 
@@ -222,12 +222,24 @@ export default function Hero() {
                   <div className="space-y-4 mb-6">
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        What is your startup idea?
+                        TARGET MARKET
                       </label>
                       <textarea 
-                        placeholder="e.g., A mobile app that helps people track their daily water intake with smart reminders and gamification..."
+                        placeholder="e.g., Maritime Logistics"
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
-                        rows={4}
+                        rows={2}
+                        data-testid="input-target-market"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        PRODUCT IDEA
+                      </label>
+                      <textarea 
+                        placeholder="A concept, initiative, or proposal being explored or evaluated"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm"
+                        rows={3}
+                        data-testid="input-product-idea"
                       />
                     </div>
                   </div>
@@ -235,15 +247,21 @@ export default function Hero() {
                   <Button 
                     className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
+                    data-testid="button-start-feasibility"
                   >
                     <Rocket className="w-5 h-5 mr-2" />
-                    Start Quick Validation - $29
+                    Start Feasibility Study - $49
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
 
-                  <p className="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
-                    PDF + PowerPoint + Public Link • Delivered in 3 minutes • Perfect for first-time validation
-                  </p>
+                  <div className="space-y-2 mt-4">
+                    <p className="text-xs text-center text-gray-600 dark:text-gray-400">
+                      PDF + PowerPoint + Public Link • Real-time agent collaboration • SOC2 & GDPR compliant
+                    </p>
+                    <p className="text-xs text-center font-semibold text-blue-600 dark:text-blue-400">
+                      Save $3,000 & 92 HOURS vs analysts • Access to all 100+ apps
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
