@@ -2,11 +2,66 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb, Shield, BarChart3, Globe, Cpu, Building2 } from "lucide-react";
 
-export default function Hero() {
+interface Product {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  agents: number;
+  sources: number;
+  runtime: string;
+  category: string;
+  featured?: boolean;
+  perfect?: boolean;
+}
+
+interface HeroProps {
+  onProductClick?: (product: Product) => void;
+}
+
+export default function Hero({ onProductClick }: HeroProps) {
+  // Define the featured product with FifthRow specifications
+  const featuredProduct: Product = {
+    id: "new-product-feasibility-study",
+    name: "New Product Feasibility Study",
+    title: "Feasibility Analysis & Market Positioning",
+    description: "Comprehensive feasibility analysis and market positioning with real-time agent collaboration. Professional-grade business intelligence for strategic decision-making.",
+    price: 49,
+    originalPrice: 3000,
+    agents: 1, // Multiple agents as specified by FifthRow
+    sources: 1500, // Using credits instead of sources count
+    runtime: "25m 54s",
+    category: "Idea Validation",
+    featured: true
+  };
+
   const scrollToValidation = () => {
     const element = document.getElementById('products');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleFeasibilityClick = () => {
+    // Track the click for analytics
+    fetch('/api/track-product-click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        product: featuredProduct.id, 
+        location: 'hero'
+      })
+    });
+
+    // Open the modal if handler is provided
+    if (onProductClick) {
+      onProductClick(featuredProduct);
+    } else {
+      // Fallback behavior - log for debugging
+      console.log('Feasibility study clicked:', featuredProduct);
+      alert('Feature will be connected to FifthRow API. Product details logged to console.');
     }
   };
 
@@ -245,6 +300,7 @@ export default function Hero() {
                   </div>
 
                   <Button 
+                    onClick={handleFeasibilityClick}
                     className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     size="lg"
                     data-testid="button-start-feasibility"

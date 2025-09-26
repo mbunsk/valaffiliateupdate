@@ -66,7 +66,7 @@ export default function NewHome() {
       </div>
 
       {/* Original Hero Section */}
-      <Hero />
+      <Hero onProductClick={handleProductClick} />
 
       {/* Products Grid */}
       <ProductsGrid onProductClick={handleProductClick} />
