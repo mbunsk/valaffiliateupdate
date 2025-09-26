@@ -9,6 +9,7 @@ import NewHome from "@/pages/new-home";
 import About from "@/pages/about";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
+import ReportPage from "@/pages/report";
 import NotFound from "@/pages/not-found";
 import AdminPage from "@/pages/admin";
 import ValidationStrategy from "@/pages/validation-strategy";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/report/:reportId?" component={ReportPage} />
       <Route path="/validation-strategy" component={ValidationStrategy} />
       <Route path="/aron" component={AdminPage} />
       <Route component={NotFound} />
