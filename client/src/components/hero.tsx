@@ -127,6 +127,11 @@ export default function Hero({ onProductClick }: HeroProps) {
             </div>
           </div>
           
+          {/* Spacing */}
+          <div className="mb-12"></div>
+          <div className="mb-12"></div>
+          <div className="mb-12"></div>
+          
           {/* Left/Right Split Layout */}
           <div className="grid lg:grid-cols-2 gap-6 items-start max-w-7xl mx-auto">
             {/* Left Side - Information */}
@@ -183,10 +188,6 @@ export default function Hero({ onProductClick }: HeroProps) {
                       <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm">
                         <Lightbulb className="w-8 h-8 text-blue-600" />
                       </div>
-                      <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0 shadow-lg">
-                        <Star className="w-4 h-4 mr-1" />
-                        Most Popular
-                      </Badge>
                     </div>
                     <div className="text-right">
                       <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
