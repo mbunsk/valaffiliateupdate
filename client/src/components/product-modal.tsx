@@ -8,21 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Clock, Users, FileText, DollarSign, CheckCircle, Shield, Mail } from "lucide-react";
 import ProductDetails from "./product-details";
-
-interface Product {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  agents: number;
-  sources: number;
-  runtime: string;
-  category: string;
-  featured?: boolean;
-  perfect?: boolean;
-}
+import { Product } from "@shared/types";
 
 interface ProductModalProps {
   product: Product | null;

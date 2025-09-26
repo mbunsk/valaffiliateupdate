@@ -1,21 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb, Shield, BarChart3, Globe, Cpu, Building2 } from "lucide-react";
-
-interface Product {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  agents: number;
-  sources: number;
-  runtime: string;
-  category: string;
-  featured?: boolean;
-  perfect?: boolean;
-}
+import { Product } from "@shared/types";
 
 interface HeroProps {
   onProductClick?: (product: Product) => void;

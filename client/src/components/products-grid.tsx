@@ -2,21 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Users, FileText, ArrowRight, Star, TrendingUp, Zap, Brain, Rocket, DollarSign, Shield, CheckCircle, Sparkles, Target, BarChart3, Lightbulb, Building2, Globe, Cpu } from "lucide-react";
-
-interface Product {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  agents: number;
-  sources: number;
-  runtime: string;
-  category: string;
-  featured?: boolean;
-  perfect?: boolean;
-}
+import { Product } from "@shared/types";
 
 const products: Product[] = [
   {

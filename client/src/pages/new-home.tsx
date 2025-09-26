@@ -7,21 +7,7 @@ import TestimonialsGrid from "@/components/testimonials-grid";
 import NewsletterSection from "@/components/newsletter-section";
 import ThemeToggle from "@/components/theme-toggle";
 import Footer from "@/components/footer";
-
-interface Product {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  agents: number;
-  sources: number;
-  runtime: string;
-  category: string;
-  featured?: boolean;
-  perfect?: boolean;
-}
+import { Product } from "@shared/types";
 
 export default function NewHome() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
