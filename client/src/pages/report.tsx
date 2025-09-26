@@ -251,6 +251,50 @@ export default function ReportPage() {
               {
                 title: "1. Development & Production Cost Estimate",
                 content: "Below is an itemized breakdown of the estimated development and production costs for launching an AI-powered domain quality scoring marketplace. All monetary figures are provided in US dollars and reference current industry benchmarks and detailed cost analyses."
+              },
+              {
+                title: "1.7 Operational Staffing",
+                content: "• Technical Oversight (ML, AI, DevOps Engineers): $7,500+ per FTE/month\n• Customer Support:\n  - AI-based agent: $16–$210/month\n  - Human agent: $4,500–$4,900/month\n\nQuidget – AI Support Agent Costs"
+              },
+              {
+                title: "1.8 Ongoing AI Model Updates",
+                content: "Retraining & Drift Detection: Approximately 10–20% of the initial AI development cost per year (covering personnel, cloud compute, and monitoring infrastructure)\n\nRohan Paul – Keeping LLMs Updated"
+              },
+              {
+                title: "2. Revenue & Profitability Projection",
+                content: "Analysis of multiple revenue streams, market size assessments, and projected profitability scenarios across a 3-year timeline with realistic growth assumptions."
+              },
+              {
+                title: "2.1 Revenue Model & Streams",
+                content: "The marketplace can generate revenues from multiple streams, similar to established platforms such as Flippa:\n\n• Listing Fees: Ranging from $29 to $699 per listing, depending on package levels (Flippa Pricing Structure)\n• Success (Take) Fees: Typically up to 10% of each transaction value (Flippa Pricing Structure)\n• Premium Listing/Promotion Fees: Additional fees for enhanced placement, confidentiality, and detailed reporting\n• Investor Services: Membership-based models (e.g., VIP access for $49/month) and bundled due diligence tools\n• Featured Placement/Advertising Fees: For additional exposure\n• AI-Powered Upgrades: Offering predictive analytics and legal/IP screening as SaaS add-ons"
+              },
+              {
+                title: "2.2 Market Size & Transaction Volume",
+                content: "• Total Addressable Market (TAM): Approximately $500 million/year (Domain Name Wire Q1 2025)\n• Annual Transaction Volume: Around 6 million domain sales (NameBio Daily Market Report)"
+              },
+              {
+                title: "2.3 Gross Margins & Profitability Considerations",
+                content: "• Expected Gross Margins: Typically between 60–80%, with AI automation potentially pushing margins to the higher end\n• Take Rate Example: With a 10% fee and an average transaction value of $50, the platform captures about $5 per transaction\n• Cost Structure Factors: Operating expenses include technical staff, cloud infrastructure, and customer support—with AI tools reducing manual intervention and lowering support costs\n\nQuidget – AI Support Agent Costs"
+              },
+              {
+                title: "2.4 Illustrative Revenue Scenario (Years 1–3)",
+                content: "The following table presents a hypothetical scenario based on increasing adoption, improved sell-through rates through AI curation, and premium pricing dynamics (inspired by data from platforms like Afternic):"
+              },
+              {
+                title: "2.5 AI Impact on Sales Velocity and Pricing",
+                content: "• Enhanced Sales Velocity: AI scoring identifies high-potential domains (e.g., premium .ai names), leading to faster transaction cycles\n• Pricing Uplift: High-quality domains curated via AI can command a notable premium, thus increasing average transaction values\n\nAfternic 2024 TLD Rundown"
+              },
+              {
+                title: "2.6 Strategic & Industry Benchmarks",
+                content: "• Diversified Revenue: Platforms like Flippa combine listing, success, and premium fees to create multiple revenue streams\n• Profitability Drivers: AI-enabled automation improves matching efficiency, reduces overhead, and increases gross margins\n\nShipturtle – Exploring Revenue Models · Quidget – AI Support Agent Costs"
+              },
+              {
+                title: "3. Sources & References",
+                content: "• Trangotech – Marketplace App Development Cost\n• BytePlus – AI Model Costs\n• Codelevate – How Much Does It Cost to Build an AI\n• Shipturtle – Cost to Build an Online Marketplace Website\n• Quidget – AI Support Agent Costs\n• Rohan Paul – Keeping LLMs Updated Without Full Retraining\n• Flippa – Flippa Fees and Pricing\n• Domain Name Wire Q1 2025 Report\n• NameBio Daily Market Report\n• Afternic 2024 TLD Rundown"
+              },
+              {
+                title: "4. Additional Considerations from Market Trends",
+                content: "Target Customer Segments: Domain investors, sellers, brokers, and digital asset managers seek transparency through AI-driven, real‑time assessments, improving confidence and reducing information asymmetry (BCG – How AI Agents Are Opening the Golden Era of Customer Experience).\n\nEvolving Regulatory & Security Requirements: Increased investment in compliance, legal/IP checks, and cybersecurity is essential to mitigate regulatory risk and potential IP disputes (Law of the Digital Domain).\n\nOperational Efficiency Enhancements: AI automation reduces customer support and operational costs, while real‑time analytics enable adaptive pricing and rapid liquidity in the marketplace (PYMNTS – AI to Power Personalized Shopping Experiences in 2025).\n\nThis detailed financial analysis provides a comprehensive view of both the upfront investment and the potential revenue streams for an AI-powered domain quality scoring marketplace, establishing a framework for strategic decision-making that addresses development, operational costs, and market-driven revenue projections."
               }
             ],
             tables: [
@@ -275,19 +319,36 @@ export default function ReportPage() {
                 title: "1.3 Core Platform Engineering",
                 headers: ["Component", "Cost Range", "Details"],
                 rows: [
-                  ["Frontend & Backend Engineering", "$30,000–$100,000+", "Simple MVP: $30,000–$50,000\nFully-featured system: $70,000–$100,000+"],
-                  ["Platform-Specific Development", "$40,000–$75,000", "Web: $15,000–$30,000\nMobile (if required): $25,000–$45,000"],
-                  ["Third-Party Integrations", "$4,000–$15,000", "Payments, Analytics, CRM systems"]
+                  ["Frontend & Backend Engineering", "For a simple MVP: $30,000–$50,000\nFor a fully-featured system: $70,000–$100,000+", "Trangotech Marketplace App Development Cost"],
+                  ["Platform-Specific Development", "Web: $15,000–$30,000\nMobile (if required): $25,000–$45,000", ""],
+                  ["Third-Party Integrations (Payments, Analytics)", "$4,000–$15,000", "Trangotech Marketplace App Development Cost"]
                 ]
               },
               {
                 title: "1.4 Advanced Features/Add-Ons",
                 headers: ["Feature", "Cost Range", "Source"],
                 rows: [
-                  ["AI Domain Scoring Engine Integration", "$5,000–$20,000", "BytePlus AI Model Costs"],
-                  ["Model training/development", "$50,000–$250,000+", "Enterprise-level models possibly exceeding $1M+"],
+                  ["AI Domain Scoring Engine - Integration", "$5,000–$20,000", "BytePlus AI Model Costs"],
+                  ["AI Domain Scoring Engine - Model training/development", "$50,000–$250,000+ (with enterprise-level models possibly exceeding $1M+)", "BytePlus AI Model Costs · Codelevate on AI Costs"],
                   ["Legal/IP Risk Tools & Compliance", "$3,000–$20,000+", "Trangotech Marketplace App Development Cost"],
                   ["Security & Compliance Features", "$5,000–$15,000", "Trangotech Marketplace App Development Cost"]
+                ]
+              },
+              {
+                title: "1.5 Testing & Quality Assurance",
+                headers: ["Item", "Cost Range", "Source"],
+                rows: [
+                  ["Quality Testing (manual/automated)", "$5,000–$20,000", "Trangotech Marketplace App Development Cost"]
+                ]
+              },
+              {
+                title: "1.6 Launch & Post-Launch",
+                headers: ["Item", "Cost Range", "Source"],
+                rows: [
+                  ["Beta Launch, Fees, and Marketing", "$2,000–$5,000", "Trangotech Marketplace App Development Cost"],
+                  ["Ongoing Maintenance & Updates", "$5,000–$15,000/year", "Trangotech Marketplace App Development Cost"],
+                  ["Infrastructure/Cloud Hosting & Scaling - Initial setup", "$15,000–$30,000", "Shipturtle – Cost to Build an Online Marketplace Website"],
+                  ["Infrastructure/Cloud Hosting & Scaling - Variable monthly costs", "$500–$10,000 (depending on AI compute requirements)", "Shipturtle – Cost to Build an Online Marketplace Website"]
                 ]
               },
               {
@@ -300,30 +361,8 @@ export default function ReportPage() {
                   ["Advanced Add‑Ons (AI, Legal/IP, Security)", "$13,000", "$55,000+ (can exceed $250K for AI)"],
                   ["Testing & Launch", "$7,000", "$25,000"],
                   ["Maintenance & Hosting (Annual)", "$5,000/yr", "$15,000/yr + scaling cloud costs"],
-                  ["Total for lean MVP", "~$120,000", ""],
-                  ["Robust, feature-rich platform", "$250,000–$300,000+", "(advanced AI initiatives can drive costs above $1M)"]
-                ]
-              },
-              {
-                title: "2.1 Revenue Model & Streams",
-                headers: ["Revenue Stream", "Rate/Fee", "Source"],
-                rows: [
-                  ["Listing Fees", "$29 to $699 per listing", "Flippa Pricing Structure"],
-                  ["Success (Take) Fees", "Up to 10% of transaction value", "Flippa Pricing Structure"],
-                  ["Premium Listing/Promotion Fees", "Additional fees for enhanced placement", ""],
-                  ["Investor Services", "VIP access for $49/month", ""],
-                  ["Featured Placement/Advertising Fees", "For additional exposure", ""],
-                  ["AI-Powered Upgrades", "SaaS add-ons for analytics", ""]
-                ]
-              },
-              {
-                title: "2.2 Market Size & Transaction Volume",
-                headers: ["Metric", "Value", "Source"],
-                rows: [
-                  ["Total Addressable Market (TAM)", "~$500 million/year", "Domain Name Wire Q1 2025"],
-                  ["Annual Transaction Volume", "~6 million domain sales", "NameBio Daily Market Report"],
-                  ["Expected Gross Margins", "60–80%", "AI automation potentially pushing margins higher"],
-                  ["Take Rate Example", "$5 per transaction", "10% fee on $50 average transaction value"]
+                  ["Total for a lean MVP", "Approximately $120,000", ""],
+                  ["Robust, feature-rich platform", "Between $250,000 and $300,000+", "(advanced AI initiatives can drive costs above $1M)"]
                 ]
               },
               {
@@ -339,7 +378,7 @@ export default function ReportPage() {
                   ["Listing Fees (avg. $50)", "$250,000", "$500,000", "$1,250,000"],
                   ["Premium/Upgrade Fees", "$25,000", "$50,000", "$125,000"],
                   ["Total Revenue", "$300,000", "$625,000", "$1,637,500"],
-                  ["Gross Margin Example at 75%", "$225,000", "$468,750", "$1,228,125"]
+                  ["Gross Margin Example at 75%", "Year 1: $225,000\nYear 2: $468,750\nYear 3: $1,228,125", "", ""]
                 ]
               }
             ]
