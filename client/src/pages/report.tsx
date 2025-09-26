@@ -101,15 +101,19 @@ export default function ReportPage() {
             subsections: [
               {
                 title: "Target Customer Segments & Their Needs",
-                content: "Below is a comprehensive analysis of target customer segments, their specific needs, and pain points. Each segment benefits from data-driven evaluations that improve confidence, efficiency, and market positioning."
+                content: "Below is a comprehensive analysis of target customer segments, their specific needs, and pain points. Each segment benefits from real-time, data-driven evaluations that improve confidence, efficiency, and liquidity."
               },
               {
                 title: "Market Trends, Innovations & Competitor Landscape", 
-                content: "Recent advancements in AI are fundamentally reshaping how markets operate. Key trends include AI-powered autonomous agents, domain-specific AI models, real-time analytics, and enhanced efficiency through automation."
+                content: "Recent advancements in AI are fundamentally reshaping how marketplaces operate. Key trends include AI-powered autonomous agents making customer interactions highly personalized, domain-specific generative AI leveraging multimodal data, real-time analytics delivering hyper-personalized experiences, and automation drastically reducing resolution times."
               },
               {
                 title: "Regulatory Impact & Technology Advancements",
-                content: "Integration of legal frameworks and advanced analytics is critical, including compliance requirements, security enhancements, and advanced AI & analytics deployment."
+                content: "Integrating legal vetting and IP clearance mechanisms is critical to mitigate ownership disputes. Advanced AI analytics with autonomous agents drive enhanced operational efficiency. Security enhancements like DNSSEC and blockchain integration bolster transactional security, supporting trust and liquidity."
+              },
+              {
+                title: "Strategic Market Implications",
+                content: "Enhanced Liquidity: AI scoring accelerates identification and transfer of high-quality assets. Data-Driven Confidence: Real-time analytics enable stakeholders to optimize pricing and timing strategies. Regulatory Assurance: Robust legal vetting builds trust for premium transactions. Competitive Differentiation: Integration of AI, blockchain, and adaptive analytics offers disruptive advantage over traditional methods."
               }
             ],
             tables: [
@@ -117,13 +121,42 @@ export default function ReportPage() {
                 title: "Target Customer Segments Analysis",
                 headers: ["Customer Segment", "Description", "Key Needs", "Pain Points", "Sources"],
                 rows: [
-                  ["Early Adopters", "Tech-savvy users seeking innovative solutions", "• Predictive insights\n• Data-driven scoring\n• Transparency", "• Opaque valuations\n• Limited market data", "BCG, CMSWire"],
-                  ["Enterprise Clients", "Large organizations with established processes", "• Automated valuations\n• Efficiency tools\n• Rapid liquidity", "• Manual evaluation\n• High operational costs", "Flippa, Afternic"],
-                  ["SMB Market", "Small to medium businesses", "• Instant evaluation\n• Transaction efficiency\n• Low overhead", "• Scalability issues\n• Administrative costs", "DNIB, Afternic"],
-                  ["Digital Asset Managers", "Firms managing large inventories", "• Dynamic analytics\n• System integration\n• Real-time tracking", "• Data overload\n• Operational inefficiencies", "Relevance AI, Medium"]
+                  ["Domain Investors & Investment Firms", "Individuals and institutions seeking premium domains for long-term appreciation and resale opportunities", "• Predictive Insights: Data-driven, real-time AI scoring to predict future liquidity\n• Transparency: Explainable AI models detailing score derivation\n• Risk Assessment: Legal and IP background checks", "• Opaque Valuations: Traditional methods are manual and inconsistent\n• Information Asymmetry: Limited market data creates uncertainty", "BCG – AI Agents, CMSWire – AI Analysis, NamePros – AI Naming Trends"],
+                  ["Domain Sellers & Portfolio Holders", "Individuals, brokers, or agencies listing domains for sale, often managing large portfolios", "• Automated Valuations: Trusted AI scoring for transparent pricing\n• Efficiency Tools: Streamlined listing with market analytics\n• Rapid Liquidity: Faster transactions through investor matching", "• Manual Evaluation: Traditional, error-prone pricing methods\n• Inefficiencies: High operational costs from slow evaluation", "Flippa – AI Valuation, Afternic – 2024 TLD, OpenProvider – AI Domain TLDs"],
+                  ["Brokers & Intermediaries", "Specialists or firms facilitating domain transactions and advising buyers/sellers", "• Instant Evaluation: AI-powered assessments for negotiation insights\n• Transaction Efficiency: Low-overhead automation and risk screening\n• IP Dispute Prevention: Regulatory flag detection", "• Scalability Issues: Manual due diligence slows operations\n• High Administration Costs: Increased overhead from inconsistent data", "DNIB – Domain Industry Brief, Afternic – Transaction Assurance"],
+                  ["Digital Asset & Portfolio Managers", "Firms managing large inventories of domains as digital assets", "• Dynamic Analytics: Real-time tracking with AI-driven reporting\n• System Integration: Seamless CRM and asset management\n• Buy/Hold/Sell Decisions: Support for strategic choices", "• Data Overload: Traditional systems struggle with trend filtering\n• Operational Inefficiencies: Manual analysis leads to missed opportunities", "Relevance AI – Segmentation, Medium – AI Use Case Personalization"]
                 ]
               }
-            ]
+            ],
+            mindmap: {
+              centralTopic: "AI-Driven Domain Marketplace",
+              branches: [
+                {
+                  title: "Target Customers",
+                  items: ["Investors & Investment Firms", "Domain Sellers & Portfolio Holders", "Brokers & Intermediaries", "Digital Asset Managers"]
+                },
+                {
+                  title: "Core Features", 
+                  items: ["AI Quality Scoring", "Real-Time Analytics", "Automated Evaluations", "Legal/IP Vetting"]
+                },
+                {
+                  title: "Customer Expectations",
+                  items: ["Personalization", "Transparency", "Frictionless Transactions", "Predictive Insights"]
+                },
+                {
+                  title: "Technological Advancements",
+                  items: ["Autonomous AI Agents", "Domain-Specific Generative AI", "Blockchain Integration", "Multimodal Analytics"]
+                },
+                {
+                  title: "Competitive Landscape",
+                  items: ["Flippa", "Acquire.com", "Traditional Brokers", "Manual Valuation Services"]
+                },
+                {
+                  title: "Regulatory & Legal",
+                  items: ["IP & Trademark Clearance", "Risk Assessment", "DNSSEC Security", "Compliance Documentation"]
+                }
+              ]
+            }
           },
           {
             id: "profitability-forecast",
