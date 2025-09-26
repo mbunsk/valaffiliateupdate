@@ -35,14 +35,8 @@ export default function Hero({ onProductClick }: HeroProps) {
       })
     });
 
-    // Open the modal if handler is provided
-    if (onProductClick) {
-      onProductClick(featuredProduct);
-    } else {
-      // Fallback behavior - log for debugging
-      console.log('Feasibility study clicked:', featuredProduct);
-      alert('Feature will be connected to FifthRow API. Product details logged to console.');
-    }
+    // Navigate directly to the report page (dev will handle Stripe integration before this)
+    window.location.href = '/report/new-product-feasibility-study';
   };
 
   return (
@@ -160,10 +154,10 @@ export default function Hero({ onProductClick }: HeroProps) {
               </div>
               
               <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                Advanced AI-powered research platform delivering <strong className="text-primary">Fortune 500-grade business intelligence</strong>, 
-                <strong className="text-gray-900 dark:text-gray-100">strategic market analysis</strong>, and 
-                <strong className="text-gray-900 dark:text-gray-100">competitive insights</strong> for enterprise decision-making. 
-                <strong className="text-primary">Starting at $29 per report.</strong>
+                Get comprehensive <strong className="text-primary">New Product Feasibility Study</strong> powered by 
+                <strong className="text-gray-900 dark:text-gray-100">10+ AI agents</strong> delivering 
+                <strong className="text-gray-900 dark:text-gray-100">enterprise-grade market analysis</strong> and competitive intelligence. 
+                <strong className="text-primary">Save $15,000+ vs. hiring consultants.</strong>
               </p>
               
               <div className="bg-muted/20 rounded-xl p-6 backdrop-blur-sm border border-primary/20 tech-border">
