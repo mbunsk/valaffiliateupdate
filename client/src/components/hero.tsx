@@ -143,10 +143,10 @@ export default function Hero({ onProductClick }: HeroProps) {
               </div>
               
               <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                Get comprehensive <strong className="text-primary">New Product Feasibility Study</strong> powered by 
-                <strong className="text-gray-900 dark:text-gray-100">10+ AI agents</strong> delivering 
-                <strong className="text-gray-900 dark:text-gray-100">enterprise-grade market analysis</strong> and competitive intelligence. 
-                <strong className="text-primary">Save $15,000+ vs. hiring consultants.</strong>
+                Get a comprehensive <strong className="text-primary">New Product Feasibility Study</strong> powered by 
+                <strong className="text-gray-900 dark:text-gray-100">10+ AI agents</strong> that analyzes market opportunity, 
+                assesses profitability, evaluates technical feasibility, and identifies risks to help you make confident 
+                <strong className="text-primary">go/no-go decisions</strong>. Save $15,000+ vs. hiring consultants.
               </p>
               
               <div className="bg-muted/20 rounded-xl p-4 backdrop-blur-sm border border-primary/20 tech-border">
