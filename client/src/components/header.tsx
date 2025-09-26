@@ -87,24 +87,6 @@ export default function Header() {
                 </div>
                 <span className="text-sm font-bold text-gray-900 dark:text-gray-100">4.85</span>
               </a>
-              <button 
-                onClick={() => scrollToSection('validate')}
-                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
-              >
-                🚀 Validate Idea
-              </button>
-              <button 
-                onClick={() => scrollToSection('resources')}
-                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
-              >
-                🛠️ Resources
-              </button>
-              <button 
-                onClick={() => scrollToSection('simulate')}
-                className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
-              >
-                💬 Customer Simulation
-              </button>
               <a 
                 href="/about"
                 className="text-foreground/80 hover:text-primary px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary/10 hover:scale-105"
@@ -146,24 +128,6 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-            <button 
-              onClick={() => scrollToSection('validate')}
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            >
-              Validate Your Idea
-            </button>
-            <button 
-              onClick={() => scrollToSection('resources')}
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            >
-              Startup Resources
-            </button>
-            <button 
-              onClick={() => scrollToSection('simulate')}
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            >
-              Customer Simulation
-            </button>
             <a 
               href="/about"
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"

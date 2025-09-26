@@ -23,12 +23,6 @@ export default function Hero({ onProductClick }: HeroProps) {
     featured: true
   };
 
-  const scrollToValidation = () => {
-    const element = document.getElementById('products');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const handleFeasibilityClick = () => {
     // Track the click for analytics
@@ -191,15 +185,6 @@ export default function Hero({ onProductClick }: HeroProps) {
 
 
 
-              <Button 
-                onClick={scrollToValidation}
-                size="lg"
-                className="inline-flex items-center px-12 py-6 text-xl font-bold rounded-lg tech-glow transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-primary to-green-500 hover:from-green-500 hover:to-primary"
-              >
-                <Shield className="mr-3 w-6 h-6" />
-                Enterprise Research Suite
-                <ArrowRight className="ml-3 w-6 h-6" />
-              </Button>
             </div>
 
             {/* Right Side - Featured Product Card */}
@@ -301,7 +286,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                       PDF + PowerPoint + Public Link • Real-time agent collaboration • SOC2 & GDPR compliant
                     </p>
                     <p className="text-xs text-center font-semibold text-blue-600 dark:text-blue-400">
-                      Save $3,000 & 92 HOURS vs analysts • Access to all 100+ apps
+                      ~$15 · 25M 54S vs ~$3,000 · 92 HOURS analysts • Access to all 100+ apps
                     </p>
                   </div>
                 </div>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
-import ProductsGrid from "@/components/products-grid";
 import ProductModal from "@/components/product-modal";
 import TestimonialsGrid from "@/components/testimonials-grid";
 import NewsletterSection from "@/components/newsletter-section";
@@ -53,9 +52,6 @@ export default function NewHome() {
 
       {/* Original Hero Section */}
       <Hero onProductClick={handleProductClick} />
-
-      {/* Products Grid */}
-      <ProductsGrid onProductClick={handleProductClick} />
 
       {/* Section Divider */}
       <div className="py-12 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
