@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import { 
   FileText, 
   Clock, 
@@ -81,6 +83,8 @@ export default function ReportPage() {
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const { toast } = useToast();
 
   // Mock data based on the sample report - in production this would come from FifthRow API
   useEffect(() => {
@@ -212,6 +216,28 @@ export default function ReportPage() {
     setExpandedSections(newExpanded);
   };
 
+  const handleShareReport = () => {
+    setShareDialogOpen(true);
+  };
+
+  const copyReportLink = async () => {
+    const reportUrl = window.location.href;
+    try {
+      await navigator.clipboard.writeText(reportUrl);
+      toast({
+        title: "Link copied!",
+        description: "Report link has been copied to your clipboard.",
+      });
+      setShareDialogOpen(false);
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Please copy the link manually.",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -266,10 +292,32 @@ export default function ReportPage() {
                   <Download className="w-4 h-4 mr-2" />
                   Download PDF
                 </Button>
-                <Button variant="outline" size="sm" data-testid="button-share-report">
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share
-                </Button>
+                <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="sm" data-testid="button-share-report" onClick={handleShareReport}>
+                      <Share2 className="w-4 h-4 mr-2" />
+                      Share
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent data-testid="share-dialog">
+                    <DialogHeader>
+                      <DialogTitle>Share Report</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <p className="text-sm text-muted-foreground">
+                        Share this research report with your team or save the link for later.
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex-1 p-3 bg-muted rounded-md text-sm font-mono break-all">
+                          {window.location.href}
+                        </div>
+                        <Button onClick={copyReportLink} data-testid="button-copy-link">
+                          Copy Link
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </CardHeader>
