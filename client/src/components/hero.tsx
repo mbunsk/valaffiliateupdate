@@ -130,9 +130,7 @@ export default function Hero({ onProductClick }: HeroProps) {
           </div>
           
           {/* Spacing */}
-          <div className="mb-12"></div>
-          <div className="mb-12"></div>
-          <div className="mb-12"></div>
+          <div className="mb-8 sm:mb-10 lg:mb-12"></div>
           
           {/* Left/Right Split Layout */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-6 items-start max-w-7xl mx-auto">
