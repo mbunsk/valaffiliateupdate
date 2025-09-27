@@ -127,13 +127,31 @@ export default function Header() {
       {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 backdrop-blur-sm">
             <a 
               href="/about"
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors duration-200"
             >
-              About
+              💡 About
             </a>
+            
+            {/* Theme Toggle for Mobile */}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary flex items-center px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors duration-200"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun className="h-5 w-5 mr-2" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="h-5 w-5 mr-2" />
+                  Dark Mode
+                </>
+              )}
+            </button>
           </div>
         </div>
       )}
