@@ -683,20 +683,20 @@ export default function ReportPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Report Header */}
-        <Card className="mb-8 border-2 border-primary/20 shadow-lg">
+        <Card className="mb-6 sm:mb-8 border-2 border-primary/20 shadow-lg">
           <CardHeader className="pb-4">
-            <div className="flex items-start justify-between">
-              <div className="space-y-2">
+            <div className="flex flex-col lg:flex-row items-start justify-between space-y-4 lg:space-y-0">
+              <div className="space-y-2 flex-1">
                 <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                   <FileText className="w-4 h-4 mr-2" />
                   Research Report
                 </Badge>
-                <CardTitle className="text-3xl font-bold text-foreground">
+                <CardTitle className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
                   {reportData.title}
                 </CardTitle>
-                <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-muted-foreground">
                   <div className="flex items-center space-x-2">
                     <Clock className="w-4 h-4" />
                     <span>{reportData.duration}</span>
@@ -707,58 +707,59 @@ export default function ReportPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex space-x-2">
-                <Button variant="outline" size="sm" data-testid="button-download-report">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
+                <Button variant="outline" size="sm" data-testid="button-download-report" className="hidden sm:flex">
                   <Download className="w-4 h-4 mr-2" />
                   Download PDF
                 </Button>
-                <Button variant="outline" size="sm" data-testid="button-share-report">
+                <Button variant="outline" size="sm" data-testid="button-share-report" className="w-full sm:w-auto">
                   <Share2 className="w-4 h-4 mr-2" />
-                  Share
+                  <span className="sm:hidden">Share Report</span>
+                  <span className="hidden sm:inline">Share</span>
                 </Button>
               </div>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               {reportData.answers}
             </p>
           </CardContent>
         </Card>
 
         {/* Report Sections */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {reportData.sections.map((section) => (
             <Card key={section.id} className="border border-muted shadow-sm">
               <CardHeader 
-                className="cursor-pointer hover:bg-muted/50 transition-colors"
+                className="cursor-pointer hover:bg-muted/50 transition-colors touch-manipulation"
                 onClick={() => toggleSection(section.id)}
               >
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-semibold flex items-center">
-                    {section.id === 'target-customers' && <Users className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'market-trends' && <TrendingUp className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'regulatory-impact' && <Shield className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'strategic-implications' && <Target className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'ai-marketplace-mindmap' && <Globe className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'profitability-forecast' && <BarChart3 className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'technical-feasibility' && <Zap className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'risk-analysis' && <Shield className="w-5 h-5 mr-3 text-primary" />}
-                    {section.id === 'final-recommendations' && <Lightbulb className="w-5 h-5 mr-3 text-primary" />}
-                    {section.title}
+                  <CardTitle className="text-lg sm:text-xl font-semibold flex items-center leading-tight">
+                    {section.id === 'target-customers' && <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'market-trends' && <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'regulatory-impact' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'strategic-implications' && <Target className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'ai-marketplace-mindmap' && <Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'profitability-forecast' && <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'technical-feasibility' && <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'risk-analysis' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {section.id === 'final-recommendations' && <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    <span className="pr-2">{section.title}</span>
                   </CardTitle>
                   {expandedSections.has(section.id) ? 
-                    <ChevronUp className="w-5 h-5 text-muted-foreground" /> : 
-                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0" /> : 
+                    <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                   }
                 </div>
               </CardHeader>
               
               {expandedSections.has(section.id) && (
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 sm:space-y-6">
                   <div className="prose prose-sm max-w-none dark:prose-invert">
                     {section.content.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="text-muted-foreground leading-relaxed mb-4">
+                      <p key={index} className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
                         {paragraph.split('\n').map((line, lineIndex) => (
                           <span key={lineIndex}>
                             {line}
@@ -771,11 +772,11 @@ export default function ReportPage() {
                   
                   {/* Subsections */}
                   {section.subsections?.map((subsection, subsectionIndex) => (
-                    <div key={subsectionIndex} className="space-y-3">
-                      <h4 className="font-semibold text-lg text-foreground">{subsection.title}</h4>
+                    <div key={subsectionIndex} className="space-y-2 sm:space-y-3">
+                      <h4 className="font-semibold text-base sm:text-lg text-foreground leading-tight">{subsection.title}</h4>
                       <div className="prose prose-sm max-w-none dark:prose-invert">
                         {subsection.content.split('\n\n').map((paragraph, paragraphIndex) => (
-                          <p key={paragraphIndex} className="text-muted-foreground leading-relaxed mb-4">
+                          <p key={paragraphIndex} className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
                             {paragraph.split('\n').map((line, lineIndex) => (
                               <span key={lineIndex}>
                                 {line}
@@ -790,14 +791,14 @@ export default function ReportPage() {
                   
                   {/* Tables */}
                   {section.tables?.map((table, tableIndex) => (
-                    <div key={tableIndex} className="space-y-3">
-                      <h4 className="font-semibold text-lg text-foreground">{table.title}</h4>
-                      <div className="overflow-x-auto">
-                        <table className="w-full border border-muted rounded-lg overflow-hidden">
+                    <div key={tableIndex} className="space-y-2 sm:space-y-3">
+                      <h4 className="font-semibold text-base sm:text-lg text-foreground leading-tight">{table.title}</h4>
+                      <div className="overflow-x-auto -mx-4 sm:mx-0">
+                        <table className="w-full border border-muted rounded-lg overflow-hidden min-w-full">
                           <thead className="bg-muted/50">
                             <tr>
                               {table.headers.map((header, headerIndex) => (
-                                <th key={headerIndex} className="px-4 py-3 text-left font-semibold text-sm text-foreground">
+                                <th key={headerIndex} className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-xs sm:text-sm text-foreground min-w-[120px]">
                                   {header}
                                 </th>
                               ))}
@@ -807,16 +808,16 @@ export default function ReportPage() {
                             {table.rows.map((row, rowIndex) => (
                               <tr key={rowIndex} className="border-t border-muted hover:bg-muted/20">
                                 {row.map((cell, cellIndex) => (
-                                  <td key={cellIndex} className="px-4 py-3 text-sm leading-relaxed align-top">
+                                  <td key={cellIndex} className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm leading-relaxed align-top">
                                     {cell.split('\n').map((line, lineIndex) => (
-                                      <div key={lineIndex} className={lineIndex > 0 ? 'mt-2' : ''}>
+                                      <div key={lineIndex} className={lineIndex > 0 ? 'mt-1 sm:mt-2' : ''}>
                                         {line.startsWith('•') ? (
-                                          <div className="flex items-start space-x-2">
-                                            <span className="text-primary mt-1">•</span>
-                                            <span>{line.substring(1).trim()}</span>
+                                          <div className="flex items-start space-x-1 sm:space-x-2">
+                                            <span className="text-primary mt-0.5 sm:mt-1 text-xs sm:text-sm">•</span>
+                                            <span className="text-xs sm:text-sm">{line.substring(1).trim()}</span>
                                           </div>
                                         ) : (
-                                          line
+                                          <span className="text-xs sm:text-sm">{line}</span>
                                         )}
                                       </div>
                                     ))}
@@ -832,20 +833,20 @@ export default function ReportPage() {
 
                   {/* Mindmap */}
                   {section.mindmap && (
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-lg text-center text-foreground">{section.mindmap.centralTopic}</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="space-y-3 sm:space-y-4">
+                      <h4 className="font-semibold text-base sm:text-lg text-center text-foreground leading-tight">{section.mindmap.centralTopic}</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                         {section.mindmap.branches.map((branch, branchIndex) => (
                           <Card key={branchIndex} className="border border-primary/20">
-                            <CardHeader className="pb-2">
-                              <CardTitle className="text-sm font-semibold text-primary">{branch.title}</CardTitle>
+                            <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                              <CardTitle className="text-sm sm:text-base font-semibold text-primary leading-tight">{branch.title}</CardTitle>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                               <ul className="space-y-1">
                                 {branch.items.map((item, itemIndex) => (
-                                  <li key={itemIndex} className="text-sm text-muted-foreground flex items-start">
-                                    <span className="text-primary mr-2">•</span>
-                                    {item}
+                                  <li key={itemIndex} className="text-xs sm:text-sm text-muted-foreground flex items-start">
+                                    <span className="text-primary mr-2 mt-0.5">•</span>
+                                    <span className="leading-relaxed">{item}</span>
                                   </li>
                                 ))}
                               </ul>
