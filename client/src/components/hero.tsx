@@ -266,7 +266,7 @@ export default function Hero({ onProductClick }: HeroProps) {
                       PDF + PowerPoint + Public Link • Real-time agent collaboration • SOC2 & GDPR compliant
                     </p>
                     <p className="text-xs text-center font-semibold text-blue-600 dark:text-blue-400 leading-relaxed">
-                      ~$49 · 25M 54S vs ~$3,000 · 92 HOURS analysts • Access to all 100+ apps
+                      
                     </p>
                   </div>
                 </div>
