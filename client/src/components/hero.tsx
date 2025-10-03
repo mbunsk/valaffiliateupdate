@@ -25,13 +25,13 @@ export default function Hero({ onProductClick }: HeroProps) {
   };
   const [idea, setIdea] = useState("");
   const [targetMarket, setTargetMarket] = useState("");
-  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-    // const REDIRECT_URI = "http://localhost:5002/log";
-  const REDIRECT_URI = process.env.BASE_URL + "/log";
+  const GOOGLE_CLIENT_ID = "224526045847-3h28lq5sdmpl3oa06qo7mhmgtfbve4km.apps.googleusercontent.com";
+  // const REDIRECT_URI = "http://localhost:5002/log";
+  const REDIRECT_URI = "https://offer-validatorai.onrender.com/log";
   const email = localStorage.getItem('email');
   // const BASE_URL = "https://validator-site-mbunsk.replit.app";
 
-
+  const BASE_URL = "https://offer-validatorai.onrender.com";
   
 
   
