@@ -68,9 +68,9 @@ const start_flow: React.FC = () => {
         const flowResponse = data as StartFlowResponse;
         
         // Get execution ID and redirect
-        // const executionId = flowResponse.flow_execution_id;
+        const executionId = flowResponse.flow_execution_id;
 
-        const executionId = "1fcda3d7-f470-4e8f-9c9a-47a48543b5b0";
+        //const executionId = "1fcda3d7-f470-4e8f-9c9a-47a48543b5b0";
         // const redirectUrl = "http://localhost:5002/report";
 
         const redirectUrl = `${BASE_URL}/report`;
