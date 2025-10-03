@@ -15,7 +15,7 @@ export default function Hero({ onProductClick }: HeroProps) {
     name: "New Product Feasibility Study",
     title: "Feasibility Analysis & Market Positioning",
     description: "Comprehensive feasibility analysis and market positioning with real-time agent collaboration. Professional-grade business intelligence for strategic decision-making.",
-    price: 49,
+    price: 25,
     originalPrice: 3000,
     agents: 1, // Multiple agents as specified by FifthRow
     sources: 1500, // Using credits instead of sources count
@@ -26,12 +26,12 @@ export default function Hero({ onProductClick }: HeroProps) {
   const [idea, setIdea] = useState("");
   const [targetMarket, setTargetMarket] = useState("");
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "499059041818-o51j87um0t9objnq9toosijeovjph3th.apps.googleusercontent.com";
-  // const REDIRECT_URI = "http://localhost:5002/log";
-  const REDIRECT_URI = "https://offer-validatorai.onrender.com/log";
+  
+  const REDIRECT_URI = "https://offer.validatorai.com/log";
   const email = localStorage.getItem('email');
   // const BASE_URL = "https://validator-site-mbunsk.replit.app";
 
-  const BASE_URL = "https://offer-validatorai.onrender.com";
+  const BASE_URL = "https://offer.validatorai.com";
   
 
   
@@ -306,7 +306,7 @@ console.log(targetMarket);
                     data-testid="button-start-feasibility"
                   >
                     <Rocket className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-                    Start Feasibility Study - $49
+                    Start Feasibility Study - $25
                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3" />
                   </Button>
 
