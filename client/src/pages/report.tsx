@@ -222,7 +222,7 @@ export default function ReportPage() {
 
       // ${BASE_URL }/api/v1/flow-executions/{$execution_id};
 
-  const POLL_INTERVAL_SECONDS =  500;
+  const POLL_INTERVAL_SECONDS =  6000;
   
        
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
