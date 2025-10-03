@@ -13,9 +13,14 @@ import ReportPage from "@/pages/report";
 import NotFound from "@/pages/not-found";
 import AdminPage from "@/pages/admin";
 import ValidationStrategy from "@/pages/validation-strategy";
+import Api from "./Api";
+import start_flow from "./pages/success";
+import Log from "./Log";
+
 
 function Router() {
   return (
+   
     <Switch>
       <Route path="/" component={NewHome} />
       <Route path="/old" component={Home} />
@@ -25,8 +30,14 @@ function Router() {
       <Route path="/report/:reportId?" component={ReportPage} />
       <Route path="/validation-strategy" component={ValidationStrategy} />
       <Route path="/aron" component={AdminPage} />
+      <Route path="/test" component={Api} />
+      <Route path="/success/:session_id" component={start_flow} />
+      <Route path="/success" component={start_flow} />
+      <Route path="/log" component={Log} />
+      
       <Route component={NotFound} />
     </Switch>
+   
   );
 }
 

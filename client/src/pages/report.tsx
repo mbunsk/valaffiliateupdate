@@ -1,5 +1,5 @@
 import { useParams } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, JSX, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import {
   Target,
   Zap
 } from "lucide-react";
+import { c } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 
 interface ReportData {
   title: string;
@@ -77,12 +78,39 @@ interface MindmapBranch {
   items: string[];
 }
 
+interface ApiResponse {
+        id?: string;
+        processing_status?: string;
+        [key: string]: any;
+        
+        }  
+
 export default function ReportPage() {
+  const { reportId } = useParams();
   const params = useParams();
   const [reportData, setReportData] = useState<ReportData | null>(null);
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  
+  const [expandedSections, setExpandedSections] =useState<Set<any>>(new Set());
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+
+  
+      const [finalResult, setFinalResult] = useState<ApiResponse | any>(null);
+      const [lines, setLines] = useState<string[]>([]);
+     const [results, setResults] = useState<ApiResponse[]>([]);
+  const BASE_URL = "https://plan.validatorai.com/feasibility/api.php";
+      const FLOW_TEMPLATE_ID = "bae9d61f-176f-4b5b-9a66-6c700e9f8604";
+      const API_KEY = "oKEkzm4m8x65RL3GgFp1ZEuRuqtNEFTZdwa3OsLp3j8Pp-nK355eQ2DMhgJ3-KWZfAfcJ4q-4wD9iPnYdPsmwQ"; // <-- set your API key here
+  
+      // const BASE_URL = "https://api-public.fifthrow.com";
+      //   ${BASE_URL }/api/v1/flow-executions/flow-templates/{$FLOW_TEMPLATE_ID};
+
+      // ${BASE_URL }/api/v1/flow-executions/{$execution_id};
+
+  const POLL_INTERVAL_SECONDS =  500;
+  
+       
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   // Mock data based on the sample report - in production this would come from FifthRow API
   useEffect(() => {
@@ -648,6 +676,90 @@ export default function ReportPage() {
     }, 1000);
   }, [params]);
 
+  
+
+  
+      const pollCount = useRef(0);
+
+     
+
+      const pollUntilComplete = async(execution_id : string) => {
+        
+        const MAX_POLLS = 8;
+  let lastData: any = null;
+    
+          while(true) {
+            setLoading(true);
+            try {
+              
+                  const response = await fetch(`${BASE_URL}`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json',
+                    },
+                    credentials: 'include', // crucial for PHP session
+                    body: JSON.stringify({ execution_id: execution_id })
+                  });
+
+                  const data = await response.json();
+                  console.log('Data from PHP:', data);
+                  
+                  setResults(prev => [...prev, data]);
+
+                  lastData = data;
+        pollCount.current++;
+                  console.log("Connection count: ",  pollCount.current);
+  
+  
+              const status = data.processing_status;  
+  
+              console.log(status);
+                 setLines([`Status: ${status}`]);
+                  
+  
+                  if (status === 'finished' || status === 'failed') {
+                    setLoading(false);
+                    setFinalResult(lastData);
+                    return data;
+                  
+                      
+                  }
+
+            
+          } catch (error) {
+              console.log(error);
+              console.warn('JSON parse error:', error);
+             
+              
+          }
+      await sleep(POLL_INTERVAL_SECONDS);
+        }
+    }
+    
+  
+      useEffect(() => {
+          const runFlow = async () => {
+              const execution_id = reportId;
+              if(!execution_id) return;
+              const result = await pollUntilComplete(execution_id);
+          setFinalResult(result);
+          };
+  
+        
+  
+          runFlow();
+          }, []);
+  
+         
+          
+          console.log(results);
+          console.log(finalResult);
+         
+         
+          
+    
+
   const toggleSection = (sectionId: string) => {
     const newExpanded = new Set(expandedSections);
     if (newExpanded.has(sectionId)) {
@@ -658,18 +770,19 @@ export default function ReportPage() {
     setExpandedSections(newExpanded);
   };
 
-  if (loading) {
+  if (lines && lines[lines.length - 1] != "Status: finished") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="text-lg text-muted-foreground">Loading your research report...</p>
+          <p className="text-lg text-muted-foreground">{lines}</p>
         </div>
       </div>
     );
-  }
+  } 
 
-  if (!reportData) {
+  if (!reportId) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
@@ -681,10 +794,12 @@ export default function ReportPage() {
     );
   }
 
+  if (finalResult) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Report Header */}
+        
         <Card className="mb-6 sm:mb-8 border-2 border-primary/20 shadow-lg">
           <CardHeader className="pb-4">
             <div className="flex flex-col lg:flex-row items-start justify-between space-y-4 lg:space-y-0">
@@ -694,17 +809,10 @@ export default function ReportPage() {
                   Research Report
                 </Badge>
                 <CardTitle className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
-                  {reportData.title}
+                  {finalResult.title}
                 </CardTitle>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-muted-foreground">
-                  <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{reportData.duration}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Database className="w-4 h-4" />
-                    <span>{reportData.sourceCount} sources</span>
-                  </div>
+                  
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
@@ -722,47 +830,50 @@ export default function ReportPage() {
           </CardHeader>
           <CardContent>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              {reportData.answers}
+              {finalResult.description}
             </p>
           </CardContent>
         </Card>
 
         {/* Report Sections */}
         <div className="space-y-4 sm:space-y-6">
-          {reportData.sections.map((section) => (
-            <Card key={section.id} className="border border-muted shadow-sm">
+          {finalResult.flow_execution_steps.map((flow: { id: Key | null | any; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; raw_output: { split: (arg0: string) => { split: (arg0: string) => { (): any; new(): any; map: { (arg0: (line: any, lineIndex: any) => JSX.Element): string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; new(): any; }; length: number; }; }[]; }; }) => (
+            <Card key={flow?.id} className="border border-muted shadow-sm">
               <CardHeader 
                 className="cursor-pointer hover:bg-muted/50 transition-colors touch-manipulation"
-                onClick={() => toggleSection(section.id)}
+                onClick={() => toggleSection(flow?.id)}
               >
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg sm:text-xl font-semibold flex items-center leading-tight">
-                    {section.id === 'target-customers' && <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'market-trends' && <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'regulatory-impact' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'strategic-implications' && <Target className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'ai-marketplace-mindmap' && <Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'profitability-forecast' && <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'technical-feasibility' && <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'risk-analysis' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    {section.id === 'final-recommendations' && <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
-                    <span className="pr-2">{section.title}</span>
+                    {flow.id === 'target-customers' && <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'market-trends' && <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'regulatory-impact' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'strategic-implications' && <Target className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'ai-marketplace-mindmap' && <Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'profitability-forecast' && <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'technical-feasibility' && <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'risk-analysis' && <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    {flow.id === 'final-recommendations' && <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary flex-shrink-0" />}
+                    <span className="pr-2">{flow.title}</span>
                   </CardTitle>
-                  {expandedSections.has(section.id) ? 
+                  {expandedSections.has(flow.id) ? 
                     <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0" /> : 
                     <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                   }
                 </div>
               </CardHeader>
               
-              {expandedSections.has(section.id) && (
+              {expandedSections.has(flow.id) && (
                 <CardContent className="space-y-4 sm:space-y-6">
                   <div className="prose prose-sm max-w-none dark:prose-invert">
-                    {section.content.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                    {flow.raw_output.split('\n\n').map((paragraph: { split: (arg0: string) => { (): any; new(): any; map: { (arg0: (line: any, lineIndex: any) => JSX.Element): string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; new(): any; }; length: number; }; }, index: Key | null | undefined) => (
+                      <p key={index} className="text-white leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base break-words">
                         {paragraph.split('\n').map((line, lineIndex) => (
                           <span key={lineIndex}>
-                            {line}
+                             {line
+                              .replace(/[*#]/g, '')
+                              .replace(/\n\n\n\|/g, "<table>")
+                              .replace(/\|\n\n\n/g, "</table>")}
                             {lineIndex < paragraph.split('\n').length - 1 && <br />}
                           </span>
                         ))}
@@ -770,168 +881,15 @@ export default function ReportPage() {
                     ))}
                   </div>
                   
-                  {/* Subsections */}
-                  {section.subsections?.map((subsection, subsectionIndex) => (
-                    <div key={subsectionIndex} className="space-y-2 sm:space-y-3">
-                      <h4 className="font-semibold text-base sm:text-lg text-foreground leading-tight">{subsection.title}</h4>
-                      <div className="prose prose-sm max-w-none dark:prose-invert">
-                        {subsection.content.split('\n\n').map((paragraph, paragraphIndex) => (
-                          <p key={paragraphIndex} className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
-                            {paragraph.split('\n').map((line, lineIndex) => (
-                              <span key={lineIndex}>
-                                {line}
-                                {lineIndex < paragraph.split('\n').length - 1 && <br />}
-                              </span>
-                            ))}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                  
-                  {/* Tables */}
-                  {section.tables?.map((table, tableIndex) => (
-                    <div key={tableIndex} className="space-y-2 sm:space-y-3">
-                      <h4 className="font-semibold text-base sm:text-lg text-foreground leading-tight">{table.title}</h4>
-                      <div className="overflow-x-auto -mx-4 sm:mx-0">
-                        <table className="w-full border border-muted rounded-lg overflow-hidden min-w-full">
-                          <thead className="bg-muted/50">
-                            <tr>
-                              {table.headers.map((header, headerIndex) => (
-                                <th key={headerIndex} className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-xs sm:text-sm text-foreground min-w-[120px]">
-                                  {header}
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {table.rows.map((row, rowIndex) => (
-                              <tr key={rowIndex} className="border-t border-muted hover:bg-muted/20">
-                                {row.map((cell, cellIndex) => (
-                                  <td key={cellIndex} className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm leading-relaxed align-top">
-                                    {cell.split('\n').map((line, lineIndex) => (
-                                      <div key={lineIndex} className={lineIndex > 0 ? 'mt-1 sm:mt-2' : ''}>
-                                        {line.startsWith('•') ? (
-                                          <div className="flex items-start space-x-1 sm:space-x-2">
-                                            <span className="text-primary mt-0.5 sm:mt-1 text-xs sm:text-sm">•</span>
-                                            <span className="text-xs sm:text-sm">{line.substring(1).trim()}</span>
-                                          </div>
-                                        ) : (
-                                          <span className="text-xs sm:text-sm">{line}</span>
-                                        )}
-                                      </div>
-                                    ))}
-                                  </td>
-                                ))}
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  ))}
+                 
+        </CardContent>
 
-                  {/* Mindmap */}
-                  {section.mindmap && (
-                    <div className="space-y-3 sm:space-y-4">
-                      <h4 className="font-semibold text-base sm:text-lg text-center text-foreground leading-tight">{section.mindmap.centralTopic}</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                        {section.mindmap.branches.map((branch, branchIndex) => (
-                          <Card key={branchIndex} className="border border-primary/20">
-                            <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
-                              <CardTitle className="text-sm sm:text-base font-semibold text-primary leading-tight">{branch.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
-                              <ul className="space-y-1">
-                                {branch.items.map((item, itemIndex) => (
-                                  <li key={itemIndex} className="text-xs sm:text-sm text-muted-foreground flex items-start">
-                                    <span className="text-primary mr-2 mt-0.5">•</span>
-                                    <span className="leading-relaxed">{item}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              )}
-            </Card>
+        )}
+        </Card>
           ))}
         </div>
-
-        {/* Key Industry Sources */}
-        <Card className="mt-8 border border-muted shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold flex items-center">
-              <Database className="w-5 h-5 mr-3 text-primary" />
-              Key Industry Sources
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {reportData.sources.map((source, index) => (
-                <div key={index} className="flex items-start space-x-3 p-3 rounded-lg border border-muted/50 hover:border-primary/50 transition-colors">
-                  <ExternalLink className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h5 className="font-medium text-sm text-foreground">{source.title}</h5>
-                    {source.description && (
-                      <p className="text-xs text-muted-foreground mt-1">{source.description}</p>
-                    )}
-                    <a 
-                      href={source.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-xs text-primary hover:underline mt-1 inline-block"
-                      data-testid={`link-source-${index}`}
-                    >
-                      View Source
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Additional Questions */}
-        <Card className="mt-8 border border-muted shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold flex items-center">
-              <Lightbulb className="w-5 h-5 mr-3 text-primary" />
-              Additional Research Questions
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {reportData.qaQuestions.map((question, index) => (
-                <div key={index} className="p-4 rounded-lg border border-muted/50 hover:border-primary/50 transition-colors">
-                  <p className="text-sm font-medium text-foreground mb-2">{question.question}</p>
-                  <div className="flex items-center space-x-4 text-xs text-muted-foreground">
-                    {question.duration && (
-                      <span className="flex items-center space-x-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{question.duration}</span>
-                      </span>
-                    )}
-                    {question.sourceCount && (
-                      <span className="flex items-center space-x-1">
-                        <Database className="w-3 h-3" />
-                        <span>{question.sourceCount} sources</span>
-                      </span>
-                    )}
-                    <Badge variant={question.isAnswered ? "default" : "secondary"} className="text-xs">
-                      {question.isAnswered ? "Answered" : "Available"}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
+        </div>
+        </div>
+  )
+}
 }

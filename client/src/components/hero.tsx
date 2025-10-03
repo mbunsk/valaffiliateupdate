@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Brain, FileText, Clock, Rocket, Lightbulb, Shield, BarChart3, Globe, Cpu, Building2 } from "lucide-react";
 import { Product } from "@shared/types";
+import { useState } from "react";
 
 interface HeroProps {
   onProductClick?: (product: Product) => void;
@@ -22,22 +23,64 @@ export default function Hero({ onProductClick }: HeroProps) {
     category: "Idea Validation",
     featured: true
   };
+  const [idea, setIdea] = useState("");
+  const [targetMarket, setTargetMarket] = useState("");
+  const GOOGLE_CLIENT_ID = "224526045847-3h28lq5sdmpl3oa06qo7mhmgtfbve4km.apps.googleusercontent.com";
+  // const REDIRECT_URI = "http://localhost:5002/log";
+  const REDIRECT_URI = "https://validator-site-mbunsk.replit.app/log";
+  const email = localStorage.getItem('email');
+  const BASE_URL = "https://validator-site-mbunsk.replit.app";
+  
 
-
+  
+console.log(email);
+console.log(idea);
+console.log(targetMarket);
   const handleFeasibilityClick = () => {
-    // Track the click for analytics
-    fetch('/api/track-product-click', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        product: featuredProduct.id, 
-        location: 'hero'
-      })
-    });
 
-    // Navigate directly to the report page (dev will handle Stripe integration before this)
-    window.location.href = '/report/new-product-feasibility-study';
-  };
+    localStorage.setItem('target_market', targetMarket);
+    localStorage.setItem('idea', idea);
+
+    
+    if(localStorage.getItem('email') && localStorage.getItem('customer_id')) {
+      // window.location.href = 'https://localhost:5002/success';
+      window.location.href = 'https://validator-site-mbunsk.replit.app/success';
+    } else {
+      if(localStorage.getItem('email')) {
+
+        const email = localStorage.getItem('email');
+        if (!email) {
+            alert("Email not found.");
+            return;
+          }
+        const form = document.createElement('form');
+
+        form.method = 'POST';
+        form.action = 'https://plan.validatorai.com/auth/services/stripe/create-checkout-session.php';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'email';
+        input.value = email;
+
+
+        if (!email) return alert("Email not found in localStorage");
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      } else {
+         const scope = encodeURIComponent("email profile");
+          const responseType = "code";
+
+          window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+            REDIRECT_URI
+          )}&response_type=${responseType}&scope=${scope}`;
+        };
+      
+      }
+    };
+  
 
   return (
     <section className="pt-2 pb-12 bg-gradient-to-br from-background via-muted/5 to-background relative overflow-hidden grid-pattern">
@@ -234,6 +277,8 @@ export default function Hero({ onProductClick }: HeroProps) {
                         placeholder="e.g., Maritime Logistics"
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation"
                         rows={1}
+                        onChange={(e) => setTargetMarket(e.target.value)}
+                        value={targetMarket}
                         data-testid="input-target-market"
                       />
                     </div>
@@ -245,6 +290,8 @@ export default function Hero({ onProductClick }: HeroProps) {
                         placeholder="A concept, initiative, or proposal being explored or evaluated"
                         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation"
                         rows={2}
+                        onChange={(e) => setIdea(e.target.value)}
+                        value={idea}
                         data-testid="input-product-idea"
                       />
                     </div>
