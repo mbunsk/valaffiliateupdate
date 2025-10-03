@@ -25,6 +25,8 @@ export default function Hero({ onProductClick }: HeroProps) {
   };
   const [idea, setIdea] = useState("");
   const [targetMarket, setTargetMarket] = useState("");
+  const [targetMarketError, setTargetMarketError] = useState(false);
+  const [ideaError, setIdeaError] = useState(false);
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "499059041818-o51j87um0t9objnq9toosijeovjph3th.apps.googleusercontent.com";
   
   const REDIRECT_URI = "https://offer.validatorai.com/log";
@@ -39,7 +41,27 @@ console.log(email);
 console.log(idea);
 console.log(targetMarket);
   const handleFeasibilityClick = () => {
-
+    // Reset error states
+    setTargetMarketError(false);
+    setIdeaError(false);
+    
+    // Validate required fields
+    let hasError = false;
+    
+    if (!targetMarket.trim()) {
+      setTargetMarketError(true);
+      hasError = true;
+    }
+    
+    if (!idea.trim()) {
+      setIdeaError(true);
+      hasError = true;
+    }
+    
+    if (hasError) {
+      return;
+    }
+    
     localStorage.setItem('target_market', targetMarket);
     localStorage.setItem('idea', idea);
 
@@ -277,9 +299,18 @@ console.log(targetMarket);
                       </label>
                       <textarea 
                         placeholder="e.g., Maritime Logistics"
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation"
+                        className={`w-full p-3 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation ${
+                          targetMarketError 
+                            ? 'border-red-500 focus:border-red-500' 
+                            : 'border-gray-300 dark:border-gray-600 focus:border-blue-500'
+                        }`}
                         rows={1}
-                        onChange={(e) => setTargetMarket(e.target.value)}
+                        onChange={(e) => {
+                          setTargetMarket(e.target.value);
+                          if (targetMarketError && e.target.value.trim()) {
+                            setTargetMarketError(false);
+                          }
+                        }}
                         value={targetMarket}
                         data-testid="input-target-market" required
                       />
@@ -290,9 +321,18 @@ console.log(targetMarket);
                       </label>
                       <textarea 
                         placeholder="A concept, initiative, or proposal being explored or evaluated"
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation"
+                        className={`w-full p-3 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none text-sm touch-manipulation ${
+                          ideaError 
+                            ? 'border-red-500 focus:border-red-500' 
+                            : 'border-gray-300 dark:border-gray-600 focus:border-blue-500'
+                        }`}
                         rows={2}
-                        onChange={(e) => setIdea(e.target.value)}
+                        onChange={(e) => {
+                          setIdea(e.target.value);
+                          if (ideaError && e.target.value.trim()) {
+                            setIdeaError(false);
+                          }
+                        }}
                         value={idea}
                         data-testid="input-product-idea" required
                       />
