@@ -117,12 +117,12 @@ const convertMarkdownTables = (content: string): string => {
     const dataCells = dataRows.map(row => parseTableRow(row));
     
     // Generate HTML table
-    let tableHtml = '<div class="overflow-x-auto my-4"><table class="table-auto border-collapse border border-white bg-black text-white w-full">';
+    let tableHtml = '<div class="overflow-x-auto my-4"><table class="table-auto border-collapse bg-black text-white w-full">';
     
     // Header row
-    tableHtml += '<thead className="bg-black text-white"><tr class="bg-black text-white">';
+    tableHtml += '<thead className="bg-black text-white border border-gray"><tr class="bg-black text-white">';
     headerCells.forEach(cell => {
-      tableHtml += `<th class="align-middle text-center border border-gray-300 px-4 py-2 text-left font-semibold text-base sm:text-lg">${formatTableCell(cell)}</th>`;
+      tableHtml += `<th class="align-middle text-center  px-4 py-2 text-left font-semibold text-base sm:text-m">${formatTableCell(cell)}</th>`;
     });
     tableHtml += '</tr></thead>';
     
@@ -132,7 +132,7 @@ const convertMarkdownTables = (content: string): string => {
       const rowClass = 'bg-black';
       tableHtml += `<tr class="${rowClass} bg-black text-white">`;
       row.forEach(cell => {
-        tableHtml += `<td class=" text-base sm:text-lg  leading-relaxed border border-gray-300 px-4 py-2">${formatTableCell(cell)}</td>`;
+        tableHtml += `<td class=" text-base sm:text-sm  leading-relaxed  px-4 py-2">${formatTableCell(cell)}</td>`;
       });
       tableHtml += '</tr>';
     });
@@ -191,7 +191,8 @@ const parseMarkdownContent = (content: string): string => {
     .replace(/^\- (.*$)/gim, '<li class="ml-4">$1</li>')
     .replace(/^(\d+)\. (.*$)/gim, '<li class="ml-4">$2</li>')
     // Line breaks
-    .replace(/\n/g, '<br>');
+    .replace(/\n/g, '<br>')
+    .replace(/###/g, '');
   
   // Wrap lists in ul tags
   html = html.replace(/(<li class="ml-4">.*<\/li>)/gs, '<ul class="list-disc ml-6 mb-4">$1</ul>');
@@ -416,7 +417,7 @@ export default function ReportPage() {
               {expandedSections.has(flow.id) && (
                 <CardContent className="space-y-4 sm:space-y-6">
                   <div 
-                    className="prose prose-sm dark:prose-invert text-white text-base sm:text-lg leading-relaxed  max-w-4xl  px-[1px]"
+                    className="report-div prose prose-sm dark:prose-invert text-white text-base sm:text-s leading-relaxed  max-w-4xl  px-[1px]"
                     dangerouslySetInnerHTML={{ 
                       __html: parseMarkdownContent(flow.raw_output) 
                     }}
