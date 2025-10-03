@@ -35,9 +35,9 @@ const start_flow: React.FC = () => {
       try {
         // Hardcoded payload
         const hardcodedPayload = {
-          target_market: 'Maritime Logistics',
-          product_idea: 'An AI-powered ETA & route optimizer that ingests weather, port congestion, and fuel cost data to recommend routes and schedules — reduces delays and bunker costs while improving on-time delivery.',
-          email: 'test@example.com'
+          target_market: localStorage.getItem('target_market'),
+          product_idea: localStorage.getItem('idea'),
+          email: localStorage.getItem('email')
         };
 
         // const payload = {
