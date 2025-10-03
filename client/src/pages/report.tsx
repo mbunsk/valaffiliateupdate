@@ -85,6 +85,120 @@ interface ApiResponse {
         
         }  
 
+// Table conversion functions
+const convertMarkdownTables = (content: string): string => {
+  // Regular expression to match markdown tables
+  const tableRegex = /(\|.*\|[\r\n]+)+(\|[\s\-\|]+[\r\n]+)+(\|.*\|[\r\n]*)+/g;
+  
+  return content.replace(tableRegex, (match) => {
+    const lines = match.trim().split('\n').filter(line => line.trim());
+    
+    if (lines.length < 2) return match; // Need at least header and separator
+    
+    // Find separator line (contains only |, -, and spaces)
+    let separatorIndex = -1;
+    for (let i = 0; i < lines.length; i++) {
+      if (/^\|[\s\-\|]+\|?$/.test(lines[i].trim())) {
+        separatorIndex = i;
+        break;
+      }
+    }
+    
+    if (separatorIndex === -1) return match; // No valid separator found
+    
+    // Extract header and data rows
+    const headerRow = lines[0];
+    const dataRows = lines.slice(separatorIndex + 1);
+    
+    // Parse header
+    const headerCells = parseTableRow(headerRow);
+    
+    // Parse data rows
+    const dataCells = dataRows.map(row => parseTableRow(row));
+    
+    // Generate HTML table
+    let tableHtml = '<div class="overflow-x-auto my-4"><table class="table-auto border-collapse border border-white bg-black text-white w-full">';
+    
+    // Header row
+    tableHtml += '<thead className="bg-black text-white"><tr class="bg-black text-white">';
+    headerCells.forEach(cell => {
+      tableHtml += `<th class="align-middle text-center border border-gray-300 px-4 py-2 text-left font-semibold text-base sm:text-lg">${formatTableCell(cell)}</th>`;
+    });
+    tableHtml += '</tr></thead>';
+    
+    // Data rows
+    tableHtml += '<tbody>';
+    dataCells.forEach((row, index) => {
+      const rowClass = 'bg-black';
+      tableHtml += `<tr class="${rowClass} bg-black text-white">`;
+      row.forEach(cell => {
+        tableHtml += `<td class=" text-base sm:text-lg  leading-relaxed border border-gray-300 px-4 py-2">${formatTableCell(cell)}</td>`;
+      });
+      tableHtml += '</tr>';
+    });
+    tableHtml += '</tbody>';
+    
+    tableHtml += '</table></div>';
+    
+    return tableHtml;
+  });
+};
+
+const parseTableRow = (row: string): string[] => {
+  // Split by | and clean up
+  const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell !== '');
+  return cells;
+};
+
+const formatTableCell = (cell: string): string => {
+  if (!cell) return '';
+  
+  // Convert markdown formatting within table cells
+  let formatted = cell
+    // Bold text
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
+    // Italic text
+    .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-600 hover:text-blue-800 underline">$1</a>')
+    // Handle N/A and similar placeholders
+    .replace(/N\/A/g, '<span class="text-gray-500 italic">N/A</span>')
+    // Handle line breaks within cells
+    .replace(/\n/g, '<br>');
+  
+  return formatted;
+};
+
+const parseMarkdownContent = (content: string): string => {
+  if (!content) return '';
+  
+  // First, convert markdown tables to HTML
+  let html = convertMarkdownTables(content);
+  
+  // Then convert other markdown-like content to HTML
+  html = html
+    // Headers
+    .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2 class="text-xl font-semibold mt-6 mb-3">$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mt-8 mb-4">$1</h1>')
+    // Bold text
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
+    // Italic text
+    .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-600 hover:text-blue-800 underline">$1</a>')
+    // Lists
+    .replace(/^\- (.*$)/gim, '<li class="ml-4">$1</li>')
+    .replace(/^(\d+)\. (.*$)/gim, '<li class="ml-4">$2</li>')
+    // Line breaks
+    .replace(/\n/g, '<br>');
+  
+  // Wrap lists in ul tags
+  html = html.replace(/(<li class="ml-4">.*<\/li>)/gs, '<ul class="list-disc ml-6 mb-4">$1</ul>');
+  
+  return html;
+};
+
 export default function ReportPage() {
   const { reportId } = useParams();
   const params = useParams();
@@ -301,23 +415,12 @@ export default function ReportPage() {
               
               {expandedSections.has(flow.id) && (
                 <CardContent className="space-y-4 sm:space-y-6">
-                  <div className="prose prose-sm max-w-none dark:prose-invert">
-                    {flow.raw_output.split('\n\n').map((paragraph: { split: (arg0: string) => { (): any; new(): any; map: { (arg0: (line: any, lineIndex: any) => JSX.Element): string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; new(): any; }; length: number; }; }, index: Key | null | undefined) => (
-                      <p key={index} className="text-white leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base break-words">
-                        {paragraph.split('\n').map((line, lineIndex) => (
-                          <span key={lineIndex}>
-                             {line
-                              .replace(/[*#]/g, '')
-                              .replace(/\n\n\n\|/g, "<table>")
-                              .replace(/\|\n\n\n/g, "</table>")}
-                            {lineIndex < paragraph.split('\n').length - 1 && <br />}
-                          </span>
-                        ))}
-                      </p>
-                    ))}
-                  </div>
-                  
-                 
+                  <div 
+                    className="prose prose-sm dark:prose-invert text-white text-base sm:text-lg leading-relaxed  max-w-4xl  px-[1px]"
+                    dangerouslySetInnerHTML={{ 
+                      __html: parseMarkdownContent(flow.raw_output) 
+                    }}
+                  />
         </CardContent>
 
         )}
