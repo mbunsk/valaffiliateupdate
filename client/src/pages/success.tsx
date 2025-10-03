@@ -28,7 +28,7 @@ const start_flow: React.FC = () => {
   const email = localStorage.getItem('email');
   const target_market = localStorage.getItem('target_market');
   const idea = localStorage.getItem('idea');
-   const BASE_URL = "https://offer-validatorai.onrender.com";
+   const BASE_URL = "https://offer.validatorai.com";
     //   ${BASE_URL }/api/v1/flow-executions/flow-templates/{$FLOW_TEMPLATE_ID};
   useEffect(() => {
     const startFlow = async () => {
