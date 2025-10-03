@@ -389,3 +389,12 @@
   color: hsl(var(--foreground));
   font-weight: 600;
 }
+
+.report-div a{
+  color:white;
+}
+
+.report-div h2{
+  font-weight:bold;
+}
+
