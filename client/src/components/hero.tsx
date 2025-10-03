@@ -281,7 +281,7 @@ console.log(targetMarket);
                         rows={1}
                         onChange={(e) => setTargetMarket(e.target.value)}
                         value={targetMarket}
-                        data-testid="input-target-market"
+                        data-testid="input-target-market" required
                       />
                     </div>
                     <div className="space-y-2">
@@ -294,7 +294,7 @@ console.log(targetMarket);
                         rows={2}
                         onChange={(e) => setIdea(e.target.value)}
                         value={idea}
-                        data-testid="input-product-idea"
+                        data-testid="input-product-idea" required
                       />
                     </div>
                   </div>
