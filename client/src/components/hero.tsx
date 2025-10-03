@@ -29,7 +29,9 @@ export default function Hero({ onProductClick }: HeroProps) {
   // const REDIRECT_URI = "http://localhost:5002/log";
   const REDIRECT_URI = "https://validator-site-mbunsk.replit.app/log";
   const email = localStorage.getItem('email');
-  const BASE_URL = "https://validator-site-mbunsk.replit.app";
+  // const BASE_URL = "https://validator-site-mbunsk.replit.app";
+
+  const BASE_URL = "https://offer-validatorai.onrender.com";
   
 
   
@@ -44,7 +46,7 @@ console.log(targetMarket);
     
     if(localStorage.getItem('email') && localStorage.getItem('customer_id')) {
       // window.location.href = 'https://localhost:5002/success';
-      window.location.href = 'https://validator-site-mbunsk.replit.app/success';
+      window.location.href = `${BASE_URL}/success`;
     } else {
       if(localStorage.getItem('email')) {
 
