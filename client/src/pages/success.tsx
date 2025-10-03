@@ -22,12 +22,13 @@ interface StartFlowError {
 }
 
 const start_flow: React.FC = () => {
-  const BASE_URL = "https://validator-site-mbunsk.replit.app";
+  // const BASE_URL = "https://validator-site-mbunsk.replit.app";
   const FLOW_TEMPLATE_ID = "bae9d61f-176f-4b5b-9a66-6c700e9f8604";
   const API_KEY = "oKEkzm4m8x65RL3GgFp1ZEuRuqtNEFTZdwa3OsLp3j8Pp-nK355eQ2DMhgJ3-KWZfAfcJ4q-4wD9iPnYdPsmwQ";
   const email = localStorage.getItem('email');
   const target_market = localStorage.getItem('target_market');
   const idea = localStorage.getItem('idea');
+   const BASE_URL = "https://offer-validatorai.onrender.com";
     //   ${BASE_URL }/api/v1/flow-executions/flow-templates/{$FLOW_TEMPLATE_ID};
   useEffect(() => {
     const startFlow = async () => {
@@ -72,7 +73,7 @@ const start_flow: React.FC = () => {
         const executionId = "1fcda3d7-f470-4e8f-9c9a-47a48543b5b0";
         // const redirectUrl = "http://localhost:5002/report";
 
-        const redirectUrl = 'https://validator-site-mbunsk.replit.app/report';
+        const redirectUrl = `${BASE_URL}/report`;
         
         console.log('Flow started successfully:' , flowResponse);
         console.log('Redirecting to:', redirectUrl);
