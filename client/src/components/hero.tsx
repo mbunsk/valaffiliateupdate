@@ -258,7 +258,7 @@ console.log(targetMarket);
                     </div>
                     <div className="text-center sm:text-right">
                       <div className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        $49
+                        $25
                       </div>
                       <div className="text-sm text-gray-600 dark:text-gray-400 line-through">$3,000</div>
                     </div>
