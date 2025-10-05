@@ -229,7 +229,7 @@ const parseMarkdownContent = (content: string): string => {
     .replace(/###/g, '');
   
   // Wrap lists in ul tags
-  html = html.replace(/(<li class="ml-4">.*<\/li>)/gs, '<ul class="list-disc ml-6 mb-4">$1</ul>');
+  html = html.replace(/(<li class="ml-4">.*<\/li>)/g, '<ul class="list-disc ml-6 mb-4">$1</ul>');
   
   return html;
 };
@@ -242,6 +242,11 @@ export default function ReportPage() {
   const [expandedSections, setExpandedSections] =useState<Set<any>>(new Set());
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+
+  // Declare all state variables first
+  const [finalResult, setFinalResult] = useState<ApiResponse | any>(null);
+  const [lines, setLines] = useState<string[]>([]);
+  const [results, setResults] = useState<ApiResponse[]>([]);
 
   console.log('ReportPage component mounted');
   console.log('reportId from params:', reportId);
@@ -273,11 +278,6 @@ export default function ReportPage() {
       setTimeout(renderMermaidDiagrams, 100);
     }
   }, [results]);
-
-  
-      const [finalResult, setFinalResult] = useState<ApiResponse | any>(null);
-      const [lines, setLines] = useState<string[]>([]);
-     const [results, setResults] = useState<ApiResponse[]>([]);
   const BASE_URL = "https://plan.validatorai.com/feasibility/api.php";
       const FLOW_TEMPLATE_ID = "bae9d61f-176f-4b5b-9a66-6c700e9f8604";
       const API_KEY = "oKEkzm4m8x65RL3GgFp1ZEuRuqtNEFTZdwa3OsLp3j8Pp-nK355eQ2DMhgJ3-KWZfAfcJ4q-4wD9iPnYdPsmwQ"; // <-- set your API key here
@@ -352,11 +352,13 @@ export default function ReportPage() {
             
           } catch (error) {
               console.error('API call failed:', error);
-              console.error('Error details:', {
-                message: error.message,
-                stack: error.stack,
-                name: error.name
-              });
+              if (error instanceof Error) {
+                console.error('Error details:', {
+                  message: error.message,
+                  stack: error.stack,
+                  name: error.name
+                });
+              }
              
               
           }
@@ -508,7 +510,7 @@ export default function ReportPage() {
                   <div 
                     className="report-div prose prose-sm dark:prose-invert text-white text-base sm:text-s leading-relaxed  max-w-4xl  px-[1px]"
                     dangerouslySetInnerHTML={{ 
-                      __html: parseMarkdownContent(flow.raw_output) 
+                      __html: parseMarkdownContent(typeof flow.raw_output === 'string' ? flow.raw_output : '') 
                     }}
                   />
         </CardContent>
