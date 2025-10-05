@@ -111,8 +111,8 @@ const renderMermaidDiagrams = (content: string): string => {
     // Fix malformed mindmap syntax
     let fixedCode = diagramCode.trim();
     
-    // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
-    if (fixedCode.includes('["') && !fixedCode.includes('mindmap')) {
+    // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
+    if (fixedCode.includes('["') && fixedCode.includes('mindmap') && fixedCode.includes('["')) {
       console.log('Detected malformed mindmap, fixing syntax...');
       
       // Extract the central topic (first item)
@@ -302,8 +302,8 @@ export default function ReportPage() {
             // Clean up the Mermaid code
             diagramCode = diagramCode.trim();
             
-            // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
-            if (diagramCode.includes('["') && !diagramCode.includes('mindmap')) {
+            // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
+            if (diagramCode.includes('["') && diagramCode.includes('mindmap') && diagramCode.includes('["')) {
               console.log(`Diagram ${index}: Detected malformed mindmap, fixing syntax...`);
               
               // Extract the central topic (first item)
@@ -625,8 +625,8 @@ export default function ReportPage() {
                                   // Remove any extra whitespace and ensure proper formatting
                                   diagramCode = diagramCode.trim();
                                   
-                                  // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
-                                  if (diagramCode.includes('["') && !diagramCode.includes('mindmap')) {
+                                  // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
+                                  if (diagramCode.includes('["') && diagramCode.includes('mindmap') && diagramCode.includes('["')) {
                                     console.log(`Manual diagram ${index}: Detected malformed mindmap, fixing syntax...`);
                                     
                                     // Extract the central topic (first item)
