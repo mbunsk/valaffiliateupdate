@@ -243,6 +243,10 @@ export default function ReportPage() {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
+  console.log('ReportPage component mounted');
+  console.log('reportId from params:', reportId);
+  console.log('all params:', params);
+
   // Render Mermaid diagrams after content is loaded
   useEffect(() => {
     const renderMermaidDiagrams = async () => {
@@ -296,6 +300,8 @@ export default function ReportPage() {
      
 
       const pollUntilComplete = async(execution_id : string) => {
+        console.log('pollUntilComplete called with execution_id:', execution_id);
+        console.log('BASE_URL:', BASE_URL);
         
         const MAX_POLLS = 8;
         let lastData: any = null;
@@ -303,6 +309,8 @@ export default function ReportPage() {
           while(true) {
             setLoading(true);
             try {
+              console.log('Making API call to:', BASE_URL);
+              console.log('Request body:', JSON.stringify({ execution_id: execution_id }));
               
                   const response = await fetch(`${BASE_URL}`, {
                     method: 'POST',
@@ -313,6 +321,9 @@ export default function ReportPage() {
                     credentials: 'include', // crucial for PHP session
                     body: JSON.stringify({ execution_id: execution_id })
                   });
+
+                  console.log('Response status:', response.status);
+                  console.log('Response ok:', response.ok);
 
                   const data = await response.json();
                   console.log('Data from PHP:', data);
@@ -340,8 +351,12 @@ export default function ReportPage() {
 
             
           } catch (error) {
-              console.log(error);
-              console.warn('JSON parse error:', error);
+              console.error('API call failed:', error);
+              console.error('Error details:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+              });
              
               
           }
@@ -351,17 +366,23 @@ export default function ReportPage() {
     
   
       useEffect(() => {
+          console.log('useEffect triggered, reportId:', reportId);
           const runFlow = async () => {
               const execution_id = reportId;
-              if(!execution_id) return;
+              console.log('runFlow called with execution_id:', execution_id);
+              if(!execution_id) {
+                console.log('No execution_id, returning early');
+                return;
+              }
+              console.log('Starting pollUntilComplete...');
               const result = await pollUntilComplete(execution_id);
-          setFinalResult(result);
+              console.log('pollUntilComplete completed, result:', result);
+              setFinalResult(result);
           };
-  
-        
-  
+
+          console.log('Calling runFlow...');
           runFlow();
-          }, []);
+          }, [reportId]);
   
          
           
@@ -382,7 +403,13 @@ export default function ReportPage() {
     setExpandedSections(newExpanded);
   };
 
+  console.log('Render check - lines:', lines);
+  console.log('Render check - loading:', loading);
+  console.log('Render check - results:', results);
+  console.log('Render check - finalResult:', finalResult);
+
   if (lines && lines[lines.length - 1] != "Status: finished") {
+    console.log('Showing loading screen');
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
@@ -407,7 +434,8 @@ export default function ReportPage() {
   }
 
   if (finalResult) {
-  return (
+    console.log('Rendering finalResult content');
+    return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Report Header */}
@@ -492,5 +520,23 @@ export default function ReportPage() {
         </div>
         </div>
   )
+  }
+
+  // Fallback case - no finalResult
+  console.log('No finalResult, showing fallback');
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <FileText className="h-16 w-16 text-muted-foreground mx-auto" />
+        <h1 className="text-2xl font-bold">No Report Data</h1>
+        <p className="text-muted-foreground">No report data available. Check console for debugging info.</p>
+        <div className="text-sm text-gray-500">
+          <p>reportId: {reportId}</p>
+          <p>results.length: {results.length}</p>
+          <p>finalResult: {finalResult ? 'exists' : 'null'}</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 }
