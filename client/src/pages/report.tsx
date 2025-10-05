@@ -1,5 +1,6 @@
 import { useParams } from "wouter";
 import { useState, useEffect, useRef, JSX, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
+import mermaid from 'mermaid';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,36 @@ interface ApiResponse {
         [key: string]: any;
         
         }  
+
+// Initialize Mermaid
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#3b82f6',
+    primaryTextColor: '#ffffff',
+    primaryBorderColor: '#1e40af',
+    lineColor: '#6b7280',
+    secondaryColor: '#1f2937',
+    tertiaryColor: '#111827'
+  }
+});
+
+// Mermaid diagram rendering function
+const renderMermaidDiagrams = (content: string): string => {
+  const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+  let diagramCounter = 0;
+  
+  return content.replace(mermaidRegex, (match, diagramCode) => {
+    const diagramId = `mermaid-${Date.now()}-${diagramCounter++}`;
+    
+    // Create a placeholder div that will be replaced with the rendered diagram
+    return `<div id="${diagramId}" class="mermaid-diagram my-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
+      <div class="text-center text-gray-400 mb-2">Loading diagram...</div>
+      <pre class="hidden">${diagramCode}</pre>
+    </div>`;
+  });
+};
 
 // Table conversion functions
 const convertMarkdownTables = (content: string): string => {
@@ -172,8 +203,11 @@ const formatTableCell = (cell: string): string => {
 const parseMarkdownContent = (content: string): string => {
   if (!content) return '';
   
-  // First, convert markdown tables to HTML
-  let html = convertMarkdownTables(content);
+  // First, render Mermaid diagrams
+  let html = renderMermaidDiagrams(content);
+  
+  // Then, convert markdown tables to HTML
+  html = convertMarkdownTables(html);
   
   // Then convert other markdown-like content to HTML
   html = html
@@ -208,6 +242,33 @@ export default function ReportPage() {
   const [expandedSections, setExpandedSections] =useState<Set<any>>(new Set());
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+
+  // Render Mermaid diagrams after content is loaded
+  useEffect(() => {
+    const renderMermaidDiagrams = async () => {
+      const diagrams = document.querySelectorAll('.mermaid-diagram');
+      diagrams.forEach(async (diagram) => {
+        const pre = diagram.querySelector('pre');
+        if (pre) {
+          const diagramCode = pre.textContent;
+          if (diagramCode) {
+            try {
+              const { svg } = await mermaid.render(diagram.id, diagramCode);
+              diagram.innerHTML = svg;
+            } catch (error) {
+              console.error('Mermaid rendering error:', error);
+              diagram.innerHTML = '<div class="text-red-400 text-center">Error rendering diagram</div>';
+            }
+          }
+        }
+      });
+    };
+
+    if (results.length > 0) {
+      // Small delay to ensure DOM is updated
+      setTimeout(renderMermaidDiagrams, 100);
+    }
+  }, [results]);
 
   
       const [finalResult, setFinalResult] = useState<ApiResponse | any>(null);
@@ -326,7 +387,7 @@ export default function ReportPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="text-lg text-muted-foreground">Loading your research report...</p>
+          <p className="text-lg text-muted-foreground">Loading your research report.  We have 10 AI agents doing the work of professional analysts.  The report will load here and be emailed to you in approximately 20 minutes.</p>
           <p className="text-lg text-muted-foreground">{lines}</p>
         </div>
       </div>
