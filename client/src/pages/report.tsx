@@ -108,10 +108,42 @@ const renderMermaidDiagrams = (content: string): string => {
   return content.replace(mermaidRegex, (match, diagramCode) => {
     const diagramId = `mermaid-${Date.now()}-${diagramCounter++}`;
     
+    // Fix malformed mindmap syntax
+    let fixedCode = diagramCode.trim();
+    
+    // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
+    if (fixedCode.includes('["') && !fixedCode.includes('mindmap')) {
+      console.log('Detected malformed mindmap, fixing syntax...');
+      
+      // Extract the central topic (first item)
+      const lines = fixedCode.split('\n').filter(line => line.trim());
+      const firstLine = lines[0] || '';
+      const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
+      
+      // Build proper mindmap syntax
+      let properMindmap = `mindmap\n  root)${centralTopic}(`;
+      
+      // Process the rest of the items to build the mindmap structure
+      const items = fixedCode.match(/\["([^"]+)"\]/g) || [];
+      const processedItems = new Set(); // Avoid duplicates
+      
+      items.forEach((item, index) => {
+        if (index === 0) return; // Skip the central topic
+        const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
+        if (!processedItems.has(cleanItem)) {
+          processedItems.add(cleanItem);
+          properMindmap += `\n    ${cleanItem}`;
+        }
+      });
+      
+      fixedCode = properMindmap;
+      console.log('Fixed mindmap syntax:', fixedCode);
+    }
+    
     // Create a placeholder div that will be replaced with the rendered diagram
     return `<div id="${diagramId}" class="mermaid-diagram my-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
       <div class="text-center text-gray-400 mb-2">Loading diagram...</div>
-      <pre class="hidden">${diagramCode}</pre>
+      <pre class="hidden">${fixedCode}</pre>
     </div>`;
   });
 };
@@ -270,11 +302,40 @@ export default function ReportPage() {
             // Clean up the Mermaid code
             diagramCode = diagramCode.trim();
             
-            // Fix common mindmap syntax issues
-            diagramCode = diagramCode
-              .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
-              .replace(/\s+/g, ' ') // Normalize whitespace
-              .replace(/\n\s*/g, '\n'); // Clean line breaks
+            // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
+            if (diagramCode.includes('["') && !diagramCode.includes('mindmap')) {
+              console.log(`Diagram ${index}: Detected malformed mindmap, fixing syntax...`);
+              
+              // Extract the central topic (first item)
+              const lines = diagramCode.split('\n').filter(line => line.trim());
+              const firstLine = lines[0] || '';
+              const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
+              
+              // Build proper mindmap syntax
+              let properMindmap = `mindmap\n  root)${centralTopic}(`;
+              
+              // Process the rest of the items to build the mindmap structure
+              const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
+              const processedItems = new Set(); // Avoid duplicates
+              
+              items.forEach((item, index) => {
+                if (index === 0) return; // Skip the central topic
+                const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
+                if (!processedItems.has(cleanItem)) {
+                  processedItems.add(cleanItem);
+                  properMindmap += `\n    ${cleanItem}`;
+                }
+              });
+              
+              diagramCode = properMindmap;
+              console.log(`Diagram ${index}: Fixed mindmap syntax:`, diagramCode);
+            } else {
+              // Fix common mindmap syntax issues for properly formatted code
+              diagramCode = diagramCode
+                .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
+                .replace(/\s+/g, ' ') // Normalize whitespace
+                .replace(/\n\s*/g, '\n'); // Clean line breaks
+            }
             
             console.log(`Diagram ${index} cleaned code:`, diagramCode);
             
@@ -564,11 +625,40 @@ export default function ReportPage() {
                                   // Remove any extra whitespace and ensure proper formatting
                                   diagramCode = diagramCode.trim();
                                   
-                                  // Fix common mindmap syntax issues
-                                  diagramCode = diagramCode
-                                    .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
-                                    .replace(/\s+/g, ' ') // Normalize whitespace
-                                    .replace(/\n\s*/g, '\n'); // Clean line breaks
+                                  // If it's a malformed mindmap (just a list of strings), convert it to proper syntax
+                                  if (diagramCode.includes('["') && !diagramCode.includes('mindmap')) {
+                                    console.log(`Manual diagram ${index}: Detected malformed mindmap, fixing syntax...`);
+                                    
+                                    // Extract the central topic (first item)
+                                    const lines = diagramCode.split('\n').filter(line => line.trim());
+                                    const firstLine = lines[0] || '';
+                                    const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
+                                    
+                                    // Build proper mindmap syntax
+                                    let properMindmap = `mindmap\n  root)${centralTopic}(`;
+                                    
+                                    // Process the rest of the items to build the mindmap structure
+                                    const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
+                                    const processedItems = new Set(); // Avoid duplicates
+                                    
+                                    items.forEach((item, index) => {
+                                      if (index === 0) return; // Skip the central topic
+                                      const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
+                                      if (!processedItems.has(cleanItem)) {
+                                        processedItems.add(cleanItem);
+                                        properMindmap += `\n    ${cleanItem}`;
+                                      }
+                                    });
+                                    
+                                    diagramCode = properMindmap;
+                                    console.log(`Manual diagram ${index}: Fixed mindmap syntax:`, diagramCode);
+                                  } else {
+                                    // Fix common mindmap syntax issues for properly formatted code
+                                    diagramCode = diagramCode
+                                      .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
+                                      .replace(/\s+/g, ' ') // Normalize whitespace
+                                      .replace(/\n\s*/g, '\n'); // Clean line breaks
+                                  }
                                   
                                   console.log(`Manual diagram ${index} cleaned code:`, diagramCode);
                                   
