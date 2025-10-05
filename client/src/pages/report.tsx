@@ -108,42 +108,10 @@ const renderMermaidDiagrams = (content: string): string => {
   return content.replace(mermaidRegex, (match, diagramCode) => {
     const diagramId = `mermaid-${Date.now()}-${diagramCounter++}`;
     
-    // Fix malformed mindmap syntax
-    let fixedCode = diagramCode.trim();
-    
-    // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
-    if (fixedCode.includes('["') && fixedCode.includes('mindmap') && fixedCode.includes('["')) {
-      console.log('Detected malformed mindmap, fixing syntax...');
-      
-      // Extract the central topic (first item)
-      const lines = fixedCode.split('\n').filter(line => line.trim());
-      const firstLine = lines[0] || '';
-      const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
-      
-      // Build proper mindmap syntax
-      let properMindmap = `mindmap\n  root)${centralTopic}(`;
-      
-      // Process the rest of the items to build the mindmap structure
-      const items = fixedCode.match(/\["([^"]+)"\]/g) || [];
-      const processedItems = new Set(); // Avoid duplicates
-      
-      items.forEach((item, index) => {
-        if (index === 0) return; // Skip the central topic
-        const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
-        if (!processedItems.has(cleanItem)) {
-          processedItems.add(cleanItem);
-          properMindmap += `\n    ${cleanItem}`;
-        }
-      });
-      
-      fixedCode = properMindmap;
-      console.log('Fixed mindmap syntax:', fixedCode);
-    }
-    
     // Create a placeholder div that will be replaced with the rendered diagram
     return `<div id="${diagramId}" class="mermaid-diagram my-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
       <div class="text-center text-gray-400 mb-2">Loading diagram...</div>
-      <pre class="hidden">${fixedCode}</pre>
+      <pre class="hidden">${diagramCode.trim()}</pre>
     </div>`;
   });
 };
@@ -299,45 +267,9 @@ export default function ReportPage() {
           console.log(`Diagram ${index} raw code:`, diagramCode);
           
           if (diagramCode) {
-            // Clean up the Mermaid code
+            // Clean up the Mermaid code (API should now send properly formatted syntax)
             diagramCode = diagramCode.trim();
-            
-            // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
-            if (diagramCode.includes('["') && diagramCode.includes('mindmap') && diagramCode.includes('["')) {
-              console.log(`Diagram ${index}: Detected malformed mindmap, fixing syntax...`);
-              
-              // Extract the central topic (first item)
-              const lines = diagramCode.split('\n').filter(line => line.trim());
-              const firstLine = lines[0] || '';
-              const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
-              
-              // Build proper mindmap syntax
-              let properMindmap = `mindmap\n  root)${centralTopic}(`;
-              
-              // Process the rest of the items to build the mindmap structure
-              const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
-              const processedItems = new Set(); // Avoid duplicates
-              
-              items.forEach((item, index) => {
-                if (index === 0) return; // Skip the central topic
-                const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
-                if (!processedItems.has(cleanItem)) {
-                  processedItems.add(cleanItem);
-                  properMindmap += `\n    ${cleanItem}`;
-                }
-              });
-              
-              diagramCode = properMindmap;
-              console.log(`Diagram ${index}: Fixed mindmap syntax:`, diagramCode);
-            } else {
-              // Fix common mindmap syntax issues for properly formatted code
-              diagramCode = diagramCode
-                .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
-                .replace(/\s+/g, ' ') // Normalize whitespace
-                .replace(/\n\s*/g, '\n'); // Clean line breaks
-            }
-            
-            console.log(`Diagram ${index} cleaned code:`, diagramCode);
+            console.log(`Diagram ${index} code:`, diagramCode);
             
             try {
               console.log(`Rendering diagram ${index}...`);
@@ -620,47 +552,10 @@ export default function ReportPage() {
                                 let diagramCode = pre.textContent;
                                 console.log(`Manual diagram ${index} raw code:`, diagramCode);
                                 
-                                // Clean up the Mermaid code
+                                // Clean up the Mermaid code (API should now send properly formatted syntax)
                                 if (diagramCode) {
-                                  // Remove any extra whitespace and ensure proper formatting
                                   diagramCode = diagramCode.trim();
-                                  
-                                  // If it's a malformed mindmap (mindmap followed by list of strings), convert it to proper syntax
-                                  if (diagramCode.includes('["') && diagramCode.includes('mindmap') && diagramCode.includes('["')) {
-                                    console.log(`Manual diagram ${index}: Detected malformed mindmap, fixing syntax...`);
-                                    
-                                    // Extract the central topic (first item)
-                                    const lines = diagramCode.split('\n').filter(line => line.trim());
-                                    const firstLine = lines[0] || '';
-                                    const centralTopic = firstLine.match(/\["([^"]+)"\]/)?.[1] || 'Central Topic';
-                                    
-                                    // Build proper mindmap syntax
-                                    let properMindmap = `mindmap\n  root)${centralTopic}(`;
-                                    
-                                    // Process the rest of the items to build the mindmap structure
-                                    const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
-                                    const processedItems = new Set(); // Avoid duplicates
-                                    
-                                    items.forEach((item, index) => {
-                                      if (index === 0) return; // Skip the central topic
-                                      const cleanItem = item.replace(/\["([^"]+)"\]/, '$1');
-                                      if (!processedItems.has(cleanItem)) {
-                                        processedItems.add(cleanItem);
-                                        properMindmap += `\n    ${cleanItem}`;
-                                      }
-                                    });
-                                    
-                                    diagramCode = properMindmap;
-                                    console.log(`Manual diagram ${index}: Fixed mindmap syntax:`, diagramCode);
-                                  } else {
-                                    // Fix common mindmap syntax issues for properly formatted code
-                                    diagramCode = diagramCode
-                                      .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
-                                      .replace(/\s+/g, ' ') // Normalize whitespace
-                                      .replace(/\n\s*/g, '\n'); // Clean line breaks
-                                  }
-                                  
-                                  console.log(`Manual diagram ${index} cleaned code:`, diagramCode);
+                                  console.log(`Manual diagram ${index} code:`, diagramCode);
                                   
                                   try {
                                     const { svg } = await mermaid.render(diagram.id, diagramCode);
