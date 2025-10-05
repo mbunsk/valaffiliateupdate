@@ -263,9 +263,21 @@ export default function ReportPage() {
         console.log(`Processing diagram ${index}:`, diagram);
         const pre = diagram.querySelector('pre');
         if (pre) {
-          const diagramCode = pre.textContent;
-          console.log(`Diagram ${index} code:`, diagramCode);
+          let diagramCode = pre.textContent;
+          console.log(`Diagram ${index} raw code:`, diagramCode);
+          
           if (diagramCode) {
+            // Clean up the Mermaid code
+            diagramCode = diagramCode.trim();
+            
+            // Fix common mindmap syntax issues
+            diagramCode = diagramCode
+              .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
+              .replace(/\s+/g, ' ') // Normalize whitespace
+              .replace(/\n\s*/g, '\n'); // Clean line breaks
+            
+            console.log(`Diagram ${index} cleaned code:`, diagramCode);
+            
             try {
               console.log(`Rendering diagram ${index}...`);
               const { svg } = await mermaid.render(diagram.id, diagramCode);
@@ -273,7 +285,18 @@ export default function ReportPage() {
               console.log(`Diagram ${index} rendered successfully`);
             } catch (error) {
               console.error(`Mermaid rendering error for diagram ${index}:`, error);
-              diagram.innerHTML = '<div class="text-red-400 text-center">Error rendering diagram</div>';
+              console.error(`Failed code:`, diagramCode);
+              
+              // Show the raw code for debugging
+              diagram.innerHTML = `
+                <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
+                <div class="text-xs text-gray-400 text-left">
+                  <div class="font-bold">Error:</div>
+                  <div>${error.message}</div>
+                  <div class="font-bold mt-2">Code:</div>
+                  <pre class="whitespace-pre-wrap">${diagramCode}</pre>
+                </div>
+              `;
             }
           }
         }
@@ -533,16 +556,40 @@ export default function ReportPage() {
                             diagrams.forEach(async (diagram, index) => {
                               const pre = diagram.querySelector('pre');
                               if (pre) {
-                                const diagramCode = pre.textContent;
-                                console.log(`Manual diagram ${index} code:`, diagramCode);
+                                let diagramCode = pre.textContent;
+                                console.log(`Manual diagram ${index} raw code:`, diagramCode);
+                                
+                                // Clean up the Mermaid code
                                 if (diagramCode) {
+                                  // Remove any extra whitespace and ensure proper formatting
+                                  diagramCode = diagramCode.trim();
+                                  
+                                  // Fix common mindmap syntax issues
+                                  diagramCode = diagramCode
+                                    .replace(/\["([^"]+)"\]/g, '["$1"]') // Ensure proper quotes
+                                    .replace(/\s+/g, ' ') // Normalize whitespace
+                                    .replace(/\n\s*/g, '\n'); // Clean line breaks
+                                  
+                                  console.log(`Manual diagram ${index} cleaned code:`, diagramCode);
+                                  
                                   try {
                                     const { svg } = await mermaid.render(diagram.id, diagramCode);
                                     diagram.innerHTML = svg;
                                     console.log(`Manual diagram ${index} rendered successfully`);
                                   } catch (error) {
                                     console.error(`Manual Mermaid rendering error for diagram ${index}:`, error);
-                                    diagram.innerHTML = '<div class="text-red-400 text-center">Error rendering diagram</div>';
+                                    console.error(`Failed code:`, diagramCode);
+                                    
+                                    // Show the raw code for debugging
+                                    diagram.innerHTML = `
+                                      <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
+                                      <div class="text-xs text-gray-400 text-left">
+                                        <div class="font-bold">Error:</div>
+                                        <div>${error.message}</div>
+                                        <div class="font-bold mt-2">Code:</div>
+                                        <pre class="whitespace-pre-wrap">${diagramCode}</pre>
+                                      </div>
+                                    `;
                                   }
                                 }
                               }
