@@ -94,48 +94,24 @@ interface ApiResponse {
         
         }  
 
-// Load Mermaid from CDN and initialize
-useEffect(() => {
-  const loadMermaid = async () => {
-    // Check if mermaid is already loaded
-    if (window.mermaid) {
-      initializeMermaid();
-      return;
-    }
-
-    // Load Mermaid from CDN
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
-    script.onload = () => {
-      console.log('Mermaid CDN loaded successfully');
-      initializeMermaid();
-    };
-    script.onerror = () => {
-      console.error('Failed to load Mermaid from CDN');
-    };
-    document.head.appendChild(script);
-  };
-
-  const initializeMermaid = () => {
-    if (window.mermaid) {
-      window.mermaid.initialize({
-        startOnLoad: false,
-        theme: 'dark',
-        themeVariables: {
-          primaryColor: '#3b82f6',
-          primaryTextColor: '#ffffff',
-          primaryBorderColor: '#1e40af',
-          lineColor: '#6b7280',
-          secondaryColor: '#1f2937',
-          tertiaryColor: '#111827'
-        }
-      });
-      console.log('Mermaid initialized successfully');
-    }
-  };
-
-  loadMermaid();
-}, []);
+// Initialize Mermaid (will be called inside component)
+const initializeMermaid = () => {
+  if (window.mermaid) {
+    window.mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#3b82f6',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#1e40af',
+        lineColor: '#6b7280',
+        secondaryColor: '#1f2937',
+        tertiaryColor: '#111827'
+      }
+    });
+    console.log('Mermaid initialized successfully');
+  }
+};
 
 // Mermaid diagram rendering function (for client-side fallback)
 const renderMermaidDiagrams = (content: string): string => {
@@ -288,6 +264,31 @@ export default function ReportPage() {
   console.log('ReportPage component mounted');
   console.log('reportId from params:', reportId);
   console.log('all params:', params);
+
+  // Load Mermaid from CDN and initialize
+  useEffect(() => {
+    const loadMermaid = async () => {
+      // Check if mermaid is already loaded
+      if (window.mermaid) {
+        initializeMermaid();
+        return;
+      }
+
+      // Load Mermaid from CDN
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+      script.onload = () => {
+        console.log('Mermaid CDN loaded successfully');
+        initializeMermaid();
+      };
+      script.onerror = () => {
+        console.error('Failed to load Mermaid from CDN');
+      };
+      document.head.appendChild(script);
+    };
+
+    loadMermaid();
+  }, []);
 
   // Render Mermaid diagrams after content is loaded (client-side fallback)
   useEffect(() => {
