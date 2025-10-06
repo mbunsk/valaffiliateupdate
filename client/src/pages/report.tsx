@@ -1,14 +1,5 @@
 import { useParams } from "wouter";
 import { useState, useEffect, useRef, JSX, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
-// Using CDN version instead of npm package
-// import mermaid from 'mermaid';
-
-// TypeScript declaration for window.mermaid
-declare global {
-  interface Window {
-    mermaid: any;
-  }
-}
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,39 +85,9 @@ interface ApiResponse {
         
         }  
 
-// Initialize Mermaid (will be called inside component)
-const initializeMermaid = () => {
-  if (window.mermaid) {
-    window.mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      themeVariables: {
-        primaryColor: '#3b82f6',
-        primaryTextColor: '#ffffff',
-        primaryBorderColor: '#1e40af',
-        lineColor: '#6b7280',
-        secondaryColor: '#1f2937',
-        tertiaryColor: '#111827'
-      }
-    });
-    console.log('Mermaid initialized successfully');
-  }
-};
-
-// Mermaid diagram rendering function (for client-side fallback)
-const renderMermaidDiagrams = (content: string): string => {
-  const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
-  let diagramCounter = 0;
-  
-  return content.replace(mermaidRegex, (match, diagramCode) => {
-    const diagramId = `mermaid-${Date.now()}-${diagramCounter++}`;
-    
-    // Create a placeholder div that will be replaced with the rendered diagram
-    return `<div id="${diagramId}" class="mermaid-diagram my-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
-      <div class="text-center text-gray-400 mb-2">Loading diagram...</div>
-      <pre class="hidden">${diagramCode.trim()}</pre>
-    </div>`;
-  });
+// Simple function to display raw content without Mermaid processing
+const displayRawContent = (content: string): string => {
+  return content;
 };
 
 // Table conversion functions
@@ -216,10 +177,10 @@ const formatTableCell = (cell: string): string => {
 const parseMarkdownContent = (content: string): string => {
   if (!content) return '';
   
-  // First, render Mermaid diagrams
-  let html = renderMermaidDiagrams(content);
+  // Display raw content without Mermaid processing
+  let html = displayRawContent(content);
   
-  // Then, convert markdown tables to HTML
+  // Convert markdown tables to HTML
   html = convertMarkdownTables(html);
   
   // Then convert other markdown-like content to HTML
@@ -265,115 +226,9 @@ export default function ReportPage() {
   console.log('reportId from params:', reportId);
   console.log('all params:', params);
 
-  // Load Mermaid from CDN and initialize
+  // Load report data
   useEffect(() => {
-    const loadMermaid = async () => {
-      // Check if mermaid is already loaded
-      if (window.mermaid) {
-        initializeMermaid();
-        return;
-      }
-
-      // Load Mermaid from CDN
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
-      script.onload = () => {
-        console.log('Mermaid CDN loaded successfully');
-        initializeMermaid();
-      };
-      script.onerror = () => {
-        console.error('Failed to load Mermaid from CDN');
-      };
-      document.head.appendChild(script);
-    };
-
-    loadMermaid();
-  }, []);
-
-  // Render Mermaid diagrams after content is loaded (client-side fallback)
-  useEffect(() => {
-    const renderMermaidDiagrams = async () => {
-      console.log('Looking for Mermaid diagrams...');
-      const diagrams = document.querySelectorAll('.mermaid-diagram');
-      console.log('Found diagrams:', diagrams.length);
-      
-      diagrams.forEach(async (diagram, index) => {
-        console.log(`Processing diagram ${index}:`, diagram);
-        const pre = diagram.querySelector('pre');
-        if (pre) {
-          let diagramCode = pre.textContent;
-          console.log(`Diagram ${index} code:`, diagramCode);
-          
-          if (diagramCode) {
-            // Clean up the Mermaid code (PHP should have fixed the syntax)
-            diagramCode = diagramCode.trim();
-            console.log(`Diagram ${index} final code:`, diagramCode);
-            
-            try {
-              console.log(`Rendering diagram ${index}...`);
-              
-              // Modern API try/catch with improved error handling
-              if (window.mermaid && typeof window.mermaid.render === 'function') {
-                const uid = 'm' + Date.now() + '_' + index;
-                try {
-                  const result = await window.mermaid.render(uid, diagramCode);
-                  const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
-                  if (!svg) throw new Error('No SVG returned by mermaid.render()');
-                  diagram.innerHTML = svg;
-                  
-                  // Make svg responsive
-                  const svgElement = diagram.querySelector('svg');
-                  if (svgElement) { 
-                    svgElement.setAttribute('width','100%'); 
-                    svgElement.removeAttribute('height'); 
-                  }
-                  
-                  console.log(`Diagram ${index} rendered successfully`);
-                } catch(e) {
-                  // fallback to legacy API
-                  if (window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
-                    window.mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
-                      diagram.innerHTML = svgCode; 
-                      console.log(`Diagram ${index} rendered successfully (legacy API)`);
-                    });
-                  } else {
-                    throw new Error('No supported mermaid render API available: ' + e.message);
-                  }
-                }
-              } else if (window.mermaid && window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
-                window.mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
-                  diagram.innerHTML = svgCode; 
-                  console.log(`Diagram ${index} rendered successfully (legacy API)`);
-                });
-              } else {
-                throw new Error('No supported mermaid render API available');
-              }
-            } catch (error) {
-              console.error(`Mermaid rendering error for diagram ${index}:`, error);
-              console.error(`Failed code:`, diagramCode);
-              
-              // Show the raw code for debugging
-              diagram.innerHTML = `
-                <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
-                <div class="text-xs text-gray-400 text-left">
-                  <div class="font-bold">Error:</div>
-                  <div>${error.message}</div>
-                  <div class="font-bold mt-2">Code:</div>
-                  <pre class="whitespace-pre-wrap">${diagramCode}</pre>
-                </div>
-              `;
-            }
-          }
-        }
-      });
-    };
-
-    // Trigger when either results or finalResult changes
-    if (results.length > 0 || finalResult) {
-      console.log('Triggering Mermaid rendering...');
-      // Small delay to ensure DOM is updated
-      setTimeout(renderMermaidDiagrams, 500);
-    }
+    console.log('Report data loaded, content ready to display');
   }, [results, finalResult]);
   const BASE_URL = "https://plan.validatorai.com/feasibility/api.php";
       const FLOW_TEMPLATE_ID = "bae9d61f-176f-4b5b-9a66-6c700e9f8604";
@@ -608,85 +463,6 @@ export default function ReportPage() {
                     className="report-div prose prose-sm dark:prose-invert text-white text-base sm:text-s leading-relaxed  max-w-4xl  px-[1px]"
                     dangerouslySetInnerHTML={{ 
                       __html: parseMarkdownContent(typeof flow.raw_output === 'string' ? flow.raw_output : '') 
-                    }}
-                    ref={(el) => {
-                      if (el) {
-                        // Trigger Mermaid rendering after content is inserted (client-side fallback)
-                        setTimeout(() => {
-                          const renderMermaidDiagrams = async () => {
-                            console.log('Manual Mermaid rendering triggered');
-                            const diagrams = el.querySelectorAll('.mermaid-diagram');
-                            console.log('Found diagrams in content:', diagrams.length);
-                            
-                            diagrams.forEach(async (diagram, index) => {
-                              const pre = diagram.querySelector('pre');
-                              if (pre) {
-                                let diagramCode = pre.textContent;
-                                console.log(`Manual diagram ${index} code:`, diagramCode);
-                                
-                                if (diagramCode) {
-                                  diagramCode = diagramCode.trim();
-                                  console.log(`Manual diagram ${index} final code:`, diagramCode);
-                                  
-                                  try {
-                                    // Modern API try/catch with improved error handling
-                                    if (window.mermaid && typeof window.mermaid.render === 'function') {
-                                      const uid = 'm' + Date.now() + '_manual_' + index;
-                                      try {
-                                        const result = await window.mermaid.render(uid, diagramCode);
-                                        const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
-                                        if (!svg) throw new Error('No SVG returned by mermaid.render()');
-                                        diagram.innerHTML = svg;
-                                        
-                                        // Make svg responsive
-                                        const svgElement = diagram.querySelector('svg');
-                                        if (svgElement) { 
-                                          svgElement.setAttribute('width','100%'); 
-                                          svgElement.removeAttribute('height'); 
-                                        }
-                                        
-                                        console.log(`Manual diagram ${index} rendered successfully`);
-                                      } catch(e) {
-                                        // fallback to legacy API
-                                        if (window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
-                                          window.mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
-                                            diagram.innerHTML = svgCode; 
-                                            console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
-                                          });
-                                        } else {
-                                          throw new Error('No supported mermaid render API available: ' + e.message);
-                                        }
-                                      }
-                                    } else if (window.mermaid && window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
-                                      window.mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
-                                        diagram.innerHTML = svgCode; 
-                                        console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
-                                      });
-                                    } else {
-                                      throw new Error('No supported mermaid render API available');
-                                    }
-                                  } catch (error) {
-                                    console.error(`Manual Mermaid rendering error for diagram ${index}:`, error);
-                                    console.error(`Failed code:`, diagramCode);
-                                    
-                                    // Show the raw code for debugging
-                                    diagram.innerHTML = `
-                                      <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
-                                      <div class="text-xs text-gray-400 text-left">
-                                        <div class="font-bold">Error:</div>
-                                        <div>${error.message}</div>
-                                        <div class="font-bold mt-2">Code:</div>
-                                        <pre class="whitespace-pre-wrap">${diagramCode}</pre>
-                                      </div>
-                                    `;
-                                  }
-                                }
-                              }
-                            });
-                          };
-                          renderMermaidDiagrams();
-                        }, 100);
-                      }
                     }}
                   />
         </CardContent>

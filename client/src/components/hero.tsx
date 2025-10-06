@@ -352,7 +352,7 @@ console.log(targetMarket);
 
                   <div className="space-y-2 mt-4">
                     <p className="text-xs text-center text-gray-600 dark:text-gray-400 leading-relaxed">
-                      PDF + PowerPoint + Public Link • Real-time agent collaboration • SOC2 & GDPR compliant
+                    PDF + Public Link • SOC2 & GDPR compliant
                     </p>
                     <p className="text-xs text-center font-semibold text-blue-600 dark:text-blue-400 leading-relaxed">
                       
