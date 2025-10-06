@@ -100,10 +100,20 @@ mermaid.initialize({
   }
 });
 
-// No longer needed - PHP now generates SVG directly
+// Mermaid diagram rendering function (for client-side fallback)
 const renderMermaidDiagrams = (content: string): string => {
-  // PHP now handles Mermaid rendering, so we just return the content as-is
-  return content;
+  const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+  let diagramCounter = 0;
+  
+  return content.replace(mermaidRegex, (match, diagramCode) => {
+    const diagramId = `mermaid-${Date.now()}-${diagramCounter++}`;
+    
+    // Create a placeholder div that will be replaced with the rendered diagram
+    return `<div id="${diagramId}" class="mermaid-diagram my-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
+      <div class="text-center text-gray-400 mb-2">Loading diagram...</div>
+      <pre class="hidden">${diagramCode.trim()}</pre>
+    </div>`;
+  });
 };
 
 // Table conversion functions
@@ -242,7 +252,91 @@ export default function ReportPage() {
   console.log('reportId from params:', reportId);
   console.log('all params:', params);
 
-  // No longer needed - PHP now generates SVG diagrams directly
+  // Render Mermaid diagrams after content is loaded (client-side fallback)
+  useEffect(() => {
+    const renderMermaidDiagrams = async () => {
+      console.log('Looking for Mermaid diagrams...');
+      const diagrams = document.querySelectorAll('.mermaid-diagram');
+      console.log('Found diagrams:', diagrams.length);
+      
+      diagrams.forEach(async (diagram, index) => {
+        console.log(`Processing diagram ${index}:`, diagram);
+        const pre = diagram.querySelector('pre');
+        if (pre) {
+          let diagramCode = pre.textContent;
+          console.log(`Diagram ${index} code:`, diagramCode);
+          
+          if (diagramCode) {
+            // Clean up the Mermaid code (PHP should have fixed the syntax)
+            diagramCode = diagramCode.trim();
+            console.log(`Diagram ${index} final code:`, diagramCode);
+            
+            try {
+              console.log(`Rendering diagram ${index}...`);
+              
+              // Modern API try/catch with improved error handling
+              if (typeof mermaid.render === 'function') {
+                const uid = 'm' + Date.now() + '_' + index;
+                try {
+                  const result = await mermaid.render(uid, diagramCode);
+                  const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
+                  if (!svg) throw new Error('No SVG returned by mermaid.render()');
+                  diagram.innerHTML = svg;
+                  
+                  // Make svg responsive
+                  const svgElement = diagram.querySelector('svg');
+                  if (svgElement) { 
+                    svgElement.setAttribute('width','100%'); 
+                    svgElement.removeAttribute('height'); 
+                  }
+                  
+                  console.log(`Diagram ${index} rendered successfully`);
+                } catch(e) {
+                  // fallback to legacy API
+                  if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
+                    mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
+                      diagram.innerHTML = svgCode; 
+                      console.log(`Diagram ${index} rendered successfully (legacy API)`);
+                    });
+                  } else {
+                    throw new Error('No supported mermaid render API available: ' + e.message);
+                  }
+                }
+              } else if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
+                mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
+                  diagram.innerHTML = svgCode; 
+                  console.log(`Diagram ${index} rendered successfully (legacy API)`);
+                });
+              } else {
+                throw new Error('No supported mermaid render API available');
+              }
+            } catch (error) {
+              console.error(`Mermaid rendering error for diagram ${index}:`, error);
+              console.error(`Failed code:`, diagramCode);
+              
+              // Show the raw code for debugging
+              diagram.innerHTML = `
+                <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
+                <div class="text-xs text-gray-400 text-left">
+                  <div class="font-bold">Error:</div>
+                  <div>${error.message}</div>
+                  <div class="font-bold mt-2">Code:</div>
+                  <pre class="whitespace-pre-wrap">${diagramCode}</pre>
+                </div>
+              `;
+            }
+          }
+        }
+      });
+    };
+
+    // Trigger when either results or finalResult changes
+    if (results.length > 0 || finalResult) {
+      console.log('Triggering Mermaid rendering...');
+      // Small delay to ensure DOM is updated
+      setTimeout(renderMermaidDiagrams, 500);
+    }
+  }, [results, finalResult]);
   const BASE_URL = "https://plan.validatorai.com/feasibility/api.php";
       const FLOW_TEMPLATE_ID = "bae9d61f-176f-4b5b-9a66-6c700e9f8604";
       const API_KEY = "oKEkzm4m8x65RL3GgFp1ZEuRuqtNEFTZdwa3OsLp3j8Pp-nK355eQ2DMhgJ3-KWZfAfcJ4q-4wD9iPnYdPsmwQ"; // <-- set your API key here
@@ -477,7 +571,85 @@ export default function ReportPage() {
                     dangerouslySetInnerHTML={{ 
                       __html: parseMarkdownContent(typeof flow.raw_output === 'string' ? flow.raw_output : '') 
                     }}
-                    // No longer needed - PHP now generates SVG diagrams directly
+                    ref={(el) => {
+                      if (el) {
+                        // Trigger Mermaid rendering after content is inserted (client-side fallback)
+                        setTimeout(() => {
+                          const renderMermaidDiagrams = async () => {
+                            console.log('Manual Mermaid rendering triggered');
+                            const diagrams = el.querySelectorAll('.mermaid-diagram');
+                            console.log('Found diagrams in content:', diagrams.length);
+                            
+                            diagrams.forEach(async (diagram, index) => {
+                              const pre = diagram.querySelector('pre');
+                              if (pre) {
+                                let diagramCode = pre.textContent;
+                                console.log(`Manual diagram ${index} code:`, diagramCode);
+                                
+                                if (diagramCode) {
+                                  diagramCode = diagramCode.trim();
+                                  console.log(`Manual diagram ${index} final code:`, diagramCode);
+                                  
+                                  try {
+                                    // Modern API try/catch with improved error handling
+                                    if (typeof mermaid.render === 'function') {
+                                      const uid = 'm' + Date.now() + '_manual_' + index;
+                                      try {
+                                        const result = await mermaid.render(uid, diagramCode);
+                                        const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
+                                        if (!svg) throw new Error('No SVG returned by mermaid.render()');
+                                        diagram.innerHTML = svg;
+                                        
+                                        // Make svg responsive
+                                        const svgElement = diagram.querySelector('svg');
+                                        if (svgElement) { 
+                                          svgElement.setAttribute('width','100%'); 
+                                          svgElement.removeAttribute('height'); 
+                                        }
+                                        
+                                        console.log(`Manual diagram ${index} rendered successfully`);
+                                      } catch(e) {
+                                        // fallback to legacy API
+                                        if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
+                                          mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
+                                            diagram.innerHTML = svgCode; 
+                                            console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
+                                          });
+                                        } else {
+                                          throw new Error('No supported mermaid render API available: ' + e.message);
+                                        }
+                                      }
+                                    } else if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
+                                      mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
+                                        diagram.innerHTML = svgCode; 
+                                        console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
+                                      });
+                                    } else {
+                                      throw new Error('No supported mermaid render API available');
+                                    }
+                                  } catch (error) {
+                                    console.error(`Manual Mermaid rendering error for diagram ${index}:`, error);
+                                    console.error(`Failed code:`, diagramCode);
+                                    
+                                    // Show the raw code for debugging
+                                    diagram.innerHTML = `
+                                      <div class="text-red-400 text-center mb-2">Error rendering diagram</div>
+                                      <div class="text-xs text-gray-400 text-left">
+                                        <div class="font-bold">Error:</div>
+                                        <div>${error.message}</div>
+                                        <div class="font-bold mt-2">Code:</div>
+                                        <pre class="whitespace-pre-wrap">${diagramCode}</pre>
+                                      </div>
+                                    `;
+                                  }
+                                }
+                              }
+                            });
+                          };
+                          renderMermaidDiagrams();
+                        }, 100);
+                      }
+                    }}
                   />
         </CardContent>
 
