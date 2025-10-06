@@ -267,32 +267,9 @@ export default function ReportPage() {
           console.log(`Diagram ${index} raw code:`, diagramCode);
           
           if (diagramCode) {
-            // Clean up the Mermaid code
+            // Clean up the Mermaid code (PHP should have fixed the syntax)
             diagramCode = diagramCode.trim();
-            console.log(`Diagram ${index} raw code:`, diagramCode);
-            
-            // Check if it's still malformed (API fix might not have worked)
-            if (diagramCode.includes('mindmap') && diagramCode.includes('["') && !diagramCode.includes('root)')) {
-              console.log(`Diagram ${index}: API fix didn't work, applying JavaScript fix...`);
-              
-              // Extract all the bracketed items
-              const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
-              if (items.length > 0) {
-                const centralTopic = items[0].replace(/\["([^"]+)"\]/, '$1');
-                const otherItems = items.slice(1).map(item => item.replace(/\["([^"]+)"\]/, '$1'));
-                
-                // Build proper mindmap syntax
-                let properMindmap = `mindmap\n  root)${centralTopic}(\n`;
-                otherItems.forEach(item => {
-                  properMindmap += `    ${item}\n`;
-                });
-                
-                diagramCode = properMindmap.trim();
-                console.log(`Diagram ${index}: Fixed syntax:`, diagramCode);
-              }
-            }
-            
-            console.log(`Diagram ${index} final code:`, diagramCode);
+            console.log(`Diagram ${index} code:`, diagramCode);
             
             try {
               console.log(`Rendering diagram ${index}...`);
@@ -575,33 +552,10 @@ export default function ReportPage() {
                                 let diagramCode = pre.textContent;
                                 console.log(`Manual diagram ${index} raw code:`, diagramCode);
                                 
-                                // Clean up the Mermaid code
+                                // Clean up the Mermaid code (PHP should have fixed the syntax)
                                 if (diagramCode) {
                                   diagramCode = diagramCode.trim();
-                                  console.log(`Manual diagram ${index} raw code:`, diagramCode);
-                                  
-                                  // Check if it's still malformed (API fix might not have worked)
-                                  if (diagramCode.includes('mindmap') && diagramCode.includes('["') && !diagramCode.includes('root)')) {
-                                    console.log(`Manual diagram ${index}: API fix didn't work, applying JavaScript fix...`);
-                                    
-                                    // Extract all the bracketed items
-                                    const items = diagramCode.match(/\["([^"]+)"\]/g) || [];
-                                    if (items.length > 0) {
-                                      const centralTopic = items[0].replace(/\["([^"]+)"\]/, '$1');
-                                      const otherItems = items.slice(1).map(item => item.replace(/\["([^"]+)"\]/, '$1'));
-                                      
-                                      // Build proper mindmap syntax
-                                      let properMindmap = `mindmap\n  root)${centralTopic}(\n`;
-                                      otherItems.forEach(item => {
-                                        properMindmap += `    ${item}\n`;
-                                      });
-                                      
-                                      diagramCode = properMindmap.trim();
-                                      console.log(`Manual diagram ${index}: Fixed syntax:`, diagramCode);
-                                    }
-                                  }
-                                  
-                                  console.log(`Manual diagram ${index} final code:`, diagramCode);
+                                  console.log(`Manual diagram ${index} code:`, diagramCode);
                                   
                                   try {
                                     const { svg } = await mermaid.render(diagram.id, diagramCode);
