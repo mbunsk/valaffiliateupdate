@@ -305,6 +305,7 @@ console.log(targetMarket);
                             : 'border-gray-300 dark:border-gray-600 focus:border-blue-500'
                         }`}
                         rows={1}
+                        maxLength={100}
                         onChange={(e) => {
                           setTargetMarket(e.target.value);
                           if (targetMarketError && e.target.value.trim()) {
@@ -327,6 +328,7 @@ console.log(targetMarket);
                             : 'border-gray-300 dark:border-gray-600 focus:border-blue-500'
                         }`}
                         rows={2}
+                        maxLength={200}
                         onChange={(e) => {
                           setIdea(e.target.value);
                           if (ideaError && e.target.value.trim()) {
