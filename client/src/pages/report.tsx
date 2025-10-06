@@ -1,6 +1,14 @@
 import { useParams } from "wouter";
 import { useState, useEffect, useRef, JSX, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
-import mermaid from 'mermaid';
+// Using CDN version instead of npm package
+// import mermaid from 'mermaid';
+
+// TypeScript declaration for window.mermaid
+declare global {
+  interface Window {
+    mermaid: any;
+  }
+}
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -86,19 +94,48 @@ interface ApiResponse {
         
         }  
 
-// Initialize Mermaid
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'dark',
-  themeVariables: {
-    primaryColor: '#3b82f6',
-    primaryTextColor: '#ffffff',
-    primaryBorderColor: '#1e40af',
-    lineColor: '#6b7280',
-    secondaryColor: '#1f2937',
-    tertiaryColor: '#111827'
-  }
-});
+// Load Mermaid from CDN and initialize
+useEffect(() => {
+  const loadMermaid = async () => {
+    // Check if mermaid is already loaded
+    if (window.mermaid) {
+      initializeMermaid();
+      return;
+    }
+
+    // Load Mermaid from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    script.onload = () => {
+      console.log('Mermaid CDN loaded successfully');
+      initializeMermaid();
+    };
+    script.onerror = () => {
+      console.error('Failed to load Mermaid from CDN');
+    };
+    document.head.appendChild(script);
+  };
+
+  const initializeMermaid = () => {
+    if (window.mermaid) {
+      window.mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+          primaryColor: '#3b82f6',
+          primaryTextColor: '#ffffff',
+          primaryBorderColor: '#1e40af',
+          lineColor: '#6b7280',
+          secondaryColor: '#1f2937',
+          tertiaryColor: '#111827'
+        }
+      });
+      console.log('Mermaid initialized successfully');
+    }
+  };
+
+  loadMermaid();
+}, []);
 
 // Mermaid diagram rendering function (for client-side fallback)
 const renderMermaidDiagrams = (content: string): string => {
@@ -275,10 +312,10 @@ export default function ReportPage() {
               console.log(`Rendering diagram ${index}...`);
               
               // Modern API try/catch with improved error handling
-              if (typeof mermaid.render === 'function') {
+              if (window.mermaid && typeof window.mermaid.render === 'function') {
                 const uid = 'm' + Date.now() + '_' + index;
                 try {
-                  const result = await mermaid.render(uid, diagramCode);
+                  const result = await window.mermaid.render(uid, diagramCode);
                   const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
                   if (!svg) throw new Error('No SVG returned by mermaid.render()');
                   diagram.innerHTML = svg;
@@ -293,8 +330,8 @@ export default function ReportPage() {
                   console.log(`Diagram ${index} rendered successfully`);
                 } catch(e) {
                   // fallback to legacy API
-                  if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
-                    mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
+                  if (window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
+                    window.mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
                       diagram.innerHTML = svgCode; 
                       console.log(`Diagram ${index} rendered successfully (legacy API)`);
                     });
@@ -302,8 +339,8 @@ export default function ReportPage() {
                     throw new Error('No supported mermaid render API available: ' + e.message);
                   }
                 }
-              } else if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
-                mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
+              } else if (window.mermaid && window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
+                window.mermaid.mermaidAPI.render('m' + Date.now() + '_' + index, diagramCode, (svgCode) => { 
                   diagram.innerHTML = svgCode; 
                   console.log(`Diagram ${index} rendered successfully (legacy API)`);
                 });
@@ -516,8 +553,8 @@ export default function ReportPage() {
                   
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
-                <Button variant="outline" size="sm" data-testid="button-download-report" className="hidden sm:flex">
+              <div style={{display: "none"}} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
+                <Button variant="outline" size="sm" data-testid="button-download-report" className="hidden sm:flex display: none;">
                   <Download className="w-4 h-4 mr-2" />
                   Download PDF
                 </Button>
@@ -592,10 +629,10 @@ export default function ReportPage() {
                                   
                                   try {
                                     // Modern API try/catch with improved error handling
-                                    if (typeof mermaid.render === 'function') {
+                                    if (window.mermaid && typeof window.mermaid.render === 'function') {
                                       const uid = 'm' + Date.now() + '_manual_' + index;
                                       try {
-                                        const result = await mermaid.render(uid, diagramCode);
+                                        const result = await window.mermaid.render(uid, diagramCode);
                                         const svg = result && result.svg ? result.svg : (typeof result === 'string' ? result : null);
                                         if (!svg) throw new Error('No SVG returned by mermaid.render()');
                                         diagram.innerHTML = svg;
@@ -610,8 +647,8 @@ export default function ReportPage() {
                                         console.log(`Manual diagram ${index} rendered successfully`);
                                       } catch(e) {
                                         // fallback to legacy API
-                                        if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
-                                          mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
+                                        if (window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
+                                          window.mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
                                             diagram.innerHTML = svgCode; 
                                             console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
                                           });
@@ -619,8 +656,8 @@ export default function ReportPage() {
                                           throw new Error('No supported mermaid render API available: ' + e.message);
                                         }
                                       }
-                                    } else if (mermaid.mermaidAPI && typeof mermaid.mermaidAPI.render === 'function') {
-                                      mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
+                                    } else if (window.mermaid && window.mermaid.mermaidAPI && typeof window.mermaid.mermaidAPI.render === 'function') {
+                                      window.mermaid.mermaidAPI.render('m' + Date.now() + '_manual_' + index, diagramCode, (svgCode) => { 
                                         diagram.innerHTML = svgCode; 
                                         console.log(`Manual diagram ${index} rendered successfully (legacy API)`);
                                       });
